@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "config:recommended"
+  ],
+  "patch": {
+    "automerge": true
+  },
+  "schedule": [
+    "before 5am on monday"
+  ],
+  "timezone": "Europe/Berlin",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "rebaseWhen": "never"
+}
