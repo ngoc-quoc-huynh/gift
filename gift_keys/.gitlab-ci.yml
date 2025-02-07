@@ -1,0 +1,84 @@
+stages:
+  - generation
+  - check
+  - deploy
+
+.cache: &cache
+  key:
+    files:
+      - pubspec.lock
+  paths:
+    - .dart_tool/
+    - .pub-cache
+
+variables:
+  XCODE_VERSION: '16.2'
+
+generation:
+  stage: generation
+  cache: *cache
+  tags:
+    - shell
+  script:
+    - flutter pub get
+    - dart run slang generate
+  artifacts:
+    paths:
+      - lib/static/i18n/*.g.dart
+    expire_in: 2 days
+
+check_style:
+  stage: check
+  tags:
+    - shell
+  script:
+    - dart format --output=none --set-exit-if-changed .
+
+lint:
+  stage: check
+  cache: *cache
+  tags:
+    - shell
+  script:
+    - flutter pub get
+    - flutter analyze
+    - dart run dart_code_linter:metrics analyze . --set-exit-on-violation-level=warning
+
+test:
+  stage: check
+  cache: *cache
+  tags:
+    - shell
+  script:
+    - flutter pub get
+    - flutter test --coverage --test-randomize-ordering-seed=random
+    - dart run test_cov_console --exclude=static
+  artifacts:
+    when: on_failure
+    paths:
+      - test/ui/**/failures
+    expire_in: 2 days
+
+.decrypt_android: &decrypt_android |
+  git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.cosee.biz/${CI_PROJECT_NAMESPACE}/secrets.git .signing
+  cd .signing/android
+  echo $MATCH_PASSWORD_ANDROID > pass.txt
+  gpg -d --batch --passphrase-file=pass.txt --output keystore.properties keystore.properties.gpg
+  gpg -d --batch --passphrase-file=pass.txt --output keystore.jks keystore.jks.gpg
+  gpg -d --batch --passphrase-file=pass.txt --output service-account.json service-account.json.gpg
+  cd ../..
+
+build:android_apk:
+  stage: deploy
+  when: manual
+  cache: *cache
+  tags:
+    - shell
+  script:
+    - *decrypt_android
+    - flutter pub get
+    - flutter build apk --release
+  artifacts:
+    paths:
+      - build/app/outputs/apk/release/
+    expire_in: 1 days

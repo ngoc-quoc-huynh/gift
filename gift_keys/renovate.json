@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "config:base",
+    "local>mobile/runner-tools:xcode"
+  ],
+  "patch": {
+    "automerge": true
+  },
+  "schedule": [
+    "before 5am on monday"
+  ],
+  "timezone": "Europe/Berlin",
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "rebaseWhen": "never"
+}

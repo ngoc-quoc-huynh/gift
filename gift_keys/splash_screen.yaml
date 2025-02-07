@@ -1,0 +1,67 @@
+# TODO: Specify Splash Screen
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+
+  # Hide notification bar if set to true.
+  fullscreen: false
+
+  # Either color or background_image must be provided.
+  color: '#000000'
+  # background_image: assets/background.png
+
+  # The image used in the splash_screen screen. Should be sized for 4x pixel density (xxxhdpi).
+  # images: assets/image.png
+
+  # Specify an image used as branding in the splash_screen screen.
+  # branding: assets/branding.png
+
+  # Position of the branding.
+  # branding_mode: bottom
+
+  ### Dark Mode ###
+  # color_dark: "#000000"
+  # background_image_dark: "assets/background_dark.png"
+  # image_dark: assets/image_dark.png
+  # branding_dark: assets/branding_dark.png
+
+  ### Android 12 ###
+  # Android 12 handles the splash_screen screen differently than previous versions.
+  # https://developer.android.com/guide/topics/ui/splash_screen-screen
+  android_12:
+    # The image used in the splash_screen screen. If not specified, the app's launcher icon will be used instead.
+    # Note that the splash_screen screen will be clipped to a circle on the center of the screen.
+    # App icon with an icon background: This should be 960×960 pixels, and fit within a circle
+    # 640 pixels in diameter.
+    # App icon without an icon background: This should be 1152×1152 pixels, and fit within a circle
+    # 768 pixels in diameter.
+    # image: assets/image.png
+
+    # Splash screen background color.
+    # color: "#000000"
+
+    # App icon background color.
+    # icon_background_color: '#000000'
+
+    # Specify an image used as branding in the splash_screen screen..
+    # branding: assets/branding.png
+
+    ### Dark Mode ###
+    # image_dark: assets/image_dark.png
+    # color_dark: "#000000"
+    # icon_background_color_dark: "#000000"
+
+  ### Splash screen position ###
+
+  # android_gravity can be one of the following Android Gravity (see
+  # https://developer.android.com/reference/android/view/Gravity): bottom, center,
+  # center_horizontal, center_vertical, clip_horizontal, clip_vertical, end, fill, fill_horizontal,
+  # fill_vertical, left, right, start, or top.
+  android_gravity: center
+
+  # ios_content_mode can be one of the following iOS UIView.ContentMode (see
+  # https://developer.apple.com/documentation/uikit/uiview/contentmode): scaleToFill,
+  # scaleAspectFit, scaleAspectFill, center, top, bottom, left, right, topLeft, topRight,
+  # bottomLeft, or bottomRight.
+  ios_content_mode: center
