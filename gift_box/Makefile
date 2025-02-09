@@ -18,6 +18,14 @@ test:
 	flutter test --coverage --test-randomize-ordering-seed=$(or $(seed),random)
 	dart run test_cov_console --exclude=static
 
+test-unit:
+	flutter test test/domain test/infrastructure --coverage --test-randomize-ordering-seed=$(or $(seed),random)
+	dart run test_cov_console --exclude=static,ui,domain/interfaces,injector.dart
+
+test-ui:
+	flutter test test/ui --coverage --test-randomize-ordering-seed=$(or $(seed),random) --dart-define=CI=true
+	dart run test_cov_console --exclude=static,domain,infrastructure,injector.dart
+
 update-goldens:
 	flutter test --update-goldens --tags=golden
 
