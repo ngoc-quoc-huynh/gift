@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:get_it/get_it.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
+import 'package:gift_box/domain/utils/extensions/get_it.dart';
 import 'package:gift_box/infrastructure/repositories/logger.dart';
 import 'package:gift_box/static/i18n/translations.g.dart';
 import 'package:logger/logger.dart';
@@ -18,7 +19,8 @@ final class Injector {
     ..registerLazySingleton<Logger>(Logger.new)
     ..registerLazySingleton<LoggerApi>(LoggerRepository.new)
     ..registerLazySingleton<Translations>(_createTranslations)
-    ..registerLazySingleton<Random>(Random.new);
+    ..registerLazySingleton<Random>(Random.new)
+    ..registerPeriodicTimer();
 
   static Translations _createTranslations() => AppLocale.en.buildSync();
 }

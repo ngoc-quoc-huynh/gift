@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -28,6 +29,22 @@ void main() {
       Injector.instance.loggerApi,
       loggerApi,
     );
+  });
+
+  test('returns periodic timer correctly.', () {
+    Injector.instance
+        .registerFactoryParam<Timer, Duration, void Function(Timer timer)>(
+      Timer.periodic,
+    );
+    final periodicTimer = Injector.instance.periodicTimer(
+      Duration.zero,
+      (_) {
+        return;
+      },
+    );
+    addTearDown(periodicTimer.cancel);
+
+    expect(periodicTimer, isA<Timer>());
   });
 
   test('returns Random.', () {
