@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:get_it/get_it.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/infrastructure/repositories/logger.dart';
@@ -15,7 +17,8 @@ final class Injector {
   static void setupDependencies() => instance
     ..registerLazySingleton<Logger>(Logger.new)
     ..registerLazySingleton<LoggerApi>(LoggerRepository.new)
-    ..registerLazySingleton<Translations>(_createTranslations);
+    ..registerLazySingleton<Translations>(_createTranslations)
+    ..registerLazySingleton<Random>(Random.new);
 
   static Translations _createTranslations() => AppLocale.en.buildSync();
 }

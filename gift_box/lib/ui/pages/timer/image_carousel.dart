@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gift_box/domain/models/asset.dart';
+import 'package:gift_box/domain/utils/extensions/list.dart';
 import 'package:gift_box/static/resources/assets.dart';
 
 class ImageCarousel extends StatelessWidget {
@@ -13,7 +14,7 @@ class ImageCarousel extends StatelessWidget {
       shape: const RoundedRectangleBorder(),
       enableSplash: false,
       itemSnapping: true,
-      children: Assets.items.map(_Item.new).toList(),
+      children: (Assets.items..shuffleSeeded()).map(_Item.new).toList(),
     );
   }
 }

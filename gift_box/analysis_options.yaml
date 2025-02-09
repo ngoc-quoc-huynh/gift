@@ -3,3 +3,8 @@ include: package:cosee_lints/analysis_options.yaml
 dart_code_linter:
   extends:
     - package:cosee_lints/metrics.yaml
+
+  rules:
+    - missing-test-assertion:
+        include-assertions:
+          - expectList
