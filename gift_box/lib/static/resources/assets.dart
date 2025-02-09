@@ -9,4 +9,13 @@ final class Assets {
   static final example4 = Asset('assets/images/example_4.webp');
   static final example5 = Asset('assets/images/example_5.webp');
   static final example6 = Asset('assets/images/example_6.webp');
+
+  static final items = [
+    example1,
+    example2,
+    example3,
+    example4,
+    example5,
+    example6,
+  ];
 }

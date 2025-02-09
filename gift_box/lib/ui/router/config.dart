@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:go_router/go_router.dart';
-import 'package:gift_box/ui/pages/home/page.dart';
+import 'package:gift_box/ui/pages/timer/page.dart';
 import 'package:gift_box/ui/router/routes.dart';
+import 'package:go_router/go_router.dart';
 
 final class GoRouterConfig {
   const GoRouterConfig._();
@@ -11,12 +11,12 @@ final class GoRouterConfig {
 
   static final routes = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: '/',
+    initialLocation: '/timer',
     routes: [
       GoRoute(
-        name: Routes.homePage(),
-        path: '/',
-        builder: (_, __) => const HomePage(),
+        name: Routes.timerPage(),
+        path: '/timer',
+        builder: (_, __) => const TimerPage(),
       ),
     ],
   );
