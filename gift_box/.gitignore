@@ -58,3 +58,7 @@ lib/**/*.i18n.dart
 
 # Don't check in golden failure output
 test/**/failures/
+
+# i18n analyses
+**/i18n/_missing_translations.yaml
+**/i18n/_unused_translations.yaml

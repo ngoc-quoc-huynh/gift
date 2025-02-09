@@ -6,7 +6,13 @@ targets:
           base_locale: en
           input_directory: lib/static/i18n
           input_file_pattern: .i18n.yaml
+          lazy: false
           locale_handling: false
           output_directory: lib/static/i18n
           output_file_name: translations.g.dart
           translation_class_visibility: public
+          obfuscation:
+            enabled: true
+          format:
+            enabled: true
+            width: 80
