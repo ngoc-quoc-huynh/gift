@@ -5,5 +5,5 @@ extension type Route(String name) {
 final class Routes {
   const Routes._();
 
-  static final homePage = Route('home');
+  static final homePage = Route('timer');
 }

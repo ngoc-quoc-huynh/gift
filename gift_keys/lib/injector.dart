@@ -1,8 +1,8 @@
 import 'package:get_it/get_it.dart';
-import 'package:logger/logger.dart';
 import 'package:gift_keys/domain/interfaces/logger.dart';
 import 'package:gift_keys/infrastructure/repositories/logger.dart';
 import 'package:gift_keys/static/i18n/translations.g.dart';
+import 'package:logger/logger.dart';
 
 export 'package:gift_keys/domain/utils/extensions/get_it.dart';
 export 'package:gift_keys/static/i18n/translations.g.dart';

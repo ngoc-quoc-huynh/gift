@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:gift_box/domain/exceptions/base.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/domain/utils/mixins/logger.dart';
 import 'package:gift_box/injector.dart';
+import 'package:mocktail/mocktail.dart';
 
 import '../../../mocks.dart';
 

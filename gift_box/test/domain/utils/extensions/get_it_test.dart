@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:logger/logger.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/injector.dart';
+import 'package:logger/logger.dart';
 
 import '../../../mocks.dart';
 

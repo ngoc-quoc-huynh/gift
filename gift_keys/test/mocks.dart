@@ -1,6 +1,6 @@
+import 'package:gift_keys/domain/interfaces/logger.dart';
 import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:gift_keys/domain/interfaces/logger.dart';
 
 final class MockLogger extends Mock implements Logger {}
 

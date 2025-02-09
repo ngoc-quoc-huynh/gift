@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:go_router/go_router.dart';
 import 'package:gift_keys/ui/pages/home/page.dart';
 import 'package:gift_keys/ui/router/routes.dart';
+import 'package:go_router/go_router.dart';
 
 final class GoRouterConfig {
   const GoRouterConfig._();
