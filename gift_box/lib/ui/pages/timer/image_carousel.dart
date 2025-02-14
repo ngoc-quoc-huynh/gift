@@ -56,7 +56,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
   }
 
   void _onImageCarouselStateChange(
-    _,
+    BuildContext _,
     ImageCarouselState state,
   ) =>
       unawaited(
