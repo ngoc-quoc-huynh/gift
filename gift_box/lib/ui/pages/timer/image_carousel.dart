@@ -41,6 +41,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
       child: BlocListener<ImageCarouselCubit, ImageCarouselState>(
         listener: _onImageCarouselStateChange,
         child: IgnorePointer(
+          // TODO: Change logic if https://github.com/flutter/flutter/issues/161369 is resolved.
           child: CarouselView(
             controller: _controller,
             itemExtent: double.infinity,
@@ -60,6 +61,7 @@ class _ImageCarouselState extends State<ImageCarousel> {
     ImageCarouselState state,
   ) =>
       unawaited(
+        // TODO: Change if https://github.com/flutter/flutter/issues/161368 is resolved.
         _controller.animateTo(
           _screenWidth * state.index,
           duration: Config.carouselAnimationDuration,
