@@ -1,4 +1,4 @@
-.PHONY: i18n check-i18n check-code check-files style test update-goldens launcher-icon splash-screen
+.PHONY: i18n check-i18n check-code check-files style test test-unit test-ui update-goldens splash-screen
 
 i18n:
 	dart run slang
