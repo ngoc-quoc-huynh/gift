@@ -7,6 +7,8 @@ import 'package:gift_box/static/i18n/translations.g.dart';
 import 'package:logger/logger.dart';
 
 extension GetItExtension on GetIt {
+  DateTime get birthday => get<DateTime>(instanceName: 'birthday');
+
   Logger get logger => get<Logger>();
 
   LoggerApi get loggerApi => get<LoggerApi>();
@@ -20,9 +22,4 @@ extension GetItExtension on GetIt {
       get(param1: duration, param2: callback);
 
   Translations get translations => get<Translations>();
-
-  void registerPeriodicTimer() =>
-      registerFactoryParam<Timer, Duration, void Function(Timer timer)>(
-        Timer.periodic,
-      );
 }

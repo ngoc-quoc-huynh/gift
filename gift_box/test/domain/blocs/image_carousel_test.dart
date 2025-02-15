@@ -5,6 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_box/domain/blocs/image_carousel/cubit.dart';
 import 'package:gift_box/injector.dart';
 
+import '../../utils.dart';
+
 void main() {
   test(
     'initial state is ImageCarouselState(index: 0, isReverse: false).',
