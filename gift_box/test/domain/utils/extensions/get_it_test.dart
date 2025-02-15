@@ -7,8 +7,23 @@ import 'package:gift_box/injector.dart';
 import 'package:logger/logger.dart';
 
 import '../../../mocks.dart';
+import '../../../utils.dart';
 
 void main() {
+  test('returns birthday.', () {
+    final birthday = DateTime(2025);
+    Injector.instance.registerBirthday(birthday);
+    addTearDown(
+      () async =>
+          Injector.instance.unregister<DateTime>(instanceName: 'birthday'),
+    );
+
+    expect(
+      Injector.instance.birthday,
+      birthday,
+    );
+  });
+
   test('returns Logger.', () {
     final logger = MockLogger();
     Injector.instance.registerSingleton<Logger>(logger);

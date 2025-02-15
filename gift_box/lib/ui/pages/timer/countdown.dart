@@ -43,7 +43,7 @@ class TimerCountdown extends StatelessWidget {
 }
 
 class _Text extends StatelessWidget {
-  const _Text({super.key});
+  const _Text();
 
   @override
   Widget build(BuildContext context) {

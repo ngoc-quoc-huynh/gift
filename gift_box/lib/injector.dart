@@ -1,8 +1,8 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:get_it/get_it.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
-import 'package:gift_box/domain/utils/extensions/get_it.dart';
 import 'package:gift_box/infrastructure/repositories/logger.dart';
 import 'package:gift_box/static/i18n/translations.g.dart';
 import 'package:logger/logger.dart';
@@ -20,7 +20,12 @@ final class Injector {
     ..registerLazySingleton<LoggerApi>(LoggerRepository.new)
     ..registerLazySingleton<Translations>(_createTranslations)
     ..registerLazySingleton<Random>(Random.new)
-    ..registerPeriodicTimer();
-
+    ..registerFactoryParam<Timer, Duration, void Function(Timer timer)>(
+      Timer.periodic,
+    )
+    ..registerLazySingleton<DateTime>(
+      () => DateTime(2026),
+      instanceName: 'birthday',
+    );
   static Translations _createTranslations() => AppLocale.en.buildSync();
 }

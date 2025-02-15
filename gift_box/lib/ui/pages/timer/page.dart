@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gift_box/ui/pages/timer/countdown.dart';
 import 'package:gift_box/ui/pages/timer/image_carousel.dart';
 
 class TimerPage extends StatelessWidget {
@@ -7,7 +8,12 @@ class TimerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: ImageCarousel(),
+      body: Stack(
+        children: [
+          ImageCarousel(),
+          TimerCountdown(),
+        ],
+      ),
     );
   }
 }
