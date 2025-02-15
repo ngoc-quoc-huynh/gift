@@ -1,0 +1,5 @@
+appName: 'Gift'
+
+pages:
+  timer:
+    tapMe: 'Tap me'

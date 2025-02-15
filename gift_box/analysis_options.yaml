@@ -8,3 +8,5 @@ dart_code_linter:
     - missing-test-assertion:
         include-assertions:
           - expectList
+        include-methods:
+          - testBloc
