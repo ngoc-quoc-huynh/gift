@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/countdown/cubit.dart';
 import 'package:gift_box/domain/utils/extensions/duration.dart';
 import 'package:gift_box/injector.dart';
+import 'package:gift_box/ui/router/routes.dart';
+import 'package:go_router/go_router.dart';
 
 class TimerCountdown extends StatelessWidget {
   const TimerCountdown({super.key});
@@ -59,9 +61,15 @@ class _Text extends StatelessWidget {
             remainingTime.toHHMMSS(),
             style: textStyle,
           ),
-        CountdownFinished() => Text(
-            Injector.instance.translations.pages.timer.tapMe,
-            style: textStyle,
+        CountdownFinished() => TextButton(
+            style: TextButton.styleFrom(
+              overlayColor: Colors.transparent,
+            ),
+            onPressed: () => context.goNamed(Routes.giftPage()),
+            child: Text(
+              Injector.instance.translations.pages.timer.tapMe,
+              style: textStyle,
+            ),
           ),
       },
     );

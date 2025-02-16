@@ -4,4 +4,5 @@ final class Routes {
   const Routes._();
 
   static final timerPage = Route('timer');
+  static final giftPage = Route('gift');
 }
