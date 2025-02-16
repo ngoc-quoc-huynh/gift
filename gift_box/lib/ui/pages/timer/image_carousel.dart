@@ -8,22 +8,15 @@ import 'package:gift_box/domain/utils/extensions/list.dart';
 import 'package:gift_box/static/config.dart';
 import 'package:gift_box/static/resources/assets.dart';
 
-class ImageCarousel extends StatefulWidget {
-  const ImageCarousel({super.key});
+class TimerImageCarousel extends StatefulWidget {
+  const TimerImageCarousel({super.key});
 
   @override
-  State<ImageCarousel> createState() => _ImageCarouselState();
+  State<TimerImageCarousel> createState() => _TimerImageCarouselState();
 }
 
-class _ImageCarouselState extends State<ImageCarousel> {
+class _TimerImageCarouselState extends State<TimerImageCarousel> {
   final _controller = CarouselController();
-  late double _screenWidth;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _screenWidth = MediaQuery.sizeOf(context).width;
-  }
 
   @override
   void dispose() {
@@ -38,32 +31,38 @@ class _ImageCarouselState extends State<ImageCarousel> {
         count: Assets.items.length,
         imageDuration: Config.carouselImageDuration,
       )..init(),
-      child: BlocListener<ImageCarouselCubit, ImageCarouselState>(
-        listener: _onImageCarouselStateChange,
-        child: IgnorePointer(
-          // TODO: Change logic if https://github.com/flutter/flutter/issues/161369 is resolved.
-          child: CarouselView(
-            controller: _controller,
-            itemExtent: double.infinity,
-            padding: EdgeInsets.zero,
-            shape: const RoundedRectangleBorder(),
-            enableSplash: false,
-            itemSnapping: true,
-            children: (Assets.items..shuffleSeeded()).map(_Item.new).toList(),
+      child: LayoutBuilder(
+        builder: (context, constraints) =>
+            BlocListener<ImageCarouselCubit, ImageCarouselState>(
+          listener: (_, state) => _onImageCarouselStateChange(
+            state: state,
+            maxWidth: constraints.maxWidth,
+          ),
+          child: IgnorePointer(
+            // TODO: Change logic if https://github.com/flutter/flutter/issues/161369 is resolved.
+            child: CarouselView(
+              controller: _controller,
+              itemExtent: double.infinity,
+              padding: EdgeInsets.zero,
+              shape: const RoundedRectangleBorder(),
+              enableSplash: false,
+              itemSnapping: true,
+              children: (Assets.items..shuffleSeeded()).map(_Item.new).toList(),
+            ),
           ),
         ),
       ),
     );
   }
 
-  void _onImageCarouselStateChange(
-    BuildContext _,
-    ImageCarouselState state,
-  ) =>
+  void _onImageCarouselStateChange({
+    required ImageCarouselState state,
+    required double maxWidth,
+  }) =>
       unawaited(
         // TODO: Change if https://github.com/flutter/flutter/issues/161368 is resolved.
         _controller.animateTo(
-          _screenWidth * state.index,
+          maxWidth * state.index,
           duration: Config.carouselAnimationDuration,
           curve: Curves.easeInOut,
         ),

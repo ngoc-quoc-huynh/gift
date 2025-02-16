@@ -1,5 +1,10 @@
 .PHONY: i18n check-i18n check-code check-files style test test-unit test-ui update-goldens splash-screen
 
+ci_test := $(if $(findstring ci,$(MAKECMDGOALS)),--dart-define=CI=true,)
+
+ci:
+	@true
+
 i18n:
 	dart run slang
 
@@ -18,7 +23,7 @@ style:
 	dart run dart_code_linter:metrics analyze . --set-exit-on-violation-level=warning
 
 test:
-	flutter test --coverage --test-randomize-ordering-seed=$(or $(seed),random)
+	flutter test --coverage --test-randomize-ordering-seed=$(or $(seed),random) $(ci_test)
 	dart run test_cov_console --exclude=static,domain/interfaces,injector.dart
 
 test-unit:
@@ -26,11 +31,13 @@ test-unit:
 	dart run test_cov_console --exclude=static,ui,domain/interfaces,injector.dart
 
 test-ui:
-	flutter test test/ui --coverage --test-randomize-ordering-seed=$(or $(seed),random) --dart-define=CI=true
+	@$(eval MAKEFLAGS:=$(filter-out ci,$(MAKEFLAGS)))
+	flutter test test/ui --coverage --test-randomize-ordering-seed=$(or $(seed),random) $(ci_test)
 	dart run test_cov_console --exclude=static,domain,infrastructure,injector.dart
 
+
 update-goldens:
-	flutter test --update-goldens --tags=golden
+	flutter test --update-goldens --tags=golden  $(ci_test)
 
 splash-screen:
 	dart run flutter_native_splash:create --path=splash_screen.yaml

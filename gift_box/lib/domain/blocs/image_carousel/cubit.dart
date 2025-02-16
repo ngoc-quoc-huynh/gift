@@ -25,7 +25,7 @@ final class ImageCarouselCubit extends Cubit<ImageCarouselState> {
 
   void init() {
     _cancelTimer();
-    Injector.instance.periodicTimer(
+    _timer = Injector.instance.periodicTimer(
       imageDuration,
       (_) => emit(_computeState()),
     );

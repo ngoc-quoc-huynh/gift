@@ -10,7 +10,7 @@ class TimerPage extends StatelessWidget {
     return const Scaffold(
       body: Stack(
         children: [
-          ImageCarousel(),
+          TimerImageCarousel(),
           TimerCountdown(),
         ],
       ),
