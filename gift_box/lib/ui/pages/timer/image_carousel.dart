@@ -42,7 +42,7 @@ class _TimerImageCarouselState extends State<TimerImageCarousel> {
             // TODO: Change logic if https://github.com/flutter/flutter/issues/161369 is resolved.
             child: CarouselView(
               controller: _controller,
-              itemExtent: double.infinity,
+              itemExtent: constraints.maxWidth,
               padding: EdgeInsets.zero,
               shape: const RoundedRectangleBorder(),
               enableSplash: false,

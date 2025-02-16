@@ -24,7 +24,7 @@ final class Injector {
       Timer.periodic,
     )
     ..registerLazySingleton<DateTime>(
-      () => DateTime(2026),
+      () => DateTime(2025),
       instanceName: 'birthday',
     );
   static Translations _createTranslations() => AppLocale.en.buildSync();
