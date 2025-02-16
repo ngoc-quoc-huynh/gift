@@ -5,24 +5,6 @@ plugins {
     id "dev.flutter.flutter-gradle-plugin"
 }
 
-def localProperties = new Properties()
-def localPropertiesFile = rootProject.file("local.properties")
-if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader("UTF-8") { reader ->
-        localProperties.load(reader)
-    }
-}
-
-def flutterVersionCode = localProperties.getProperty("flutter.versionCode")
-if (flutterVersionCode == null) {
-    flutterVersionCode = "1"
-}
-
-def flutterVersionName = localProperties.getProperty("flutter.versionName")
-if (flutterVersionName == null) {
-    flutterVersionName = "1.0"
-}
-
 def keystoreProperties = new Properties()
 def keystorePropertiesFile = rootProject.file('../.signing/android/keystore.properties')
 if (keystorePropertiesFile.exists()) {
@@ -50,22 +32,13 @@ android {
         applicationId = "dev.huynh.gift.keys"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        versionCode = flutterVersionCode.toInteger()
-        versionName = flutterVersionName
-    }
-
-    signingConfigs {
-        release {
-            keyAlias 'key0'
-            keyPassword keystoreProperties['keyPassword']
-            storeFile rootProject.file('../.signing/android/keystore.jks')
-            storePassword keystoreProperties['storePassword']
-        }
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
     }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
         }
         debug {
             signingConfig signingConfigs.debug
