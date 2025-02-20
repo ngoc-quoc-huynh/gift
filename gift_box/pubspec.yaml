@@ -21,6 +21,9 @@ dependencies:
   flutter_bloc: ^9.0.0
   bloc_concurrency: ^0.3.0
 
+  # UI
+  rive: ^0.13.20
+
   # Utils
   clock: ^1.1.2
   collection: ^1.19.0
@@ -56,3 +59,4 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/gift.riv
