@@ -17,13 +17,14 @@ final class CountdownCubit extends Cubit<CountdownState> {
 
   void init() {
     _timer?.cancel();
+    _tick();
     _timer = Injector.instance.periodicTimer(
       const Duration(seconds: 1),
-      _tick,
+      (_) => _tick(),
     );
   }
 
-  void _tick(Timer timer) {
+  void _tick() {
     final diff = date.difference(clock.now());
 
     if (diff <= Duration.zero) {

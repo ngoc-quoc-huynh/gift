@@ -9,6 +9,8 @@ import 'package:gift_box/injector.dart';
 import '../../utils.dart';
 
 // ignore_for_file: discarded_futures, testBloc do not need to be awaited here.
+// ignore_for_file: missing-test-assertion, withClock is used alongside
+// blocTest, ensuring proper assertions.
 
 void main() {
   final birthday = DateTime(2025);
@@ -22,39 +24,32 @@ void main() {
   );
 
   group('init', () {
-    blocTest<CountdownCubit, CountdownState>(
-      'emits nothing nothing when timer is not started.',
-      setUp: Injector.instance.registerPeriodicTimer,
-      tearDown: Injector.instance.unregister<Timer>,
-      build: () => CountdownCubit(birthday)..init(),
-      expect: () => const <CountdownState>[],
-    );
-
-    // ignore_for_file: missing-test-assertion
     test(
-      'emits CountdownRunning when countdown starts',
+      'emits CountdownFinished when timer is not started but countdown is '
+      'reached.',
       () => withClock<void>(
-        Clock.fixed(DateTime(2024, 12, 31)),
+        Clock.fixed(birthday),
         () => testBloc<CountdownCubit, CountdownState>(
           setUp: Injector.instance.registerPeriodicTimer,
           tearDown: Injector.instance.unregister<Timer>,
-          build: () => CountdownCubit(birthday)..init(),
-          wait: const Duration(seconds: 1),
-          expect: () => const [CountdownRunning(Duration(hours: 24))],
+          build: () => CountdownCubit(birthday),
+          act: (cubit) => cubit.init(),
+          expect: () => const [CountdownFinished()],
         ),
       ),
     );
 
     test(
-      'emits CountdownRunning when countdown starts',
+      'emits CountdownRunning when timer is not started and countdown is not '
+      'reached.',
       () => withClock<void>(
-        Clock.fixed(DateTime(2025)),
+        Clock.fixed(DateTime(2024, 12, 31)),
         () => testBloc<CountdownCubit, CountdownState>(
           setUp: Injector.instance.registerPeriodicTimer,
           tearDown: Injector.instance.unregister<Timer>,
-          build: () => CountdownCubit(birthday)..init(),
-          wait: const Duration(seconds: 1),
-          expect: () => const [CountdownFinished()],
+          build: () => CountdownCubit(birthday),
+          act: (cubit) => cubit.init(),
+          expect: () => const [CountdownRunning(Duration(days: 1))],
         ),
       ),
     );
