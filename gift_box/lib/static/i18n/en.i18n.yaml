@@ -5,3 +5,4 @@ pages:
     tapMe: 'Tap me'
   gift:
     openMe: 'Open me'
+    nfcTooltip: 'Enable NFC to unlock the gift.'

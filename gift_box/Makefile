@@ -31,7 +31,6 @@ test-unit:
 	dart run test_cov_console --exclude=static,ui,domain/interfaces,injector.dart
 
 test-ui:
-	@$(eval MAKEFLAGS:=$(filter-out ci,$(MAKEFLAGS)))
 	flutter test test/ui --coverage --test-randomize-ordering-seed=$(or $(seed),random) $(ci_test)
 	dart run test_cov_console --exclude=static,domain,infrastructure,injector.dart
 

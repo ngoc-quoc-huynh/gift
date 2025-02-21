@@ -10,6 +10,9 @@ final class NfcRepository implements NfcApi {
   static final _instance = NfcManager();
 
   @override
+  Future<bool> isEnabled() => _instance.isNfcEnabled();
+
+  @override
   Stream<NfcStatus> startEmulation(Uint8List aid, Uint8List pin) =>
       _instance.startEmulation(aid: aid, pin: pin).map(
             (status) => switch (status) {
