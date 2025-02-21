@@ -1,0 +1,60 @@
+name: gift_keys
+
+on:
+  push:
+    paths:
+      - 'gift_keys/**'
+      - '.github/workflows/gift_keys.yaml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    defaults:
+      run:
+        working-directory: ./gift_keys
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache asdf
+        uses: actions/cache@v4
+        with:
+          path: ~/.asdf/
+          key: ${{ runner.os }}-asdf-${{ hashFiles('.tool-versions') }}
+          restore-keys: ${{ runner.os }}-asdf-
+      - name: Install asdf
+        uses: asdf-vm/actions/install@v3
+        # See https://github.com/asdf-vm/actions/issues/445
+        if: steps.cache-asdf.outputs.cache-hit != 'true'
+
+      - name: Cache flutter dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.pub-cache
+            ./gift_keys/.dart_tool
+          key: ${{ runner.os }}-flutter-gift-keys-${{ hashFiles('./gift_keys/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-flutter-gift-keys-
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Generate i18n
+        run: dart run slang generate
+      - name: Format code
+        run: dart format --set-exit-if-changed .
+      - name: Analyze code
+        run: flutter analyze
+      - name: Run code metrics
+        run: dart run dart_code_linter:metrics analyze . --set-exit-on-violation-level=warning
+      - name: Run tests
+        run: |
+          flutter test --coverage --test-randomize-ordering-seed=random --dart-define=CI=true
+          dart run test_cov_console --exclude=static,domain/interfaces,injector.dart
+      - name: Upload golden test failures
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: golden-test-failures
+          path: gift_keys/test/ui/**/failures
