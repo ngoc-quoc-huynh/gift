@@ -1,0 +1,5 @@
+<resources>
+    <!-- TODO: Adjust descriptions if needed. -->
+    <string name="service_description">Gift</string>
+    <string name="aid_group_description">Only the designated gifter can unlock this gift.</string>
+</resources>

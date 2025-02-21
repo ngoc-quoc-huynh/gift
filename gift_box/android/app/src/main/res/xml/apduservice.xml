@@ -1,0 +1,11 @@
+<host-apdu-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:apduServiceBanner="@drawable/launch_background"
+    android:description="@string/service_description"
+    android:requireDeviceUnlock="true">
+    <aid-group
+        android:category="other"
+        android:description="@string/aid_group_description">
+        <!-- TODO: Adjust AID if needed. -->
+        <aid-filter android:name="F000000001" />
+    </aid-group>
+</host-apdu-service>
