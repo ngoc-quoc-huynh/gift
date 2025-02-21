@@ -57,7 +57,7 @@ lib/**/*.i18n.dart
 /coverage/
 
 # Ignore non-CI golden files and failures
-test/**/goldens/**/
+test/**/goldens/
 test/**/failures/
 !test/**/goldens/ci/
 
