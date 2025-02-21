@@ -22,6 +22,7 @@ dependencies:
   bloc_concurrency: ^0.3.0
 
   # UI
+  confetti: ^0.8.0
   rive: ^0.13.20
 
   # Utils
