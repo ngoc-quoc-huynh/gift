@@ -14,13 +14,13 @@ class GiftBox extends StatefulWidget {
 }
 
 class _GiftBoxState extends State<GiftBox> {
-  late StateMachineController _controller;
-  late SMIBool _isCorrect;
-  late SMIBool _isWrong;
+  StateMachineController? _controller;
+  SMIBool? _isCorrect;
+  SMIBool? _isWrong;
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -53,16 +53,16 @@ class _GiftBoxState extends State<GiftBox> {
       'State Machine',
     )!
       ..addEventListener(_onRiveEvent);
-    _isCorrect = _controller.getBoolInput('Is key correct')!;
-    _isWrong = _controller.getBoolInput('Is key wrong')!;
-    artboard.addController(_controller);
+    _isCorrect = _controller?.getBoolInput('Is key correct')!;
+    _isWrong = _controller?.getBoolInput('Is key wrong')!;
+    artboard.addController(_controller!);
   }
 
   void _onGiftBoxStateChanged(BuildContext _, GiftBoxState state) =>
       switch (state) {
         GiftBoxIdle() => null,
-        GiftBoxOpenOnSuccess() => _isCorrect.change(true),
-        GiftBoxOpenOnFailure() => _isWrong.change(true),
+        GiftBoxOpenOnSuccess() => _isCorrect?.change(true),
+        GiftBoxOpenOnFailure() => _isWrong?.change(true),
       };
 
   void _onRiveEvent(RiveEvent event) => switch (event.name) {

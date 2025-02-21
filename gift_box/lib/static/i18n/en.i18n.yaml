@@ -3,3 +3,5 @@ appName: 'Gift'
 pages:
   timer:
     tapMe: 'Tap me'
+  gift:
+    openMe: 'Open me'

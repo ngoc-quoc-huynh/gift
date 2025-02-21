@@ -30,13 +30,13 @@ extension GetItTestExtension on GetIt {
         instanceName: 'pin',
       );
 
-  Future<void> unregisterAid() async =>
+  FutureOr<void> unregisterAid() async =>
       unregister<Uint8List>(instanceName: 'aid');
 
-  Future<void> unregisterBirthday() async =>
+  FutureOr<void> unregisterBirthday() async =>
       unregister<DateTime>(instanceName: 'birthday');
 
-  Future<void> unregisterPin() async =>
+  FutureOr<void> unregisterPin() async =>
       unregister<Uint8List>(instanceName: 'pin');
 
   void registerPeriodicTimer() =>
