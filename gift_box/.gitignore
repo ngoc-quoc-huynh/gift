@@ -57,9 +57,10 @@ lib/**/*.i18n.dart
 /coverage/
 
 # Ignore non-CI golden files and failures
-test/**/goldens/
 test/**/failures/
-!test/**/goldens/ci/
+test/**/goldens/linux
+test/**/goldens/macos
+test/**/goldens/windows
 
 # i18n analyses
 **/i18n/_missing_translations.yaml
