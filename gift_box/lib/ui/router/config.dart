@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:gift_box/ui/pages/gift/page.dart';
+import 'package:gift_box/ui/pages/home/page.dart';
 import 'package:gift_box/ui/pages/timer/page.dart';
 import 'package:gift_box/ui/router/routes.dart';
 import 'package:go_router/go_router.dart';
@@ -15,14 +16,19 @@ final class GoRouterConfig {
     initialLocation: '/timer',
     routes: [
       GoRoute(
-        name: Routes.timerPage(),
-        path: '/timer',
-        builder: (_, __) => const TimerPage(),
+        name: Routes.homePage(),
+        path: '/',
+        builder: (_, __) => const HomePage(),
       ),
       GoRoute(
         name: Routes.giftPage(),
         path: '/gift',
         builder: (_, __) => const GiftPage(),
+      ),
+      GoRoute(
+        name: Routes.timerPage(),
+        path: '/timer',
+        builder: (_, __) => const TimerPage(),
       ),
     ],
   );

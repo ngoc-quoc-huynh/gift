@@ -49,17 +49,14 @@ class _Text extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.displayLarge?.copyWith(
-          color: Colors.white,
-          letterSpacing: 1.5,
-        );
+    final textStyle = Theme.of(context).textTheme.displayLarge;
 
     return BlocBuilder<CountdownCubit, CountdownState>(
       builder: (context, state) => switch (state) {
         CountdownLoadInProgress() => const SizedBox.shrink(),
         CountdownRunning(:final remainingTime) => Text(
             remainingTime.toHHMMSS(),
-            style: textStyle,
+            style: textStyle?.copyWith(letterSpacing: 1.5),
           ),
         CountdownFinished() => TextButton(
             style: TextButton.styleFrom(
