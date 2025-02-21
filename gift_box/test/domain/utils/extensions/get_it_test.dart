@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
@@ -10,13 +11,21 @@ import '../../../mocks.dart';
 import '../../../utils.dart';
 
 void main() {
+  test('returns aid.', () {
+    final aid = Uint8List(0);
+    Injector.instance.registerAid(aid);
+    addTearDown(Injector.instance.unregisterAid);
+
+    expectList(
+      Injector.instance.aid,
+      aid,
+    );
+  });
+
   test('returns birthday.', () {
     final birthday = DateTime(2025);
     Injector.instance.registerBirthday(birthday);
-    addTearDown(
-      () async =>
-          Injector.instance.unregister<DateTime>(instanceName: 'birthday'),
-    );
+    addTearDown(Injector.instance.unregisterBirthday);
 
     expect(
       Injector.instance.birthday,
@@ -60,6 +69,17 @@ void main() {
     addTearDown(periodicTimer.cancel);
 
     expect(periodicTimer, isA<Timer>());
+  });
+
+  test('returns pin.', () {
+    final pin = Uint8List(0);
+    Injector.instance.registerPin(pin);
+    addTearDown(Injector.instance.unregisterPin);
+
+    expectList(
+      Injector.instance.pin,
+      pin,
+    );
   });
 
   test('returns Random.', () {
