@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:gift_keys/ui/pages/home/page.dart';
+import 'package:gift_keys/ui/pages/keys/page.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,12 +11,12 @@ final class GoRouterConfig {
 
   static final routes = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: '/',
+    initialLocation: '/keys',
     routes: [
       GoRoute(
-        name: Routes.homePage(),
-        path: '/',
-        builder: (_, __) => const HomePage(),
+        name: Routes.keysPage(),
+        path: '/keys',
+        builder: (_, __) => const KeysPage(),
       ),
     ],
   );

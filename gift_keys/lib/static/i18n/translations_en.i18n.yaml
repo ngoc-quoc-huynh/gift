@@ -1,1 +1,5 @@
 appName: 'Gift Keys'
+
+pages:
+  keys:
+    add: 'Add key'
