@@ -1,0 +1,23 @@
+appName: 'Gift Keys'
+
+imagePickerFormField:
+  add: 'Add image'
+  empty: 'Please select an image.'
+
+pages:
+  keys:
+    add: 'Add key'
+  addKey:
+    appBar: 'Add key'
+    aid:
+      hint: 'Application identifier'
+      validation: 'Please enter an application identifier.'
+    birthday:
+      hint: 'Birthday'
+      validation: 'Please enter a birthday.'
+    name:
+      hint: 'Name'
+      validation: 'Please enter a name.'
+    password:
+      hint: 'Password'
+      validation: 'Please enter a password.'

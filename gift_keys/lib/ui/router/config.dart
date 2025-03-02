@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:gift_keys/ui/pages/add_key/page.dart';
 import 'package:gift_keys/ui/pages/keys/page.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +18,13 @@ final class GoRouterConfig {
         name: Routes.keysPage(),
         path: '/keys',
         builder: (_, __) => const KeysPage(),
+        routes: [
+          GoRoute(
+            name: Routes.addKeyPage(),
+            path: 'add',
+            builder: (_, __) => const AddKeyPage(),
+          ),
+        ],
       ),
     ],
   );

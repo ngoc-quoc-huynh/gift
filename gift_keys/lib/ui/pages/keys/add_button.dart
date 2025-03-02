@@ -1,7 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
+import 'package:gift_keys/ui/router/routes.dart';
 
 class KeyAddButton extends StatelessWidget {
   const KeyAddButton({super.key});
@@ -18,9 +20,7 @@ class KeyAddButton extends StatelessWidget {
         child: Opacity(
           opacity: _computeOpacity(constraints.maxWidth, screenWidth),
           child: ActionChip(
-            onPressed: () {
-              // TODO: Navigate to add key page
-            },
+            onPressed: () => context.goRoute(Routes.addKeyPage),
             shape: RoundedRectangleBorder(
               side: BorderSide(color: primaryColor),
               borderRadius: const BorderRadius.all(Radius.circular(16)),
