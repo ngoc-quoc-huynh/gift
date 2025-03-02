@@ -64,11 +64,14 @@ methodName
     test('returns correctly without parameters.', () {
       repository.logInfo('methodName', 'message', stackTrace: StackTrace.empty);
       verify(
-        () => logger.i('''
+        () => logger.i(
+          '''
 methodName
 {
   "message": "message"
-}''', stackTrace: StackTrace.empty),
+}''', // ignore: prefer-trailing-comma, false-positive
+          stackTrace: StackTrace.empty,
+        ),
       );
     });
 
@@ -81,14 +84,17 @@ methodName
       );
 
       verify(
-        () => logger.i('''
+        () => logger.i(
+          '''
 methodName
 {
   "parameters": {
     "id": "id"
   },
   "message": "message"
-}''', stackTrace: StackTrace.empty),
+}''', // ignore: prefer-trailing-comma, false-positive
+          stackTrace: StackTrace.empty,
+        ),
       );
     });
   });
@@ -101,11 +107,15 @@ methodName
         stackTrace: StackTrace.empty,
       );
       verify(
-        () => logger.w('''
+        () => logger.w(
+          '''
 methodName
 {
   "message": "message"
-}''', stackTrace: StackTrace.empty),
+}''',
+          // ignore: prefer-trailing-comma, false-positive
+          stackTrace: StackTrace.empty,
+        ),
       );
     });
 
@@ -118,14 +128,18 @@ methodName
       );
 
       verify(
-        () => logger.w('''
+        () => logger.w(
+          '''
 methodName
 {
   "parameters": {
     "id": "id"
   },
   "message": "message"
-}''', stackTrace: StackTrace.empty),
+}''',
+          // ignore: prefer-trailing-comma, false-positive
+          stackTrace: StackTrace.empty,
+        ),
       );
     });
   });

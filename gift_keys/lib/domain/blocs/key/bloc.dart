@@ -22,7 +22,6 @@ final class KeysBloc extends Bloc<KeysEvent, KeysState> {
   void _onKeysAddEvent(KeysAddEvent event, Emitter<KeysState> emit) {
     if (state case KeysLoadOnSuccess(:final keys)) {
       emit(KeysLoadOnSuccess([...keys, event.key]..sortBy((e) => e.birthday)));
-      print("EMITTED: $state");
     }
   }
 }

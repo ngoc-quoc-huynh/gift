@@ -18,5 +18,6 @@ final class GiftKey extends Equatable {
   final String password;
 
   @override
+  // ignore: list-all-equatable-fields, we can only determine the file path.
   List<Object?> get props => [image.path, name, birthday, aid, password];
 }

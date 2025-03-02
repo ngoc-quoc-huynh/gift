@@ -27,12 +27,12 @@ final class GoRouterConfig {
           GoRoute(
             name: Routes.keysPage(),
             path: '/keys',
-            builder: (_, __) => const KeysPage(),
+            builder: (_, _) => const KeysPage(),
             routes: [
               GoRoute(
                 name: Routes.addKeyPage(),
                 path: 'add',
-                builder: (_, __) => const AddKeyPage(),
+                builder: (_, _) => const AddKeyPage(),
               ),
             ],
           ),
