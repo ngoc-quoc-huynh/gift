@@ -13,9 +13,7 @@ class KeysPage extends StatelessWidget {
         shape: RoundedRectangleBorder(),
         enableSplash: false,
         itemSnapping: true,
-        children: [
-          KeyAddButton(),
-        ],
+        children: [KeyAddButton()],
       ),
     );
   }

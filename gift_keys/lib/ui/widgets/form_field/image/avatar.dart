@@ -4,10 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:gift_keys/injector.dart';
 
 sealed class ImagePickerAvatar extends StatelessWidget {
-  const ImagePickerAvatar({
-    required this.onImagePicked,
-    super.key,
-  });
+  const ImagePickerAvatar({required this.onImagePicked, super.key});
+
   const factory ImagePickerAvatar.selected({
     required File file,
     required ValueChanged<File> onImagePicked,
@@ -51,19 +49,14 @@ class _Selected extends ImagePickerAvatar {
         shape: const CircleBorder(),
         color: Colors.transparent,
         clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          onTap: onTap,
-        ),
+        child: InkWell(onTap: onTap),
       ),
     );
   }
 }
 
 class _Empty extends ImagePickerAvatar {
-  const _Empty({
-    required super.onImagePicked,
-    super.key,
-  });
+  const _Empty({required super.onImagePicked, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +65,7 @@ class _Empty extends ImagePickerAvatar {
         CircleAvatar(
           radius: ImagePickerAvatar._radius,
           backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-          child: const Icon(
-            Icons.image,
-            size: 40,
-          ),
+          child: const Icon(Icons.image, size: 40),
         ),
         Material(
           shape: const CircleBorder(),
@@ -84,9 +74,7 @@ class _Empty extends ImagePickerAvatar {
           child: SizedBox(
             width: ImagePickerAvatar._radius * 2,
             height: ImagePickerAvatar._radius * 2,
-            child: InkWell(
-              onTap: onTap,
-            ),
+            child: InkWell(onTap: onTap),
           ),
         ),
       ],

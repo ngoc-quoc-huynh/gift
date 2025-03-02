@@ -17,15 +17,11 @@ final class LoggerRepository implements LoggerApi {
     required Exception exception,
     required StackTrace stackTrace,
     Map<String, dynamic>? parameters,
-  }) =>
-      _logger.e(
-        _buildMessage(
-          methodName,
-          parameters: parameters,
-        ),
-        error: exception,
-        stackTrace: stackTrace,
-      );
+  }) => _logger.e(
+    _buildMessage(methodName, parameters: parameters),
+    error: exception,
+    stackTrace: stackTrace,
+  );
 
   @override
   void logInfo(
@@ -33,15 +29,10 @@ final class LoggerRepository implements LoggerApi {
     String message, {
     required StackTrace stackTrace,
     Map<String, dynamic>? parameters,
-  }) =>
-      _logger.i(
-        _buildMessage(
-          methodName,
-          message: message,
-          parameters: parameters,
-        ),
-        stackTrace: stackTrace,
-      );
+  }) => _logger.i(
+    _buildMessage(methodName, message: message, parameters: parameters),
+    stackTrace: stackTrace,
+  );
 
   @override
   void logWarning(
@@ -49,27 +40,16 @@ final class LoggerRepository implements LoggerApi {
     String message, {
     required StackTrace stackTrace,
     Map<String, dynamic>? parameters,
-  }) =>
-      _logger.w(
-        _buildMessage(
-          methodName,
-          message: message,
-          parameters: parameters,
-        ),
-        stackTrace: stackTrace,
-      );
+  }) => _logger.w(
+    _buildMessage(methodName, message: message, parameters: parameters),
+    stackTrace: stackTrace,
+  );
 
   String _buildMessage(
     String methodName, {
     String? message,
     Map<String, dynamic>? parameters,
-  }) =>
-      '''
+  }) => '''
 $methodName
-${_encoder.convert(
-        {
-          if (parameters != null) 'parameters': parameters,
-          if (message != null) 'message': message,
-        },
-      )}''';
+${_encoder.convert({if (parameters != null) 'parameters': parameters, if (message != null) 'message': message})}''';
 }

@@ -17,11 +17,7 @@ class AddKeyPage extends StatelessWidget {
       ),
       body: const Padding(
         padding: EdgeInsets.all(20),
-        child: AutofillGroup(
-          child: Form(
-            child: _Body(),
-          ),
-        ),
+        child: AutofillGroup(child: Form(child: _Body())),
       ),
     );
   }
@@ -54,9 +50,7 @@ class _BodyState extends State<_Body> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        ImagePickerFormField(
-          onPicked: (file) => _file = file,
-        ),
+        ImagePickerFormField(onPicked: (file) => _file = file),
         const SizedBox(height: 10),
         CustomTextFormField(
           controller: _nameController,
@@ -106,9 +100,9 @@ class _BodyState extends State<_Body> {
       _emptyValidator(val, _translations.aid.validation);
 
   String? _birthdayValidator(DateTime? val) => switch (val) {
-        null => _translations.birthday.validation,
-        DateTime() => null,
-      };
+    null => _translations.birthday.validation,
+    DateTime() => null,
+  };
 
   String? _nameValidator(String? val) =>
       _emptyValidator(val, _translations.name.validation);
@@ -117,10 +111,10 @@ class _BodyState extends State<_Body> {
       _emptyValidator(val, _translations.password.validation);
 
   String? _emptyValidator(String? val, String message) => switch (val) {
-        null => message,
-        final val when val.isEmpty => message,
-        String() => null,
-      };
+    null => message,
+    final val when val.isEmpty => message,
+    String() => null,
+  };
 
   void _onCreatePressed(BuildContext context) {
     if (Form.of(context).validate()) {

@@ -13,13 +13,9 @@ void main() {
   final logger = MockLogger();
   const repository = LoggerRepository();
 
-  setUpAll(
-    () => Injector.instance.registerSingleton<Logger>(logger),
-  );
+  setUpAll(() => Injector.instance.registerSingleton<Logger>(logger));
 
-  tearDownAll(
-    () async => Injector.instance.unregister<Logger>(),
-  );
+  tearDownAll(() async => Injector.instance.unregister<Logger>());
 
   group('logException', () {
     test('returns correctly without parameters.', () {
@@ -66,20 +62,13 @@ methodName
 
   group('logInfo', () {
     test('returns correctly without parameters.', () {
-      repository.logInfo(
-        'methodName',
-        'message',
-        stackTrace: StackTrace.empty,
-      );
+      repository.logInfo('methodName', 'message', stackTrace: StackTrace.empty);
       verify(
-        () => logger.i(
-          '''
+        () => logger.i('''
 methodName
 {
   "message": "message"
-}''',
-          stackTrace: StackTrace.empty,
-        ),
+}''', stackTrace: StackTrace.empty),
       );
     });
 
@@ -92,17 +81,14 @@ methodName
       );
 
       verify(
-        () => logger.i(
-          '''
+        () => logger.i('''
 methodName
 {
   "parameters": {
     "id": "id"
   },
   "message": "message"
-}''',
-          stackTrace: StackTrace.empty,
-        ),
+}''', stackTrace: StackTrace.empty),
       );
     });
   });
@@ -115,14 +101,11 @@ methodName
         stackTrace: StackTrace.empty,
       );
       verify(
-        () => logger.w(
-          '''
+        () => logger.w('''
 methodName
 {
   "message": "message"
-}''',
-          stackTrace: StackTrace.empty,
-        ),
+}''', stackTrace: StackTrace.empty),
       );
     });
 
@@ -135,17 +118,14 @@ methodName
       );
 
       verify(
-        () => logger.w(
-          '''
+        () => logger.w('''
 methodName
 {
   "parameters": {
     "id": "id"
   },
   "message": "message"
-}''',
-          stackTrace: StackTrace.empty,
-        ),
+}''', stackTrace: StackTrace.empty),
       );
     });
   });

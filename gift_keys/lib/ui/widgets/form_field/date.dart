@@ -9,14 +9,15 @@ class DateFormField extends FormField<DateTime> {
     super.validator,
     super.key,
   }) : super(
-          builder: (field) => _Body(
-            controller: controller,
-            errorText: field.errorText,
-            labelText: labelText,
-            onTap: () => _show(field, labelText),
-            value: field.value,
-          ),
-        );
+         builder:
+             (field) => _Body(
+               controller: controller,
+               errorText: field.errorText,
+               labelText: labelText,
+               onTap: () => _show(field, labelText),
+               value: field.value,
+             ),
+       );
 
   static Future<void> _show(
     FormFieldState<DateTime> field,
@@ -98,11 +99,10 @@ class _BodyState extends State<_Body> {
   }
 
   void _onValueChanged() => WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) {
-          _controller.text = DateFormat.yMd(
-            Injector
-                .instance.translations.$meta.locale.flutterLocale.countryCode,
-          ).format(widget.value!);
-        }
-      });
+    if (mounted) {
+      _controller.text = DateFormat.yMd(
+        Injector.instance.translations.$meta.locale.flutterLocale.countryCode,
+      ).format(widget.value!);
+    }
+  });
 }

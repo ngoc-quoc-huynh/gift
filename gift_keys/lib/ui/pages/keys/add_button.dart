@@ -15,36 +15,38 @@ class KeyAddButton extends StatelessWidget {
     final screenWidth = MediaQuery.sizeOf(context).width;
 
     return LayoutBuilder(
-      builder: (context, constraints) => OverflowBox(
-        maxWidth: screenWidth,
-        child: Opacity(
-          opacity: _computeOpacity(constraints.maxWidth, screenWidth),
-          child: ActionChip(
-            onPressed: () => context.goRoute(Routes.addKeyPage),
-            shape: RoundedRectangleBorder(
-              side: BorderSide(color: primaryColor),
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-            ),
-            padding: const EdgeInsets.all(20),
-            label: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const CircleAvatar(
-                  radius: 30,
-                  child: Icon(Icons.add, size: 50),
+      builder:
+          (context, constraints) => OverflowBox(
+            maxWidth: screenWidth,
+            child: Opacity(
+              opacity: _computeOpacity(constraints.maxWidth, screenWidth),
+              child: ActionChip(
+                onPressed: () => context.goRoute(Routes.addKeyPage),
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color: primaryColor),
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  Injector.instance.translations.pages.keys.add,
-                  style: theme.textTheme.headlineMedium
-                      ?.copyWith(color: primaryColor),
-                  textAlign: TextAlign.center,
+                padding: const EdgeInsets.all(20),
+                label: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const CircleAvatar(
+                      radius: 30,
+                      child: Icon(Icons.add, size: 50),
+                    ),
+                    const SizedBox(height: 10),
+                    Text(
+                      Injector.instance.translations.pages.keys.add,
+                      style: theme.textTheme.headlineMedium?.copyWith(
+                        color: primaryColor,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
     );
   }
 

@@ -14,11 +14,12 @@ final class Injector {
 
   static final GetIt instance = GetIt.instance;
 
-  static void setupDependencies() => instance
-    ..registerLazySingleton<FileApi>(FileRepository.new)
-    ..registerLazySingleton<Logger>(Logger.new)
-    ..registerLazySingleton<LoggerApi>(LoggerRepository.new)
-    ..registerLazySingleton<Translations>(_createTranslations);
+  static void setupDependencies() =>
+      instance
+        ..registerLazySingleton<FileApi>(FileRepository.new)
+        ..registerLazySingleton<Logger>(Logger.new)
+        ..registerLazySingleton<LoggerApi>(LoggerRepository.new)
+        ..registerLazySingleton<Translations>(_createTranslations);
 
   static Translations _createTranslations() => AppLocale.en.buildSync();
 }
