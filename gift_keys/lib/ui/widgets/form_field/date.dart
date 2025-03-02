@@ -5,22 +5,22 @@ import 'package:intl/intl.dart';
 class DateFormField extends FormField<DateTime> {
   DateFormField({
     required String labelText,
-    TextEditingController? controller,
+    required ValueChanged<DateTime> onDateSelected,
     super.validator,
     super.key,
   }) : super(
          builder:
              (field) => _Body(
-               controller: controller,
                errorText: field.errorText,
                labelText: labelText,
-               onTap: () => _show(field, labelText),
+               onTap: () => _show(field, onDateSelected, labelText),
                value: field.value,
              ),
        );
 
   static Future<void> _show(
     FormFieldState<DateTime> field,
+    ValueChanged<DateTime> onDateSelected,
     String labelText,
   ) async {
     final date = await showDatePicker(
@@ -33,20 +33,19 @@ class DateFormField extends FormField<DateTime> {
 
     if (date != null) {
       field.didChange(date);
+      onDateSelected.call(date);
     }
   }
 }
 
 class _Body extends StatefulWidget {
   const _Body({
-    required this.controller,
     required this.errorText,
     required this.labelText,
     required this.onTap,
     required this.value,
   });
 
-  final TextEditingController? controller;
   final DateTime? value;
   final String labelText;
   final String? errorText;
@@ -57,22 +56,11 @@ class _Body extends StatefulWidget {
 }
 
 class _BodyState extends State<_Body> {
-  late TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = switch (widget.controller) {
-      null => TextEditingController(),
-      final controller => controller,
-    };
-  }
+  final _controller = TextEditingController();
 
   @override
   void dispose() {
-    if (widget.controller == null) {
-      _controller.dispose();
-    }
+    _controller.dispose();
     super.dispose();
   }
 

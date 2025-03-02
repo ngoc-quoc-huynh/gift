@@ -1,10 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_keys/domain/blocs/key/bloc.dart';
+import 'package:gift_keys/domain/models/key.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/widgets/form_field/date.dart';
 import 'package:gift_keys/ui/widgets/form_field/image/form_field.dart';
 import 'package:gift_keys/ui/widgets/form_field/text.dart';
+import 'package:go_router/go_router.dart';
 
 class AddKeyPage extends StatelessWidget {
   const AddKeyPage({super.key});
@@ -32,16 +36,15 @@ class _Body extends StatefulWidget {
 
 class _BodyState extends State<_Body> {
   final _aidController = TextEditingController();
-  final _birthdayController = TextEditingController();
   final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
-  late File _file;
+  late File _image;
+  late DateTime _birthday;
 
   @override
   void dispose() {
     super.dispose();
     _aidController.dispose();
-    _birthdayController.dispose();
     _nameController.dispose();
     _passwordController.dispose();
   }
@@ -50,7 +53,7 @@ class _BodyState extends State<_Body> {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        ImagePickerFormField(onPicked: (file) => _file = file),
+        ImagePickerFormField(onPicked: (file) => _image = file),
         const SizedBox(height: 10),
         CustomTextFormField(
           controller: _nameController,
@@ -63,7 +66,7 @@ class _BodyState extends State<_Body> {
         ),
         const SizedBox(height: 10),
         DateFormField(
-          controller: _birthdayController,
+          onDateSelected: (date) => _birthday = date,
           labelText: _translations.birthday.hint,
           validator: _birthdayValidator,
         ),
@@ -118,8 +121,19 @@ class _BodyState extends State<_Body> {
 
   void _onCreatePressed(BuildContext context) {
     if (Form.of(context).validate()) {
-      // TODO: Add logic
-      _file.path;
+      context
+        ..read<KeysBloc>().add(
+          KeysAddEvent(
+            GiftKey(
+              image: _image,
+              name: _nameController.text,
+              birthday: _birthday,
+              aid: _aidController.text,
+              password: _passwordController.text,
+            ),
+          ),
+        )
+        ..pop();
     }
   }
 
