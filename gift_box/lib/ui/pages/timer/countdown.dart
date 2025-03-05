@@ -22,6 +22,7 @@ class TimerCountdown extends StatelessWidget {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
             child: ColoredBox(
+              // TODO: Handle light/dark mode like in keys app
               color: theme.colorScheme.surface.withValues(alpha: 0.1),
               child: Padding(
                 padding: const EdgeInsets.symmetric(

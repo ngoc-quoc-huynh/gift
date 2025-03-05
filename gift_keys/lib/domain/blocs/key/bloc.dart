@@ -21,7 +21,19 @@ final class KeysBloc extends Bloc<KeysEvent, KeysState> {
 
   void _onKeysAddEvent(KeysAddEvent event, Emitter<KeysState> emit) {
     if (state case KeysLoadOnSuccess(:final keys)) {
-      emit(KeysLoadOnSuccess([...keys, event.key]..sortBy((e) => e.birthday)));
+      final insertIndex = keys.lowerBound(event.key, _compareGiftKeys);
+      final newKeys = [...keys]..insert(insertIndex, event.key);
+
+      emit(KeysAddOnSuccess(insertIndex, newKeys));
     }
+  }
+
+  static int _compareGiftKeys(GiftKey a, GiftKey b) {
+    final dateComparison = b.birthday.compareTo(a.birthday);
+
+    return switch (dateComparison) {
+      0 => a.name.compareTo(b.name),
+      _ => dateComparison,
+    };
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gift_keys/domain/utils/extensions/date_time.dart';
 import 'package:gift_keys/injector.dart';
-import 'package:intl/intl.dart';
 
 class DateFormField extends FormField<DateTime> {
   DateFormField({
@@ -88,9 +88,7 @@ class _BodyState extends State<_Body> {
 
   void _onValueChanged() => WidgetsBinding.instance.addPostFrameCallback((_) {
     if (mounted) {
-      _controller.text = DateFormat.yMd(
-        Injector.instance.translations.$meta.locale.flutterLocale.countryCode,
-      ).format(widget.value!);
+      _controller.text = widget.value!.format();
     }
   });
 }
