@@ -125,6 +125,7 @@ class _BodyState extends State<_Body> {
         ..read<KeysBloc>().add(
           KeysAddEvent(
             GiftKey(
+              id: DateTime.now().millisecondsSinceEpoch.toString(),
               image: _image,
               name: _nameController.text,
               birthday: _birthday,

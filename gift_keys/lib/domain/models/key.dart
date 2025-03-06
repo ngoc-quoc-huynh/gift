@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 
 final class GiftKey extends Equatable {
   const GiftKey({
+    required this.id,
     required this.image,
     required this.name,
     required this.birthday,
@@ -11,6 +12,7 @@ final class GiftKey extends Equatable {
     required this.password,
   });
 
+  final String id;
   final File image;
   final String name;
   final DateTime birthday;
@@ -19,5 +21,5 @@ final class GiftKey extends Equatable {
 
   @override
   // ignore: list-all-equatable-fields, we can only determine the file path.
-  List<Object?> get props => [image.path, name, birthday, aid, password];
+  List<Object?> get props => [id, image.path, name, birthday, aid, password];
 }

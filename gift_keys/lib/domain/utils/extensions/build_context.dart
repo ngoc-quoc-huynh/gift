@@ -3,5 +3,8 @@ import 'package:gift_keys/domain/models/route.dart';
 import 'package:go_router/go_router.dart';
 
 extension BuildContextExtension on BuildContext {
-  void goRoute(Route route) => goNamed(route());
+  void goRoute(
+    Route route, {
+    Map<String, String> pathParameters = const <String, String>{},
+  }) => goNamed(route(), pathParameters: pathParameters);
 }
