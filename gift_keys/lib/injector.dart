@@ -1,8 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:gift_keys/domain/interfaces/file.dart';
 import 'package:gift_keys/domain/interfaces/logger.dart';
+import 'package:gift_keys/domain/interfaces/nfc.dart';
 import 'package:gift_keys/infrastructure/repositories/file.dart';
 import 'package:gift_keys/infrastructure/repositories/logger.dart';
+import 'package:gift_keys/infrastructure/repositories/nfc.dart';
 import 'package:gift_keys/static/i18n/translations.g.dart';
 import 'package:logger/logger.dart';
 
@@ -19,6 +21,7 @@ final class Injector {
         ..registerLazySingleton<FileApi>(FileRepository.new)
         ..registerLazySingleton<Logger>(Logger.new)
         ..registerLazySingleton<LoggerApi>(LoggerRepository.new)
+        ..registerLazySingleton<NfcApi>(NfcRepository.new)
         ..registerLazySingleton<Translations>(_createTranslations);
 
   static Translations _createTranslations() => AppLocale.en.buildSync();
