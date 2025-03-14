@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:gift_keys/domain/models/date_time_format.dart';
 import 'package:gift_keys/domain/models/key.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/domain/utils/extensions/date_time.dart';
@@ -25,12 +27,12 @@ class KeysItem extends StatelessWidget {
       onTap:
           () => context.goRoute(
             Routes.keyPage,
-            pathParameters: {'id': giftKey.id},
+            pathParameters: {'id': giftKey.id.toString()},
           ),
       child: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: FileImage(giftKey.image),
+            image: FileImage(File(giftKey.imagePath)),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               Colors.black.withValues(
@@ -66,7 +68,7 @@ class KeysItem extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          giftKey.birthday.format(),
+                          giftKey.birthday.format(DateTimeFormat.yMd),
                           style: textTheme.displaySmall?.copyWith(
                             color: textColor,
                           ),

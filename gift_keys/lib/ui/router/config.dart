@@ -38,7 +38,9 @@ final class GoRouterConfig {
               GoRoute(
                 name: Routes.keyPage(),
                 path: ':id',
-                builder: (_, _) => const KeyPage(),
+                builder:
+                    (_, state) =>
+                        KeyPage(id: state.pathParameters['id']! as int),
               ),
             ],
           ),

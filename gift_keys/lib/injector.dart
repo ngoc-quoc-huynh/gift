@@ -1,12 +1,17 @@
+import 'dart:io';
+
 import 'package:get_it/get_it.dart';
 import 'package:gift_keys/domain/interfaces/file.dart';
+import 'package:gift_keys/domain/interfaces/local_database.dart';
 import 'package:gift_keys/domain/interfaces/logger.dart';
 import 'package:gift_keys/domain/interfaces/nfc.dart';
 import 'package:gift_keys/infrastructure/repositories/file.dart';
 import 'package:gift_keys/infrastructure/repositories/logger.dart';
 import 'package:gift_keys/infrastructure/repositories/nfc.dart';
+import 'package:gift_keys/infrastructure/repositories/sqlite_async.dart';
 import 'package:gift_keys/static/i18n/translations.g.dart';
 import 'package:logger/logger.dart';
+import 'package:path_provider/path_provider.dart';
 
 export 'package:gift_keys/domain/utils/extensions/get_it.dart';
 export 'package:gift_keys/static/i18n/translations.g.dart';
@@ -16,13 +21,20 @@ final class Injector {
 
   static final GetIt instance = GetIt.instance;
 
-  static void setupDependencies() =>
-      instance
-        ..registerLazySingleton<FileApi>(FileRepository.new)
-        ..registerLazySingleton<Logger>(Logger.new)
-        ..registerLazySingleton<LoggerApi>(LoggerRepository.new)
-        ..registerLazySingleton<NfcApi>(NfcRepository.new)
-        ..registerLazySingleton<Translations>(_createTranslations);
+  static Future<void> setupDependencies() async {
+    instance
+      ..registerSingletonAsync<Directory>(
+        getApplicationDocumentsDirectory,
+        instanceName: 'appDir',
+      )
+      ..registerLazySingleton<FileApi>(FileRepository.new)
+      ..registerLazySingleton<LocalDatabaseApi>(SqliteAsyncRepository.new)
+      ..registerLazySingleton<Logger>(Logger.new)
+      ..registerLazySingleton<LoggerApi>(LoggerRepository.new)
+      ..registerLazySingleton<NfcApi>(NfcRepository.new)
+      ..registerLazySingleton<Translations>(_createTranslations);
+    await instance.allReady();
+  }
 
   static Translations _createTranslations() => AppLocale.en.buildSync();
 }

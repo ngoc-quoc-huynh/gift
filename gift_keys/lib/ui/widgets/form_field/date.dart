@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gift_keys/domain/models/date_time_format.dart';
 import 'package:gift_keys/domain/utils/extensions/date_time.dart';
 import 'package:gift_keys/injector.dart';
 
@@ -86,9 +87,7 @@ class _BodyState extends State<_Body> {
     );
   }
 
-  void _onValueChanged() => WidgetsBinding.instance.addPostFrameCallback((_) {
-    if (mounted) {
-      _controller.text = widget.value!.format();
-    }
-  });
+  void _onValueChanged() => WidgetsBinding.instance.addPostFrameCallback(
+    (_) => _controller.text = widget.value!.format(DateTimeFormat.yMd),
+  );
 }

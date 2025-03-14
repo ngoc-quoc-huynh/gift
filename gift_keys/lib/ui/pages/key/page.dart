@@ -3,7 +3,9 @@ import 'package:gift_keys/ui/pages/key/key.dart';
 import 'package:gift_keys/ui/pages/key/nfc_status.dart';
 
 class KeyPage extends StatelessWidget {
-  const KeyPage({super.key});
+  const KeyPage({required this.id, super.key});
+
+  final int id;
 
   @override
   Widget build(BuildContext context) {

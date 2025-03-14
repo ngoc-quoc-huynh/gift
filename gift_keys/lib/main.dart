@@ -4,8 +4,9 @@ import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/theme.dart';
 import 'package:gift_keys/ui/router/config.dart';
 
-void main() {
-  Injector.setupDependencies();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Injector.setupDependencies();
   runApp(const App());
 }
 

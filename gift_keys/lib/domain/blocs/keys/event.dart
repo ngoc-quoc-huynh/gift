@@ -12,5 +12,5 @@ final class KeysInitializeEvent extends KeysEvent {
 final class KeysAddEvent extends KeysEvent {
   const KeysAddEvent(this.key);
 
-  final GiftKey key;
+  final AddGiftKey key;
 }

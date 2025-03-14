@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/keys/bloc.dart';
-import 'package:gift_keys/domain/models/key.dart';
+import 'package:gift_keys/domain/models/add_key.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/widgets/form_field/date.dart';
 import 'package:gift_keys/ui/widgets/form_field/image/form_field.dart';
@@ -124,9 +124,8 @@ class _BodyState extends State<_Body> {
       context
         ..read<KeysBloc>().add(
           KeysAddEvent(
-            GiftKey(
-              id: DateTime.now().millisecondsSinceEpoch.toString(),
-              image: _image,
+            AddGiftKey(
+              imagePath: _image.path,
               name: _nameController.text,
               birthday: _birthday,
               aid: _aidController.text,
