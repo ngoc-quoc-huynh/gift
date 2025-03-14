@@ -35,6 +35,7 @@ dependencies:
     git:
       url: https://github.com/ngoc-quoc-huynh/nfc_manager.git
       path: nfc_manager
+      ref: v1.0.0
 
 dev_dependencies:
   # Linter

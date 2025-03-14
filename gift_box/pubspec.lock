@@ -534,8 +534,8 @@ packages:
     dependency: "direct main"
     description:
       path: nfc_manager
-      ref: HEAD
-      resolved-ref: ce14458f067536d45f9606043a3ca1d121a5f000
+      ref: "v1.0.0"
+      resolved-ref: "68d1a21455c5d6fa5eaadf4b4435466399f4b73e"
       url: "https://github.com/ngoc-quoc-huynh/nfc_manager.git"
     source: git
     version: "1.0.0"
@@ -543,8 +543,8 @@ packages:
     dependency: transitive
     description:
       path: nfc_manager_android
-      ref: HEAD
-      resolved-ref: ce14458f067536d45f9606043a3ca1d121a5f000
+      ref: "v1.0.0"
+      resolved-ref: "68d1a21455c5d6fa5eaadf4b4435466399f4b73e"
       url: "https://github.com/ngoc-quoc-huynh/nfc_manager.git"
     source: git
     version: "1.0.0+1"
@@ -552,8 +552,8 @@ packages:
     dependency: transitive
     description:
       path: nfc_manager_platform_interface
-      ref: HEAD
-      resolved-ref: ce14458f067536d45f9606043a3ca1d121a5f000
+      ref: "v1.0.0"
+      resolved-ref: "68d1a21455c5d6fa5eaadf4b4435466399f4b73e"
       url: "https://github.com/ngoc-quoc-huynh/nfc_manager.git"
     source: git
     version: "1.0.0"
