@@ -40,7 +40,7 @@ final class GoRouterConfig {
                 path: ':id',
                 builder:
                     (_, state) =>
-                        KeyPage(id: state.pathParameters['id']! as int),
+                        KeyPage(id: int.parse(state.pathParameters['id']!)),
               ),
             ],
           ),
