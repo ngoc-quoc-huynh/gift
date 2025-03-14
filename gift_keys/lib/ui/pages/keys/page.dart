@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_keys/domain/blocs/key/bloc.dart';
+import 'package:gift_keys/domain/blocs/keys/bloc.dart';
 import 'package:gift_keys/ui/pages/keys/add_button.dart';
 import 'package:gift_keys/ui/pages/keys/item.dart';
 

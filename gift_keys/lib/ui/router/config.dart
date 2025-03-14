@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_keys/domain/blocs/key/bloc.dart';
+import 'package:gift_keys/domain/blocs/keys/bloc.dart';
 import 'package:gift_keys/ui/pages/add_key/page.dart';
 import 'package:gift_keys/ui/pages/key/page.dart';
 import 'package:gift_keys/ui/pages/keys/page.dart';
