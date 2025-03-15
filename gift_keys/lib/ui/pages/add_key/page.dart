@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/keys/bloc.dart';
 import 'package:gift_keys/injector.dart';
+import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/widgets/form_field/date.dart';
 import 'package:gift_keys/ui/widgets/form_field/image/form_field.dart';
 import 'package:gift_keys/ui/widgets/form_field/text.dart';
@@ -19,7 +20,10 @@ class AddKeyPage extends StatelessWidget {
         title: Text(Injector.instance.translations.pages.addKey.appBar),
       ),
       body: const Padding(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.symmetric(
+          horizontal: Sizes.horizontalPadding,
+          vertical: Sizes.verticalPadding,
+        ),
         child: AutofillGroup(child: Form(child: _Body())),
       ),
     );

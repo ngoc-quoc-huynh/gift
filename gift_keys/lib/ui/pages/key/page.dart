@@ -5,6 +5,7 @@ import 'package:gift_keys/domain/models/date_time_format.dart';
 import 'package:gift_keys/domain/models/key.dart';
 import 'package:gift_keys/domain/utils/extensions/date_time.dart';
 import 'package:gift_keys/injector.dart';
+import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/pages/key/key.dart';
 import 'package:gift_keys/ui/pages/key/nfc_status.dart';
 
@@ -23,49 +24,52 @@ class KeyPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(Injector.instance.translations.pages.key.appBar),
       ),
-      body: BlocProvider<KeyBloc>(
-        create: (_) => KeyBloc(id)..add(const KeyInitializeEvent()),
-        child: BlocBuilder<KeyBloc, KeyState>(
-          builder:
-              (context, state) => switch (state) {
-                KeyLoadInProgress() => const SizedBox.shrink(),
-                KeyLoadOnSuccess(
-                  giftKey: GiftKey(
-                    :final name,
-                    :final birthday,
-                    :final aid,
-                    :final password,
-                  ),
-                ) =>
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Align(
-                          alignment: Alignment.topRight,
-                          child: KeyNfcStatus(),
-                        ),
-                        const Spacer(),
-                        RiveKey(aid: aid, password: password),
-                        const SizedBox(height: 20),
-                        Text(
-                          name,
-                          style: textTheme.displayLarge?.copyWith(
-                            color: primaryColor,
-                          ),
-                        ),
-                        Text(
-                          birthday.format(DateTimeFormat.normal),
-                          style: textTheme.displaySmall?.copyWith(
-                            color: primaryColor,
-                          ),
-                        ),
-                        const SizedBox(height: 40),
-                      ],
+      body: SafeArea(
+        child: BlocProvider<KeyBloc>(
+          create: (_) => KeyBloc(id)..add(const KeyInitializeEvent()),
+          child: BlocBuilder<KeyBloc, KeyState>(
+            builder:
+                (context, state) => switch (state) {
+                  KeyLoadInProgress() => const SizedBox.shrink(),
+                  KeyLoadOnSuccess(
+                    giftKey: GiftKey(
+                      :final name,
+                      :final birthday,
+                      :final aid,
+                      :final password,
                     ),
-                  ),
-              },
+                  ) =>
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: Sizes.horizontalPadding,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const Align(
+                            alignment: Alignment.topRight,
+                            child: KeyNfcStatus(),
+                          ),
+                          const Spacer(),
+                          RiveKey(aid: aid, password: password),
+                          const SizedBox(height: 20),
+                          Text(
+                            name,
+                            style: textTheme.displayLarge?.copyWith(
+                              color: primaryColor,
+                            ),
+                          ),
+                          Text(
+                            birthday.format(DateTimeFormat.normal),
+                            style: textTheme.displaySmall?.copyWith(
+                              color: primaryColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                },
+          ),
         ),
       ),
     );
