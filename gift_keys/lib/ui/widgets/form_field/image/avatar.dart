@@ -86,7 +86,7 @@ class _Empty extends ImagePickerAvatar {
       children: [
         CircleAvatar(
           radius: ImagePickerAvatar.radius,
-          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+          backgroundColor: context.colorScheme.primaryContainer,
           child: const Icon(Icons.image, size: 40),
         ),
         Material(

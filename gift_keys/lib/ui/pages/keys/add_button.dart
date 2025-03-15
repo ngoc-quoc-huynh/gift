@@ -9,8 +9,7 @@ class KeyAddButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final primaryColor = theme.colorScheme.primary;
+    final primaryColor = context.colorScheme.primary;
 
     return FadeBox(
       child: ActionChip(
@@ -27,7 +26,7 @@ class KeyAddButton extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               Injector.instance.translations.pages.keys.add,
-              style: theme.textTheme.headlineMedium?.copyWith(
+              style: context.textTheme.headlineMedium?.copyWith(
                 color: primaryColor,
               ),
               textAlign: TextAlign.center,
