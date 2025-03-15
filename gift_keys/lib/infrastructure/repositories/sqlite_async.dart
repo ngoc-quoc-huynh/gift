@@ -39,6 +39,25 @@ ORDER BY birthday ASC;
   }
 
   @override
+  Future<domain.GiftKey> loadKey(int id) async {
+    final json = await _db.get(
+      '''
+SELECT id,
+       imageFileName,
+       name,
+       birthday,
+       aid,
+       password
+FROM $_tableName
+WHERE id = ?;
+    ''',
+      [id],
+    );
+
+    return GiftKey.fromJson(json).toDomain();
+  }
+
+  @override
   Future<domain.GiftKey> saveKey({
     required String imageFileName,
     required String name,

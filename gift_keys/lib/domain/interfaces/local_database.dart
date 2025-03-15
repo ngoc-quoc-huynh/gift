@@ -14,4 +14,6 @@ abstract interface class LocalDatabaseApi {
   });
 
   Future<List<GiftKey>> loadKeys();
+
+  Future<GiftKey> loadKey(int id);
 }

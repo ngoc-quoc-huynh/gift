@@ -5,8 +5,6 @@ imagePickerFormField:
   empty: 'Please select an image.'
 
 pages:
-  keys:
-    add: 'Add key'
   addKey:
     appBar: 'Add key'
     aid:
@@ -26,3 +24,7 @@ pages:
       validation:
         empty: 'Please enter a password.'
         length: 'Password must be at least 4 characters.'
+  key:
+    appBar: 'Gift Key'
+  keys:
+    add: 'Add Gift Key'
