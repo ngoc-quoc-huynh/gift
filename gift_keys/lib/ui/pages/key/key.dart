@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_keys/domain/blocs/nfc_discovery/bloc.dart';
 import 'package:gift_keys/static/resources/assets.dart';
 import 'package:rive/rive.dart';
 
 class RiveKey extends StatefulWidget {
-  const RiveKey({super.key});
+  const RiveKey({required this.aid, required this.password, super.key});
+
+  final String aid;
+  final String password;
 
   @override
   State<RiveKey> createState() => _RiveKeyState();
@@ -11,11 +16,7 @@ class RiveKey extends StatefulWidget {
 
 class _RiveKeyState extends State<RiveKey> {
   late StateMachineController _controller;
-
-  // ignore: unused_field, TODO: Add logic
   late SMIBool _isCorrect;
-
-  // ignore: unused_field, TODO: Add logic
   late SMIBool _isWrong;
 
   @override
@@ -26,14 +27,24 @@ class _RiveKeyState extends State<RiveKey> {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: RiveAnimation.asset(
-        Assets.key(),
-        fit: BoxFit.contain,
-        artboard: 'Key',
-        stateMachines: const ['State Machine'],
-        onInit: _onInit,
+    return BlocProvider<NfcDiscoveryBloc>(
+      create:
+          (_) =>
+              NfcDiscoveryBloc(aid: widget.aid, password: widget.password)
+                ..add(const NfcDiscoveryInitializeEvent()),
+
+      child: AspectRatio(
+        aspectRatio: 1,
+        child: BlocListener<NfcDiscoveryBloc, bool?>(
+          listener: _onNfcDiscoveryStateChanged,
+          child: RiveAnimation.asset(
+            Assets.key(),
+            fit: BoxFit.contain,
+            artboard: 'Key',
+            stateMachines: const ['State Machine'],
+            onInit: _onInit,
+          ),
+        ),
       ),
     );
   }
@@ -51,4 +62,11 @@ class _RiveKeyState extends State<RiveKey> {
     'Animation end event' => null,
     _ => null,
   };
+
+  void _onNfcDiscoveryStateChanged(BuildContext _, bool? state) =>
+      switch (state) {
+        null => null,
+        true => _isCorrect.change(true),
+        false => _isWrong.change(true),
+      };
 }
