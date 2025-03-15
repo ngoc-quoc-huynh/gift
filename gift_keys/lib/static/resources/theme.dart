@@ -31,6 +31,8 @@ final class CustomTheme {
           ),
         ),
       ),
+      // ignore: deprecated_member_use, since we want to use the updated version.
+      progressIndicatorTheme: const ProgressIndicatorThemeData(year2023: false),
     );
   }
 
