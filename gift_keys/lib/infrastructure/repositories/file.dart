@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart' as widget;
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:gift_keys/domain/interfaces/file.dart';
 import 'package:gift_keys/injector.dart';
@@ -46,6 +48,17 @@ final class FileRepository implements FileApi {
 
   @override
   File loadImage(String name) => File(join(_appDir.path, 'images', name));
+
+  @override
+  Future<void> precacheImage(BuildContext context, String imageFileName) =>
+      widget.precacheImage(FileImage(loadImage(imageFileName)), context);
+
+  @override
+  Future<void> precacheImages(
+    BuildContext context,
+    List<String> imageFileNames,
+  ) =>
+      Future.wait(imageFileNames.map((image) => precacheImage(context, image)));
 
   String _buildCompressedImagePath(String path) =>
       join(dirname(path), '${basenameWithoutExtension(path)}_compressed.webp');
