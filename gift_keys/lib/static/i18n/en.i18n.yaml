@@ -11,7 +11,10 @@ pages:
     appBar: 'Add key'
     aid:
       hint: 'Application identifier'
-      validation: 'Please enter an application identifier.'
+      validation:
+        empty: 'Please enter an application identifier.'
+        hex: 'Please use only hexadecimal characters.'
+        length: 'Please make sure the AID is 10 to 32 characters long.'
     birthday:
       hint: 'Birthday'
       validation: 'Please enter a birthday.'
@@ -20,4 +23,6 @@ pages:
       validation: 'Please enter a name.'
     password:
       hint: 'Password'
-      validation: 'Please enter a password.'
+      validation:
+        empty: 'Please enter a password.'
+        length: 'Password must be at least 4 characters.'

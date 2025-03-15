@@ -98,8 +98,15 @@ class _BodyState extends State<_Body> {
     );
   }
 
-  String? _aidValidator(String? val) =>
-      _emptyValidator(val, _translations.aid.validation);
+  String? _aidValidator(String? val) => switch (val) {
+    null => _translations.aid.validation.empty,
+    final val when val.isEmpty => _translations.aid.validation.empty,
+    String() when !RegExp(r'^[0-9A-Fa-f]+$').hasMatch(val) =>
+      _translations.aid.validation.hex,
+    String() when val.length < 10 || val.length > 32 =>
+      _translations.aid.validation.length,
+    String() => null,
+  };
 
   String? _birthdayValidator(DateTime? val) => switch (val) {
     null => _translations.birthday.validation,
@@ -109,8 +116,14 @@ class _BodyState extends State<_Body> {
   String? _nameValidator(String? val) =>
       _emptyValidator(val, _translations.name.validation);
 
-  String? _passwordValidator(String? val) =>
-      _emptyValidator(val, _translations.password.validation);
+  String? _passwordValidator(String? val) => switch (val) {
+    null => _translations.password.validation.empty,
+    final val when val.isEmpty => _translations.password.validation.empty,
+
+    String() when val.length < 10 || val.length > 32 =>
+      _translations.password.validation.length,
+    String() => null,
+  };
 
   String? _emptyValidator(String? val, String message) => switch (val) {
     null => message,
