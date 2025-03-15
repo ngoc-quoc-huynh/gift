@@ -36,5 +36,9 @@ final class Injector {
     await instance.allReady();
   }
 
-  static Translations _createTranslations() => AppLocale.en.buildSync();
+  static Translations _createTranslations() =>
+      switch (Platform.localeName) {
+        'de_DE' => AppLocale.de,
+        _ => AppLocale.en,
+      }.buildSync();
 }

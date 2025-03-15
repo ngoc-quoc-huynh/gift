@@ -1,0 +1,30 @@
+appName: 'Geschenk Schlüssel'
+
+imagePickerFormField:
+  add: 'Bild hinzufügen'
+  empty: 'Bitte wähle ein Bild aus.'
+
+pages:
+  addKey:
+    appBar: 'Schlüssel hinzufügen'
+    aid:
+      hint: 'Anwendungs-ID'
+      validation:
+        empty: 'Bitte geben Sie eine Anwendungs-ID ein.'
+        hex: 'Bitte verwenden Sie nur hexadezimale Zeichen.'
+        length: 'Bitte stellen Sie sicher, dass die AID zwischen 10 und 32 Zeichen lang ist.'
+    birthday:
+      hint: 'Geburtstag'
+      validation: 'Bitte geben Sie ein Geburtsdatum ein.'
+    name:
+      hint: 'Name'
+      validation: 'Bitte geben Sie einen Namen ein.'
+    password:
+      hint: 'Passwort'
+      validation:
+        empty: 'Bitte geben Sie ein Passwort ein.'
+        length: 'Das Passwort muss mindestens 4 Zeichen lang sein.'
+  key:
+    appBar: 'Geschenk Schlüssel'
+  keys:
+    add: 'Schlüssel hinzufügen'
