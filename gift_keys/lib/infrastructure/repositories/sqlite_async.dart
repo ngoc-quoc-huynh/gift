@@ -86,7 +86,7 @@ RETURNING
       [
         imageFileName,
         name,
-        birthday.format(DateTimeFormat.yyyyMMDD),
+        birthday.format(DateTimeFormat.dashSeparated),
         aid,
         password,
       ],

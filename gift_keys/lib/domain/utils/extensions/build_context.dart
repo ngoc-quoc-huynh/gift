@@ -7,4 +7,12 @@ extension BuildContextExtension on BuildContext {
     Route route, {
     Map<String, String> pathParameters = const <String, String>{},
   }) => goNamed(route(), pathParameters: pathParameters);
+
+  ColorScheme get colorScheme => ColorScheme.of(this);
+
+  ThemeData get theme => Theme.of(this);
+
+  TextTheme get textTheme => TextTheme.of(this);
+
+  Size get screenSize => MediaQuery.sizeOf(this);
 }

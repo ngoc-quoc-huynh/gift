@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/models/nfc_command.dart';
@@ -9,8 +10,14 @@ part 'event.dart';
 
 final class NfcDiscoveryBloc extends Bloc<NfcDiscoveryEvent, bool?> {
   NfcDiscoveryBloc({required this.aid, required this.password}) : super(null) {
-    on<NfcDiscoveryInitializeEvent>(_onNfcDiscoveryInitializeEvent);
-    on<NfcDiscoverySendCommandEvent>(_onNfcDiscoverySendCommandEvent);
+    on<NfcDiscoveryInitializeEvent>(
+      _onNfcDiscoveryInitializeEvent,
+      transformer: droppable(),
+    );
+    on<NfcDiscoverySendCommandEvent>(
+      _onNfcDiscoverySendCommandEvent,
+      transformer: droppable(),
+    );
   }
 
   final String aid;

@@ -1,1 +1,1 @@
-enum DateTimeFormat { yMd, yyyyMMdd, yyyyMMDD }
+enum DateTimeFormat { compact, dashSeparated, normal }

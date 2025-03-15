@@ -42,10 +42,10 @@ class _BodyState extends State<_Body> {
 
   @override
   void dispose() {
-    super.dispose();
     _aidController.dispose();
     _nameController.dispose();
     _passwordController.dispose();
+    super.dispose();
   }
 
   @override

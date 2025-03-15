@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 
 sealed class ImagePickerAvatar extends StatelessWidget {
@@ -65,9 +66,7 @@ class _Selected extends ImagePickerAvatar {
         shape: const CircleBorder(),
         color: Colors.transparent,
         clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          onTap: () => unawaited(onTap(MediaQuery.sizeOf(context).width)),
-        ),
+        child: InkWell(onTap: () => unawaited(onTap(context.screenSize.width))),
       ),
     );
   }
@@ -98,7 +97,7 @@ class _Empty extends ImagePickerAvatar {
             width: ImagePickerAvatar.radius * 2,
             height: ImagePickerAvatar.radius * 2,
             child: InkWell(
-              onTap: () => unawaited(onTap(MediaQuery.sizeOf(context).width)),
+              onTap: () => unawaited(onTap(context.screenSize.width)),
             ),
           ),
         ),

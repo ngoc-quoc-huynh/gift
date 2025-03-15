@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/keys/bloc.dart';
+import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/pages/keys/add_button.dart';
 import 'package:gift_keys/ui/pages/keys/item.dart';
@@ -60,7 +61,7 @@ class _KeysPageState extends State<KeysPage> {
         );
         unawaited(
           _controller.animateTo(
-            MediaQuery.sizeOf(context).width * (state.index + 1),
+            context.screenSize.width * (state.index + 1),
             duration: Duration(milliseconds: 500 * (state.index + 1)),
             curve: Curves.easeInOut,
           ),

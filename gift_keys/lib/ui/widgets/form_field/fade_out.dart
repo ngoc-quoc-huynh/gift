@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 
 class FadeBox extends StatelessWidget {
   const FadeBox({required this.child, super.key});
@@ -9,14 +10,14 @@ class FadeBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final maxWidth = MediaQuery.sizeOf(context).width;
+    final screenWidth = context.screenSize.width;
 
     return LayoutBuilder(
       builder:
           (context, constraints) => OverflowBox(
-            maxWidth: maxWidth,
+            maxWidth: screenWidth,
             child: Opacity(
-              opacity: _computeOpacity(constraints.maxWidth, maxWidth),
+              opacity: _computeOpacity(constraints.maxWidth, screenWidth),
               child: child,
             ),
           ),

@@ -26,5 +26,6 @@ pages:
         length: 'Das Passwort muss mindestens 4 Zeichen lang sein.'
   key:
     appBar: 'Geschenk Schlüssel'
+    nfcHint: 'Aktiviere NFC, um das Geschenk zu öffnen.'
   keys:
     add: 'Schlüssel hinzufügen'

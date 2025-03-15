@@ -6,14 +6,13 @@ extension DateTimeExtension on DateTime {
   String format(DateTimeFormat format) {
     final languageCode =
         Injector.instance.translations.$meta.locale.flutterLocale.languageCode;
-
-    return switch (format) {
-      DateTimeFormat.yMd when languageCode == 'de' => DateFormat(
-        'dd.MM.yyyy',
-      ).format(this),
-      DateTimeFormat.yMd => DateFormat('MM/dd/yyyy').format(this),
-      DateTimeFormat.yyyyMMdd => DateFormat('yyyyMMdd').format(this),
-      DateTimeFormat.yyyyMMDD => DateFormat('yyyy-MM-dd').format(this),
+    final pattern = switch (format) {
+      DateTimeFormat.compact => 'yyyyMMdd',
+      DateTimeFormat.dashSeparated => 'yyyy-MM-dd',
+      DateTimeFormat.normal when languageCode == 'de' => 'dd.MM.yyyy',
+      DateTimeFormat.normal => 'MM/dd/yyyy',
     };
+
+    return DateFormat(pattern).format(this);
   }
 }

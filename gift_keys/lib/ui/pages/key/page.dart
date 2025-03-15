@@ -56,7 +56,7 @@ class KeyPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          birthday.format(DateTimeFormat.yMd),
+                          birthday.format(DateTimeFormat.normal),
                           style: textTheme.displaySmall?.copyWith(
                             color: primaryColor,
                           ),

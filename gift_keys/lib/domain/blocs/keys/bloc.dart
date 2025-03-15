@@ -36,7 +36,7 @@ final class KeysBloc extends Bloc<KeysEvent, KeysState> {
     if (state case KeysLoadOnSuccess(:final keys)) {
       final imageFileName =
           '${event.name}_'
-          '${event.birthday.format(DateTimeFormat.yyyyMMdd)}.webp';
+          '${event.birthday.format(DateTimeFormat.compact)}.webp';
       final [_, newKey] = await Future.wait([
         _fileApi.moveFileToAppDir(event.imagePath, imageFileName),
         _localDatabaseApi.saveKey(

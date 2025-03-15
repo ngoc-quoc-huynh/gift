@@ -16,14 +16,6 @@ class KeysItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-    final colorScheme = theme.colorScheme;
-    final textColor = switch (theme.brightness) {
-      Brightness.light => colorScheme.surface,
-      Brightness.dark => colorScheme.inverseSurface,
-    };
-
     return InkWell(
       onTap:
           () => context.goRoute(
@@ -39,7 +31,7 @@ class KeysItem extends StatelessWidget {
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               Colors.black.withValues(
-                alpha: switch (theme.brightness) {
+                alpha: switch (context.theme.brightness) {
                   Brightness.light => 0,
                   Brightness.dark => 0.2,
                 },
@@ -48,37 +40,54 @@ class KeysItem extends StatelessWidget {
             ),
           ),
         ),
-        child: FadeBox(
-          child: Center(
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                child: ColoredBox(
-                  color: colorScheme.surface.withValues(alpha: 0.2),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
+        child: _Body(name: giftKey.name, birthday: giftKey.birthday),
+      ),
+    );
+  }
+}
+
+class _Body extends StatelessWidget {
+  const _Body({required this.name, required this.birthday});
+
+  final String name;
+  final DateTime birthday;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = context.theme;
+    final brightness = theme.brightness;
+    final textTheme = theme.textTheme;
+    final colorScheme = theme.colorScheme;
+    final textColor = switch (brightness) {
+      Brightness.light => colorScheme.surface,
+      Brightness.dark => colorScheme.inverseSurface,
+    };
+
+    return FadeBox(
+      child: Center(
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(16)),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+            child: ColoredBox(
+              color: colorScheme.surface.withValues(alpha: 0.2),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      name,
+                      style: textTheme.displayLarge?.copyWith(color: textColor),
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          giftKey.name,
-                          style: textTheme.displayLarge?.copyWith(
-                            color: textColor,
-                          ),
-                        ),
-                        Text(
-                          giftKey.birthday.format(DateTimeFormat.yMd),
-                          style: textTheme.displaySmall?.copyWith(
-                            color: textColor,
-                          ),
-                        ),
-                      ],
+                    Text(
+                      birthday.format(DateTimeFormat.normal),
+                      style: textTheme.displaySmall?.copyWith(color: textColor),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),

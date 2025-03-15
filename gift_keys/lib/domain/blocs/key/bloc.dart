@@ -1,3 +1,4 @@
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -9,7 +10,7 @@ part 'state.dart';
 
 final class KeyBloc extends Bloc<KeyEvent, KeyState> {
   KeyBloc(this._id) : super(const KeyLoadInProgress()) {
-    on<KeyInitializeEvent>(_onKeyInitializeEvent);
+    on<KeyInitializeEvent>(_onKeyInitializeEvent, transformer: droppable());
   }
 
   final int _id;

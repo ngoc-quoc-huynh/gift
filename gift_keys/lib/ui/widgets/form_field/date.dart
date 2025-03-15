@@ -88,6 +88,6 @@ class _BodyState extends State<_Body> {
   }
 
   void _onValueChanged() => WidgetsBinding.instance.addPostFrameCallback(
-    (_) => _controller.text = widget.value!.format(DateTimeFormat.yMd),
+    (_) => _controller.text = widget.value!.format(DateTimeFormat.normal),
   );
 }
