@@ -6,8 +6,10 @@ import 'package:gift_keys/domain/blocs/keys/bloc.dart';
 import 'package:gift_keys/domain/models/key.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
+import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/pages/keys/add_button.dart';
 import 'package:gift_keys/ui/pages/keys/item.dart';
+import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/loading_indicator.dart';
 
 class KeysPage extends StatelessWidget {
@@ -66,9 +68,28 @@ class _BodyState extends State<_Body> {
       enableSplash: false,
       itemSnapping: true,
       children: [
-        BlocListener<KeysBloc, KeysState>(
-          listener: _onKeysStateChanged,
-          child: const KeyAddButton(),
+        SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: Sizes.horizontalPadding,
+            ),
+            child: Stack(
+              children: [
+                BlocListener<KeysBloc, KeysState>(
+                  listener: _onKeysStateChanged,
+                  child: const KeyAddButton(),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: IconButton(
+                    onPressed: () => context.pushRoute(Routes.settingsPage),
+                    tooltip: Injector.instance.translations.pages.keys.settings,
+                    icon: const Icon(Icons.settings),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
 
         ...widget.keys.map((key) => KeysItem(giftKey: key)),

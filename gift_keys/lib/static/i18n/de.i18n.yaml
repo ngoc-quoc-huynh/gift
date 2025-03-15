@@ -30,3 +30,10 @@ pages:
     nfcHintDisabled: 'Aktiviere NFC, um das Geschenk zu öffnen.'
   keys:
     add: 'Schlüssel hinzufügen'
+    settings: 'Einstellungen'
+  settings:
+    appBar: 'Einstellungen'
+    design: 'Design'
+    language: 'Sprache'
+    reset: 'Zurücksetzen'
+    license: 'Externe Bibliotheken und Lizensen'

@@ -11,6 +11,7 @@ import 'package:gift_keys/infrastructure/repositories/nfc.dart';
 import 'package:gift_keys/infrastructure/repositories/sqlite_async.dart';
 import 'package:gift_keys/static/i18n/translations.g.dart';
 import 'package:logger/logger.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
 export 'package:gift_keys/domain/utils/extensions/get_it.dart';
@@ -32,6 +33,7 @@ final class Injector {
       ..registerLazySingleton<Logger>(Logger.new)
       ..registerLazySingleton<LoggerApi>(LoggerRepository.new)
       ..registerLazySingleton<NfcApi>(NfcRepository.new)
+      ..registerSingletonAsync<PackageInfo>(PackageInfo.fromPlatform)
       ..registerLazySingleton<Translations>(_createTranslations);
     await instance.allReady();
   }

@@ -1,0 +1,69 @@
+import 'package:flutter/material.dart';
+import 'package:gift_keys/injector.dart';
+import 'package:gift_keys/static/resources/sizes.dart';
+import 'package:gift_keys/ui/pages/settings/app_version.dart';
+
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(_translations.appBar)),
+      bottomNavigationBar: const SettingsAppVersion(),
+      body: ListView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: Sizes.horizontalPadding,
+          vertical: Sizes.verticalPadding,
+        ),
+        children: [
+          SizedBox(
+            width: double.infinity,
+            child: Card(
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.brightness_6_rounded),
+                    title: Text(_translations.design),
+                    trailing: const Icon(Icons.chevron_right),
+                  ),
+                  const Divider(indent: 10, endIndent: 10),
+                  ListTile(
+                    leading: const Icon(Icons.flag_outlined),
+                    title: Text(_translations.language),
+                    trailing: const Icon(Icons.chevron_right),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            width: double.infinity,
+            child: Card(
+              child: ListTile(
+                leading: const Icon(Icons.restart_alt),
+                title: Text(_translations.reset),
+                trailing: const Icon(Icons.chevron_right),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            width: double.infinity,
+            child: Card(
+              child: ListTile(
+                leading: const Icon(Icons.library_books_outlined),
+                title: Text(_translations.license),
+                trailing: const Icon(Icons.chevron_right),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  static TranslationsPagesSettingsEn get _translations =>
+      Injector.instance.translations.pages.settings;
+}

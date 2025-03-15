@@ -7,6 +7,7 @@ import 'package:gift_keys/domain/interfaces/logger.dart';
 import 'package:gift_keys/domain/interfaces/nfc.dart';
 import 'package:gift_keys/static/i18n/translations.g.dart';
 import 'package:logger/logger.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 extension GetItExtension on GetIt {
   Directory get appDir => get<Directory>(instanceName: 'appDir');
@@ -20,6 +21,8 @@ extension GetItExtension on GetIt {
   LoggerApi get loggerApi => get<LoggerApi>();
 
   NfcApi get nfcApi => get<NfcApi>();
+  
+  PackageInfo get packageInfo => get<PackageInfo>();
 
   Translations get translations => get<Translations>();
 }

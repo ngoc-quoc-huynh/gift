@@ -4,6 +4,7 @@ import 'package:gift_keys/domain/blocs/keys/bloc.dart';
 import 'package:gift_keys/ui/pages/add_key/page.dart';
 import 'package:gift_keys/ui/pages/key/page.dart';
 import 'package:gift_keys/ui/pages/keys/page.dart';
+import 'package:gift_keys/ui/pages/settings/page.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:go_router/go_router.dart';
 
@@ -43,6 +44,11 @@ final class GoRouterConfig {
                         KeyPage(id: int.parse(state.pathParameters['id']!)),
               ),
             ],
+          ),
+          GoRoute(
+            name: Routes.settingsPage(),
+            path: '/settings',
+            builder: (_, _) => const SettingsPage(),
           ),
         ],
       ),

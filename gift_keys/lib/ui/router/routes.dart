@@ -6,4 +6,5 @@ final class Routes {
   static final addKeyPage = Route('add-key');
   static final keyPage = Route('key');
   static final keysPage = Route('keys');
+  static final settingsPage = Route('settings');
 }
