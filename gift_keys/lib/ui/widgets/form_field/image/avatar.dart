@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -20,14 +21,26 @@ sealed class ImagePickerAvatar extends StatelessWidget {
   final ValueChanged<File> onImagePicked;
 
   @protected
-  static const _radius = 50.0;
+  static const radius = 50.0;
+
+  static final _fileApi = Injector.instance.fileApi;
 
   @protected
-  Future<void> onTap() async {
-    final file = await Injector.instance.fileApi.pickImageFromGallery();
-    if (file != null) {
-      onImagePicked.call(file);
+  Future<void> onTap(double screenWidth) async {
+    final file = await _fileApi.pickImageFromGallery();
+    if (file == null) {
+      return;
     }
+
+    final compressedFile = await _fileApi.compressImage(
+      file.path,
+      screenWidth.toInt(),
+    );
+    if (compressedFile == null) {
+      return;
+    }
+
+    onImagePicked(compressedFile);
   }
 }
 
@@ -43,15 +56,25 @@ class _Selected extends ImagePickerAvatar {
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
-      radius: ImagePickerAvatar._radius,
-      backgroundImage: FileImage(file),
+      radius: ImagePickerAvatar.radius,
+      backgroundImage: ResizeImage(
+        FileImage(file),
+        width: _computeImageWidth(context),
+      ),
       child: Material(
         shape: const CircleBorder(),
         color: Colors.transparent,
         clipBehavior: Clip.hardEdge,
-        child: InkWell(onTap: onTap),
+        child: InkWell(
+          onTap: () => unawaited(onTap(MediaQuery.sizeOf(context).width)),
+        ),
       ),
     );
+  }
+
+  int _computeImageWidth(BuildContext context) {
+    final devicePixelRatio = MediaQuery.devicePixelRatioOf(context);
+    return (ImagePickerAvatar.radius * 2 * devicePixelRatio).toInt();
   }
 }
 
@@ -63,7 +86,7 @@ class _Empty extends ImagePickerAvatar {
     return Stack(
       children: [
         CircleAvatar(
-          radius: ImagePickerAvatar._radius,
+          radius: ImagePickerAvatar.radius,
           backgroundColor: Theme.of(context).colorScheme.primaryContainer,
           child: const Icon(Icons.image, size: 40),
         ),
@@ -72,9 +95,11 @@ class _Empty extends ImagePickerAvatar {
           clipBehavior: Clip.hardEdge,
           color: Colors.transparent,
           child: SizedBox(
-            width: ImagePickerAvatar._radius * 2,
-            height: ImagePickerAvatar._radius * 2,
-            child: InkWell(onTap: onTap),
+            width: ImagePickerAvatar.radius * 2,
+            height: ImagePickerAvatar.radius * 2,
+            child: InkWell(
+              onTap: () => unawaited(onTap(MediaQuery.sizeOf(context).width)),
+            ),
           ),
         ),
       ],
