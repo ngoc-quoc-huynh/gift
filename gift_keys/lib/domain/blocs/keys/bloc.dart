@@ -49,7 +49,6 @@ final class KeysBloc extends Bloc<KeysEvent, KeysState> {
       ]);
       newKey as GiftKey;
 
-      // TODO: Sort
       final insertIndex = keys.lowerBound(newKey, _compareGiftKeys);
       final newKeys = [...keys]..insert(insertIndex, newKey);
 
