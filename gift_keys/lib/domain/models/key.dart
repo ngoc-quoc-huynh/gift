@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 final class GiftKey extends Equatable {
   const GiftKey({
     required this.id,
-    required this.imagePath,
+    required this.imageFileName,
     required this.name,
     required this.birthday,
     required this.aid,
@@ -11,12 +11,12 @@ final class GiftKey extends Equatable {
   });
 
   final int id;
-  final String imagePath;
+  final String imageFileName;
   final String name;
   final DateTime birthday;
   final String aid;
   final String password;
 
   @override
-  List<Object?> get props => [id, imagePath, name, birthday, aid, password];
+  List<Object?> get props => [id, imageFileName, name, birthday, aid, password];
 }

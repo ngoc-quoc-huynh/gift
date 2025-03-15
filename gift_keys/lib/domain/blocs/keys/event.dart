@@ -10,7 +10,17 @@ final class KeysInitializeEvent extends KeysEvent {
 }
 
 final class KeysAddEvent extends KeysEvent {
-  const KeysAddEvent(this.key);
+  const KeysAddEvent({
+    required this.imagePath,
+    required this.name,
+    required this.birthday,
+    required this.aid,
+    required this.password,
+  });
 
-  final AddGiftKey key;
+  final String imagePath;
+  final String name;
+  final DateTime birthday;
+  final String aid;
+  final String password;
 }

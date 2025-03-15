@@ -4,7 +4,7 @@ import 'package:gift_keys/domain/models/key.dart' as domain;
 final class GiftKey extends Equatable {
   const GiftKey({
     required this.id,
-    required this.imagePath,
+    required this.imageFileName,
     required this.name,
     required this.birthday,
     required this.aid,
@@ -14,7 +14,7 @@ final class GiftKey extends Equatable {
   factory GiftKey.fromJson(Map<String, dynamic> json) => switch (json) {
     {
       'id': final int id,
-      'imagePath': final String imagePath,
+      'imageFileName': final String imageFileName,
       'name': final String name,
       'birthday': final String birthday,
       'aid': final String aid,
@@ -22,7 +22,7 @@ final class GiftKey extends Equatable {
     } =>
       GiftKey(
         id: id,
-        imagePath: imagePath,
+        imageFileName: imageFileName,
         name: name,
         birthday: DateTime.parse(birthday),
         aid: aid,
@@ -32,7 +32,7 @@ final class GiftKey extends Equatable {
   };
 
   final int id;
-  final String imagePath;
+  final String imageFileName;
   final String name;
   final DateTime birthday;
   final String aid;
@@ -40,7 +40,7 @@ final class GiftKey extends Equatable {
 
   domain.GiftKey toDomain() => domain.GiftKey(
     id: id,
-    imagePath: imagePath,
+    imageFileName: imageFileName,
     name: name,
     birthday: birthday,
     aid: aid,
@@ -48,5 +48,5 @@ final class GiftKey extends Equatable {
   );
 
   @override
-  List<Object?> get props => [id, imagePath, name, birthday, aid, password];
+  List<Object?> get props => [id, imageFileName, name, birthday, aid, password];
 }

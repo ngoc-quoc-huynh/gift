@@ -8,4 +8,8 @@ abstract interface class FileApi {
   Future<File?> pickImageFromGallery();
 
   Future<File?> compressImage(String path, int minWidth);
+
+  Future<File> moveFileToAppDir(String sourcePath, String name);
+
+  File loadImage(String name);
 }

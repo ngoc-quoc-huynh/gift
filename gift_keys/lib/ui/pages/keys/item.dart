@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:gift_keys/domain/models/date_time_format.dart';
 import 'package:gift_keys/domain/models/key.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/domain/utils/extensions/date_time.dart';
+import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/form_field/fade_out.dart';
 
@@ -23,6 +23,7 @@ class KeysItem extends StatelessWidget {
       Brightness.light => colorScheme.surface,
       Brightness.dark => colorScheme.inverseSurface,
     };
+
     return InkWell(
       onTap:
           () => context.goRoute(
@@ -32,7 +33,9 @@ class KeysItem extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: FileImage(File(giftKey.imagePath)),
+            image: FileImage(
+              Injector.instance.fileApi.loadImage(giftKey.imageFileName),
+            ),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
               Colors.black.withValues(

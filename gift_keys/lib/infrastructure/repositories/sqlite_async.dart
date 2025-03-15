@@ -1,5 +1,4 @@
 import 'package:gift_keys/domain/interfaces/local_database.dart';
-import 'package:gift_keys/domain/models/add_key.dart';
 import 'package:gift_keys/domain/models/date_time_format.dart';
 import 'package:gift_keys/domain/models/key.dart' as domain;
 import 'package:gift_keys/domain/utils/extensions/date_time.dart';
@@ -27,7 +26,7 @@ final class SqliteAsyncRepository implements LocalDatabaseApi {
   Future<List<domain.GiftKey>> loadKeys() async {
     final result = await _db.getAll('''
 SELECT id,
-       imagePath,
+       imageFileName,
        name,
        birthday,
        aid,
@@ -40,11 +39,17 @@ ORDER BY birthday ASC;
   }
 
   @override
-  Future<domain.GiftKey> saveKey(AddGiftKey key) async {
+  Future<domain.GiftKey> saveKey({
+    required String imageFileName,
+    required String name,
+    required DateTime birthday,
+    required String aid,
+    required String password,
+  }) async {
     final result = await _db.execute(
       '''
 INSERT INTO $_tableName (
-  imagePath,
+  imageFileName,
   name,
   birthday,
   aid,
@@ -53,18 +58,18 @@ INSERT INTO $_tableName (
 VALUES (?, ?, ?, ?, ?)
 RETURNING 
   id,
-  imagePath,
+  imageFileName,
   name,
   birthday,
   aid,
   password;
 ''',
       [
-        key.imagePath,
-        key.name,
-        key.birthday.format(DateTimeFormat.yyyyMMDD),
-        key.aid,
-        key.password,
+        imageFileName,
+        name,
+        birthday.format(DateTimeFormat.yyyyMMDD),
+        aid,
+        password,
       ],
     );
 
@@ -79,7 +84,7 @@ RETURNING
   static const _createTable = '''
 CREATE TABLE IF NOT EXISTS $_tableName (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    imagePath VARCHAR(255) NOT NULL,
+    imageFileName VARCHAR(255) NOT NULL,
     name VARCHAR(50) NOT NULL,
     birthday CHAR(10) NOT NULL,
     aid VARCHAR(50) NOT NULL,
