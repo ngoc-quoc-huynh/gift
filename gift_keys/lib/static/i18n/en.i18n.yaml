@@ -26,6 +26,7 @@ pages:
         length: 'Password must be at least 4 characters.'
   key:
     appBar: 'Gift Key'
-    nfcHint: 'Enable NFC to open a gift.'
+    nfcHintEnabled: 'You need a key to open this gift'
+    nfcHintDisabled: 'Enable NFC to open this gift.'
   keys:
     add: 'Add Gift Key'

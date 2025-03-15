@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/nfc_status/bloc.dart';
+import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/widgets/app_lifecycle_observer.dart';
 
@@ -22,10 +23,11 @@ class KeyNfcStatus extends StatelessWidget {
                 builder:
                     (context, state) => switch (state) {
                       NfcStatusLoadInProgress() => const SizedBox.shrink(),
-                      NfcStatusLoadOnSuccess(:final isEnabled) => Tooltip(
-                        message:
-                            Injector.instance.translations.pages.key.nfcHint,
-                        child: Icon(
+                      NfcStatusLoadOnSuccess(:final isEnabled) => IconButton(
+                        onPressed:
+                            () => _onPressed(context, isEnabled: isEnabled),
+
+                        icon: Icon(
                           Icons.nfc,
                           color: switch (isEnabled) {
                             false => Colors.red,
@@ -39,4 +41,23 @@ class KeyNfcStatus extends StatelessWidget {
       ),
     );
   }
+
+  void _onPressed(BuildContext context, {required bool isEnabled}) {
+    final message = switch (isEnabled) {
+      false => _translations.nfcHintDisabled,
+      true => _translations.nfcHintEnabled,
+    };
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          content: Text(message),
+          behavior: SnackBarBehavior.floating,
+          backgroundColor: context.colorScheme.primary,
+        ),
+      );
+  }
+
+  TranslationsPagesKeyEn get _translations =>
+      Injector.instance.translations.pages.key;
 }

@@ -26,6 +26,7 @@ pages:
         length: 'Das Passwort muss mindestens 4 Zeichen lang sein.'
   key:
     appBar: 'Geschenk Schlüssel'
-    nfcHint: 'Aktiviere NFC, um das Geschenk zu öffnen.'
+    nfcHintEnabled: 'Du benötigst einen Schlüssen, um das Geschenk zu öffnen.'
+    nfcHintDisabled: 'Aktiviere NFC, um das Geschenk zu öffnen.'
   keys:
     add: 'Schlüssel hinzufügen'
