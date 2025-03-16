@@ -22,8 +22,16 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<LanguageOptionHydratedValueCubit>(
-      create: (_) => LanguageOptionHydratedValueCubit(LanguageOption.system),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<LanguageOptionHydratedValueCubit>(
+          create:
+              (_) => LanguageOptionHydratedValueCubit(LanguageOption.system),
+        ),
+        BlocProvider<ThemeModeHydratedValueCubit>(
+          create: (_) => ThemeModeHydratedValueCubit(ThemeMode.system),
+        ),
+      ],
       child: const _Body(),
     );
   }
@@ -53,15 +61,21 @@ class _BodyState extends State<_Body> {
     return BlocConsumer<LanguageOptionHydratedValueCubit, LanguageOption>(
       listener: _onLanguageOptionChanged,
       builder:
-          (context, language) => MaterialApp.router(
-            title: Injector.instance.translations.appName,
-            theme: CustomTheme.lightTheme(textTheme),
-            darkTheme: CustomTheme.darkTheme(textTheme),
-            locale: _getLocaleByLanguageOption(language),
-            supportedLocales: AppLocaleUtils.supportedLocales,
-            localizationsDelegates: GlobalMaterialLocalizations.delegates,
-            routerConfig: GoRouterConfig.routes,
-          ),
+          (context, language) =>
+              BlocBuilder<ThemeModeHydratedValueCubit, ThemeMode>(
+                builder:
+                    (context, themeMode) => MaterialApp.router(
+                      title: Injector.instance.translations.appName,
+                      theme: CustomTheme.lightTheme(textTheme),
+                      darkTheme: CustomTheme.darkTheme(textTheme),
+                      themeMode: themeMode,
+                      locale: _getLocaleByLanguageOption(language),
+                      supportedLocales: AppLocaleUtils.supportedLocales,
+                      localizationsDelegates:
+                          GlobalMaterialLocalizations.delegates,
+                      routerConfig: GoRouterConfig.routes,
+                    ),
+              ),
     );
   }
 

@@ -38,11 +38,17 @@ pages:
   settings:
     appBar: 'Settings'
     design: 'Design'
+    designUpdate: 'Design has been updated successfully.'
     language: 'Language'
     languageUpdate: 'Language has been updated successfully.'
     reset: 'Reset'
     license: 'External libraries and licenses'
     dialogs:
+      design:
+        title: 'Choose design'
+        bright: 'Bright'
+        dark: 'Dark'
+        device: 'Device design'
       language:
         title: 'Choose language'
         english: 'English'
