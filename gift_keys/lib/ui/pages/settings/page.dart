@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_keys/domain/models/language.dart';
+import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/pages/settings/app_version.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/design.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/language.dart';
+import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/snack_bar.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -89,6 +91,7 @@ class SettingsPage extends StatelessWidget {
                 leading: const Icon(Icons.library_books_outlined),
                 title: Text(_translations.license),
                 trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.pushRoute(Routes.licensePage),
               ),
             ),
           ),
