@@ -15,6 +15,7 @@ final class KeysBloc extends Bloc<KeysEvent, KeysState> {
   KeysBloc() : super(const KeysLoadInProgress()) {
     on<KeysInitializeEvent>(_onKeysInitializeEvent, transformer: droppable());
     on<KeysAddEvent>(_onKeysAddEvent, transformer: droppable());
+    on<KeysResetEvent>(_onKeysResetEvent, transformer: droppable());
   }
 
   static final _fileApi = Injector.instance.fileApi;
@@ -54,6 +55,18 @@ final class KeysBloc extends Bloc<KeysEvent, KeysState> {
 
       emit(KeysAddOnSuccess(insertIndex, newKeys));
     }
+  }
+
+  Future<void> _onKeysResetEvent(
+    KeysResetEvent event,
+    Emitter<KeysState> emit,
+  ) async {
+    emit(const KeysLoadInProgress());
+    await Future.wait([
+      _fileApi.deleteAllImages(),
+      _localDatabaseApi.deleteAll(),
+    ]);
+    emit(const KeysLoadOnSuccess([]));
   }
 
   static int _compareGiftKeys(GiftKey a, GiftKey b) {

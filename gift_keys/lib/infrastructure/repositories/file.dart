@@ -13,6 +13,7 @@ final class FileRepository implements FileApi {
 
   static final _instance = ImagePicker();
   static final _appDir = Injector.instance.appDir;
+  static final _imagesPath = join(_appDir.path, 'images');
 
   @override
   Future<File?> pickImageFromGallery() async {
@@ -47,7 +48,7 @@ final class FileRepository implements FileApi {
   }
 
   @override
-  File loadImage(String name) => File(join(_appDir.path, 'images', name));
+  File loadImage(String name) => File(join(_imagesPath, name));
 
   @override
   Future<void> precacheImage(BuildContext context, String imageFileName) =>
@@ -62,4 +63,13 @@ final class FileRepository implements FileApi {
 
   String _buildCompressedImagePath(String path) =>
       join(dirname(path), '${basenameWithoutExtension(path)}_compressed.webp');
+
+  @override
+  Future<void> deleteAllImages() async {
+    final dir = Directory(_imagesPath);
+
+    if (dir.existsSync()) {
+      await dir.delete(recursive: true);
+    }
+  }
 }

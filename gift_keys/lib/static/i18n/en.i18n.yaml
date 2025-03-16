@@ -42,6 +42,7 @@ pages:
     language: 'Language'
     languageUpdate: 'Language has been updated successfully.'
     reset: 'Reset'
+    resetUpdate: 'Gift keys has been successfully reset.'
     license: 'External libraries and licenses'
     dialogs:
       design:
@@ -54,3 +55,6 @@ pages:
         english: 'English'
         german: 'German'
         device: 'Device language'
+      reset:
+        title: 'Reset gift keys'
+        content: 'Are you sure you want to reset your gift keys? This process cannot be undone.'

@@ -18,4 +18,6 @@ abstract interface class FileApi {
   Future<void> precacheImage(BuildContext context, String image);
 
   Future<void> precacheImages(BuildContext context, List<String> images);
+
+  Future<void> deleteAllImages();
 }

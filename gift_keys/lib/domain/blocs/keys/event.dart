@@ -24,3 +24,7 @@ final class KeysAddEvent extends KeysEvent {
   final String aid;
   final String password;
 }
+
+final class KeysResetEvent extends KeysEvent {
+  const KeysResetEvent();
+}

@@ -95,6 +95,12 @@ RETURNING
     return GiftKey.fromJson(result.first).toDomain();
   }
 
+  @override
+  Future<void> deleteAll() => _db.execute('''
+DELETE FROM $_tableName;
+DELETE FROM sqlite_sequence WHERE name = $_tableName;
+''');
+
   static const _tableName = 'key';
   static final _createDatabaseMigration = SqliteMigration(
     1,

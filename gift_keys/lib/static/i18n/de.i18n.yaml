@@ -44,6 +44,7 @@ pages:
     language: 'Sprache'
     languageUpdate: 'Sprache wurde erfolgreich aktualisiert.'
     reset: 'Zurücksetzen'
+    resetUpdate: 'Schlüsseln wurden erfolgreich zurückgesetzt.'
     license: 'Externe Bibliotheken und Lizensen'
     dialogs:
       design:
@@ -56,3 +57,6 @@ pages:
         english: 'Englisch'
         german: 'Deutsch'
         device: 'Gerätesprache'
+      reset:
+        title: 'Schlüsseln zurücksetzen'
+        content: 'Bist du dir sicher, dass du deine Geschenke Schlüsseln zurücksetzen möchtest? Dieser Vorgang kann nicht rückgängig gemacht werden.'

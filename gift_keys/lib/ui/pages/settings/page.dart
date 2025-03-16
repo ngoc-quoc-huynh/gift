@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
+import 'package:gift_keys/domain/blocs/keys/bloc.dart';
 import 'package:gift_keys/domain/models/language.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
@@ -10,6 +11,7 @@ import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/pages/settings/app_version.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/design.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/language.dart';
+import 'package:gift_keys/ui/pages/settings/dialogs/reset.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/snack_bar.dart';
 
@@ -76,10 +78,14 @@ class SettingsPage extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: Card(
-              child: ListTile(
-                leading: const Icon(Icons.restart_alt),
-                title: Text(_translations.reset),
-                trailing: const Icon(Icons.chevron_right),
+              child: BlocListener<KeysBloc, KeysState>(
+                listener: _onKeysStateChanged,
+                child: ListTile(
+                  leading: const Icon(Icons.restart_alt),
+                  title: Text(_translations.reset),
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => unawaited(SettingsResetDialog.show(context)),
+                ),
               ),
             ),
           ),
@@ -105,6 +111,15 @@ class SettingsPage extends StatelessWidget {
 
   void _onThemeModeChanged(BuildContext context, _) =>
       CustomSnackBar.showSuccess(context, _translations.designUpdate);
+
+  void _onKeysStateChanged(BuildContext context, KeysState state) =>
+      switch (state) {
+        KeysLoadInProgress() => null,
+        KeysLoadOnSuccess() => CustomSnackBar.showSuccess(
+          context,
+          _translations.resetUpdate,
+        ),
+      };
 
   static TranslationsPagesSettingsEn get _translations =>
       Injector.instance.translations.pages.settings;
