@@ -42,10 +42,8 @@ final class FileRepository implements FileApi {
   }
 
   @override
-  Future<File> moveFileToAppDir(String sourcePath, String newName) {
-    final file = loadImage(newName)..createSync(recursive: true);
-    return File(sourcePath).copy(file.path);
-  }
+  Future<File> moveFileToAppDir(String sourcePath, String newName) =>
+      File(sourcePath).rename(loadImage(newName).path);
 
   @override
   File loadImage(String name) => File(join(_imagesPath, name));
