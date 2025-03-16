@@ -6,6 +6,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.label,
     required this.textInputAction,
     required this.validator,
+    this.textCapitalization = TextCapitalization.none,
     this.autofillHints,
     this.controller,
     this.keyboardType,
@@ -15,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
 
   final IconData icon;
   final String label;
+  final TextCapitalization textCapitalization;
   final TextInputAction textInputAction;
   final TextEditingController? controller;
   final List<String>? autofillHints;
@@ -30,6 +32,7 @@ class CustomTextFormField extends StatelessWidget {
       autofillHints: autofillHints,
       keyboardType: keyboardType,
       textInputAction: textInputAction,
+      textCapitalization: textCapitalization,
       validator: validator,
       onFieldSubmitted: (_) => onSubmitted?.call(),
     );

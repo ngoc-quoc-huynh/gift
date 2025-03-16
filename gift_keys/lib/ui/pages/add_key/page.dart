@@ -64,6 +64,7 @@ class _BodyState extends State<_Body> {
           label: _translations.name.hint,
           autofillHints: const [AutofillHints.name],
           keyboardType: TextInputType.name,
+          textCapitalization: TextCapitalization.words,
           textInputAction: TextInputAction.next,
           validator: _nameValidator,
         ),
