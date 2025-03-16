@@ -9,6 +9,7 @@ import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/pages/settings/app_version.dart';
+import 'package:gift_keys/ui/pages/settings/dialogs/cache.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/design.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/language.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/reset.dart';
@@ -78,14 +79,25 @@ class SettingsPage extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: Card(
-              child: BlocListener<KeysBloc, KeysState>(
-                listener: _onKeysStateChanged,
-                child: ListTile(
-                  leading: const Icon(Icons.restart_alt),
-                  title: Text(_translations.reset),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => unawaited(SettingsResetDialog.show(context)),
-                ),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(Icons.cached_outlined),
+                    title: Text(_translations.cache),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => unawaited(SettingsCacheDialog.show(context)),
+                  ),
+                  const Divider(indent: 10, endIndent: 10),
+                  BlocListener<KeysBloc, KeysState>(
+                    listener: _onKeysStateChanged,
+                    child: ListTile(
+                      leading: const Icon(Icons.restart_alt),
+                      title: Text(_translations.reset),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap: () => unawaited(SettingsResetDialog.show(context)),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

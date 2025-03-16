@@ -30,6 +30,10 @@ final class Injector {
         getApplicationDocumentsDirectory,
         instanceName: 'appDir',
       )
+      ..registerSingletonAsync<Directory>(
+        getTemporaryDirectory,
+        instanceName: 'tmpDir',
+      )
       ..registerLazySingleton<FileApi>(FileRepository.new)
       ..registerLazySingleton<LocalDatabaseApi>(SqliteAsyncRepository.new)
       ..registerLazySingleton<Logger>(Logger.new)

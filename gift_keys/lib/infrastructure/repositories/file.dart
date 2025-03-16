@@ -14,6 +14,7 @@ final class FileRepository implements FileApi {
   static final _instance = ImagePicker();
   static final _appDir = Injector.instance.appDir;
   static final _imagesPath = join(_appDir.path, 'images');
+  static final _tmpDir = Injector.instance.tmpDir;
 
   @override
   Future<File?> pickImageFromGallery() async {
@@ -68,6 +69,14 @@ final class FileRepository implements FileApi {
 
     if (dir.existsSync()) {
       await dir.delete(recursive: true);
+    }
+  }
+
+  @override
+  Future<void> clearCache() async {
+    widget.imageCache.clear();
+    if (_tmpDir.existsSync()) {
+      await _tmpDir.delete(recursive: true);
     }
   }
 }

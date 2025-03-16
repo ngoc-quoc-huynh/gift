@@ -10,7 +10,7 @@ imagePickerFormField:
 
 pages:
   addKey:
-    appBar: 'Add key'
+    appBar: 'Add Gift Key'
     aid:
       hint: 'Application identifier'
       validation:
@@ -37,14 +37,19 @@ pages:
     settings: 'Settings'
   settings:
     appBar: 'Settings'
+    cache: 'Delete cache'
+    cacheUpdate: 'Cache has been deleted successfully.'
     design: 'Design'
     designUpdate: 'Design has been updated successfully.'
     language: 'Language'
     languageUpdate: 'Language has been updated successfully.'
     reset: 'Reset'
-    resetUpdate: 'Gift keys has been successfully reset.'
+    resetUpdate: 'Gift Keys has been successfully reset.'
     license: 'External libraries and licenses'
     dialogs:
+      cache:
+        title: 'Delete cache'
+        content: 'Are you sure you want to delete the cache? This action will permanently remove all temporary files and cached data stored by the app.'
       design:
         title: 'Choose design'
         bright: 'Bright'
@@ -56,5 +61,5 @@ pages:
         german: 'German'
         device: 'Device language'
       reset:
-        title: 'Reset gift keys'
-        content: 'Are you sure you want to reset your gift keys? This process cannot be undone.'
+        title: 'Reset Gift Keys'
+        content: 'Are you sure you want to reset your Gift Keys? This process cannot be undone.'

@@ -36,9 +36,10 @@ pages:
   keys:
     add: 'Schlüssel hinzufügen'
     settings: 'Einstellungen'
-
   settings:
     appBar: 'Einstellungen'
+    cache: 'Cache löschen'
+    cacheUpdate: 'Cache wurde erfolgreich gelöscht.'
     design: 'Design'
     designUpdate: 'Design wurde erfolgreich aktualisiert'
     language: 'Sprache'
@@ -47,6 +48,9 @@ pages:
     resetUpdate: 'Schlüsseln wurden erfolgreich zurückgesetzt.'
     license: 'Externe Bibliotheken und Lizensen'
     dialogs:
+      cache:
+        title: 'Cache löschen'
+        content: 'Bist du dir sicher, dass du den Cache löschen möchtest? Mit dieser Aktion werden alle temporären Dateien und zwischengespeicherten Daten, die von der App gespeichert wurden, dauerhaft entfernt.'
       design:
         title: 'Design auswählen'
         bright: 'Hell'

@@ -12,6 +12,8 @@ import 'package:package_info_plus/package_info_plus.dart';
 extension GetItExtension on GetIt {
   Directory get appDir => get<Directory>(instanceName: 'appDir');
 
+  Directory get tmpDir => get<Directory>(instanceName: 'tmpDir');
+
   FileApi get fileApi => get<FileApi>();
 
   LocalDatabaseApi get localDatabaseApi => get<LocalDatabaseApi>();
