@@ -1,7 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_keys/domain/blocs/value/cubit.dart';
+import 'package:gift_keys/domain/models/language.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/pages/settings/app_version.dart';
+import 'package:gift_keys/ui/pages/settings/dialogs/language.dart';
+import 'package:gift_keys/ui/widgets/snack_bar.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -28,10 +35,20 @@ class SettingsPage extends StatelessWidget {
                     trailing: const Icon(Icons.chevron_right),
                   ),
                   const Divider(indent: 10, endIndent: 10),
-                  ListTile(
-                    leading: const Icon(Icons.flag_outlined),
-                    title: Text(_translations.language),
-                    trailing: const Icon(Icons.chevron_right),
+                  BlocListener<LanguageOptionValueCubit, LanguageOption>(
+                    listener: _onLanguageOptionChanged,
+                    child: ListTile(
+                      leading: const Icon(Icons.flag_outlined),
+                      title: Text(_translations.language),
+                      trailing: const Icon(Icons.chevron_right),
+                      onTap:
+                          () => unawaited(
+                            SettingsLanguageDialog.show(
+                              context,
+                              context.read<LanguageOptionValueCubit>().state,
+                            ),
+                          ),
+                    ),
                   ),
                 ],
               ),
@@ -63,6 +80,9 @@ class SettingsPage extends StatelessWidget {
       ),
     );
   }
+
+  void _onLanguageOptionChanged(BuildContext context, _) =>
+      CustomSnackBar.showSuccess(context, _translations.languageUpdate);
 
   static TranslationsPagesSettingsEn get _translations =>
       Injector.instance.translations.pages.settings;

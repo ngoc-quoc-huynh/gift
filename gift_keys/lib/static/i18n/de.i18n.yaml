@@ -1,5 +1,10 @@
 appName: 'Geschenk Schlüssel'
 
+general:
+  cancel: 'Abbrechen'
+  ok: 'OK'
+
+
 imagePickerFormField:
   add: 'Bild hinzufügen'
   empty: 'Bitte wähle ein Bild aus.'
@@ -31,9 +36,17 @@ pages:
   keys:
     add: 'Schlüssel hinzufügen'
     settings: 'Einstellungen'
+
   settings:
     appBar: 'Einstellungen'
     design: 'Design'
     language: 'Sprache'
+    languageUpdate: 'Sprache wurde erfolgreich aktualisiert.'
     reset: 'Zurücksetzen'
     license: 'Externe Bibliotheken und Lizensen'
+    dialogs:
+      language:
+        title: 'Sprache auswählen'
+        english: 'Englisch'
+        german: 'Deutsch'
+        device: 'Gerätesprache'

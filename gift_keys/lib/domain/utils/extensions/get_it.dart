@@ -21,7 +21,7 @@ extension GetItExtension on GetIt {
   LoggerApi get loggerApi => get<LoggerApi>();
 
   NfcApi get nfcApi => get<NfcApi>();
-  
+
   PackageInfo get packageInfo => get<PackageInfo>();
 
   Translations get translations => get<Translations>();

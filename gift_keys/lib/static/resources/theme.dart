@@ -1,6 +1,7 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:gift_keys/domain/models/theme_colors.dart';
+import 'package:gift_keys/static/resources/sizes.dart';
 
 final class CustomTheme {
   const CustomTheme._();
@@ -15,9 +16,15 @@ final class CustomTheme {
     final colorScheme = _colorScheme(brightness);
     return ThemeData(
       colorScheme: colorScheme,
-      textTheme: textTheme.apply(
-        bodyColor: colorScheme.onSurface,
-        displayColor: colorScheme.onSurface,
+      dialogTheme: const DialogThemeData(
+        actionsPadding: EdgeInsets.only(
+          left: Sizes.horizontalPadding,
+          right: Sizes.horizontalPadding,
+          bottom: Sizes.verticalPadding / 2,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+        ),
       ),
       extensions: [const CustomThemeColors().harmonized(colorScheme)],
       inputDecorationTheme: const InputDecorationTheme(
@@ -33,6 +40,10 @@ final class CustomTheme {
       ),
       // ignore: deprecated_member_use, since we want to use the updated version.
       progressIndicatorTheme: const ProgressIndicatorThemeData(year2023: false),
+      textTheme: textTheme.apply(
+        bodyColor: colorScheme.onSurface,
+        displayColor: colorScheme.onSurface,
+      ),
     );
   }
 

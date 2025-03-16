@@ -1,5 +1,9 @@
 appName: 'Gift Keys'
 
+general:
+  cancel: 'Cancel'
+  ok: 'OK'
+
 imagePickerFormField:
   add: 'Add image'
   empty: 'Please select an image.'
@@ -35,5 +39,12 @@ pages:
     appBar: 'Settings'
     design: 'Design'
     language: 'Language'
+    languageUpdate: 'Language has been updated successfully.'
     reset: 'Reset'
     license: 'External libraries and licenses'
+    dialogs:
+      language:
+        title: 'Choose language'
+        english: 'English'
+        german: 'German'
+        device: 'Device language'

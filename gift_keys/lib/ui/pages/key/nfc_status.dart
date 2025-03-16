@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/nfc_status/bloc.dart';
-import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/widgets/app_lifecycle_observer.dart';
+import 'package:gift_keys/ui/widgets/snack_bar.dart';
 
 class KeyNfcStatus extends StatelessWidget {
   const KeyNfcStatus({super.key});
@@ -47,15 +47,8 @@ class KeyNfcStatus extends StatelessWidget {
       false => _translations.nfcHintDisabled,
       true => _translations.nfcHintEnabled,
     };
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(message),
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: context.colorScheme.primary,
-        ),
-      );
+
+    CustomSnackBar.showInfo(context, message);
   }
 
   TranslationsPagesKeyEn get _translations =>
