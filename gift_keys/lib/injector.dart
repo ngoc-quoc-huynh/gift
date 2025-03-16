@@ -5,11 +5,13 @@ import 'package:gift_keys/domain/interfaces/file.dart';
 import 'package:gift_keys/domain/interfaces/local_database.dart';
 import 'package:gift_keys/domain/interfaces/logger.dart';
 import 'package:gift_keys/domain/interfaces/nfc.dart';
+import 'package:gift_keys/domain/utils/extensions/get_it.dart';
 import 'package:gift_keys/infrastructure/repositories/file.dart';
 import 'package:gift_keys/infrastructure/repositories/logger.dart';
 import 'package:gift_keys/infrastructure/repositories/nfc.dart';
 import 'package:gift_keys/infrastructure/repositories/sqlite_async.dart';
 import 'package:gift_keys/static/i18n/translations.g.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
@@ -36,6 +38,10 @@ final class Injector {
       ..registerSingletonAsync<PackageInfo>(PackageInfo.fromPlatform)
       ..registerLazySingleton<Translations>(_createTranslations);
     await instance.allReady();
+
+    HydratedBloc.storage = await HydratedStorage.build(
+      storageDirectory: HydratedStorageDirectory(instance.appDir.path),
+    );
   }
 
   static Translations _createTranslations() =>

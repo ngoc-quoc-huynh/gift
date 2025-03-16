@@ -24,8 +24,9 @@ dependencies:
   go_router: ^14.2.9
 
   # State Management
-  flutter_bloc: ^9.0.0
   bloc_concurrency: ^0.3.0
+  flutter_bloc: ^9.0.0
+  hydrated_bloc: ^10.0.0
 
   # UI
   dynamic_color: ^1.7.0

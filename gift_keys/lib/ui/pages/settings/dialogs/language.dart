@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_keys/domain/blocs/value/cubit.dart';
 import 'package:gift_keys/domain/models/language.dart';
 import 'package:gift_keys/injector.dart';
@@ -24,7 +25,7 @@ class SettingsLanguageDialog extends StatelessWidget {
     );
 
     if (context.mounted && option != null) {
-      context.read<LanguageOptionValueCubit>().update(option);
+      context.read<LanguageOptionHydratedValueCubit>().update(option);
     }
   }
 

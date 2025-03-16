@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:gift_keys/domain/blocs/value/cubit.dart';
+import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_keys/domain/models/language.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
@@ -22,23 +22,46 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider<LanguageOptionHydratedValueCubit>(
+      create: (_) => LanguageOptionHydratedValueCubit(LanguageOption.system),
+      child: const _Body(),
+    );
+  }
+}
+
+class _Body extends StatefulWidget {
+  const _Body();
+
+  @override
+  State<_Body> createState() => _BodyState();
+}
+
+class _BodyState extends State<_Body> {
+  @override
+  void initState() {
+    super.initState();
+    _onLanguageOptionChanged(
+      context,
+      context.read<LanguageOptionHydratedValueCubit>().state,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final textTheme = context.textTheme;
 
-    return BlocProvider<LanguageOptionValueCubit>(
-      create: (_) => LanguageOptionValueCubit(LanguageOption.system),
-      child: BlocConsumer<LanguageOptionValueCubit, LanguageOption>(
-        listener: _onLanguageOptionChanged,
-        builder:
-            (context, language) => MaterialApp.router(
-              title: Injector.instance.translations.appName,
-              theme: CustomTheme.lightTheme(textTheme),
-              darkTheme: CustomTheme.darkTheme(textTheme),
-              locale: _getLocaleByLanguageOption(language),
-              supportedLocales: AppLocaleUtils.supportedLocales,
-              localizationsDelegates: GlobalMaterialLocalizations.delegates,
-              routerConfig: GoRouterConfig.routes,
-            ),
-      ),
+    return BlocConsumer<LanguageOptionHydratedValueCubit, LanguageOption>(
+      listener: _onLanguageOptionChanged,
+      builder:
+          (context, language) => MaterialApp.router(
+            title: Injector.instance.translations.appName,
+            theme: CustomTheme.lightTheme(textTheme),
+            darkTheme: CustomTheme.darkTheme(textTheme),
+            locale: _getLocaleByLanguageOption(language),
+            supportedLocales: AppLocaleUtils.supportedLocales,
+            localizationsDelegates: GlobalMaterialLocalizations.delegates,
+            routerConfig: GoRouterConfig.routes,
+          ),
     );
   }
 

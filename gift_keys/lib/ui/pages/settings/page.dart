@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_keys/domain/blocs/value/cubit.dart';
+import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_keys/domain/models/language.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
@@ -35,7 +35,10 @@ class SettingsPage extends StatelessWidget {
                     trailing: const Icon(Icons.chevron_right),
                   ),
                   const Divider(indent: 10, endIndent: 10),
-                  BlocListener<LanguageOptionValueCubit, LanguageOption>(
+                  BlocListener<
+                    LanguageOptionHydratedValueCubit,
+                    LanguageOption
+                  >(
                     listener: _onLanguageOptionChanged,
                     child: ListTile(
                       leading: const Icon(Icons.flag_outlined),
@@ -45,7 +48,9 @@ class SettingsPage extends StatelessWidget {
                           () => unawaited(
                             SettingsLanguageDialog.show(
                               context,
-                              context.read<LanguageOptionValueCubit>().state,
+                              context
+                                  .read<LanguageOptionHydratedValueCubit>()
+                                  .state,
                             ),
                           ),
                     ),
