@@ -124,8 +124,7 @@ class _BodyState extends State<_Body> {
     null => _translations.password.validation.empty,
     final val when val.isEmpty => _translations.password.validation.empty,
 
-    String() when val.length < 10 || val.length > 32 =>
-      _translations.password.validation.length,
+    String() when val.length < 4 => _translations.password.validation.length,
     String() => null,
   };
 
