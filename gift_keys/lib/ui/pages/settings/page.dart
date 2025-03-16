@@ -9,10 +9,12 @@ import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/pages/settings/app_version.dart';
+import 'package:gift_keys/ui/pages/settings/card.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/cache.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/design.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/language.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/reset.dart';
+import 'package:gift_keys/ui/pages/settings/item.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/snack_bar.dart';
 
@@ -30,88 +32,67 @@ class SettingsPage extends StatelessWidget {
           vertical: Sizes.verticalPadding,
         ),
         children: [
-          SizedBox(
-            width: double.infinity,
-            child: Card(
-              child: Column(
-                children: [
-                  BlocListener<ThemeModeHydratedValueCubit, ThemeMode>(
-                    listener: _onThemeModeChanged,
-                    child: ListTile(
-                      leading: const Icon(Icons.brightness_6_rounded),
-                      title: Text(_translations.design),
-                      trailing: const Icon(Icons.chevron_right),
-                      onTap:
-                          () => unawaited(
-                            SettingsDesignDialog.show(
-                              context,
-                              context.read<ThemeModeHydratedValueCubit>().state,
-                            ),
-                          ),
-                    ),
-                  ),
-                  const Divider(indent: 10, endIndent: 10),
-                  BlocListener<
-                    LanguageOptionHydratedValueCubit,
-                    LanguageOption
-                  >(
-                    listener: _onLanguageOptionChanged,
-                    child: ListTile(
-                      leading: const Icon(Icons.flag_outlined),
-                      title: Text(_translations.language),
-                      trailing: const Icon(Icons.chevron_right),
-                      onTap:
-                          () => unawaited(
-                            SettingsLanguageDialog.show(
-                              context,
-                              context
-                                  .read<LanguageOptionHydratedValueCubit>()
-                                  .state,
-                            ),
-                          ),
-                    ),
-                  ),
-                ],
+          SettingsCard(
+            children: [
+              BlocListener<ThemeModeHydratedValueCubit, ThemeMode>(
+                listener: _onThemeModeChanged,
+                child: SettingsItem(
+                  icon: Icons.brightness_6_rounded,
+                  title: _translations.design,
+                  onTap:
+                      () => unawaited(
+                        SettingsDesignDialog.show(
+                          context,
+                          context.read<ThemeModeHydratedValueCubit>().state,
+                        ),
+                      ),
+                ),
               ),
-            ),
+              BlocListener<LanguageOptionHydratedValueCubit, LanguageOption>(
+                listener: _onLanguageOptionChanged,
+                child: SettingsItem(
+                  icon: Icons.flag_outlined,
+                  title: _translations.language,
+                  onTap:
+                      () => unawaited(
+                        SettingsLanguageDialog.show(
+                          context,
+                          context
+                              .read<LanguageOptionHydratedValueCubit>()
+                              .state,
+                        ),
+                      ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 10),
-          SizedBox(
-            width: double.infinity,
-            child: Card(
-              child: Column(
-                children: [
-                  ListTile(
-                    leading: const Icon(Icons.cached_outlined),
-                    title: Text(_translations.cache),
-                    trailing: const Icon(Icons.chevron_right),
-                    onTap: () => unawaited(SettingsCacheDialog.show(context)),
-                  ),
-                  const Divider(indent: 10, endIndent: 10),
-                  BlocListener<KeysBloc, KeysState>(
-                    listener: _onKeysStateChanged,
-                    child: ListTile(
-                      leading: const Icon(Icons.restart_alt),
-                      title: Text(_translations.reset),
-                      trailing: const Icon(Icons.chevron_right),
-                      onTap: () => unawaited(SettingsResetDialog.show(context)),
-                    ),
-                  ),
-                ],
+          SettingsCard(
+            children: [
+              SettingsItem(
+                icon: Icons.cached_outlined,
+                title: _translations.cache,
+                onTap: () => unawaited(SettingsCacheDialog.show(context)),
               ),
-            ),
+              BlocListener<KeysBloc, KeysState>(
+                listener: _onKeysStateChanged,
+                child: SettingsItem(
+                  icon: Icons.restart_alt,
+                  title: _translations.reset,
+                  onTap: () => unawaited(SettingsResetDialog.show(context)),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 10),
-          SizedBox(
-            width: double.infinity,
-            child: Card(
-              child: ListTile(
-                leading: const Icon(Icons.library_books_outlined),
-                title: Text(_translations.license),
-                trailing: const Icon(Icons.chevron_right),
+          SettingsCard(
+            children: [
+              SettingsItem(
+                icon: Icons.library_books_outlined,
+                title: _translations.license,
                 onTap: () => context.pushRoute(Routes.licensePage),
               ),
-            ),
+            ],
           ),
         ],
       ),
