@@ -15,20 +15,20 @@ pages:
     aid:
       hint: 'Anwendungs-ID'
       validation:
-        empty: 'Bitte geben Sie eine Anwendungs-ID ein.'
-        hex: 'Bitte verwenden Sie nur hexadezimale Zeichen.'
-        length: 'Bitte stellen Sie sicher, dass die AID zwischen 10 und 32 Zeichen lang ist.'
+        empty: 'Bitte gebe eine Anwendungs-ID ein.'
+        hex: 'Bitte verwende nur hexadezimale Zeichen.'
+        length: 'AID muss zwischen 10 und 32 Zeichen lang sein.'
     birthday:
       hint: 'Geburtstag'
-      validation: 'Bitte geben Sie ein Geburtsdatum ein.'
+      validation: 'Bitte gebe ein Geburtsdatum ein.'
     name:
       hint: 'Name'
-      validation: 'Bitte geben Sie einen Namen ein.'
+      validation: 'Bitte gebe einen Namen ein.'
     password:
       hint: 'Passwort'
       validation:
-        empty: 'Bitte geben Sie ein Passwort ein.'
-        length: 'Das Passwort muss mindestens 4 Zeichen lang sein.'
+        empty: 'Bitte gebe ein Passwort ein.'
+        length: 'Passwort muss mindestens 4 Zeichen lang sein.'
   key:
     appBar: 'Geschenk Schlüssel'
     nfcHintEnabled: 'Du benötigst einen Schlüssen, um das Geschenk zu öffnen.'
