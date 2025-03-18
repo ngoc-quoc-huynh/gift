@@ -43,25 +43,22 @@ final class FileRepository implements FileApi {
   }
 
   @override
-  Future<File> moveFileToAppDir(String sourcePath, String newName) {
-    final file = loadImage(newName)..createSync(recursive: true);
+  Future<File> moveFileToAppDir(String sourcePath, int id) {
+    final file = loadImage(id)..createSync(recursive: true);
 
     return File(sourcePath).rename(file.path);
   }
 
   @override
-  File loadImage(String name) => File(join(_imagesPath, name));
+  File loadImage(int id) => File(join(_imagesPath, '$id.webp'));
 
   @override
-  Future<void> precacheImage(BuildContext context, String imageFileName) =>
-      widget.precacheImage(FileImage(loadImage(imageFileName)), context);
+  Future<void> precacheImage(BuildContext context, int id) =>
+      widget.precacheImage(FileImage(loadImage(id)), context);
 
   @override
-  Future<void> precacheImages(
-    BuildContext context,
-    List<String> imageFileNames,
-  ) =>
-      Future.wait(imageFileNames.map((image) => precacheImage(context, image)));
+  Future<void> precacheImages(BuildContext context, List<int> ids) =>
+      Future.wait(ids.map((id) => precacheImage(context, id)));
 
   String _buildCompressedImagePath(String path) =>
       join(dirname(path), '${basenameWithoutExtension(path)}_compressed.webp');

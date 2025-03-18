@@ -26,7 +26,7 @@ class KeysItem extends StatelessWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: FileImage(
-              Injector.instance.fileApi.loadImage(giftKeyMeta.imageFileName),
+              Injector.instance.fileApi.loadImage(giftKeyMeta.id),
             ),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(

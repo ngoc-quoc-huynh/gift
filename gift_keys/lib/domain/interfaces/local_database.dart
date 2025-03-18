@@ -7,7 +7,6 @@ abstract interface class LocalDatabaseApi {
   Future<void> initialize();
 
   Future<GiftKeyMeta> saveKey({
-    required String imageFileName,
     required String name,
     required DateTime birthday,
     required String aid,

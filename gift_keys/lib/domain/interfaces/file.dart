@@ -11,13 +11,13 @@ abstract interface class FileApi {
 
   Future<File?> compressImage(String path, int minWidth);
 
-  Future<File> moveFileToAppDir(String sourcePath, String name);
+  Future<File> moveFileToAppDir(String sourcePath, int id);
 
-  File loadImage(String name);
+  File loadImage(int id);
 
-  Future<void> precacheImage(BuildContext context, String image);
+  Future<void> precacheImage(BuildContext context, int id);
 
-  Future<void> precacheImages(BuildContext context, List<String> images);
+  Future<void> precacheImages(BuildContext context, List<int> ids);
 
   Future<void> deleteAllImages();
 

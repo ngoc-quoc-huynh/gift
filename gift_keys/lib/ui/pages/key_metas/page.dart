@@ -100,12 +100,9 @@ class _BodyState extends State<_Body> {
 
   void _onKeysStateChanged(BuildContext context, KeyMetasState state) {
     switch (state) {
-      case KeyMetasAddOnSuccess(:final index, metas: final keys):
+      case KeyMetasAddOnSuccess(:final index, metas: final metas):
         unawaited(
-          Injector.instance.fileApi.precacheImage(
-            context,
-            keys[index].imageFileName,
-          ),
+          Injector.instance.fileApi.precacheImage(context, metas[index].id),
         );
         unawaited(
           _controller.animateTo(
@@ -116,12 +113,12 @@ class _BodyState extends State<_Body> {
         );
       case KeyMetasDeleteOnSuccess():
         CustomSnackBar.showSuccess(context, _translations.deleteSuccess);
-      case KeyMetasLoadOnSuccess(metas: final keys)
+      case KeyMetasLoadOnSuccess(metas: final metas)
           when state is! KeyMetasAddOnSuccess:
         unawaited(
           Injector.instance.fileApi.precacheImages(
             context,
-            keys.map((key) => key.imageFileName).toList(),
+            metas.map((meta) => meta.id).toList(),
           ),
         );
       default:

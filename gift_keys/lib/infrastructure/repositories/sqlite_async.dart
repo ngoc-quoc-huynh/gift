@@ -28,7 +28,6 @@ final class SqliteAsyncRepository implements LocalDatabaseApi {
   Future<List<domain.GiftKeyMeta>> loadKeyMetas() async {
     final result = await _db.getAll('''
 SELECT id,
-       imageFileName,
        name,
        birthday
 FROM $_tableName
@@ -43,7 +42,6 @@ ORDER BY birthday ASC;
     final json = await _db.get(
       '''
 SELECT id,
-       imageFileName,
        name,
        birthday,
        aid,
@@ -59,7 +57,6 @@ WHERE id = ?;
 
   @override
   Future<domain.GiftKeyMeta> saveKey({
-    required String imageFileName,
     required String name,
     required DateTime birthday,
     required String aid,
@@ -68,26 +65,18 @@ WHERE id = ?;
     final result = await _db.execute(
       '''
 INSERT INTO $_tableName (
-  imageFileName,
   name,
   birthday,
   aid,
   password
 )
-VALUES (?, ?, ?, ?, ?)
+VALUES (?, ?, ?, ?)
 RETURNING 
   id,
-  imageFileName,
   name,
   birthday;
 ''',
-      [
-        imageFileName,
-        name,
-        birthday.format(DateTimeFormat.dashSeparated),
-        aid,
-        password,
-      ],
+      [name, birthday.format(DateTimeFormat.dashSeparated), aid, password],
     );
 
     return GiftKeyMeta.fromJson(result.first).toDomain();
@@ -116,7 +105,6 @@ WHERE id = ?;
   static const _createTable = '''
 CREATE TABLE IF NOT EXISTS $_tableName (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    imageFileName VARCHAR(255) NOT NULL,
     name VARCHAR(50) NOT NULL,
     birthday CHAR(10) NOT NULL,
     aid VARCHAR(50) NOT NULL,

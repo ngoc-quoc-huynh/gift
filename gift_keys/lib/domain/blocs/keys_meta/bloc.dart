@@ -5,9 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_keys/domain/models/date_time_format.dart';
 import 'package:gift_keys/domain/models/key_meta.dart';
-import 'package:gift_keys/domain/utils/extensions/date_time.dart';
 import 'package:gift_keys/injector.dart';
 
 part 'event.dart';
@@ -41,20 +39,13 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     Emitter<KeyMetasState> emit,
   ) async {
     if (state case KeyMetasLoadOnSuccess(metas: final metas)) {
-      final imageFileName =
-          '${event.name}_'
-          '${event.birthday.format(DateTimeFormat.compact)}.webp';
-      final [_, newMeta] = await Future.wait([
-        _fileApi.moveFileToAppDir(event.imagePath, imageFileName),
-        _localDatabaseApi.saveKey(
-          imageFileName: imageFileName,
-          name: event.name,
-          birthday: event.birthday,
-          aid: event.aid,
-          password: event.password,
-        ),
-      ]);
-      newMeta as GiftKeyMeta;
+      final newMeta = await _localDatabaseApi.saveKey(
+        name: event.name,
+        birthday: event.birthday,
+        aid: event.aid,
+        password: event.password,
+      );
+      await _fileApi.moveFileToAppDir(event.imagePath, newMeta.id);
 
       final insertIndex = metas.lowerBound(newMeta, _compareGiftKeyMetas);
       final newMetas = [...metas]..insert(insertIndex, newMeta);
