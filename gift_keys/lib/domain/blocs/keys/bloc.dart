@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
@@ -16,6 +18,7 @@ final class KeysBloc extends Bloc<KeysEvent, KeysState> {
     on<KeysInitializeEvent>(_onKeysInitializeEvent, transformer: droppable());
     on<KeysAddEvent>(_onKeysAddEvent, transformer: droppable());
     on<KeysResetEvent>(_onKeysResetEvent, transformer: droppable());
+    on<KeysDeleteEvent>(_onKeysDeleteEvent, transformer: droppable());
   }
 
   static final _fileApi = Injector.instance.fileApi;
@@ -64,9 +67,22 @@ final class KeysBloc extends Bloc<KeysEvent, KeysState> {
     emit(const KeysLoadInProgress());
     await Future.wait([
       _fileApi.deleteAllImages(),
-      _localDatabaseApi.deleteAll(),
+      _localDatabaseApi.deleteKeys(),
     ]);
     emit(const KeysLoadOnSuccess([]));
+  }
+
+  Future<void> _onKeysDeleteEvent(
+    KeysDeleteEvent event,
+    Emitter<KeysState> emit,
+  ) async {
+    if (state case KeysLoadOnSuccess(:final keys)) {
+      final id = event.id;
+      emit(
+        KeysDeleteOnSuccess(List.of(keys)..removeWhere((key) => key.id == id)),
+      );
+      await _localDatabaseApi.deleteKey(id);
+    }
   }
 
   static int _compareGiftKeys(GiftKey a, GiftKey b) {

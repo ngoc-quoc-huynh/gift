@@ -29,3 +29,7 @@ final class KeysAddOnSuccess extends KeysLoadOnSuccess {
   @override
   List<Object?> get props => [index, ...super.props];
 }
+
+final class KeysDeleteOnSuccess extends KeysLoadOnSuccess {
+  const KeysDeleteOnSuccess(super.keys);
+}

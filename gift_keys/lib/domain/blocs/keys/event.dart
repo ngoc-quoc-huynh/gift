@@ -28,3 +28,9 @@ final class KeysAddEvent extends KeysEvent {
 final class KeysResetEvent extends KeysEvent {
   const KeysResetEvent();
 }
+
+final class KeysDeleteEvent extends KeysEvent {
+  const KeysDeleteEvent(this.id);
+
+  final int id;
+}

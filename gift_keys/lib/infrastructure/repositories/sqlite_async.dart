@@ -96,10 +96,19 @@ RETURNING
   }
 
   @override
-  Future<void> deleteAll() => _db.execute('''
+  Future<void> deleteKeys() => _db.execute('''
 DELETE FROM $_tableName;
 DELETE FROM sqlite_sequence WHERE name = $_tableName;
 ''');
+
+  @override
+  Future<void> deleteKey(int id) => _db.execute(
+    '''
+DELETE FROM $_tableName
+WHERE id = ?;
+''',
+    [id],
+  );
 
   static const _tableName = 'key';
   static final _createDatabaseMigration = SqliteMigration(

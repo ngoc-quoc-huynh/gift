@@ -33,9 +33,12 @@ pages:
     appBar: 'Geschenk Schlüssel'
     nfcHintEnabled: 'Du benötigst einen Schlüssen, um das Geschenk zu öffnen.'
     nfcHintDisabled: 'Aktiviere NFC, um das Geschenk zu öffnen.'
+    edit: 'Bearbeiten'
+    delete: 'Löschen'
   keys:
     add: 'Schlüssel hinzufügen'
     settings: 'Einstellungen'
+    deleteSuccess: 'Schlüssel wurde erfolgreich gelöscht.'
   settings:
     appBar: 'Einstellungen'
     cache: 'Cache löschen'

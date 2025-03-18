@@ -17,5 +17,7 @@ abstract interface class LocalDatabaseApi {
 
   Future<GiftKey> loadKey(int id);
 
-  Future<void> deleteAll();
+  Future<void> deleteKeys();
+
+  Future<void> deleteKey(int id);
 }

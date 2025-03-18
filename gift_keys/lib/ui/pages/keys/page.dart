@@ -11,6 +11,7 @@ import 'package:gift_keys/ui/pages/keys/add_button.dart';
 import 'package:gift_keys/ui/pages/keys/item.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/loading_indicator.dart';
+import 'package:gift_keys/ui/widgets/snack_bar.dart';
 
 class KeysPage extends StatelessWidget {
   const KeysPage({super.key});
@@ -60,40 +61,40 @@ class _BodyState extends State<_Body> {
 
   @override
   Widget build(BuildContext context) {
-    return CarouselView(
-      controller: _controller,
-      itemExtent: double.infinity,
-      padding: EdgeInsets.zero,
-      shape: const RoundedRectangleBorder(),
-      enableSplash: false,
-      itemSnapping: true,
-      children: [
-        SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: Sizes.horizontalPadding,
-            ),
-            child: Stack(
-              children: [
-                BlocListener<KeysBloc, KeysState>(
-                  listener: _onKeysStateChanged,
-                  child: const KeyAddButton(),
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    onPressed: () => context.pushRoute(Routes.settingsPage),
-                    tooltip: Injector.instance.translations.pages.keys.settings,
-                    icon: const Icon(Icons.settings),
+    return BlocListener<KeysBloc, KeysState>(
+      listener: _onKeysStateChanged,
+      child: CarouselView(
+        controller: _controller,
+        itemExtent: double.infinity,
+        padding: EdgeInsets.zero,
+        shape: const RoundedRectangleBorder(),
+        enableSplash: false,
+        itemSnapping: true,
+        children: [
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Sizes.horizontalPadding,
+              ),
+              child: Stack(
+                children: [
+                  const KeyAddButton(),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      onPressed: () => context.pushRoute(Routes.settingsPage),
+                      tooltip: _translations.settings,
+                      icon: const Icon(Icons.settings),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
 
-        ...widget.keys.map((key) => KeysItem(giftKey: key)),
-      ],
+          ...widget.keys.map((key) => KeysItem(giftKey: key)),
+        ],
+      ),
     );
   }
 
@@ -113,6 +114,8 @@ class _BodyState extends State<_Body> {
             curve: Curves.easeInOut,
           ),
         );
+      case KeysDeleteOnSuccess():
+        CustomSnackBar.showSuccess(context, _translations.deleteSuccess);
       case KeysLoadOnSuccess(:final keys) when state is! KeysAddOnSuccess:
         unawaited(
           Injector.instance.fileApi.precacheImages(
@@ -124,4 +127,7 @@ class _BodyState extends State<_Body> {
         break;
     }
   }
+
+  static TranslationsPagesKeysEn get _translations =>
+      Injector.instance.translations.pages.keys;
 }

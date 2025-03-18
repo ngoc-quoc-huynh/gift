@@ -32,9 +32,12 @@ pages:
     appBar: 'Gift Key'
     nfcHintEnabled: 'You need a key to open this gift'
     nfcHintDisabled: 'Enable NFC to open this gift.'
+    edit: 'Edit'
+    delete: 'Delete'
   keys:
     add: 'Add Gift Key'
     settings: 'Settings'
+    deleteSuccess: 'Gift key has been deleted successfully.'
   settings:
     appBar: 'Settings'
     cache: 'Delete cache'
