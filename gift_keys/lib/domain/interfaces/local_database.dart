@@ -1,11 +1,12 @@
 import 'package:gift_keys/domain/models/key.dart';
+import 'package:gift_keys/domain/models/key_meta.dart';
 
 abstract interface class LocalDatabaseApi {
   const LocalDatabaseApi();
 
   Future<void> initialize();
 
-  Future<GiftKey> saveKey({
+  Future<GiftKeyMeta> saveKey({
     required String imageFileName,
     required String name,
     required DateTime birthday,
@@ -13,7 +14,7 @@ abstract interface class LocalDatabaseApi {
     required String password,
   });
 
-  Future<List<GiftKey>> loadKeys();
+  Future<List<GiftKeyMeta>> loadKeyMetas();
 
   Future<GiftKey> loadKey(int id);
 

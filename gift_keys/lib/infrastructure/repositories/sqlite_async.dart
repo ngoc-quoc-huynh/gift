@@ -1,8 +1,10 @@
 import 'package:gift_keys/domain/interfaces/local_database.dart';
 import 'package:gift_keys/domain/models/date_time_format.dart';
 import 'package:gift_keys/domain/models/key.dart' as domain;
+import 'package:gift_keys/domain/models/key_meta.dart' as domain;
 import 'package:gift_keys/domain/utils/extensions/date_time.dart';
 import 'package:gift_keys/infrastructure/dtos/sqlite_async/key.dart';
+import 'package:gift_keys/infrastructure/dtos/sqlite_async/key_meta.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:path/path.dart';
 import 'package:sqlite_async/sqlite_async.dart';
@@ -23,19 +25,17 @@ final class SqliteAsyncRepository implements LocalDatabaseApi {
   }
 
   @override
-  Future<List<domain.GiftKey>> loadKeys() async {
+  Future<List<domain.GiftKeyMeta>> loadKeyMetas() async {
     final result = await _db.getAll('''
 SELECT id,
        imageFileName,
        name,
-       birthday,
-       aid,
-       password
+       birthday
 FROM $_tableName
 ORDER BY birthday ASC;
     ''');
 
-    return result.map((json) => GiftKey.fromJson(json).toDomain()).toList();
+    return result.map((json) => GiftKeyMeta.fromJson(json).toDomain()).toList();
   }
 
   @override
@@ -58,7 +58,7 @@ WHERE id = ?;
   }
 
   @override
-  Future<domain.GiftKey> saveKey({
+  Future<domain.GiftKeyMeta> saveKey({
     required String imageFileName,
     required String name,
     required DateTime birthday,
@@ -79,9 +79,7 @@ RETURNING
   id,
   imageFileName,
   name,
-  birthday,
-  aid,
-  password;
+  birthday;
 ''',
       [
         imageFileName,
@@ -92,7 +90,7 @@ RETURNING
       ],
     );
 
-    return GiftKey.fromJson(result.first).toDomain();
+    return GiftKeyMeta.fromJson(result.first).toDomain();
   }
 
   @override

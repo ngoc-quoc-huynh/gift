@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:gift_keys/domain/models/date_time_format.dart';
-import 'package:gift_keys/domain/models/key.dart';
+import 'package:gift_keys/domain/models/key_meta.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/domain/utils/extensions/date_time.dart';
 import 'package:gift_keys/injector.dart';
@@ -10,9 +10,9 @@ import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/form_field/fade_out.dart';
 
 class KeysItem extends StatelessWidget {
-  const KeysItem({required this.giftKey, super.key});
+  const KeysItem({required this.giftKeyMeta, super.key});
 
-  final GiftKey giftKey;
+  final GiftKeyMeta giftKeyMeta;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +20,13 @@ class KeysItem extends StatelessWidget {
       onTap:
           () => context.goRoute(
             Routes.keyPage,
-            pathParameters: {'id': giftKey.id.toString()},
+            pathParameters: {'id': giftKeyMeta.id.toString()},
           ),
       child: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: FileImage(
-              Injector.instance.fileApi.loadImage(giftKey.imageFileName),
+              Injector.instance.fileApi.loadImage(giftKeyMeta.imageFileName),
             ),
             fit: BoxFit.cover,
             colorFilter: ColorFilter.mode(
@@ -40,7 +40,7 @@ class KeysItem extends StatelessWidget {
             ),
           ),
         ),
-        child: _Body(name: giftKey.name, birthday: giftKey.birthday),
+        child: _Body(name: giftKeyMeta.name, birthday: giftKeyMeta.birthday),
       ),
     );
   }

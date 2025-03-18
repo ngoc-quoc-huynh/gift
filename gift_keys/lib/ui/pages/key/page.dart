@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/key/bloc.dart';
-import 'package:gift_keys/domain/blocs/keys/bloc.dart';
+import 'package:gift_keys/domain/blocs/keys_meta/bloc.dart';
 import 'package:gift_keys/domain/models/date_time_format.dart';
 import 'package:gift_keys/domain/models/key.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
@@ -47,7 +47,7 @@ class KeyPage extends StatelessWidget {
                 onPressed:
                     () =>
                         context
-                          ..read<KeysBloc>().add(KeysDeleteEvent(id))
+                          ..read<KeyMetasBloc>().add(KeyMetasDeleteEvent(id))
                           ..pop(),
                 child: Text(_translations.delete),
               ),

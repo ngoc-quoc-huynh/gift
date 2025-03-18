@@ -2,28 +2,28 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_keys/domain/blocs/keys/bloc.dart';
-import 'package:gift_keys/domain/models/key.dart';
+import 'package:gift_keys/domain/blocs/keys_meta/bloc.dart';
+import 'package:gift_keys/domain/models/key_meta.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
-import 'package:gift_keys/ui/pages/keys/add_button.dart';
-import 'package:gift_keys/ui/pages/keys/item.dart';
+import 'package:gift_keys/ui/pages/key_metas/add_button.dart';
+import 'package:gift_keys/ui/pages/key_metas/item.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/loading_indicator.dart';
 import 'package:gift_keys/ui/widgets/snack_bar.dart';
 
-class KeysPage extends StatelessWidget {
-  const KeysPage({super.key});
+class KeyMetasPage extends StatelessWidget {
+  const KeyMetasPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<KeysBloc, KeysState>(
+      body: BlocBuilder<KeyMetasBloc, KeyMetasState>(
         builder:
             (context, state) => switch (state) {
-              KeysLoadInProgress() => const LoadingIndicator(),
-              KeysLoadOnSuccess(:final keys) => _Body(keys),
+              KeyMetasLoadInProgress() => const LoadingIndicator(),
+              KeyMetasLoadOnSuccess(metas: final metas) => _Body(metas),
             },
       ),
     );
@@ -31,9 +31,9 @@ class KeysPage extends StatelessWidget {
 }
 
 class _Body extends StatefulWidget {
-  const _Body(this.keys);
+  const _Body(this.metas);
 
-  final List<GiftKey> keys;
+  final List<GiftKeyMeta> metas;
 
   @override
   State<_Body> createState() => _BodyState();
@@ -46,7 +46,7 @@ class _BodyState extends State<_Body> {
   void initState() {
     super.initState();
     _controller = CarouselController(
-      initialItem: switch (widget.keys.isEmpty) {
+      initialItem: switch (widget.metas.isEmpty) {
         true => 0,
         false => 1,
       },
@@ -61,7 +61,7 @@ class _BodyState extends State<_Body> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<KeysBloc, KeysState>(
+    return BlocListener<KeyMetasBloc, KeyMetasState>(
       listener: _onKeysStateChanged,
       child: CarouselView(
         controller: _controller,
@@ -92,15 +92,15 @@ class _BodyState extends State<_Body> {
             ),
           ),
 
-          ...widget.keys.map((key) => KeysItem(giftKey: key)),
+          ...widget.metas.map((meta) => KeysItem(giftKeyMeta: meta)),
         ],
       ),
     );
   }
 
-  void _onKeysStateChanged(BuildContext context, KeysState state) {
+  void _onKeysStateChanged(BuildContext context, KeyMetasState state) {
     switch (state) {
-      case KeysAddOnSuccess(:final index, :final keys):
+      case KeyMetasAddOnSuccess(:final index, metas: final keys):
         unawaited(
           Injector.instance.fileApi.precacheImage(
             context,
@@ -114,9 +114,10 @@ class _BodyState extends State<_Body> {
             curve: Curves.easeInOut,
           ),
         );
-      case KeysDeleteOnSuccess():
+      case KeyMetasDeleteOnSuccess():
         CustomSnackBar.showSuccess(context, _translations.deleteSuccess);
-      case KeysLoadOnSuccess(:final keys) when state is! KeysAddOnSuccess:
+      case KeyMetasLoadOnSuccess(metas: final keys)
+          when state is! KeyMetasAddOnSuccess:
         unawaited(
           Injector.instance.fileApi.precacheImages(
             context,

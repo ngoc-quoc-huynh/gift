@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_keys/domain/blocs/keys/bloc.dart';
+import 'package:gift_keys/domain/blocs/keys_meta/bloc.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/widgets/alert_dialog/action.dart';
@@ -17,7 +17,7 @@ class SettingsResetDialog extends StatelessWidget {
     );
 
     if (context.mounted && (reset ?? false)) {
-      context.read<KeysBloc>().add(const KeysResetEvent());
+      context.read<KeyMetasBloc>().add(const KeyMetasResetEvent());
     }
   }
 

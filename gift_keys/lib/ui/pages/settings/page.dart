@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
-import 'package:gift_keys/domain/blocs/keys/bloc.dart';
+import 'package:gift_keys/domain/blocs/keys_meta/bloc.dart';
 import 'package:gift_keys/domain/models/language.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
@@ -74,7 +74,7 @@ class SettingsPage extends StatelessWidget {
                 title: _translations.cache,
                 onTap: () => unawaited(SettingsCacheDialog.show(context)),
               ),
-              BlocListener<KeysBloc, KeysState>(
+              BlocListener<KeyMetasBloc, KeyMetasState>(
                 listener: _onKeysStateChanged,
                 child: SettingsItem(
                   icon: Icons.restart_alt,
@@ -105,10 +105,10 @@ class SettingsPage extends StatelessWidget {
   void _onThemeModeChanged(BuildContext context, _) =>
       CustomSnackBar.showSuccess(context, _translations.designUpdate);
 
-  void _onKeysStateChanged(BuildContext context, KeysState state) =>
+  void _onKeysStateChanged(BuildContext context, KeyMetasState state) =>
       switch (state) {
-        KeysLoadInProgress() => null,
-        KeysLoadOnSuccess() => CustomSnackBar.showSuccess(
+        KeyMetasLoadInProgress() => null,
+        KeyMetasLoadOnSuccess() => CustomSnackBar.showSuccess(
           context,
           _translations.resetUpdate,
         ),

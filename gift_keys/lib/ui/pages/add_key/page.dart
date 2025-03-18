@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_keys/domain/blocs/keys/bloc.dart';
+import 'package:gift_keys/domain/blocs/keys_meta/bloc.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/widgets/form_field/date.dart';
@@ -138,8 +138,8 @@ class _BodyState extends State<_Body> {
   void _onCreatePressed(BuildContext context) {
     if (Form.of(context).validate()) {
       context
-        ..read<KeysBloc>().add(
-          KeysAddEvent(
+        ..read<KeyMetasBloc>().add(
+          KeyMetasAddEvent(
             imagePath: _image.path,
             name: _nameController.text,
             birthday: _birthday,
