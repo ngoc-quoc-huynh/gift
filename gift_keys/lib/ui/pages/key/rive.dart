@@ -32,17 +32,14 @@ class _RiveKeyState extends State<RiveKey> {
           (_) =>
               NfcDiscoveryBloc(aid: widget.aid, password: widget.password)
                 ..add(const NfcDiscoveryInitializeEvent()),
-      child: AspectRatio(
-        aspectRatio: 0.65,
-        child: BlocListener<NfcDiscoveryBloc, bool?>(
-          listener: _onNfcDiscoveryStateChanged,
-          child: RiveAnimation.asset(
-            Assets.key(),
-            fit: BoxFit.contain,
-            artboard: 'Key',
-            stateMachines: const ['State Machine'],
-            onInit: _onInit,
-          ),
+      child: BlocListener<NfcDiscoveryBloc, bool?>(
+        listener: _onNfcDiscoveryStateChanged,
+        child: RiveAnimation.asset(
+          Assets.key(),
+          fit: BoxFit.contain,
+          artboard: 'Key',
+          stateMachines: const ['State Machine'],
+          onInit: _onInit,
         ),
       ),
     );
