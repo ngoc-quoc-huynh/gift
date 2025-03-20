@@ -8,8 +8,8 @@ import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/domain/utils/extensions/date_time.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
-import 'package:gift_keys/ui/pages/key/key.dart';
 import 'package:gift_keys/ui/pages/key/nfc_status.dart';
+import 'package:gift_keys/ui/pages/key/rive.dart';
 import 'package:go_router/go_router.dart';
 
 class KeyPage extends StatelessWidget {
@@ -74,6 +74,7 @@ class KeyPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                         horizontal: Sizes.horizontalPadding,
+                        vertical: Sizes.verticalPadding,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -82,7 +83,6 @@ class KeyPage extends StatelessWidget {
                             alignment: Alignment.topRight,
                             child: KeyNfcStatus(),
                           ),
-                          const Spacer(),
                           RiveKey(aid: aid, password: password),
                           const SizedBox(height: 20),
                           Text(
