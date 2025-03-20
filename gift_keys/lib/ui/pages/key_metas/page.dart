@@ -112,7 +112,11 @@ class _BodyState extends State<_Body> {
           ),
         );
       case KeyMetasDeleteOnSuccess():
-        CustomSnackBar.showSuccess(context, _translations.deleteSuccess);
+        // Prevent delay of showing SnackBar after popping page.
+        WidgetsBinding.instance.addPostFrameCallback(
+          (_) =>
+              CustomSnackBar.showSuccess(context, _translations.deleteSuccess),
+        );
       case KeyMetasLoadOnSuccess(metas: final metas)
           when state is! KeyMetasAddOnSuccess:
         unawaited(
