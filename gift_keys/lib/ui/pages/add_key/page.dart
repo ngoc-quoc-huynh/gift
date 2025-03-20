@@ -19,13 +19,7 @@ class AddKeyPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(Injector.instance.translations.pages.addKey.appBar),
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: Sizes.horizontalPadding,
-          vertical: Sizes.verticalPadding,
-        ),
-        child: AutofillGroup(child: Form(child: _Body())),
-      ),
+      body: const AutofillGroup(child: Form(child: _Body())),
     );
   }
 }
@@ -55,6 +49,10 @@ class _BodyState extends State<_Body> {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: const EdgeInsets.symmetric(
+        horizontal: Sizes.horizontalPadding,
+        vertical: Sizes.verticalPadding,
+      ),
       children: [
         ImagePickerFormField(onPicked: (file) => _image = file),
         const SizedBox(height: 10),
