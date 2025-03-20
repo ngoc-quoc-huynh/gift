@@ -73,6 +73,15 @@ final class FileRepository implements FileApi {
   }
 
   @override
+  Future<void> deleteImage(int id) async {
+    final file = loadImage(id);
+
+    if (file.existsSync()) {
+      await file.delete();
+    }
+  }
+
+  @override
   Future<void> clearCache() async {
     widget.imageCache.clear();
     if (_tmpDir.existsSync()) {

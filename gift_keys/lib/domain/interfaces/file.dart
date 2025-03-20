@@ -21,5 +21,7 @@ abstract interface class FileApi {
 
   Future<void> deleteAllImages();
 
+  Future<void> deleteImage(int id);
+
   Future<void> clearCache();
 }

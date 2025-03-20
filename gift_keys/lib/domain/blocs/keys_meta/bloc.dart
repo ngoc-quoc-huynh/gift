@@ -77,7 +77,11 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
           List.of(metas)..removeWhere((meta) => meta.id == id),
         ),
       );
-      await _localDatabaseApi.deleteKey(id);
+
+      await Future.wait([
+        _localDatabaseApi.deleteKey(id),
+        _fileApi.deleteImage(id),
+      ]);
     }
   }
 
