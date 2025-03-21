@@ -27,20 +27,14 @@ class _RiveKeyState extends State<RiveKey> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NfcDiscoveryBloc>(
-      create:
-          (_) =>
-              NfcDiscoveryBloc(aid: widget.aid, password: widget.password)
-                ..add(const NfcDiscoveryInitializeEvent()),
-      child: BlocListener<NfcDiscoveryBloc, bool?>(
-        listener: _onNfcDiscoveryStateChanged,
-        child: RiveAnimation.asset(
-          Assets.key(),
-          fit: BoxFit.contain,
-          artboard: 'Key',
-          stateMachines: const ['State Machine'],
-          onInit: _onInit,
-        ),
+    return BlocListener<NfcDiscoveryBloc, NfcDiscoveryState>(
+      listener: _onNfcDiscoveryStateChanged,
+      child: RiveAnimation.asset(
+        Assets.key(),
+        fit: BoxFit.contain,
+        artboard: 'Key',
+        stateMachines: const ['State Machine'],
+        onInit: _onInit,
       ),
     );
   }
@@ -59,10 +53,10 @@ class _RiveKeyState extends State<RiveKey> {
     _ => null,
   };
 
-  void _onNfcDiscoveryStateChanged(BuildContext _, bool? state) =>
+  bool? _onNfcDiscoveryStateChanged(BuildContext _, NfcDiscoveryState state) =>
       switch (state) {
-        null => null,
-        true => _isCorrect.change(true),
-        false => _isWrong.change(true),
+        NfcDiscoveryConnectOnSuccess() => _isCorrect.change(true),
+        NfcDiscoveryConnectOnFailure() => _isWrong.change(true),
+        NfcDiscoveryLoadInProgress() || NfcDiscoveryConnectInProgress() => null,
       };
 }

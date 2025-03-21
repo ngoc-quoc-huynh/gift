@@ -4,8 +4,8 @@ import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/form_field/fade_out.dart';
 
-class KeyAddButton extends StatelessWidget {
-  const KeyAddButton({super.key});
+class KeyMetaAddButton extends StatelessWidget {
+  const KeyMetaAddButton({super.key});
 
   @override
   Widget build(BuildContext context) {

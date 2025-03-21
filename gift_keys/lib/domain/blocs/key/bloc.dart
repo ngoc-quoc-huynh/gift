@@ -21,6 +21,8 @@ final class KeyBloc extends Bloc<KeyEvent, KeyState> {
     KeyInitializeEvent event,
     Emitter<KeyState> emit,
   ) async {
+    emit(const KeyLoadInProgress());
+
     final giftKey = await _localDatabaseApi.loadKey(_id);
     emit(KeyLoadOnSuccess(giftKey));
   }

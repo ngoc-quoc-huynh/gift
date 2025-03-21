@@ -20,4 +20,12 @@ abstract interface class LocalDatabaseApi {
   Future<void> deleteKeys();
 
   Future<void> deleteKey(int id);
+
+  Future<GiftKeyMeta> updateKey({
+    required int id,
+    required String name,
+    required DateTime birthday,
+    required String aid,
+    required String password,
+  });
 }

@@ -34,3 +34,21 @@ final class KeyMetasDeleteEvent extends KeyMetasEvent {
 
   final int id;
 }
+
+final class KeyMetasUpdateEvent extends KeyMetasEvent {
+  const KeyMetasUpdateEvent({
+    required this.id,
+    required this.imagePath,
+    required this.name,
+    required this.birthday,
+    required this.aid,
+    required this.password,
+  });
+
+  final int id;
+  final String imagePath;
+  final String name;
+  final DateTime birthday;
+  final String aid;
+  final String password;
+}

@@ -4,37 +4,20 @@ general:
   cancel: 'Abbrechen'
   ok: 'OK'
 
-
-imagePickerFormField:
-  add: 'Bild hinzufügen'
-  empty: 'Bitte wähle ein Bild aus.'
-
 pages:
   addKey:
     appBar: 'Schlüssel hinzufügen'
-    aid:
-      hint: 'Anwendungs-ID'
-      validation:
-        empty: 'Bitte gebe eine Anwendungs-ID ein.'
-        hex: 'Bitte verwende nur hexadezimale Zeichen.'
-        length: 'AID muss zwischen 10 und 32 Zeichen lang sein.'
-    birthday:
-      hint: 'Geburtstag'
-      validation: 'Bitte gebe ein Geburtsdatum ein.'
-    name:
-      hint: 'Name'
-      validation: 'Bitte gebe einen Namen ein.'
-    password:
-      hint: 'Passwort'
-      validation:
-        empty: 'Bitte gebe ein Passwort ein.'
-        length: 'Passwort muss mindestens 4 Zeichen lang sein.'
+    create: 'Erstellen'
+  editKey:
+    appBar: 'Schlüssel bearbeiten'
+    update: 'Aktualisieren'
   key:
     appBar: 'Geschenk Schlüssel'
     nfcHintEnabled: 'Du benötigst einen Schlüssen, um das Geschenk zu öffnen.'
     nfcHintDisabled: 'Aktiviere NFC, um das Geschenk zu öffnen.'
     edit: 'Bearbeiten'
     delete: 'Löschen'
+    updateSuccess: 'Geschenk Schlüssel wurde erfolgreich aktualisiert.'
   keys:
     add: 'Schlüssel hinzufügen'
     settings: 'Einstellungen'
@@ -67,3 +50,26 @@ pages:
       reset:
         title: 'Schlüsseln zurücksetzen'
         content: 'Bist du dir sicher, dass du deine Geschenke Schlüsseln zurücksetzen möchtest? Dieser Vorgang kann nicht rückgängig gemacht werden.'
+
+widgets:
+  form:
+    aid:
+      hint: 'Anwendungs-ID'
+      validation:
+        empty: 'Bitte gebe eine Anwendungs-ID ein.'
+        hex: 'Bitte verwende nur hexadezimale Zeichen.'
+        length: 'AID muss zwischen 10 und 32 Zeichen lang sein.'
+    birthday:
+      hint: 'Geburtstag'
+      validation: 'Bitte gebe ein Geburtsdatum ein.'
+    image:
+      add: 'Bild hinzufügen'
+      validation: 'Bitte wähle ein Bild aus.'
+    name:
+      hint: 'Name'
+      validation: 'Bitte gebe einen Namen ein.'
+    password:
+      hint: 'Passwort'
+      validation:
+        empty: 'Bitte gebe ein Passwort ein.'
+        length: 'Passwort muss mindestens 4 Zeichen lang sein.'

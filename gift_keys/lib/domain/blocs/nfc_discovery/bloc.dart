@@ -1,15 +1,18 @@
 import 'dart:async';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/models/nfc_command.dart';
 import 'package:gift_keys/injector.dart';
 
 part 'event.dart';
+part 'state.dart';
 
-final class NfcDiscoveryBloc extends Bloc<NfcDiscoveryEvent, bool?> {
-  NfcDiscoveryBloc({required this.aid, required this.password}) : super(null) {
+final class NfcDiscoveryBloc
+    extends Bloc<NfcDiscoveryEvent, NfcDiscoveryState> {
+  NfcDiscoveryBloc() : super(const NfcDiscoveryLoadInProgress()) {
     on<NfcDiscoveryInitializeEvent>(
       _onNfcDiscoveryInitializeEvent,
       transformer: droppable(),
@@ -18,40 +21,76 @@ final class NfcDiscoveryBloc extends Bloc<NfcDiscoveryEvent, bool?> {
       _onNfcDiscoverySendCommandEvent,
       transformer: droppable(),
     );
+    on<NfcDiscoveryPauseEvent>(
+      _onNfcDiscoveryPauseEvent,
+      transformer: droppable(),
+    );
+    on<NfcDiscoveryResumeEvent>(
+      _onNfcDiscoveryResumeEvent,
+      transformer: droppable(),
+    );
   }
 
-  final String aid;
-  final String password;
-
   static final _nfcApi = Injector.instance.nfcApi;
-
   StreamSubscription<String>? _sub;
 
-  void _onNfcDiscoveryInitializeEvent(
+  Future<void> _onNfcDiscoveryInitializeEvent(
     NfcDiscoveryInitializeEvent event,
-    Emitter<bool?> emit,
-  ) =>
-      _sub = _nfcApi.startDiscovery().listen(
-        (_) => add(const NfcDiscoverySendCommandEvent()),
-      );
+    Emitter<NfcDiscoveryState> emit,
+  ) async {
+    emit(const NfcDiscoveryLoadInProgress());
+
+    await _cancelSub();
+    emit(NfcDiscoveryConnectInProgress(event.aid, event.password));
+
+    _sub = _nfcApi.startDiscovery().listen(
+      (_) => add(const NfcDiscoverySendCommandEvent()),
+    );
+  }
 
   Future<void> _onNfcDiscoverySendCommandEvent(
     NfcDiscoverySendCommandEvent event,
-    Emitter<bool?> emit,
+    Emitter<NfcDiscoveryState> emit,
   ) async {
-    final selectResponse = await _nfcApi.sendCommand(SelectAidCommand(aid));
-    if (!selectResponse) {
-      return;
-    }
+    if (state case NfcDiscoveryConnectInProgress(:final aid, :final password)) {
+      emit(NfcDiscoveryConnectInProgress(aid, password));
 
-    final verifyResponse = await _nfcApi.sendCommand(
-      VerifyPinCommand(password),
-    );
-    if (verifyResponse) {
-      emit(true);
-      await _cancelSub();
-    } else {
-      emit(false);
+      final selectResponse = await _nfcApi.sendCommand(SelectAidCommand(aid));
+      if (!selectResponse) {
+        emit(NfcDiscoveryConnectOnFailure(aid, password));
+        return;
+      }
+
+      final verifyResponse = await _nfcApi.sendCommand(
+        VerifyPinCommand(password),
+      );
+
+      if (verifyResponse) {
+        emit(NfcDiscoveryConnectOnSuccess(aid, password));
+        await _cancelSub();
+      } else {
+        emit(NfcDiscoveryConnectOnFailure(aid, password));
+      }
+    }
+  }
+
+  void _onNfcDiscoveryPauseEvent(
+    NfcDiscoveryPauseEvent event,
+    Emitter<NfcDiscoveryState> emit,
+  ) {
+    if (state is NfcDiscoveryConnectInProgress &&
+        state is! NfcDiscoveryConnectOnSuccess) {
+      _sub?.pause();
+    }
+  }
+
+  void _onNfcDiscoveryResumeEvent(
+    NfcDiscoveryResumeEvent event,
+    Emitter<NfcDiscoveryState> emit,
+  ) {
+    if (state is NfcDiscoveryConnectInProgress &&
+        state is! NfcDiscoveryConnectOnSuccess) {
+      _sub?.resume();
     }
   }
 

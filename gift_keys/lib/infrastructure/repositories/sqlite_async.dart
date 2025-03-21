@@ -97,6 +97,35 @@ WHERE id = ?;
     [id],
   );
 
+  @override
+  Future<domain.GiftKeyMeta> updateKey({
+    required int id,
+    required String name,
+    required DateTime birthday,
+    required String aid,
+    required String password,
+  }) async {
+    final result = await _db.execute(
+      '''
+UPDATE $_tableName
+SET 
+  name = ?,
+  birthday = ?,
+  aid = ?,
+  password = ?
+WHERE id = ?
+RETURNING 
+  id,
+  name,
+  aid,
+  birthday;
+''',
+      [name, birthday.format(DateTimeFormat.dashSeparated), aid, password, id],
+    );
+
+    return GiftKeyMeta.fromJson(result.first).toDomain();
+  }
+
   static const _tableName = 'key';
   static final _createDatabaseMigration = SqliteMigration(
     1,

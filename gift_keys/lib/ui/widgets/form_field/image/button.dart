@@ -11,7 +11,7 @@ class ImagePickerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: _onPressed,
-      child: Text(Injector.instance.translations.imagePickerFormField.add),
+      child: Text(Injector.instance.translations.widgets.form.image.add),
     );
   }
 

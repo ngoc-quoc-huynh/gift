@@ -1,12 +1,15 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/keys_meta/bloc.dart';
 import 'package:gift_keys/ui/pages/add_key/page.dart';
+import 'package:gift_keys/ui/pages/edit_key/page.dart';
 import 'package:gift_keys/ui/pages/key/page.dart';
 import 'package:gift_keys/ui/pages/key_metas/page.dart';
 import 'package:gift_keys/ui/pages/license/page.dart';
 import 'package:gift_keys/ui/pages/settings/page.dart';
 import 'package:gift_keys/ui/router/routes.dart';
+import 'package:gift_keys/ui/widgets/key/builder.dart';
+import 'package:gift_keys/ui/widgets/key/provider.dart';
 import 'package:go_router/go_router.dart';
 
 final class GoRouterConfig {
@@ -38,12 +41,33 @@ final class GoRouterConfig {
                 path: 'new',
                 builder: (_, _) => const AddKeyPage(),
               ),
-              GoRoute(
-                name: Routes.keyPage(),
-                path: ':id',
+              ShellRoute(
                 builder:
-                    (_, state) =>
-                        KeyPage(id: int.parse(state.pathParameters['id']!)),
+                    (_, state, child) => KeyPageProvider(
+                      id: int.parse(state.pathParameters['id']!),
+                      child: child,
+                    ),
+                routes: [
+                  GoRoute(
+                    name: Routes.keyPage(),
+                    path: ':id',
+                    builder:
+                        (context, state) => KeyPageBuilder(
+                          builder: (giftKey) => KeyPage(giftKey: giftKey),
+                        ),
+                    routes: [
+                      GoRoute(
+                        name: Routes.editKeyPage(),
+                        path: 'edit',
+                        builder:
+                            (_, state) => KeyPageBuilder(
+                              builder:
+                                  (giftKey) => EditKeyPage(giftKey: giftKey),
+                            ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),

@@ -4,36 +4,20 @@ general:
   cancel: 'Cancel'
   ok: 'OK'
 
-imagePickerFormField:
-  add: 'Add image'
-  empty: 'Please select an image.'
-
 pages:
   addKey:
     appBar: 'Add Gift Key'
-    aid:
-      hint: 'Application identifier'
-      validation:
-        empty: 'Please enter an application identifier.'
-        hex: 'Please use only hexadecimal characters.'
-        length: 'AID must be between 10 to 32 characters long.'
-    birthday:
-      hint: 'Birthday'
-      validation: 'Please enter a birthday.'
-    name:
-      hint: 'Name'
-      validation: 'Please enter a name.'
-    password:
-      hint: 'Password'
-      validation:
-        empty: 'Please enter a password.'
-        length: 'Password must be at least 4 characters.'
+    create: 'Create'
+  editKey:
+    appBar: 'Edit Gift Key'
+    update: 'Update'
   key:
     appBar: 'Gift Key'
     nfcHintEnabled: 'You need a key to open this gift'
     nfcHintDisabled: 'Enable NFC to open this gift.'
     edit: 'Edit'
     delete: 'Delete'
+    updateSuccess: 'Gift key has been updated successfilly.'
   keys:
     add: 'Add Gift Key'
     settings: 'Settings'
@@ -66,3 +50,26 @@ pages:
       reset:
         title: 'Reset Gift Keys'
         content: 'Are you sure you want to reset your Gift Keys? This process cannot be undone.'
+
+widgets:
+  form:
+    aid:
+      hint: 'Application identifier'
+      validation:
+        empty: 'Please enter an application identifier.'
+        hex: 'Please use only hexadecimal characters.'
+        length: 'AID must be between 10 to 32 characters long.'
+    birthday:
+      hint: 'Birthday'
+      validation: 'Please enter a birthday.'
+    image:
+      add: 'Add image'
+      validation: 'Please select an image.'
+    name:
+      hint: 'Name'
+      validation: 'Please enter a name.'
+    password:
+      hint: 'Password'
+      validation:
+        empty: 'Please enter a password.'
+        length: 'Password must be at least 4 characters.'

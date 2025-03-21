@@ -30,6 +30,15 @@ final class KeyMetasAddOnSuccess extends KeyMetasLoadOnSuccess {
   List<Object?> get props => [index, ...super.props];
 }
 
+final class KeyMetasUpdateOnSuccess extends KeyMetasLoadOnSuccess {
+  const KeyMetasUpdateOnSuccess(this.index, super.metas);
+
+  final int index;
+
+  @override
+  List<Object?> get props => [index, ...super.props];
+}
+
 final class KeyMetasDeleteOnSuccess extends KeyMetasLoadOnSuccess {
   const KeyMetasDeleteOnSuccess(super.metas);
 }

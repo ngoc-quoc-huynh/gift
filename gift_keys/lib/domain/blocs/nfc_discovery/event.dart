@@ -6,9 +6,23 @@ sealed class NfcDiscoveryEvent {
 }
 
 final class NfcDiscoveryInitializeEvent extends NfcDiscoveryEvent {
-  const NfcDiscoveryInitializeEvent();
+  const NfcDiscoveryInitializeEvent({
+    required this.aid,
+    required this.password,
+  });
+
+  final String aid;
+  final String password;
 }
 
 final class NfcDiscoverySendCommandEvent extends NfcDiscoveryEvent {
   const NfcDiscoverySendCommandEvent();
+}
+
+final class NfcDiscoveryPauseEvent extends NfcDiscoveryEvent {
+  const NfcDiscoveryPauseEvent();
+}
+
+final class NfcDiscoveryResumeEvent extends NfcDiscoveryEvent {
+  const NfcDiscoveryResumeEvent();
 }
