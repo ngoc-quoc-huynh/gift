@@ -19,39 +19,19 @@ void main() {
 
   group('logInfo', () {
     test('returns correctly.', () {
-      final stackTrace = StackTrace.fromString('');
-      when(
-        () =>
-            loggerApi.logInfo('methodName', 'message', stackTrace: stackTrace),
-      ).thenReturn(null);
-      testClass.logInfo('methodName', 'message', stackTrace: stackTrace);
+      when(() => loggerApi.logInfo('message')).thenReturn(null);
+      testClass.logInfo('message');
 
-      verify(
-        () =>
-            loggerApi.logInfo('methodName', 'message', stackTrace: stackTrace),
-      ).called(1);
+      verify(() => loggerApi.logInfo('message')).called(1);
     });
   });
 
   group('logWarning', () {
     test('returns correctly.', () {
-      final stackTrace = StackTrace.fromString('');
-      when(
-        () => loggerApi.logWarning(
-          'methodName',
-          'message',
-          stackTrace: stackTrace,
-        ),
-      ).thenReturn(null);
-      testClass.logWarning('methodName', 'message', stackTrace: stackTrace);
+      when(() => loggerApi.logWarning('message')).thenReturn(null);
+      testClass.logWarning('message');
 
-      verify(
-        () => loggerApi.logWarning(
-          'methodName',
-          'message',
-          stackTrace: stackTrace,
-        ),
-      ).called(1);
+      verify(() => loggerApi.logWarning('message')).called(1);
     });
   });
 
@@ -60,20 +40,20 @@ void main() {
       final stackTrace = StackTrace.fromString('');
       when(
         () => loggerApi.logException(
-          'methodName',
+          'message',
           exception: const UnknownException(),
           stackTrace: stackTrace,
         ),
       ).thenReturn(null);
       testClass.logException(
-        'methodName',
+        'message',
         exception: const UnknownException(),
         stackTrace: stackTrace,
       );
 
       verify(
         () => loggerApi.logException(
-          'methodName',
+          'message',
           exception: const UnknownException(),
           stackTrace: stackTrace,
         ),

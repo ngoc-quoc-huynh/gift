@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:gift_keys/domain/interfaces/logger.dart';
 import 'package:gift_keys/injector.dart';
@@ -9,47 +7,17 @@ final class LoggerRepository implements LoggerApi {
   const LoggerRepository();
 
   static final _logger = Injector.instance.logger;
-  static const _encoder = JsonEncoder.withIndent('  ');
 
   @override
   void logException(
-    String methodName, {
+    String message, {
     required Exception exception,
-    required StackTrace stackTrace,
-    Map<String, dynamic>? parameters,
-  }) => _logger.e(
-    _buildMessage(methodName, parameters: parameters),
-    error: exception,
-    stackTrace: stackTrace,
-  );
+    StackTrace? stackTrace,
+  }) => _logger.e(message, error: exception, stackTrace: stackTrace);
 
   @override
-  void logInfo(
-    String methodName,
-    String message, {
-    required StackTrace stackTrace,
-    Map<String, dynamic>? parameters,
-  }) => _logger.i(
-    _buildMessage(methodName, message: message, parameters: parameters),
-    stackTrace: stackTrace,
-  );
+  void logInfo(String message) => _logger.i(message);
 
   @override
-  void logWarning(
-    String methodName,
-    String message, {
-    required StackTrace stackTrace,
-    Map<String, dynamic>? parameters,
-  }) => _logger.w(
-    _buildMessage(methodName, message: message, parameters: parameters),
-    stackTrace: stackTrace,
-  );
-
-  String _buildMessage(
-    String methodName, {
-    String? message,
-    Map<String, dynamic>? parameters,
-  }) => '''
-$methodName
-${_encoder.convert({if (parameters != null) 'parameters': parameters, if (message != null) 'message': message})}''';
+  void logWarning(String message) => _logger.w(message);
 }
