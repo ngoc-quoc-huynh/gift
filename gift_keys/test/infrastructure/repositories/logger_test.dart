@@ -1,8 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_keys/domain/exceptions/base.dart';
 import 'package:gift_keys/infrastructure/repositories/logger.dart';
-import 'package:gift_keys/injector.dart';
-import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../mocks.dart';
@@ -11,11 +9,7 @@ import '../../mocks.dart';
 
 void main() {
   final logger = MockLogger();
-  const repository = LoggerRepository();
-
-  setUpAll(() => Injector.instance.registerSingleton<Logger>(logger));
-
-  tearDownAll(() async => Injector.instance.unregister<Logger>());
+  final repository = LoggerRepository(logger);
 
   group('logException', () {
     test('returns correctly.', () {
