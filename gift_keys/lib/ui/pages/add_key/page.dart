@@ -10,7 +10,8 @@ class AddKeyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FormFieldPage(
-      title: Injector.instance.translations.pages.addKey.appBar,
+      title: _translations.appBar,
+      buttonTitle: _translations.create,
       onSubmitted:
           (imagePath, name, birthday, aid, password) =>
               context.read<KeyMetasBloc>().add(
@@ -24,4 +25,7 @@ class AddKeyPage extends StatelessWidget {
               ),
     );
   }
+
+  static TranslationsPagesAddKeyEn get _translations =>
+      Injector.instance.translations.pages.addKey;
 }

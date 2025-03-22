@@ -23,12 +23,14 @@ typedef FormFieldSubmitCallback =
 class FormFieldPage extends StatelessWidget {
   const FormFieldPage({
     required this.title,
+    required this.buttonTitle,
     required this.onSubmitted,
     this.giftKey,
     super.key,
   });
 
   final String title;
+  final String buttonTitle;
   final GiftKey? giftKey;
   final FormFieldSubmitCallback onSubmitted;
 
@@ -47,7 +49,12 @@ class FormFieldPage extends StatelessWidget {
                 create: (_) => FileValueCubit(_loadInitialImage()),
               ),
             ],
-            child: _Body(giftKey: giftKey, onSubmitted: onSubmitted),
+            child: _Body(
+              buttonTitle: buttonTitle,
+
+              giftKey: giftKey,
+              onSubmitted: onSubmitted,
+            ),
           ),
         ),
       ),
@@ -61,8 +68,14 @@ class FormFieldPage extends StatelessWidget {
 }
 
 class _Body extends StatefulWidget {
-  const _Body({required this.giftKey, required this.onSubmitted});
+  const _Body({
+    required this.buttonTitle,
 
+    required this.giftKey,
+    required this.onSubmitted,
+  });
+
+  final String buttonTitle;
   final GiftKey? giftKey;
   final FormFieldSubmitCallback onSubmitted;
 
@@ -139,7 +152,7 @@ class _BodyState extends State<_Body> {
         const SizedBox(height: 20),
         FilledButton(
           onPressed: () => _onSubmitted(context),
-          child: Text(Injector.instance.translations.pages.editKey.update),
+          child: Text(widget.buttonTitle),
         ),
       ],
     );

@@ -16,8 +16,9 @@ class EditKeyPage extends StatelessWidget {
     return PopScope<bool>(
       onPopInvokedWithResult: (_, result) => _onPopInvoked(context, result),
       child: FormFieldPage(
+        title: _translations.appBar,
+        buttonTitle: _translations.update,
         giftKey: giftKey,
-        title: Injector.instance.translations.pages.editKey.appBar,
         onSubmitted:
             (imagePath, name, birthday, aid, password) =>
                 context.read<KeyMetasBloc>().add(
@@ -39,4 +40,7 @@ class EditKeyPage extends StatelessWidget {
       context.read<NfcDiscoveryBloc>().add(const NfcDiscoveryResumeEvent());
     }
   }
+
+  static TranslationsPagesEditKeyEn get _translations =>
+      Injector.instance.translations.pages.editKey;
 }
