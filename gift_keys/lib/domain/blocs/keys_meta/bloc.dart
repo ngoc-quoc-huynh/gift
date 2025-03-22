@@ -5,6 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_keys/domain/exceptions/local_database.dart';
 import 'package:gift_keys/domain/models/key_meta.dart';
 import 'package:gift_keys/injector.dart';
 
@@ -31,8 +32,12 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     Emitter<KeyMetasState> emit,
   ) async {
     await _localDatabaseApi.initialize();
-    final metas = await _localDatabaseApi.loadKeyMetas();
-    emit(KeyMetasLoadOnSuccess(metas.sorted(_compareGiftKeyMetas)));
+    try {
+      final metas = await _localDatabaseApi.loadKeyMetas();
+      emit(KeyMetasLoadOnSuccess(metas.sorted(_compareGiftKeyMetas)));
+    } on LocalDatabaseException {
+      emit(const KeyMetasLoadOnFailure());
+    }
   }
 
   Future<void> _onKeyMetasAddEvent(

@@ -22,6 +22,9 @@ pages:
     add: 'Schlüssel hinzufügen'
     settings: 'Einstellungen'
     deleteSuccess: 'Schlüssel wurde erfolgreich gelöscht.'
+    error:
+      button: 'Issue erstellen'
+      load: 'Schlüsseln konnten nicht geladen werden. Bitte erstelle ein Issue auf GitHub.'
   settings:
     appBar: 'Einstellungen'
     cache: 'Cache löschen'

@@ -86,7 +86,7 @@ class KeyPage extends StatelessWidget {
         KeyMetasUpdateOnSuccess() => context.read<KeyBloc>().add(
           const KeyInitializeEvent(),
         ),
-        KeyMetasInitial() || KeyMetasOperationState() => null,
+        _ => null,
       };
 
   void _onKeyStateChanged(

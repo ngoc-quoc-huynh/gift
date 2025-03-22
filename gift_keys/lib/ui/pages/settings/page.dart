@@ -111,7 +111,7 @@ class SettingsPage extends StatelessWidget {
           context,
           _translations.resetUpdate,
         ),
-        KeyMetasInitial() || KeyMetasLoadInProgress() => null,
+        _ => null,
       };
 
   static TranslationsPagesSettingsEn get _translations =>

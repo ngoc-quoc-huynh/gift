@@ -22,6 +22,9 @@ pages:
     add: 'Add Gift Key'
     settings: 'Settings'
     deleteSuccess: 'Gift key has been deleted successfully.'
+    error:
+      button: 'Create issue'
+      load: 'Failed to load gift keys. Please create an issue on GitHub.'
   settings:
     appBar: 'Settings'
     cache: 'Delete cache'

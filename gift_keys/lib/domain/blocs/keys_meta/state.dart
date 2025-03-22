@@ -12,6 +12,10 @@ final class KeyMetasInitial extends KeyMetasState {
   const KeyMetasInitial();
 }
 
+final class KeyMetasLoadOnFailure extends KeyMetasState {
+  const KeyMetasLoadOnFailure();
+}
+
 sealed class KeyMetasOperationState extends KeyMetasState {
   const KeyMetasOperationState(this.metas);
 
