@@ -4,11 +4,9 @@ import 'package:logger/logger.dart';
 
 @immutable
 final class LoggerRepository implements LoggerApi {
-  const LoggerRepository();
+  const LoggerRepository(this._logger);
 
-  static final _logger = Logger(
-    printer: PrettyPrinter(stackTraceBeginIndex: 2, methodCount: 4),
-  );
+  final Logger _logger;
 
   @override
   void logException(

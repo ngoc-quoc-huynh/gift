@@ -11,9 +11,7 @@ import '../../mocks.dart';
 
 void main() {
   final logger = MockLogger();
-  const repository = LoggerRepository();
-
-  setUpAll(() => Injector.instance.registerSingleton<Logger>(logger));
+  final repository = LoggerRepository(logger);
 
   tearDownAll(() async => Injector.instance.unregister<Logger>());
 
