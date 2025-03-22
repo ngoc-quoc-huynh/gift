@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 
-sealed class ImagePickerAvatar extends StatelessWidget {
+sealed class ImagePickerAvatar extends StatefulWidget {
   const ImagePickerAvatar({required this.onImagePicked, super.key});
 
   const factory ImagePickerAvatar.selected({
@@ -55,18 +55,49 @@ class _Selected extends ImagePickerAvatar {
   final File file;
 
   @override
+  State<StatefulWidget> createState() => _SelectedState();
+}
+
+class _SelectedState extends State<_Selected> {
+  late ImageProvider _imageProvider;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _imageProvider = ResizeImage(
+      FileImage(widget.file),
+      width: _computeImageWidth(context),
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant _Selected oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    unawaited(_imageProvider.evict());
+    _imageProvider = ResizeImage(
+      FileImage(widget.file),
+      width: _computeImageWidth(context),
+    );
+  }
+
+  @override
+  void dispose() {
+    unawaited(_imageProvider.evict());
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: ImagePickerAvatar.radius,
-      backgroundImage: ResizeImage(
-        FileImage(file),
-        width: _computeImageWidth(context),
-      ),
+      backgroundImage: _imageProvider,
       child: Material(
         shape: const CircleBorder(),
         color: Colors.transparent,
         clipBehavior: Clip.hardEdge,
-        child: InkWell(onTap: () => unawaited(onTap(context.screenSize.width))),
+        child: InkWell(
+          onTap: () => unawaited(widget.onTap(context.screenSize.width)),
+        ),
       ),
     );
   }
@@ -80,6 +111,11 @@ class _Selected extends ImagePickerAvatar {
 class _Empty extends ImagePickerAvatar {
   const _Empty({required super.onImagePicked, super.key});
 
+  @override
+  State<StatefulWidget> createState() => _EmptyState();
+}
+
+class _EmptyState extends State<_Empty> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -97,7 +133,7 @@ class _Empty extends ImagePickerAvatar {
             width: ImagePickerAvatar.radius * 2,
             height: ImagePickerAvatar.radius * 2,
             child: InkWell(
-              onTap: () => unawaited(onTap(context.screenSize.width)),
+              onTap: () => unawaited(widget.onTap(context.screenSize.width)),
             ),
           ),
         ),

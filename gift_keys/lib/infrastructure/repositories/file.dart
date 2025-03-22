@@ -16,6 +16,7 @@ final class FileRepository implements FileApi {
   static final _fileSystem = Injector.instance.fileSystem;
   static final _imagesDir = _fileSystem.directory(join(_appDir.path, 'images'));
   static final _tmpDir = Injector.instance.tmpDir;
+  static final _compressedPath = join(_tmpDir.path, 'compressed.webp');
 
   @override
   Future<File?> pickImageFromGallery() async {
@@ -31,7 +32,7 @@ final class FileRepository implements FileApi {
   Future<File?> compressImage(String path, int minWidth) async {
     final result = await FlutterImageCompress.compressAndGetFile(
       path,
-      _buildCompressedImagePath(path),
+      _compressedPath,
       format: CompressFormat.webp,
       minWidth: minWidth,
       quality: 85,
@@ -60,9 +61,6 @@ final class FileRepository implements FileApi {
   @override
   Future<void> precacheImages(BuildContext context, List<int> ids) =>
       Future.wait(ids.map((id) => precacheImage(context, id)));
-
-  String _buildCompressedImagePath(String path) =>
-      join(dirname(path), '${basenameWithoutExtension(path)}_compressed.webp');
 
   @override
   Future<void> deleteAllImages() async {
