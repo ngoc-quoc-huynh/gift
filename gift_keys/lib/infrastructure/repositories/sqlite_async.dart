@@ -3,13 +3,14 @@ import 'package:gift_keys/domain/models/date_time_format.dart';
 import 'package:gift_keys/domain/models/key.dart' as domain;
 import 'package:gift_keys/domain/models/key_meta.dart' as domain;
 import 'package:gift_keys/domain/utils/extensions/date_time.dart';
+import 'package:gift_keys/domain/utils/mixins/logger.dart';
 import 'package:gift_keys/infrastructure/dtos/sqlite_async/key.dart';
 import 'package:gift_keys/infrastructure/dtos/sqlite_async/key_meta.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:path/path.dart';
 import 'package:sqlite_async/sqlite_async.dart';
 
-final class SqliteAsyncRepository implements LocalDatabaseApi {
+final class SqliteAsyncRepository with LoggerMixin implements LocalDatabaseApi {
   final _db = SqliteDatabase(
     path: join(Injector.instance.appDir.path, 'app.db'),
   );
@@ -22,6 +23,7 @@ final class SqliteAsyncRepository implements LocalDatabaseApi {
           ..createDatabase = _createDatabaseMigration
           ..add(_createDatabaseMigration);
     await migrations.migrate(_db);
+    logInfo('SQLite database initialized.');
   }
 
   @override
@@ -34,7 +36,11 @@ FROM $_tableName
 ORDER BY birthday ASC;
     ''');
 
-    return result.map((json) => GiftKeyMeta.fromJson(json).toDomain()).toList();
+    final metas =
+        result.map((json) => GiftKeyMeta.fromJson(json).toDomain()).toList();
+    logInfo('Loaded ${metas.length} key metas.');
+
+    return metas;
   }
 
   @override
@@ -52,7 +58,10 @@ WHERE id = ?;
       [id],
     );
 
-    return GiftKey.fromJson(json).toDomain();
+    final key = GiftKey.fromJson(json).toDomain();
+    logInfo('Loaded key: $key');
+
+    return key;
   }
 
   @override
@@ -79,23 +88,34 @@ RETURNING
       [name, birthday.format(DateTimeFormat.dashSeparated), aid, password],
     );
 
-    return GiftKeyMeta.fromJson(result.first).toDomain();
+    final meta = GiftKeyMeta.fromJson(result.first).toDomain();
+    logInfo('Saved key meta: $meta');
+
+    return meta;
   }
 
   @override
-  Future<void> deleteKeys() => _db.execute('''
-DELETE FROM $_tableName;
-DELETE FROM sqlite_sequence WHERE name = $_tableName;
-''');
+  Future<void> deleteKeys() async {
+    await _db.execute('''
+  DELETE FROM $_tableName;
+  DELETE FROM sqlite_sequence WHERE name = $_tableName;
+  ''');
+
+    logInfo('Deleted all keys.');
+  }
 
   @override
-  Future<void> deleteKey(int id) => _db.execute(
-    '''
-DELETE FROM $_tableName
-WHERE id = ?;
-''',
-    [id],
-  );
+  Future<void> deleteKey(int id) async {
+    await _db.execute(
+      '''
+  DELETE FROM $_tableName
+  WHERE id = ?;
+  ''',
+      [id],
+    );
+
+    logInfo('Deleted key: $id');
+  }
 
   @override
   Future<domain.GiftKeyMeta> updateKey({
@@ -123,7 +143,10 @@ RETURNING
       [name, birthday.format(DateTimeFormat.dashSeparated), aid, password, id],
     );
 
-    return GiftKeyMeta.fromJson(result.first).toDomain();
+    final meta = GiftKeyMeta.fromJson(result.first).toDomain();
+    logInfo('Updated key meta: $meta');
+
+    return meta;
   }
 
   static const _tableName = 'key';
