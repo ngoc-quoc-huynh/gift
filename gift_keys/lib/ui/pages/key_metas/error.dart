@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
@@ -26,8 +28,10 @@ class KeyMetasErrorView extends StatelessWidget {
             ),
             FilledButton(
               onPressed:
-                  () => Injector.instance.nativeApi.launchUri(
-                    Config.githubIssueUri,
+                  () => unawaited(
+                    Injector.instance.nativeApi.launchUri(
+                      Config.githubIssueUri,
+                    ),
                   ),
               child: Text(_translations.button),
             ),
