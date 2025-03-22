@@ -6,7 +6,9 @@ import 'package:logger/logger.dart';
 final class LoggerRepository implements LoggerApi {
   const LoggerRepository();
 
-  static final _logger = Logger();
+  static final _logger = Logger(
+    printer: PrettyPrinter(stackTraceBeginIndex: 2, methodCount: 4),
+  );
 
   @override
   void logException(
