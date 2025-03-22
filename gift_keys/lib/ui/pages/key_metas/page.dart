@@ -22,8 +22,8 @@ class KeyMetasPage extends StatelessWidget {
       body: BlocBuilder<KeyMetasBloc, KeyMetasState>(
         builder:
             (context, state) => switch (state) {
-              KeyMetasLoadInProgress() => const LoadingIndicator(),
-              KeyMetasLoadOnSuccess(metas: final metas) => _Body(metas),
+              KeyMetasInitial() => const LoadingIndicator(),
+              KeyMetasOperationState(metas: final metas) => _Body(metas),
             },
       ),
     );

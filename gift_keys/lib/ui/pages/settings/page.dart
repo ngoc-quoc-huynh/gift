@@ -107,11 +107,11 @@ class SettingsPage extends StatelessWidget {
 
   void _onKeysStateChanged(BuildContext context, KeyMetasState state) =>
       switch (state) {
-        KeyMetasLoadInProgress() => null,
         KeyMetasLoadOnSuccess() => CustomSnackBar.showSuccess(
           context,
           _translations.resetUpdate,
         ),
+        KeyMetasInitial() || KeyMetasLoadInProgress() => null,
       };
 
   static TranslationsPagesSettingsEn get _translations =>

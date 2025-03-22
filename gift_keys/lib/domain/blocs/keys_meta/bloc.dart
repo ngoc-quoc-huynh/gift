@@ -12,7 +12,7 @@ part 'event.dart';
 part 'state.dart';
 
 final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
-  KeyMetasBloc() : super(const KeyMetasLoadInProgress()) {
+  KeyMetasBloc() : super(const KeyMetasInitial()) {
     on<KeyMetasInitializeEvent>(
       _onKeyMetasInitializeEvent,
       transformer: droppable(),
@@ -40,7 +40,7 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     Emitter<KeyMetasState> emit,
   ) async {
     if (state case KeyMetasLoadOnSuccess(metas: final metas)) {
-      emit(const KeyMetasLoadInProgress());
+      emit(KeyMetasLoadInProgress(metas));
 
       final newMeta = await _localDatabaseApi.saveKey(
         name: event.name,
@@ -61,7 +61,7 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     KeyMetasResetEvent event,
     Emitter<KeyMetasState> emit,
   ) async {
-    emit(const KeyMetasLoadInProgress());
+    emit(const KeyMetasInitial());
     await Future.wait([
       _fileApi.deleteAllImages(),
       _localDatabaseApi.deleteKeys(),
@@ -74,7 +74,7 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     Emitter<KeyMetasState> emit,
   ) async {
     if (state case KeyMetasLoadOnSuccess(metas: final metas)) {
-      emit(const KeyMetasLoadInProgress());
+      emit(KeyMetasLoadInProgress(metas));
 
       final id = event.id;
       emit(
@@ -95,7 +95,7 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     Emitter<KeyMetasState> emit,
   ) async {
     if (state case KeyMetasLoadOnSuccess(metas: final metas)) {
-      emit(const KeyMetasLoadInProgress());
+      emit(KeyMetasLoadInProgress(metas));
 
       final id = event.id;
       final [_, newMeta] = await Future.wait([
