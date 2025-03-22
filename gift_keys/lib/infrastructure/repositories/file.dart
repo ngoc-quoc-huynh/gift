@@ -4,11 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart' as widget;
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:gift_keys/domain/interfaces/file.dart';
+import 'package:gift_keys/domain/utils/mixins/logger.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
-final class FileRepository implements FileApi {
+final class FileRepository with LoggerMixin implements FileApi {
   const FileRepository();
 
   static final _instance = ImagePicker();
@@ -20,52 +21,74 @@ final class FileRepository implements FileApi {
 
   @override
   Future<File?> pickImageFromGallery() async {
-    final result = await _instance.pickImage(source: ImageSource.gallery);
-
-    return switch (result) {
+    final pickedFile = await _instance.pickImage(source: ImageSource.gallery);
+    final result = switch (pickedFile) {
       null => null,
       XFile(:final path) => _fileSystem.file(path),
     };
+    logInfo('Picked image from gallery: ${result?.path}');
+
+    return result;
   }
 
   @override
   Future<File?> compressImage(String path, int minWidth) async {
-    final result = await FlutterImageCompress.compressAndGetFile(
+    final compressedImage = await FlutterImageCompress.compressAndGetFile(
       path,
       _compressedPath,
       format: CompressFormat.webp,
       minWidth: minWidth,
       quality: 85,
     );
-
-    return switch (result) {
+    final result = switch (compressedImage) {
       null => null,
       XFile(:final path) => _fileSystem.file(path),
     };
+    logInfo('Compressed image: ${result?.path}');
+
+    return result;
   }
 
   @override
-  Future<File> moveFileToAppDir(String sourcePath, int id) {
+  Future<File> moveFileToAppDir(String sourcePath, int id) async {
     final file = loadImage(id)..createSync(recursive: true);
+    await _fileSystem.file(sourcePath).rename(file.path);
+    logInfo('Moved file to app dir: ${file.path}');
 
-    return _fileSystem.file(sourcePath).rename(file.path);
+    return file;
   }
 
   @override
-  File loadImage(int id) => _fileSystem.file(join(_imagesDir.path, '$id.webp'));
+  File loadImage(int id) {
+    final path = join(_imagesDir.path, '$id.webp');
+    logInfo('Loading image: $path');
+
+    return _fileSystem.file(path);
+  }
 
   @override
-  Future<void> precacheImage(BuildContext context, int id) =>
-      widget.precacheImage(FileImage(loadImage(id)), context);
+  Future<void> precacheImage(BuildContext context, int id) async {
+    final image = loadImage(id);
+    await widget.precacheImage(FileImage(image), context);
+
+    logInfo('Precached image: ${image.path}');
+  }
 
   @override
-  Future<void> precacheImages(BuildContext context, List<int> ids) =>
-      Future.wait(ids.map((id) => precacheImage(context, id)));
+  Future<void> precacheImages(BuildContext context, List<int> ids) async {
+    await Future.wait(ids.map((id) => precacheImage(context, id)));
+
+    logInfo('Precached images: $ids');
+  }
 
   @override
   Future<void> deleteAllImages() async {
     if (_imagesDir.existsSync()) {
       await _imagesDir.delete(recursive: true);
+
+      logInfo('Deleted all images.');
+    } else {
+      logWarning('No image directory found, skipping deletion.');
     }
   }
 
@@ -75,6 +98,9 @@ final class FileRepository implements FileApi {
 
     if (file.existsSync()) {
       await file.delete();
+      logInfo('Deleting image: ${file.path}');
+    } else {
+      logWarning('Image: ${file.path} not found, skipping deletion.');
     }
   }
 
@@ -83,6 +109,9 @@ final class FileRepository implements FileApi {
     widget.imageCache.clear();
     if (_tmpDir.existsSync()) {
       await _tmpDir.delete(recursive: true);
+      logInfo('Clearing cache.');
+    } else {
+      logWarning('Temporary directory not found, skipping deletion.');
     }
   }
 }
