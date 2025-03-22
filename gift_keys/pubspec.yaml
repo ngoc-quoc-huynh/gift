@@ -35,6 +35,7 @@ dependencies:
   # Utils
   collection: ^1.19.1
   equatable: ^2.0.5
+  file: ^7.0.1
   flutter_image_compress: ^2.4.0
   image_picker: ^1.1.2
   get_it: ^8.0.0

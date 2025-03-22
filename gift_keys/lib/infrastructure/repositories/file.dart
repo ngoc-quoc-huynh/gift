@@ -13,7 +13,8 @@ final class FileRepository implements FileApi {
 
   static final _instance = ImagePicker();
   static final _appDir = Injector.instance.appDir;
-  static final _imagesPath = join(_appDir.path, 'images');
+  static final _fileSystem = Injector.instance.fileSystem;
+  static final _imagesDir = _fileSystem.directory(join(_appDir.path, 'images'));
   static final _tmpDir = Injector.instance.tmpDir;
 
   @override
@@ -22,7 +23,7 @@ final class FileRepository implements FileApi {
 
     return switch (result) {
       null => null,
-      XFile(:final path) => File(path),
+      XFile(:final path) => _fileSystem.file(path),
     };
   }
 
@@ -38,7 +39,7 @@ final class FileRepository implements FileApi {
 
     return switch (result) {
       null => null,
-      XFile(:final path) => File(path),
+      XFile(:final path) => _fileSystem.file(path),
     };
   }
 
@@ -46,11 +47,11 @@ final class FileRepository implements FileApi {
   Future<File> moveFileToAppDir(String sourcePath, int id) {
     final file = loadImage(id)..createSync(recursive: true);
 
-    return File(sourcePath).rename(file.path);
+    return _fileSystem.file(sourcePath).rename(file.path);
   }
 
   @override
-  File loadImage(int id) => File(join(_imagesPath, '$id.webp'));
+  File loadImage(int id) => _fileSystem.file(join(_imagesDir.path, '$id.webp'));
 
   @override
   Future<void> precacheImage(BuildContext context, int id) =>
@@ -65,10 +66,8 @@ final class FileRepository implements FileApi {
 
   @override
   Future<void> deleteAllImages() async {
-    final dir = Directory(_imagesPath);
-
-    if (dir.existsSync()) {
-      await dir.delete(recursive: true);
+    if (_imagesDir.existsSync()) {
+      await _imagesDir.delete(recursive: true);
     }
   }
 

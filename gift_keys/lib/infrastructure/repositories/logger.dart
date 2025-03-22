@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:gift_keys/domain/interfaces/logger.dart';
-import 'package:gift_keys/injector.dart';
+import 'package:logger/logger.dart';
 
 @immutable
 final class LoggerRepository implements LoggerApi {
   const LoggerRepository();
 
-  static final _logger = Injector.instance.logger;
+  static final _logger = Logger();
 
   @override
   void logException(

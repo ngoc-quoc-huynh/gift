@@ -1,5 +1,7 @@
-import 'dart:io';
+import 'dart:io' show Platform;
 
+import 'package:file/file.dart';
+import 'package:file/local.dart';
 import 'package:get_it/get_it.dart';
 import 'package:gift_keys/domain/interfaces/file.dart';
 import 'package:gift_keys/domain/interfaces/local_database.dart';
@@ -12,7 +14,6 @@ import 'package:gift_keys/infrastructure/repositories/nfc.dart';
 import 'package:gift_keys/infrastructure/repositories/sqlite_async.dart';
 import 'package:gift_keys/static/i18n/translations.g.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
-import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -25,18 +26,25 @@ final class Injector {
   static final GetIt instance = GetIt.instance;
 
   static Future<void> setupDependencies() async {
+    final (appDir, tmpDir) =
+        await (
+          getApplicationDocumentsDirectory(),
+          getTemporaryDirectory(),
+        ).wait;
+    const fileSystem = LocalFileSystem();
+
     instance
-      ..registerSingletonAsync<Directory>(
-        getApplicationDocumentsDirectory,
+      ..registerSingleton<Directory>(
+        fileSystem.directory(appDir.path),
         instanceName: 'appDir',
       )
-      ..registerSingletonAsync<Directory>(
-        getTemporaryDirectory,
+      ..registerSingleton<Directory>(
+        fileSystem.directory(tmpDir.path),
         instanceName: 'tmpDir',
       )
       ..registerLazySingleton<FileApi>(FileRepository.new)
+      ..registerSingleton<FileSystem>(fileSystem)
       ..registerLazySingleton<LocalDatabaseApi>(SqliteAsyncRepository.new)
-      ..registerLazySingleton<Logger>(Logger.new)
       ..registerLazySingleton<LoggerApi>(LoggerRepository.new)
       ..registerLazySingleton<NfcApi>(NfcRepository.new)
       ..registerSingletonAsync<PackageInfo>(PackageInfo.fromPlatform)
