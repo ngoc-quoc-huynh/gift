@@ -45,6 +45,9 @@ class _BodyState extends State<_Body> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => _onKeysStateChanged(context, context.read<KeyMetasBloc>().state),
+    );
     _controller = CarouselController(
       initialItem: switch (widget.metas.isEmpty) {
         true => 0,
