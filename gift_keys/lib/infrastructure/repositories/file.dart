@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart' as widget;
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:gift_keys/domain/interfaces/file.dart';
@@ -21,32 +22,52 @@ final class FileRepository with LoggerMixin implements FileApi {
 
   @override
   Future<File?> pickImageFromGallery() async {
-    final pickedFile = await _instance.pickImage(source: ImageSource.gallery);
-    final result = switch (pickedFile) {
-      null => null,
-      XFile(:final path) => _fileSystem.file(path),
-    };
-    logInfo('Picked image from gallery: ${result?.path}');
+    try {
+      final pickedFile = await _instance.pickImage(source: ImageSource.gallery);
+      final result = switch (pickedFile) {
+        null => null,
+        XFile(:final path) => _fileSystem.file(path),
+      };
+      logInfo('Picked image from gallery: ${result?.path}');
 
-    return result;
+      return result;
+    } on PlatformException catch (e, stackTrace) {
+      logException(
+        'Could not pick image from gallery.',
+        exception: e,
+        stackTrace: stackTrace,
+      );
+
+      return null;
+    }
   }
 
   @override
   Future<File?> compressImage(String path, int minWidth) async {
-    final compressedImage = await FlutterImageCompress.compressAndGetFile(
-      path,
-      _compressedPath,
-      format: CompressFormat.webp,
-      minWidth: minWidth,
-      quality: 85,
-    );
-    final result = switch (compressedImage) {
-      null => null,
-      XFile(:final path) => _fileSystem.file(path),
-    };
-    logInfo('Compressed image: ${result?.path}');
+    try {
+      final compressedImage = await FlutterImageCompress.compressAndGetFile(
+        path,
+        _compressedPath,
+        format: CompressFormat.webp,
+        minWidth: minWidth,
+        quality: 85,
+      );
+      final result = switch (compressedImage) {
+        null => null,
+        XFile(:final path) => _fileSystem.file(path),
+      };
+      logInfo('Compressed image: ${result?.path}');
 
-    return result;
+      return result;
+    } on PlatformException catch (e, stackTrace) {
+      logException(
+        'Could not compress image.',
+        exception: e,
+        stackTrace: stackTrace,
+      );
+
+      return null;
+    }
   }
 
   @override
