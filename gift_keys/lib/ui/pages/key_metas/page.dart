@@ -8,6 +8,7 @@ import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/pages/key_metas/add_button.dart';
+import 'package:gift_keys/ui/pages/key_metas/error.dart';
 import 'package:gift_keys/ui/pages/key_metas/item/item.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/loading_indicator.dart';
@@ -24,6 +25,7 @@ class KeyMetasPage extends StatelessWidget {
             (context, state) => switch (state) {
               KeyMetasInitial() => const LoadingIndicator(),
               KeyMetasOperationState(metas: final metas) => _Body(metas),
+              KeyMetasLoadOnFailure() => const KeyMetasErrorView(),
             },
       ),
     );

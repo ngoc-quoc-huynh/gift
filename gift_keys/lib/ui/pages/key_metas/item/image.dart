@@ -55,6 +55,6 @@ class _KeyMetaImageBackgroundState extends State<KeyMetaImageBackground> {
         KeyMetasUpdateOnSuccess(:final index, :final metas)
             when metas[index].id == widget.id =>
           unawaited(_fileImage.evict()),
-        KeyMetasInitial() || KeyMetasOperationState() => null,
+        _ => null,
       };
 }
