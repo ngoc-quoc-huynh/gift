@@ -3,10 +3,11 @@ appName: 'Geschenk Schlüssel'
 general:
   cancel: 'Abbrechen'
   ok: 'OK'
+  error: 'Es ist etwas schief gelaufen. Bitte kontaktiere den Support, wenn das Problem weiterhin besteht.'
 
 pages:
   addKey:
-    appBar: 'Schlüssel hinzufügen'
+    appBar: 'Schlüssel erstellen'
     create: 'Erstellen'
   editKey:
     appBar: 'Schlüssel bearbeiten'
@@ -19,7 +20,7 @@ pages:
     delete: 'Löschen'
     updateSuccess: 'Geschenk Schlüssel wurde erfolgreich aktualisiert.'
   keys:
-    add: 'Schlüssel hinzufügen'
+    add: 'Schlüssel erstellen'
     settings: 'Einstellungen'
     deleteSuccess: 'Schlüssel wurde erfolgreich gelöscht.'
     error:

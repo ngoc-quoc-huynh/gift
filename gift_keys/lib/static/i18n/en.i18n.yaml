@@ -3,10 +3,11 @@ appName: 'Gift Keys'
 general:
   cancel: 'Cancel'
   ok: 'OK'
+  error: 'Something went wrong. Please contact support if the issue continues.'
 
 pages:
   addKey:
-    appBar: 'Add Gift Key'
+    appBar: 'Create Gift Key'
     create: 'Create'
   editKey:
     appBar: 'Edit Gift Key'
@@ -19,7 +20,7 @@ pages:
     delete: 'Delete'
     updateSuccess: 'Gift key has been updated successfilly.'
   keys:
-    add: 'Add Gift Key'
+    add: 'Create Gift Key'
     settings: 'Settings'
     deleteSuccess: 'Gift key has been deleted successfully.'
     error:

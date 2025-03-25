@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_keys/domain/blocs/key/bloc.dart';
+import 'package:gift_keys/domain/blocs/key_form/bloc.dart';
 import 'package:gift_keys/domain/blocs/keys_meta/bloc.dart';
 import 'package:gift_keys/domain/blocs/nfc_discovery/bloc.dart';
 import 'package:gift_keys/domain/models/key.dart';
 import 'package:gift_keys/injector.dart';
-import 'package:gift_keys/ui/widgets/form_field/page.dart';
+import 'package:gift_keys/ui/widgets/form_field/page/page.dart';
+import 'package:gift_keys/ui/widgets/snack_bar.dart';
+import 'package:go_router/go_router.dart';
 
 class EditKeyPage extends StatelessWidget {
   const EditKeyPage({required this.giftKey, super.key});
@@ -15,22 +19,31 @@ class EditKeyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return PopScope<bool>(
       onPopInvokedWithResult: (_, result) => _onPopInvoked(context, result),
-      child: FormFieldPage(
-        title: _translations.appBar,
-        buttonTitle: _translations.update,
-        giftKey: giftKey,
-        onSubmitted:
-            (imagePath, name, birthday, aid, password) =>
-                context.read<KeyMetasBloc>().add(
-                  KeyMetasUpdateEvent(
-                    id: giftKey.id,
-                    imagePath: imagePath,
-                    name: name,
-                    birthday: birthday,
-                    aid: aid,
-                    password: password,
-                  ),
+      child: BlocProvider<KeyFormBloc>(
+        create: (_) => KeyFormBloc(),
+        child: BlocListener<KeyFormBloc, KeyFormState>(
+          listener: _onKeyFormStateChanged,
+          child: Builder(
+            builder:
+                (context) => FormFieldPage(
+                  title: _translations.appBar,
+                  buttonTitle: _translations.update,
+                  giftKey: giftKey,
+                  onSubmitted:
+                      (imagePath, name, birthday, aid, password) =>
+                          context.read<KeyFormBloc>().add(
+                            KeyFormUpdateEvent(
+                              id: giftKey.id,
+                              imagePath: imagePath,
+                              name: name,
+                              birthday: birthday,
+                              aid: aid,
+                              password: password,
+                            ),
+                          ),
                 ),
+          ),
+        ),
       ),
     );
   }
@@ -40,6 +53,20 @@ class EditKeyPage extends StatelessWidget {
       context.read<NfcDiscoveryBloc>().add(const NfcDiscoveryResumeEvent());
     }
   }
+
+  void _onKeyFormStateChanged(BuildContext context, KeyFormState state) =>
+      switch (state) {
+        KeyFormLoadOnSuccess(:final meta) =>
+          context
+            ..read<KeyMetasBloc>().add(KeyMetasUpdateEvent(meta))
+            ..read<KeyBloc>().add(const KeyInitializeEvent())
+            ..pop(),
+        KeyFormLoadOnFailure() => CustomSnackBar.showError(
+          context,
+          Injector.instance.translations.general.error,
+        ),
+        _ => null,
+      };
 
   static TranslationsPagesEditKeyEn get _translations =>
       Injector.instance.translations.pages.editKey;

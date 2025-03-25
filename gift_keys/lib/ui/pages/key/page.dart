@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/key/bloc.dart';
-import 'package:gift_keys/domain/blocs/keys_meta/bloc.dart';
 import 'package:gift_keys/domain/blocs/nfc_discovery/bloc.dart';
 import 'package:gift_keys/domain/models/date_time_format.dart';
 import 'package:gift_keys/domain/models/key.dart';
@@ -24,13 +23,8 @@ class KeyPage extends StatelessWidget {
     final textTheme = context.textTheme;
     final primaryColor = context.colorScheme.primary;
 
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<KeyMetasBloc, KeyMetasState>(
-          listener: _onKeyMetasStateChanged,
-        ),
-        BlocListener<KeyBloc, KeyState>(listener: _onKeyStateChanged),
-      ],
+    return BlocListener<KeyBloc, KeyState>(
+      listener: _onKeyStateChanged,
       child: Scaffold(
         appBar: AppBar(
           leading: BackButton(onPressed: () => context.pop()),
@@ -80,14 +74,6 @@ class KeyPage extends StatelessWidget {
       ),
     );
   }
-
-  void _onKeyMetasStateChanged(BuildContext context, KeyMetasState state) =>
-      switch (state) {
-        KeyMetasUpdateOnSuccess() => context.read<KeyBloc>().add(
-          const KeyInitializeEvent(),
-        ),
-        _ => null,
-      };
 
   void _onKeyStateChanged(
     BuildContext context,

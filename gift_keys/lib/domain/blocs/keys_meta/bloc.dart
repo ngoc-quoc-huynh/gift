@@ -40,21 +40,12 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     }
   }
 
-  Future<void> _onKeyMetasAddEvent(
+  void _onKeyMetasAddEvent(
     KeyMetasAddEvent event,
     Emitter<KeyMetasState> emit,
-  ) async {
+  ) {
     if (state case KeyMetasLoadOnSuccess(metas: final metas)) {
-      emit(KeyMetasLoadInProgress(metas));
-
-      final newMeta = await _localDatabaseApi.saveKey(
-        name: event.name,
-        birthday: event.birthday,
-        aid: event.aid,
-        password: event.password,
-      );
-      await _fileApi.moveFileToAppDir(event.imagePath, newMeta.id);
-
+      final newMeta = event.meta;
       final insertIndex = metas.lowerBound(newMeta, _compareGiftKeyMetas);
       final newMetas = [...metas]..insert(insertIndex, newMeta);
 
@@ -95,29 +86,19 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     }
   }
 
-  Future<void> _onKeyMetasUpdateEvent(
+  void _onKeyMetasUpdateEvent(
     KeyMetasUpdateEvent event,
     Emitter<KeyMetasState> emit,
-  ) async {
+  ) {
     if (state case KeyMetasLoadOnSuccess(metas: final metas)) {
       emit(KeyMetasLoadInProgress(metas));
 
-      final id = event.id;
-      final [_, newMeta] = await Future.wait([
-        _fileApi.moveFileToAppDir(event.imagePath, id),
-        _localDatabaseApi.updateKey(
-          id: event.id,
-          name: event.name,
-          birthday: event.birthday,
-          aid: event.aid,
-          password: event.password,
-        ),
-      ]);
-      newMeta as GiftKeyMeta;
-
-      final newMetas = List.of(metas)..removeWhere((meta) => meta.id == id);
+      final newMeta = event.meta;
+      final newMetas = List.of(metas)
+        ..removeWhere((meta) => meta.id == newMeta.id);
       final insertIndex = newMetas.lowerBound(newMeta, _compareGiftKeyMetas);
       newMetas.insert(insertIndex, newMeta);
+
       emit(KeyMetasUpdateOnSuccess(insertIndex, newMetas));
     }
   }

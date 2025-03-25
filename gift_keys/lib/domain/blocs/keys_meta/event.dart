@@ -10,19 +10,9 @@ final class KeyMetasInitializeEvent extends KeyMetasEvent {
 }
 
 final class KeyMetasAddEvent extends KeyMetasEvent {
-  const KeyMetasAddEvent({
-    required this.imagePath,
-    required this.name,
-    required this.birthday,
-    required this.aid,
-    required this.password,
-  });
+  const KeyMetasAddEvent(this.meta);
 
-  final String imagePath;
-  final String name;
-  final DateTime birthday;
-  final String aid;
-  final String password;
+  final GiftKeyMeta meta;
 }
 
 final class KeyMetasResetEvent extends KeyMetasEvent {
@@ -36,19 +26,7 @@ final class KeyMetasDeleteEvent extends KeyMetasEvent {
 }
 
 final class KeyMetasUpdateEvent extends KeyMetasEvent {
-  const KeyMetasUpdateEvent({
-    required this.id,
-    required this.imagePath,
-    required this.name,
-    required this.birthday,
-    required this.aid,
-    required this.password,
-  });
+  const KeyMetasUpdateEvent(this.meta);
 
-  final int id;
-  final String imagePath;
-  final String name;
-  final DateTime birthday;
-  final String aid;
-  final String password;
+  final GiftKeyMeta meta;
 }
