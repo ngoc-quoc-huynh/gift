@@ -26,8 +26,8 @@ class EditKeyPage extends StatelessWidget {
           child: Builder(
             builder:
                 (context) => FormFieldPage(
-                  title: _translations.appBar,
-                  buttonTitle: _translations.update,
+                  title: _editKeyTranslations.appBar,
+                  buttonTitle: _editKeyTranslations.update,
                   giftKey: giftKey,
                   onSubmitted:
                       (imagePath, name, birthday, aid, password) =>
@@ -63,11 +63,13 @@ class EditKeyPage extends StatelessWidget {
             ..pop(),
         KeyFormLoadOnFailure() => CustomSnackBar.showError(
           context,
-          Injector.instance.translations.general.error,
+          _translations.general.error,
         ),
         _ => null,
       };
 
-  static TranslationsPagesEditKeyEn get _translations =>
-      Injector.instance.translations.pages.editKey;
+  static Translations get _translations => Injector.instance.translations;
+
+  static TranslationsPagesEditKeyEn get _editKeyTranslations =>
+      _translations.pages.editKey;
 }

@@ -19,6 +19,9 @@ pages:
     edit: 'Edit'
     delete: 'Delete'
     updateSuccess: 'Gift key has been updated successfilly.'
+    deleteDialog:
+      title: 'Delete Gift Key'
+      content: 'Are you sure to delete this gift key? This process cannot be undone.'
   keys:
     add: 'Create Gift Key'
     settings: 'Settings'

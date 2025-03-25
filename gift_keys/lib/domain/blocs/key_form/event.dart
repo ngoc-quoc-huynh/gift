@@ -2,7 +2,11 @@ part of 'bloc.dart';
 
 @immutable
 sealed class KeyFormEvent {
-  const KeyFormEvent({
+  const KeyFormEvent();
+}
+
+final class KeyFormAddEvent extends KeyFormEvent {
+  const KeyFormAddEvent({
     required this.imagePath,
     required this.name,
     required this.birthday,
@@ -17,25 +21,26 @@ sealed class KeyFormEvent {
   final String password;
 }
 
-final class KeyFormAddEvent extends KeyFormEvent {
-  const KeyFormAddEvent({
-    required super.imagePath,
-    required super.name,
-    required super.birthday,
-    required super.aid,
-    required super.password,
-  });
-}
-
 final class KeyFormUpdateEvent extends KeyFormEvent {
   const KeyFormUpdateEvent({
     required this.id,
-    required super.imagePath,
-    required super.name,
-    required super.birthday,
-    required super.aid,
-    required super.password,
+    required this.imagePath,
+    required this.name,
+    required this.birthday,
+    required this.aid,
+    required this.password,
   });
+
+  final int id;
+  final String imagePath;
+  final String name;
+  final DateTime birthday;
+  final String aid;
+  final String password;
+}
+
+final class KeyFormDeleteEvent extends KeyFormEvent {
+  const KeyFormDeleteEvent({required this.id});
 
   final int id;
 }

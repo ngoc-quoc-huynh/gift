@@ -1,11 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_keys/domain/blocs/keys_meta/bloc.dart';
 import 'package:gift_keys/domain/blocs/nfc_discovery/bloc.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
+import 'package:gift_keys/ui/pages/key/delete_dialog.dart';
 import 'package:gift_keys/ui/router/routes.dart';
-import 'package:go_router/go_router.dart';
 
 class KeyMenuAnchor extends StatelessWidget {
   const KeyMenuAnchor({required this.id, super.key});
@@ -39,11 +40,7 @@ class KeyMenuAnchor extends StatelessWidget {
           child: Text(_translations.edit),
         ),
         MenuItemButton(
-          onPressed:
-              () =>
-                  context
-                    ..read<KeyMetasBloc>().add(KeyMetasDeleteEvent(id))
-                    ..pop(),
+          onPressed: () => unawaited(KeyDeleteDialog.show(context, id)),
           child: Text(_translations.delete),
         ),
       ],

@@ -25,6 +25,15 @@ final class KeyFormLoadOnSuccess extends KeyFormState {
   List<Object?> get props => [meta];
 }
 
+final class KeyFormDeleteOnSuccess extends KeyFormState {
+  const KeyFormDeleteOnSuccess(this.id);
+
+  final int id;
+
+  @override
+  List<Object?> get props => [id];
+}
+
 final class KeyFormLoadOnFailure extends KeyFormState {
   const KeyFormLoadOnFailure();
 }

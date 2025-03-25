@@ -13,6 +13,7 @@ final class KeyFormBloc extends Bloc<KeyFormEvent, KeyFormState> {
   KeyFormBloc() : super(const KeyFormInitial()) {
     on<KeyFormAddEvent>(_onKeyFormAddEvent, transformer: droppable());
     on<KeyFormUpdateEvent>(_onKeyFormUpdateEvent, transformer: droppable());
+    on<KeyFormDeleteEvent>(_onKeyFormDeleteEvent, transformer: droppable());
   }
 
   static final _fileApi = Injector.instance.fileApi;
@@ -59,6 +60,25 @@ final class KeyFormBloc extends Bloc<KeyFormEvent, KeyFormState> {
       ]);
 
       emit(KeyFormLoadOnSuccess(newMeta as GiftKeyMeta));
+    } on LocalDatabaseException {
+      emit(const KeyFormLoadOnFailure());
+    }
+  }
+
+  Future<void> _onKeyFormDeleteEvent(
+    KeyFormDeleteEvent event,
+    Emitter<KeyFormState> emit,
+  ) async {
+    emit(const KeyFormLoadInProgress());
+
+    try {
+      final id = event.id;
+      await Future.wait([
+        _localDatabaseApi.deleteKey(id),
+        _fileApi.deleteImage(id),
+      ]);
+
+      emit(KeyFormDeleteOnSuccess(id));
     } on LocalDatabaseException {
       emit(const KeyFormLoadOnFailure());
     }

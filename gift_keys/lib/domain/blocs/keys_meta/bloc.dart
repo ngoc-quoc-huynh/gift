@@ -65,24 +65,17 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     emit(const KeyMetasLoadOnSuccess([]));
   }
 
-  Future<void> _onKeyMetasDeleteEvent(
+  void _onKeyMetasDeleteEvent(
     KeyMetasDeleteEvent event,
     Emitter<KeyMetasState> emit,
-  ) async {
+  ) {
     if (state case KeyMetasLoadOnSuccess(metas: final metas)) {
-      emit(KeyMetasLoadInProgress(metas));
-
       final id = event.id;
       emit(
         KeyMetasDeleteOnSuccess(
           List.of(metas)..removeWhere((meta) => meta.id == id),
         ),
       );
-
-      await Future.wait([
-        _localDatabaseApi.deleteKey(id),
-        _fileApi.deleteImage(id),
-      ]);
     }
   }
 
@@ -91,8 +84,6 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     Emitter<KeyMetasState> emit,
   ) {
     if (state case KeyMetasLoadOnSuccess(metas: final metas)) {
-      emit(KeyMetasLoadInProgress(metas));
-
       final newMeta = event.meta;
       final newMetas = List.of(metas)
         ..removeWhere((meta) => meta.id == newMeta.id);

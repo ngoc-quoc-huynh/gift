@@ -19,8 +19,8 @@ class AddKeyPage extends StatelessWidget {
         child: Builder(
           builder:
               (context) => FormFieldPage(
-                title: _translations.appBar,
-                buttonTitle: _translations.create,
+                title: _addKeyTranslations.appBar,
+                buttonTitle: _addKeyTranslations.create,
                 onSubmitted:
                     (imagePath, name, birthday, aid, password) =>
                         context.read<KeyFormBloc>().add(
@@ -46,11 +46,13 @@ class AddKeyPage extends StatelessWidget {
             ..pop(),
         KeyFormLoadOnFailure() => CustomSnackBar.showError(
           context,
-          Injector.instance.translations.general.error,
+          _translations.general.error,
         ),
         _ => null,
       };
 
-  static TranslationsPagesAddKeyEn get _translations =>
-      Injector.instance.translations.pages.addKey;
+  static Translations get _translations => Injector.instance.translations;
+
+  static TranslationsPagesAddKeyEn get _addKeyTranslations =>
+      _translations.pages.addKey;
 }

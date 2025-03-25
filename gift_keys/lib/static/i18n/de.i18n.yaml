@@ -19,6 +19,9 @@ pages:
     edit: 'Bearbeiten'
     delete: 'Löschen'
     updateSuccess: 'Geschenk Schlüssel wurde erfolgreich aktualisiert.'
+    deleteDialog:
+      title: 'Schlüssel löschen'
+      content: 'Bist du dir sicher, dass du den Schlüssel löschen möchtest? Dieser Vorgang kann nicht rückgängig gemacht werden?'
   keys:
     add: 'Schlüssel erstellen'
     settings: 'Einstellungen'
