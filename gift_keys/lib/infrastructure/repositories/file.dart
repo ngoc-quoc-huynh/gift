@@ -73,8 +73,16 @@ final class FileRepository with LoggerMixin implements FileApi {
   @override
   Future<File> moveFileToAppDir(String sourcePath, int id) async {
     final file = loadImage(id)..createSync(recursive: true);
-    await _fileSystem.file(sourcePath).rename(file.path);
-    logInfo('Moved file to app dir: ${file.path}');
+
+    if (file.path != sourcePath) {
+      await _fileSystem.file(sourcePath).rename(file.path);
+      logInfo('Moved file to app dir: ${file.path}');
+    } else {
+      logWarning(
+        'Source path $sourcePath does already exist in app directory, '
+        'skipping movement.',
+      );
+    }
 
     return file;
   }
