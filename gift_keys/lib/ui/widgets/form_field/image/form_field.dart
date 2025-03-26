@@ -8,7 +8,7 @@ import 'package:gift_keys/ui/widgets/form_field/image/avatar.dart';
 import 'package:gift_keys/ui/widgets/form_field/image/button.dart';
 
 class ImagePickerFormField extends FormField<File> {
-  const ImagePickerFormField({super.key})
+  const ImagePickerFormField({required super.initialValue, super.key})
     : super(validator: _validator, builder: _Body.new);
 
   static String? _validator(File? value) => switch (value) {
@@ -17,26 +17,15 @@ class ImagePickerFormField extends FormField<File> {
   };
 }
 
-class _Body extends StatefulWidget {
+class _Body extends StatelessWidget {
   const _Body(this.field);
 
   final FormFieldState<File?> field;
 
   @override
-  State<_Body> createState() => _BodyState();
-}
-
-class _BodyState extends State<_Body> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => widget.field.didChange(context.read<FileValueCubit>().state),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
+    void onImagePicked(File image) => _onImagePicked(context, image);
+
     return Column(
       children: [
         BlocBuilder<FileValueCubit, File?>(
@@ -49,13 +38,11 @@ class _BodyState extends State<_Body> {
                 ),
               },
         ),
-        switch (widget.field.errorText) {
+        switch (field.errorText) {
           null => const SizedBox.shrink(),
           final errorText => Text(
             errorText,
-            style: TextStyle(
-              color: Theme.of(widget.field.context).colorScheme.error,
-            ),
+            style: TextStyle(color: Theme.of(field.context).colorScheme.error),
           ),
         },
         ImagePickerButton(onImagePicked: onImagePicked),
@@ -63,8 +50,8 @@ class _BodyState extends State<_Body> {
     );
   }
 
-  void onImagePicked(File image) {
-    widget.field.didChange(image);
+  void _onImagePicked(BuildContext context, File image) {
+    field.didChange(image);
     context.read<FileValueCubit>().update(image);
   }
 }

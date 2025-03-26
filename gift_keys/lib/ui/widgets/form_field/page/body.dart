@@ -63,7 +63,9 @@ class _FormFieldPageBodyState extends State<FormFieldPageBody> {
                   vertical: Sizes.verticalPadding,
                 ),
                 children: [
-                  const ImagePickerFormField(),
+                  ImagePickerFormField(
+                    initialValue: context.read<FileValueCubit>().state,
+                  ),
                   const SizedBox(height: 10),
                   CustomTextFormField(
                     controller: _nameController,

@@ -60,6 +60,13 @@ class _Selected extends ImagePickerAvatar {
 
 class _SelectedState extends State<_Selected> {
   late ImageProvider _imageProvider;
+  late DateTime _lastModified;
+
+  @override
+  void initState() {
+    super.initState();
+    _lastModified = widget.file.lastModifiedSync();
+  }
 
   @override
   void didChangeDependencies() {
@@ -73,11 +80,19 @@ class _SelectedState extends State<_Selected> {
   @override
   void didUpdateWidget(covariant _Selected oldWidget) {
     super.didUpdateWidget(oldWidget);
-    unawaited(_imageProvider.evict());
-    _imageProvider = ResizeImage(
-      FileImage(widget.file),
-      width: _computeImageWidth(context),
-    );
+    final file = widget.file;
+    if (file.existsSync()) {
+      final newLastModified = file.lastModifiedSync();
+
+      if (_lastModified != newLastModified) {
+        unawaited(_imageProvider.evict());
+        _imageProvider = ResizeImage(
+          FileImage(file),
+          width: _computeImageWidth(context),
+        );
+        _lastModified = newLastModified;
+      }
+    }
   }
 
   @override
