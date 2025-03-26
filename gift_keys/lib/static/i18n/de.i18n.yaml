@@ -3,7 +3,7 @@ appName: 'Geschenk Schlüssel'
 general:
   cancel: 'Abbrechen'
   ok: 'OK'
-  error: 'Es ist etwas schief gelaufen. Bitte kontaktiere den Support, wenn das Problem weiterhin besteht.'
+  error: 'Es ist etwas schief gelaufen.\nBitte kontaktiere den Support, wenn das Problem weiterhin besteht.'
 
 pages:
   addKey:

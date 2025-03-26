@@ -3,7 +3,7 @@ appName: 'Gift Keys'
 general:
   cancel: 'Cancel'
   ok: 'OK'
-  error: 'Something went wrong. Please contact support if the issue continues.'
+  error: 'Something went wrong.\nPlease contact support if the issue continues.'
 
 pages:
   addKey:

@@ -13,9 +13,9 @@ class KeyPageBuilder extends StatelessWidget {
     return BlocBuilder<KeyBloc, KeyState>(
       builder:
           (context, state) => switch (state) {
-            KeyLoadInProgress() =>
-              throw AssertionError('At this point, the key should be loaded.'),
             KeyLoadOnSuccess(:final giftKey) => builder.call(giftKey),
+            _ =>
+              throw AssertionError('At this point, the key should be loaded.'),
           },
     );
   }

@@ -20,3 +20,7 @@ final class KeyLoadOnSuccess extends KeyState {
   @override
   List<Object?> get props => [giftKey];
 }
+
+final class KeyLoadOnFailure extends KeyState {
+  const KeyLoadOnFailure();
+}

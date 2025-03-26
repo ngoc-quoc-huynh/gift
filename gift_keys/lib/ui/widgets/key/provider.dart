@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/key/bloc.dart';
 import 'package:gift_keys/domain/blocs/nfc_discovery/bloc.dart';
+import 'package:gift_keys/static/resources/sizes.dart';
+import 'package:gift_keys/ui/widgets/error_text.dart';
 
 class KeyPageProvider extends StatelessWidget {
   const KeyPageProvider({required this.id, required this.child, super.key});
@@ -29,6 +31,15 @@ class KeyPageProvider extends StatelessWidget {
                           ),
                   child: child,
                 ),
+              KeyLoadOnFailure() => Scaffold(
+                appBar: AppBar(),
+                body: const Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Sizes.horizontalPadding,
+                  ),
+                  child: ErrorText(),
+                ),
+              ),
             },
       ),
     );

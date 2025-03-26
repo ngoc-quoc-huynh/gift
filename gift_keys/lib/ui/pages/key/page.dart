@@ -46,10 +46,10 @@ class KeyPage extends StatelessWidget {
     BuildContext context,
     KeyState state,
   ) => switch (state) {
-    KeyLoadInProgress() => null,
     KeyLoadOnSuccess(giftKey: GiftKey(:final aid, :final password)) => context
         .read<NfcDiscoveryBloc>()
         .add(NfcDiscoveryInitializeEvent(aid: aid, password: password)),
+    _ => null,
   };
 
   void _onKeyFormStateChanged(BuildContext context, KeyFormState state) =>

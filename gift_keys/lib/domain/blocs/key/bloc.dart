@@ -2,6 +2,7 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_keys/domain/exceptions/local_database.dart';
 import 'package:gift_keys/domain/models/key.dart';
 import 'package:gift_keys/injector.dart';
 
@@ -23,7 +24,11 @@ final class KeyBloc extends Bloc<KeyEvent, KeyState> {
   ) async {
     emit(const KeyLoadInProgress());
 
-    final giftKey = await _localDatabaseApi.loadKey(_id);
-    emit(KeyLoadOnSuccess(giftKey));
+    try {
+      final giftKey = await _localDatabaseApi.loadKey(_id);
+      emit(KeyLoadOnSuccess(giftKey));
+    } on LocalDatabaseException {
+      emit(const KeyLoadOnFailure());
+    }
   }
 }
