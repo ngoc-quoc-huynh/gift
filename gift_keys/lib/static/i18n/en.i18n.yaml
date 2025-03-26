@@ -12,6 +12,9 @@ pages:
   editKey:
     appBar: 'Edit Gift Key'
     update: 'Update'
+  error:
+    appBar: 'Page not found!'
+    content: 'The URL ${url: String} could not be found.'
   key:
     appBar: 'Gift Key'
     nfcHintEnabled: 'You need a key to open this gift'

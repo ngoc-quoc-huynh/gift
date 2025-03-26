@@ -12,6 +12,9 @@ pages:
   editKey:
     appBar: 'Schlüssel bearbeiten'
     update: 'Aktualisieren'
+  error:
+    appBar: 'Seite nicht gefunden!'
+    content: 'Die URL ${url: String} konnte nicht gefunden werden.'
   key:
     appBar: 'Geschenk Schlüssel'
     nfcHintEnabled: 'Du benötigst einen Schlüssen, um das Geschenk zu öffnen.'

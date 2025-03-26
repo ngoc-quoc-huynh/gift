@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/keys_meta/bloc.dart';
 import 'package:gift_keys/ui/pages/add_key/page.dart';
 import 'package:gift_keys/ui/pages/edit_key/page.dart';
+import 'package:gift_keys/ui/pages/error/page.dart';
 import 'package:gift_keys/ui/pages/key/page.dart';
 import 'package:gift_keys/ui/pages/key_metas/page.dart';
 import 'package:gift_keys/ui/pages/license/page.dart';
@@ -22,6 +23,7 @@ final class GoRouterConfig {
   static final routes = GoRouter(
     navigatorKey: _rootNavigatorKey,
     initialLocation: '/keys',
+    errorBuilder: (_, state) => ErrorPage(url: state.matchedLocation),
     routes: [
       ShellRoute(
         builder:
