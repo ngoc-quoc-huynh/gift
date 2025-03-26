@@ -10,7 +10,7 @@ import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/pages/key_metas/add_button.dart';
 import 'package:gift_keys/ui/pages/key_metas/error.dart';
 import 'package:gift_keys/ui/pages/key_metas/item/item.dart';
-import 'package:gift_keys/ui/router/routes.dart';
+import 'package:gift_keys/ui/pages/key_metas/settings_button.dart';
 import 'package:gift_keys/ui/widgets/loading_indicator.dart';
 import 'package:gift_keys/ui/widgets/snack_bar.dart';
 
@@ -76,24 +76,17 @@ class _BodyState extends State<_Body> {
         enableSplash: false,
         itemSnapping: true,
         children: [
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: Sizes.horizontalPadding,
-              ),
-              child: Stack(
-                children: [
-                  const KeyMetaAddButton(),
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: IconButton(
-                      onPressed: () => context.pushRoute(Routes.settingsPage),
-                      tooltip: _translations.settings,
-                      icon: const Icon(Icons.settings),
-                    ),
+          const SafeArea(
+            child: Stack(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Sizes.horizontalPadding,
                   ),
-                ],
-              ),
+                  child: KeyMetaAddButton(),
+                ),
+                KeyMetasSettingsButton(),
+              ],
             ),
           ),
 
