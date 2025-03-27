@@ -53,7 +53,7 @@ ORDER BY birthday ASC;
         stackTrace: stackTrace,
       );
 
-      throw const LocalDatabaseException();
+      Error.throwWithStackTrace(const LocalDatabaseException(), stackTrace);
     }
   }
 
@@ -84,7 +84,7 @@ WHERE id = ?;
         stackTrace: stackTrace,
       );
 
-      throw const LocalDatabaseException();
+      Error.throwWithStackTrace(const LocalDatabaseException(), stackTrace);
     }
   }
 
@@ -124,7 +124,7 @@ RETURNING
         stackTrace: stackTrace,
       );
 
-      throw const LocalDatabaseException();
+      Error.throwWithStackTrace(const LocalDatabaseException(), stackTrace);
     }
   }
 
@@ -144,7 +144,7 @@ RETURNING
         stackTrace: stackTrace,
       );
 
-      throw const LocalDatabaseException();
+      Error.throwWithStackTrace(const LocalDatabaseException(), stackTrace);
     }
   }
 
@@ -166,8 +166,7 @@ RETURNING
         exception: e,
         stackTrace: stackTrace,
       );
-
-      throw const LocalDatabaseException();
+      Error.throwWithStackTrace(const LocalDatabaseException(), stackTrace);
     }
   }
 
@@ -215,7 +214,7 @@ RETURNING
         stackTrace: stackTrace,
       );
 
-      throw const LocalDatabaseException();
+      Error.throwWithStackTrace(const LocalDatabaseException(), stackTrace);
     }
   }
 
