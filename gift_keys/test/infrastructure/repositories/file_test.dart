@@ -7,6 +7,7 @@ import 'package:gift_keys/infrastructure/repositories/file.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:path/path.dart';
 
 import '../../mocks.dart';
 
@@ -15,17 +16,14 @@ void main() {
   final imagePicker = MockImagePicker();
   final loggerApi = MockLoggerApi();
   final repository = FileRepository(imagePicker);
+  final appDir = fileSystem.directory('app');
+  final tmpDir = fileSystem.directory('tmp');
+  final imagesDir = fileSystem.directory(join(appDir.path, 'images'));
 
   setUpAll(() {
     Injector.instance
-      ..registerSingleton<Directory>(
-        fileSystem.directory('app'),
-        instanceName: 'appDir',
-      )
-      ..registerSingleton<Directory>(
-        fileSystem.directory('tmp'),
-        instanceName: 'tmpDir',
-      )
+      ..registerSingleton<Directory>(appDir, instanceName: 'appDir')
+      ..registerSingleton<Directory>(tmpDir, instanceName: 'tmpDir')
       ..registerSingleton<FileSystem>(fileSystem)
       ..registerSingleton<LoggerApi>(loggerApi);
     registerFallbackValue(PlatformException(code: 'code'));
@@ -36,15 +34,14 @@ void main() {
 
   group('pickImageFromGallery', () {
     test('returns correctly when file is picked.', () async {
-      final expected = fileSystem.file('test.jpg');
+      final file = XFile(join(tmpDir.path, 'test.jpg'));
       when(
         () => imagePicker.pickImage(source: ImageSource.gallery),
-      ).thenAnswer((_) async => XFile('test.jpg'));
-
+      ).thenAnswer((_) async => file);
       final result = await repository.pickImageFromGallery();
 
       expect(result, isNotNull);
-      expect(result!.path, expected.path);
+      expect(result!.path, file.path);
 
       final verifications = verifyInOrder([
         () => imagePicker.pickImage(source: ImageSource.gallery),
@@ -102,24 +99,22 @@ void main() {
 
   group('moveFileToAppDir', () {
     test('returns correctly when the paths are different.', () async {
-      final file = fileSystem.file('tmp/test.webp')
+      final file = fileSystem.file(join(tmpDir.path, '/test.webp'))
         ..createSync(recursive: true);
-      addTearDown(
-        () => fileSystem.directory('app/images').delete(recursive: true),
-      );
+      addTearDown(() => appDir.delete(recursive: true));
 
       final result = await repository.moveFileToAppDir(file.path, 1);
 
-      expect(result.path, 'app/images/1.webp');
+      expect(result.path, join(imagesDir.path, '1.webp'));
       verify(() => loggerApi.logInfo(any())).called(2);
     });
 
     test('returns correctly when the paths are equal.', () async {
-      final file = fileSystem.file('app/images/1.webp')
+      final file = fileSystem.file(join(imagesDir.path, '1.webp'))
         ..createSync(recursive: true);
       final result = await repository.moveFileToAppDir(file.path, 1);
 
-      expect(result.path, 'app/images/1.webp');
+      expect(result.path, file.path);
 
       final verifications = verifyInOrder([
         () => loggerApi.logInfo(any()),
@@ -133,7 +128,7 @@ void main() {
 
   group('loadImage', () {
     test('returns correctly', () {
-      expect(repository.loadImage(1).path, 'app/images/1.webp');
+      expect(repository.loadImage(1).path, join(imagesDir.path, '1.webp'));
 
       verify(() => loggerApi.logInfo(any())).called(1);
     });
@@ -141,7 +136,7 @@ void main() {
 
   group('deleteAllImages', () {
     test('returns correctly when directory exists.', () async {
-      fileSystem.directory('app/images').createSync(recursive: true);
+      imagesDir.createSync(recursive: true);
       await expectLater(repository.deleteAllImages(), completes);
 
       verify(() => loggerApi.logInfo(any())).called(1);
@@ -156,10 +151,10 @@ void main() {
 
   group('deleteImage', () {
     test('returns correctly when file exists.', () async {
-      fileSystem.file('app/images/1.webp').createSync(recursive: true);
-      addTearDown(
-        () => fileSystem.directory('app/images').delete(recursive: true),
-      );
+      fileSystem
+          .file(join(imagesDir.path, '1.webp'))
+          .createSync(recursive: true);
+      addTearDown(() => imagesDir.delete(recursive: true));
 
       await expectLater(repository.deleteImage(1), completes);
 
@@ -181,7 +176,7 @@ void main() {
 
   group('clearCache', () {
     test('returns correctly when tmp directory exists.', () async {
-      fileSystem.directory('tmp').createSync();
+      tmpDir.createSync();
       await expectLater(repository.clearCache(), completes);
 
       verify(() => loggerApi.logInfo(any())).called(1);
