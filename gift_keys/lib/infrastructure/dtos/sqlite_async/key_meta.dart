@@ -15,7 +15,7 @@ final class GiftKeyMeta extends Equatable {
       'birthday': final String birthday,
     } =>
       GiftKeyMeta(id: id, name: name, birthday: DateTime.parse(birthday)),
-    _ => throw ArgumentError('Invalid json structure for GiftKey.'),
+    _ => throw ArgumentError('Invalid json structure for GiftKeyMeta.'),
   };
 
   final int id;
