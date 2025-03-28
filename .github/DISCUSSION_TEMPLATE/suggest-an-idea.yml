@@ -1,0 +1,16 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before filling out the discussion fields, please consider the following:
+        - Search for any [existing ideas](https://github.com/ngoc-quoc-huynh/gift/discussions/categories/suggest-an-idea).
+        - Review the [guidelines for suggesting ideas](https://github.com/ngoc-quoc-huynh/gift/blob/main/CONTRIBUTING.md#suggest-an-idea) to ensure your suggestion is clear and helpful.
+        - Include `[gift_box]` or `[gift_key]` in the title to specify which app is affected.
+
+  - type: textarea
+    attributes:
+      label: Description
+      description: Describe your idea in detail. Explain its purpose, benefits, and how it could improve the app.
+      placeholder: Tell us about your idea …
+    validations:
+      required: true
