@@ -1,0 +1,35 @@
+name: Administration only
+description: Issue template for Gift administrators only.
+body:
+  - type: markdown
+    attributes:
+      value: '# Gift administrators only'
+
+  - type: markdown
+    attributes:
+      value: |
+        **Attention!** This form is for Gift administrators only.
+        If you're a user, please create a [GitHub Discussion](https://github.com/ngoc-quoc-huynh/gift/discussions/new/choose) instead.
+
+  - type: textarea
+    attributes:
+      label: Describe proposed changes
+      description: Provide a detailed description of the proposed changes.
+      placeholder: Describe the change …
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: Related discussions
+      description: Link to any relevant discussions that relate to this proposal (if applicable).
+      placeholder: Enter links to related discussions …
+
+  - type: checkboxes
+    id: confirm-admin
+    attributes:
+      label: Admin confirmation
+      description: You must confirm that you are a Gift administrator to proceed.
+      options:
+        - label: I confirm that I am an admin of Gift.
+          required: true

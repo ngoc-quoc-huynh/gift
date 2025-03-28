@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Start a Discussion
+    url: https://github.com/ngoc-quoc-huynh/gift/discussions/
+    about: We encourage you to start a discussion for any questions, suggestions, or feedback regarding the app.
