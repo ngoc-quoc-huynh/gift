@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
-import 'package:gift_keys/ui/widgets/alert_dialog/action.dart';
-import 'package:gift_keys/ui/widgets/alert_dialog/dialog.dart';
+import 'package:gift_keys/ui/widgets/dialog/alert_action.dart';
+import 'package:gift_keys/ui/widgets/dialog/dialog.dart';
 import 'package:gift_keys/ui/widgets/snack_bar.dart';
 
 class SettingsCacheDialog extends StatelessWidget {
@@ -28,7 +28,7 @@ class SettingsCacheDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomAlertDialog(
+    return CustomDialog.alert(
       title: _dialogTranslations.title,
       content: Padding(
         padding: const EdgeInsets.symmetric(

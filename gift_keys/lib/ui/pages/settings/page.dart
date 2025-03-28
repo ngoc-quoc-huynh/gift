@@ -12,6 +12,7 @@ import 'package:gift_keys/ui/pages/settings/app_version.dart';
 import 'package:gift_keys/ui/pages/settings/card.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/cache.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/design.dart';
+import 'package:gift_keys/ui/pages/settings/dialogs/feedback.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/language.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/reset.dart';
 import 'package:gift_keys/ui/pages/settings/item.dart';
@@ -81,6 +82,16 @@ class SettingsPage extends StatelessWidget {
                   title: _translations.reset,
                   onTap: () => unawaited(SettingsResetDialog.show(context)),
                 ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          SettingsCard(
+            children: [
+              SettingsItem(
+                icon: Icons.feedback_outlined,
+                title: _translations.feedback,
+                onTap: () => unawaited(SettingsFeedbackDialog.show(context)),
               ),
             ],
           ),

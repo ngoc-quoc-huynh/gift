@@ -42,6 +42,7 @@ pages:
     languageUpdate: 'Language has been updated successfully.'
     reset: 'Reset'
     resetUpdate: 'Gift Keys has been successfully reset.'
+    feedback: 'Give Feedback'
     license: 'External libraries and licenses'
     dialogs:
       cache:
@@ -52,6 +53,10 @@ pages:
         bright: 'Bright'
         dark: 'Dark'
         device: 'Device design'
+      feedback:
+        title: 'Give Feedback'
+        content: 'Have an issue or suggestion? Let us know to help improve the app! You’ll be redirected to our feedback page.\n\nNote: A GitHub account is required to provide feedback.'
+        button: 'Create Feedback'
       language:
         title: 'Choose language'
         english: 'English'

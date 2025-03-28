@@ -4,8 +4,8 @@ import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_keys/domain/blocs/value/cubit.dart';
 import 'package:gift_keys/domain/models/language.dart';
 import 'package:gift_keys/injector.dart';
-import 'package:gift_keys/ui/widgets/radio_dialog/dialog.dart';
-import 'package:gift_keys/ui/widgets/radio_dialog/option.dart';
+import 'package:gift_keys/ui/widgets/dialog/dialog.dart';
+import 'package:gift_keys/ui/widgets/dialog/radio_option.dart';
 
 class SettingsLanguageDialog extends StatelessWidget {
   const SettingsLanguageDialog({super.key});
@@ -31,7 +31,7 @@ class SettingsLanguageDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RadioDialog(
+    return CustomDialog.radio(
       title: _translations.title,
       options: [
         RadioDialogOption(

@@ -42,6 +42,7 @@ pages:
     languageUpdate: 'Sprache wurde erfolgreich aktualisiert.'
     reset: 'Zurücksetzen'
     resetUpdate: 'Schlüsseln wurden erfolgreich zurückgesetzt.'
+    feedback: 'Feedback geben'
     license: 'Externe Bibliotheken und Lizensen'
     dialogs:
       cache:
@@ -52,6 +53,10 @@ pages:
         bright: 'Hell'
         dark: 'Dunkel'
         device: 'Gerätedesign'
+      feedback:
+        title: 'Feedback geben'
+        content: 'Hast du ein Problem oder eine Vorschlag? Lass es uns wissen, um die App zu verbessern! Du wirst auf unserer Feedbackseite weitergeleitet.\n\nHinweis: Ein GitHub-Account ist erforderlich, um Feedback zu geben.'
+        button: 'Feedback erstellen'
       language:
         title: 'Sprache auswählen'
         english: 'Englisch'

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_keys/domain/blocs/value/cubit.dart';
 import 'package:gift_keys/injector.dart';
-import 'package:gift_keys/ui/widgets/radio_dialog/dialog.dart';
-import 'package:gift_keys/ui/widgets/radio_dialog/option.dart';
+import 'package:gift_keys/ui/widgets/dialog/dialog.dart';
+import 'package:gift_keys/ui/widgets/dialog/radio_option.dart';
 
 class SettingsDesignDialog extends StatelessWidget {
   const SettingsDesignDialog({super.key});
@@ -30,7 +30,7 @@ class SettingsDesignDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RadioDialog(
+    return CustomDialog.radio(
       title: _translations.title,
       options: [
         RadioDialogOption<ThemeMode>(

@@ -7,6 +7,8 @@ import 'package:go_router/go_router.dart';
 extension BuildContextExtension on BuildContext {
   ColorScheme get colorScheme => ColorScheme.of(this);
 
+  DialogThemeData get dialogTheme => DialogTheme.of(this);
+
   ThemeData get theme => Theme.of(this);
 
   TextTheme get textTheme => TextTheme.of(this);
