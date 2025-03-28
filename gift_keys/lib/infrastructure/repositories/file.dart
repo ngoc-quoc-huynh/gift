@@ -1,6 +1,4 @@
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
+import 'package:file/file.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart' as widget;
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -11,9 +9,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
 final class FileRepository with LoggerMixin implements FileApi {
-  const FileRepository();
+  const FileRepository(this._imagePicker);
 
-  static final _instance = ImagePicker();
+  final ImagePicker _imagePicker;
+
   static final _appDir = Injector.instance.appDir;
   static final _fileSystem = Injector.instance.fileSystem;
   static final _imagesDir = _fileSystem.directory(join(_appDir.path, 'images'));
@@ -23,7 +22,9 @@ final class FileRepository with LoggerMixin implements FileApi {
   @override
   Future<File?> pickImageFromGallery() async {
     try {
-      final pickedFile = await _instance.pickImage(source: ImageSource.gallery);
+      final pickedFile = await _imagePicker.pickImage(
+        source: ImageSource.gallery,
+      );
       final result = switch (pickedFile) {
         null => null,
         XFile(:final path) => _fileSystem.file(path),
@@ -90,24 +91,9 @@ final class FileRepository with LoggerMixin implements FileApi {
   @override
   File loadImage(int id) {
     final path = join(_imagesDir.path, '$id.webp');
-    logInfo('Loading image: $path');
+    logInfo('Loaded image: $path');
 
     return _fileSystem.file(path);
-  }
-
-  @override
-  Future<void> precacheImage(BuildContext context, int id) async {
-    final image = loadImage(id);
-    await widget.precacheImage(FileImage(image), context);
-
-    logInfo('Precached image: ${image.path}');
-  }
-
-  @override
-  Future<void> precacheImages(BuildContext context, List<int> ids) async {
-    await Future.wait(ids.map((id) => precacheImage(context, id)));
-
-    logInfo('Precached images: $ids');
   }
 
   @override

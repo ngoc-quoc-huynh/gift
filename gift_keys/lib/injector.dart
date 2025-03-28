@@ -1,4 +1,4 @@
-import 'dart:io' show Platform;
+import 'dart:io';
 
 import 'package:file/file.dart';
 import 'package:file/local.dart';
@@ -16,6 +16,7 @@ import 'package:gift_keys/infrastructure/repositories/nfc.dart';
 import 'package:gift_keys/infrastructure/repositories/sqlite_async.dart';
 import 'package:gift_keys/static/i18n/translations.g.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
@@ -45,7 +46,7 @@ final class Injector {
         fileSystem.directory(tmpDir.path),
         instanceName: 'tmpDir',
       )
-      ..registerLazySingleton<FileApi>(FileRepository.new)
+      ..registerLazySingleton<FileApi>(() => FileRepository(ImagePicker()))
       ..registerSingleton<FileSystem>(fileSystem)
       ..registerLazySingleton<LocalDatabaseApi>(SqliteAsyncRepository.new)
       ..registerLazySingleton<LoggerApi>(

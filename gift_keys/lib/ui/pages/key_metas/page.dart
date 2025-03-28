@@ -99,9 +99,7 @@ class _BodyState extends State<_Body> {
   void _onKeysStateChanged(BuildContext context, KeyMetasState state) {
     switch (state) {
       case KeyMetasAddOnSuccess(:final index, :final metas):
-        unawaited(
-          Injector.instance.fileApi.precacheImage(context, metas[index].id),
-        );
+        unawaited(_precacheImage(context, metas[index].id));
         unawaited(
           _controller.animateTo(
             context.screenSize.width * (index + 1),
@@ -125,15 +123,17 @@ class _BodyState extends State<_Body> {
         );
       case KeyMetasLoadOnSuccess(metas: final metas)
           when state is! KeyMetasAddOnSuccess:
-        unawaited(
-          Injector.instance.fileApi.precacheImages(
-            context,
-            metas.map((meta) => meta.id).toList(),
-          ),
-        );
+        for (final meta in metas) {
+          unawaited(_precacheImage(context, meta.id));
+        }
       default:
         break;
     }
+  }
+
+  Future<void> _precacheImage(BuildContext context, int id) {
+    final file = Injector.instance.fileApi.loadImage(id);
+    return Injector.instance.nativeApi.precacheImage(context, file);
   }
 
   static TranslationsPagesKeysEn get _translations =>
