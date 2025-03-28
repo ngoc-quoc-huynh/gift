@@ -1,8 +1,8 @@
 final class Config {
   const Config._();
 
-  static final githubIssueUri = Uri.https(
+  static final githubDiscussionUri = Uri.https(
     'github.com',
-    '/ngoc-quoc-huynh/gift/issues',
+    '/ngoc-quoc-huynh/gift/discussions',
   );
 }

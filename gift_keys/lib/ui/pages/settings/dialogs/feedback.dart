@@ -16,7 +16,7 @@ class SettingsFeedbackDialog extends StatelessWidget {
     );
 
     if (giveFeedback ?? false) {
-      await Injector.instance.nativeApi.launchUri(Config.githubIssueUri);
+      await Injector.instance.nativeApi.launchUri(Config.githubDiscussionUri);
     }
   }
 
