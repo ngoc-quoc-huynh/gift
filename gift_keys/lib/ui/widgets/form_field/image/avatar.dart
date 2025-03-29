@@ -25,6 +25,7 @@ sealed class ImagePickerAvatar extends StatefulWidget {
   static const radius = 50.0;
 
   static final _fileApi = Injector.instance.fileApi;
+  static final _nativeApi = Injector.instance.nativeApi;
 
   @protected
   Future<void> onTap(double screenWidth) async {
@@ -33,7 +34,7 @@ sealed class ImagePickerAvatar extends StatefulWidget {
       return;
     }
 
-    final compressedFile = await _fileApi.compressImage(
+    final compressedFile = await _nativeApi.compressImage(
       file.path,
       screenWidth.toInt(),
     );

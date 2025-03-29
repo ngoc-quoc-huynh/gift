@@ -5,8 +5,6 @@ abstract interface class FileApi {
 
   Future<File?> pickImageFromGallery();
 
-  Future<File?> compressImage(String path, int minWidth);
-
   Future<File> moveFileToAppDir(String sourcePath, int id);
 
   File loadImage(int id);

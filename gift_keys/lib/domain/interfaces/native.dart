@@ -7,4 +7,6 @@ abstract interface class NativeApi {
   Future<void> launchUri(Uri uri);
 
   Future<void> precacheImage(BuildContext context, File image);
+
+  Future<File?> compressImage(String path, int minWidth);
 }
