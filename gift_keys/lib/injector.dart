@@ -18,6 +18,7 @@ import 'package:gift_keys/static/i18n/translations.g.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -57,7 +58,7 @@ final class Injector {
         ),
       )
       ..registerLazySingleton<NativeApi>(NativeRepository.new)
-      ..registerLazySingleton<NfcApi>(NfcRepository.new)
+      ..registerLazySingleton<NfcApi>(() => NfcRepository(NfcManager()))
       ..registerSingletonAsync<PackageInfo>(PackageInfo.fromPlatform)
       ..registerLazySingleton<Translations>(_createTranslations);
     await instance.allReady();

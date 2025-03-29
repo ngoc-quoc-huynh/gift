@@ -5,27 +5,27 @@ import 'package:gift_keys/infrastructure/dtos/nfc/command.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 
 final class NfcRepository with LoggerMixin implements NfcApi {
-  const NfcRepository();
+  NfcRepository(this._nfcManager);
 
-  static final _instance = NfcManager();
+  final NfcManager _nfcManager;
 
   @override
   Future<bool> isEnabled() async {
-    final isEnabled = await _instance.isNfcEnabled();
+    final isEnabled = await _nfcManager.isNfcEnabled();
     logInfo('Checked if NFC is enabled: $isEnabled');
 
     return isEnabled;
   }
 
   @override
-  Stream<String> startDiscovery() => _instance.startDiscovery().map((tag) {
+  Stream<String> startDiscovery() => _nfcManager.startDiscovery().map((tag) {
     logInfo('Discovered NFC tag: $tag');
     return tag;
   });
 
   @override
   Future<bool> sendCommand(domain.NfcCommand nfcCommand) async {
-    final response = await _instance.sendCommand(
+    final response = await _nfcManager.sendCommand(
       CommandExtension.fromDomain(nfcCommand),
     );
 
