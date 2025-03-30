@@ -42,7 +42,7 @@ final class FileRepository with LoggerMixin implements FileApi {
   }
 
   @override
-  Future<File> moveFileToAppDir(String sourcePath, int id) async {
+  Future<void> moveFileToAppDir(String sourcePath, int id) async {
     final file = loadImage(id)..createSync(recursive: true);
 
     if (file.path != sourcePath) {
@@ -54,8 +54,6 @@ final class FileRepository with LoggerMixin implements FileApi {
         'skipping movement.',
       );
     }
-
-    return file;
   }
 
   @override

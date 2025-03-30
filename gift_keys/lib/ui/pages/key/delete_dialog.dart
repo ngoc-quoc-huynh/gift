@@ -17,7 +17,7 @@ class KeyDeleteDialog extends StatelessWidget {
     );
 
     if (context.mounted && (reset ?? false)) {
-      context.read<KeyFormBloc>().add(KeyFormDeleteEvent(id: id));
+      context.read<KeyFormBloc>().add(KeyFormDeleteEvent(id));
     }
   }
 

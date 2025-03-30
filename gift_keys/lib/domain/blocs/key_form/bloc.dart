@@ -48,8 +48,8 @@ final class KeyFormBloc extends Bloc<KeyFormEvent, KeyFormState> {
 
     try {
       final id = event.id;
-      final [_, newMeta] = await Future.wait([
-        _fileApi.moveFileToAppDir(event.imagePath, id),
+      // ignore: avoid-dynamic, since we want to parallelize these futures.
+      final [newMeta, _] = await Future.wait<dynamic>([
         _localDatabaseApi.updateKey(
           id: id,
           name: event.name,
@@ -57,6 +57,7 @@ final class KeyFormBloc extends Bloc<KeyFormEvent, KeyFormState> {
           aid: event.aid,
           password: event.password,
         ),
+        _fileApi.moveFileToAppDir(event.imagePath, id),
       ]);
 
       emit(KeyFormLoadOnSuccess(newMeta as GiftKeyMeta));

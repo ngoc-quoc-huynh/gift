@@ -40,7 +40,7 @@ final class KeyFormUpdateEvent extends KeyFormEvent {
 }
 
 final class KeyFormDeleteEvent extends KeyFormEvent {
-  const KeyFormDeleteEvent({required this.id});
+  const KeyFormDeleteEvent(this.id);
 
   final int id;
 }

@@ -98,24 +98,20 @@ void main() {
   });
 
   group('moveFileToAppDir', () {
-    test('returns correctly when the paths are different.', () async {
+    test('completes correctly when the paths are different.', () async {
       final file = fileSystem.file(join(tmpDir.path, '/test.webp'))
         ..createSync(recursive: true);
       addTearDown(() => appDir.delete(recursive: true));
 
-      final result = await repository.moveFileToAppDir(file.path, 1);
-
-      expect(result.path, join(imagesDir.path, '1.webp'));
+      await expectLater(repository.moveFileToAppDir(file.path, 1), completes);
       verify(() => loggerApi.logInfo(any())).called(2);
     });
 
-    test('returns correctly when the paths are equal.', () async {
+    test('completes correctly when the paths are equal.', () async {
       final file = fileSystem.file(join(imagesDir.path, '1.webp'))
         ..createSync(recursive: true);
-      final result = await repository.moveFileToAppDir(file.path, 1);
 
-      expect(result.path, file.path);
-
+      await expectLater(repository.moveFileToAppDir(file.path, 1), completes);
       final verifications = verifyInOrder([
         () => loggerApi.logInfo(any()),
         () => loggerApi.logWarning(any()),
