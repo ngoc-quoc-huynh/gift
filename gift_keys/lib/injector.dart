@@ -49,7 +49,9 @@ final class Injector {
       )
       ..registerLazySingleton<FileApi>(() => FileRepository(ImagePicker()))
       ..registerSingleton<FileSystem>(fileSystem)
-      ..registerLazySingleton<LocalDatabaseApi>(SqliteAsyncRepository.new)
+      ..registerSingletonAsync<LocalDatabaseApi>(
+        const SqliteAsyncRepository().initialize,
+      )
       ..registerLazySingleton<LoggerApi>(
         () => LoggerRepository(
           Logger(

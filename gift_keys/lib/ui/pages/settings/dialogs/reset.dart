@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_keys/domain/blocs/keys_meta/bloc.dart';
+import 'package:gift_keys/domain/blocs/key_metas/bloc.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/widgets/dialog/alert_action.dart';

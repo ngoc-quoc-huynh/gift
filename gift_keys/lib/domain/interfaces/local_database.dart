@@ -4,8 +4,6 @@ import 'package:gift_keys/domain/models/key_meta.dart';
 abstract interface class LocalDatabaseApi {
   const LocalDatabaseApi();
 
-  Future<void> initialize();
-
   Future<GiftKeyMeta> saveKey({
     required String name,
     required DateTime birthday,

@@ -19,8 +19,7 @@ final class SqliteAsyncRepository with LoggerMixin implements LocalDatabaseApi {
     path: join(Injector.instance.appDir.path, 'app.db'),
   );
 
-  @override
-  Future<void> initialize() async {
+  Future<SqliteAsyncRepository> initialize() async {
     await _db.initialize();
     final migrations =
         SqliteMigrations()
@@ -28,6 +27,8 @@ final class SqliteAsyncRepository with LoggerMixin implements LocalDatabaseApi {
           ..add(_createDatabaseMigration);
     await migrations.migrate(_db);
     logInfo('SQLite database initialized.');
+
+    return this;
   }
 
   @override

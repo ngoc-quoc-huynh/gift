@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
-import 'package:gift_keys/domain/blocs/keys_meta/bloc.dart';
+import 'package:gift_keys/domain/blocs/key_metas/bloc.dart';
 import 'package:gift_keys/domain/models/language.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
@@ -25,7 +25,7 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_translations.appBar)),
+      appBar: AppBar(title: Text(_settingsTranslations.appBar)),
       bottomNavigationBar: const SettingsAppVersion(),
       body: ListView(
         padding: const EdgeInsets.symmetric(
@@ -39,7 +39,7 @@ class SettingsPage extends StatelessWidget {
                 listener: _onThemeModeChanged,
                 child: SettingsItem(
                   icon: Icons.brightness_6_rounded,
-                  title: _translations.design,
+                  title: _settingsTranslations.design,
                   onTap:
                       () => unawaited(
                         SettingsDesignDialog.show(
@@ -53,7 +53,7 @@ class SettingsPage extends StatelessWidget {
                 listener: _onLanguageOptionChanged,
                 child: SettingsItem(
                   icon: Icons.flag_outlined,
-                  title: _translations.language,
+                  title: _settingsTranslations.language,
                   onTap:
                       () => unawaited(
                         SettingsLanguageDialog.show(
@@ -72,14 +72,14 @@ class SettingsPage extends StatelessWidget {
             children: [
               SettingsItem(
                 icon: Icons.cached_outlined,
-                title: _translations.cache,
+                title: _settingsTranslations.cache,
                 onTap: () => unawaited(SettingsCacheDialog.show(context)),
               ),
               BlocListener<KeyMetasBloc, KeyMetasState>(
                 listener: _onKeysStateChanged,
                 child: SettingsItem(
                   icon: Icons.restart_alt,
-                  title: _translations.reset,
+                  title: _settingsTranslations.reset,
                   onTap: () => unawaited(SettingsResetDialog.show(context)),
                 ),
               ),
@@ -90,7 +90,7 @@ class SettingsPage extends StatelessWidget {
             children: [
               SettingsItem(
                 icon: Icons.feedback_outlined,
-                title: _translations.feedback,
+                title: _settingsTranslations.feedback,
                 onTap: () => unawaited(SettingsFeedbackDialog.show(context)),
               ),
             ],
@@ -100,7 +100,7 @@ class SettingsPage extends StatelessWidget {
             children: [
               SettingsItem(
                 icon: Icons.library_books_outlined,
-                title: _translations.license,
+                title: _settingsTranslations.license,
                 onTap: () => context.pushRoute(Routes.licensePage),
               ),
             ],
@@ -111,20 +111,26 @@ class SettingsPage extends StatelessWidget {
   }
 
   void _onLanguageOptionChanged(BuildContext context, _) =>
-      CustomSnackBar.showSuccess(context, _translations.languageUpdate);
+      CustomSnackBar.showSuccess(context, _settingsTranslations.languageUpdate);
 
   void _onThemeModeChanged(BuildContext context, _) =>
-      CustomSnackBar.showSuccess(context, _translations.designUpdate);
+      CustomSnackBar.showSuccess(context, _settingsTranslations.designUpdate);
 
   void _onKeysStateChanged(BuildContext context, KeyMetasState state) =>
       switch (state) {
         KeyMetasLoadOnSuccess() => CustomSnackBar.showSuccess(
           context,
-          _translations.resetUpdate,
+          _settingsTranslations.resetUpdate,
+        ),
+        KeyMetasResetOnFailure() => CustomSnackBar.showError(
+          context,
+          _translations.general.error,
         ),
         _ => null,
       };
 
-  static TranslationsPagesSettingsEn get _translations =>
-      Injector.instance.translations.pages.settings;
+  static Translations get _translations => Injector.instance.translations;
+
+  static TranslationsPagesSettingsEn get _settingsTranslations =>
+      _translations.pages.settings;
 }

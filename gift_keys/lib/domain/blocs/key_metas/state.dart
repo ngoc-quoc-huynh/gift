@@ -8,8 +8,8 @@ sealed class KeyMetasState extends Equatable {
   List<Object?> get props => [];
 }
 
-final class KeyMetasInitial extends KeyMetasState {
-  const KeyMetasInitial();
+final class KeyMetasLoadInProgress extends KeyMetasState {
+  const KeyMetasLoadInProgress();
 }
 
 final class KeyMetasLoadOnFailure extends KeyMetasState {
@@ -23,10 +23,6 @@ sealed class KeyMetasOperationState extends KeyMetasState {
 
   @override
   List<Object?> get props => [metas];
-}
-
-final class KeyMetasLoadInProgress extends KeyMetasOperationState {
-  const KeyMetasLoadInProgress(super.metas);
 }
 
 base class KeyMetasLoadOnSuccess extends KeyMetasOperationState {
@@ -53,4 +49,8 @@ final class KeyMetasUpdateOnSuccess extends KeyMetasLoadOnSuccess {
 
 final class KeyMetasDeleteOnSuccess extends KeyMetasLoadOnSuccess {
   const KeyMetasDeleteOnSuccess(super.metas);
+}
+
+final class KeyMetasResetOnFailure extends KeyMetasOperationState {
+  const KeyMetasResetOnFailure(super.metas);
 }

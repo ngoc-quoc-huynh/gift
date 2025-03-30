@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_keys/domain/blocs/keys_meta/bloc.dart';
+import 'package:gift_keys/domain/blocs/key_metas/bloc.dart';
 import 'package:gift_keys/domain/models/key_meta.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
@@ -23,8 +23,8 @@ class KeyMetasPage extends StatelessWidget {
       body: BlocBuilder<KeyMetasBloc, KeyMetasState>(
         builder:
             (context, state) => switch (state) {
-              KeyMetasInitial() => const LoadingIndicator(),
-              KeyMetasOperationState(metas: final metas) => _Body(metas),
+              KeyMetasLoadInProgress() => const LoadingIndicator(),
+              KeyMetasOperationState(:final metas) => _Body(metas),
               KeyMetasLoadOnFailure() => const KeyMetasErrorView(),
             },
       ),
@@ -121,7 +121,7 @@ class _BodyState extends State<_Body> {
           (_) =>
               CustomSnackBar.showSuccess(context, _translations.deleteSuccess),
         );
-      case KeyMetasLoadOnSuccess(metas: final metas)
+      case KeyMetasLoadOnSuccess(:final metas)
           when state is! KeyMetasAddOnSuccess:
         for (final meta in metas) {
           unawaited(_precacheImage(context, meta.id));

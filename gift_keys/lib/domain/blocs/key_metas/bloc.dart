@@ -13,15 +13,15 @@ part 'event.dart';
 part 'state.dart';
 
 final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
-  KeyMetasBloc() : super(const KeyMetasInitial()) {
+  KeyMetasBloc() : super(const KeyMetasLoadInProgress()) {
     on<KeyMetasInitializeEvent>(
       _onKeyMetasInitializeEvent,
       transformer: droppable(),
     );
     on<KeyMetasAddEvent>(_onKeyMetasAddEvent, transformer: droppable());
-    on<KeyMetasResetEvent>(_onKeyMetasResetEvent, transformer: droppable());
     on<KeyMetasDeleteEvent>(_onKeyMetasDeleteEvent, transformer: droppable());
     on<KeyMetasUpdateEvent>(_onKeyMetasUpdateEvent, transformer: droppable());
+    on<KeyMetasResetEvent>(_onKeyMetasResetEvent, transformer: droppable());
   }
 
   static final _fileApi = Injector.instance.fileApi;
@@ -31,7 +31,8 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     KeyMetasInitializeEvent event,
     Emitter<KeyMetasState> emit,
   ) async {
-    await _localDatabaseApi.initialize();
+    emit(const KeyMetasLoadInProgress());
+
     try {
       final metas = await _localDatabaseApi.loadKeyMetas();
       emit(KeyMetasLoadOnSuccess(metas.sorted(_compareGiftKeyMetas)));
@@ -44,7 +45,7 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     KeyMetasAddEvent event,
     Emitter<KeyMetasState> emit,
   ) {
-    if (state case KeyMetasLoadOnSuccess(metas: final metas)) {
+    if (state case KeyMetasOperationState(:final metas)) {
       final newMeta = event.meta;
       final insertIndex = metas.lowerBound(newMeta, _compareGiftKeyMetas);
       final newMetas = [...metas]..insert(insertIndex, newMeta);
@@ -53,23 +54,11 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     }
   }
 
-  Future<void> _onKeyMetasResetEvent(
-    KeyMetasResetEvent event,
-    Emitter<KeyMetasState> emit,
-  ) async {
-    emit(const KeyMetasInitial());
-    await Future.wait([
-      _fileApi.deleteAllImages(),
-      _localDatabaseApi.deleteKeys(),
-    ]);
-    emit(const KeyMetasLoadOnSuccess([]));
-  }
-
   void _onKeyMetasDeleteEvent(
     KeyMetasDeleteEvent event,
     Emitter<KeyMetasState> emit,
   ) {
-    if (state case KeyMetasLoadOnSuccess(metas: final metas)) {
+    if (state case KeyMetasOperationState(:final metas)) {
       final id = event.id;
       emit(
         KeyMetasDeleteOnSuccess(
@@ -83,7 +72,7 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
     KeyMetasUpdateEvent event,
     Emitter<KeyMetasState> emit,
   ) {
-    if (state case KeyMetasLoadOnSuccess(metas: final metas)) {
+    if (state case KeyMetasOperationState(:final metas)) {
       final newMeta = event.meta;
       final newMetas = List.of(metas)
         ..removeWhere((meta) => meta.id == newMeta.id);
@@ -91,6 +80,26 @@ final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
       newMetas.insert(insertIndex, newMeta);
 
       emit(KeyMetasUpdateOnSuccess(insertIndex, newMetas));
+    }
+  }
+
+  Future<void> _onKeyMetasResetEvent(
+    KeyMetasResetEvent event,
+    Emitter<KeyMetasState> emit,
+  ) async {
+    if (state case KeyMetasOperationState(:final metas)) {
+      emit(const KeyMetasLoadInProgress());
+
+      try {
+        await Future.wait([
+          _localDatabaseApi.deleteKeys(),
+          _fileApi.deleteAllImages(),
+        ]);
+
+        emit(const KeyMetasLoadOnSuccess([]));
+      } on LocalDatabaseException {
+        emit(KeyMetasResetOnFailure(metas));
+      }
     }
   }
 
