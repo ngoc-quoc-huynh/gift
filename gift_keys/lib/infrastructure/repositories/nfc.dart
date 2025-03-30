@@ -25,16 +25,26 @@ final class NfcRepository with LoggerMixin implements NfcApi {
 
   @override
   Future<bool> sendCommand(domain.NfcCommand nfcCommand) async {
-    final response = await _nfcManager.sendCommand(
-      CommandExtension.fromDomain(nfcCommand),
-    );
+    try {
+      final response = await _nfcManager.sendCommand(
+        CommandExtension.fromDomain(nfcCommand),
+      );
 
-    final result = switch (response) {
-      ApduResponse.ok => true,
-      _ => false,
-    };
-    logInfo('Sent NFC command with response: $result');
+      final result = switch (response) {
+        ApduResponse.ok => true,
+        _ => false,
+      };
+      logInfo('Sent NFC command with response: $result');
 
-    return result;
+      return result;
+    } on NfcException catch (e, stackTrace) {
+      logException(
+        'Sent NFC command failed.',
+        exception: e,
+        stackTrace: stackTrace,
+      );
+
+      return false;
+    }
   }
 }

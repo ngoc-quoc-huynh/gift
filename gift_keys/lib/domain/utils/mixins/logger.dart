@@ -6,11 +6,11 @@ mixin LoggerMixin {
   void logWarning(String message) => _loggerAPI.logWarning(message);
 
   void logException(
-    String methodName, {
+    String message, {
     required Exception exception,
     StackTrace? stackTrace,
   }) => _loggerAPI.logException(
-    methodName,
+    message,
     exception: exception,
     stackTrace: stackTrace,
   );
