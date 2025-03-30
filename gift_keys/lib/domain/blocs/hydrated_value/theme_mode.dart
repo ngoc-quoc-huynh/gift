@@ -1,7 +1,7 @@
 part of 'cubit.dart';
 
 final class ThemeModeHydratedValueCubit extends HydratedValueCubit<ThemeMode> {
-  ThemeModeHydratedValueCubit(super.state);
+  ThemeModeHydratedValueCubit() : super(ThemeMode.system);
 
   @override
   ThemeMode? fromJson(Map<String, dynamic> json) =>

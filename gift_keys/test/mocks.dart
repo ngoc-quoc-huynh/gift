@@ -4,6 +4,7 @@ import 'package:gift_keys/domain/interfaces/local_database.dart';
 import 'package:gift_keys/domain/interfaces/logger.dart';
 import 'package:gift_keys/domain/interfaces/native.dart';
 import 'package:gift_keys/domain/interfaces/nfc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
@@ -26,3 +27,5 @@ final class MockNativeApi extends Mock implements NativeApi {}
 final class MockNfcApi extends Mock implements NfcApi {}
 
 final class MockNfcManager extends Mock implements NfcManager {}
+
+final class MockStorage extends Mock implements Storage {}

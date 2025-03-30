@@ -2,7 +2,7 @@ part of 'cubit.dart';
 
 final class LanguageOptionHydratedValueCubit
     extends HydratedValueCubit<LanguageOption> {
-  LanguageOptionHydratedValueCubit(super.state);
+  LanguageOptionHydratedValueCubit() : super(LanguageOption.system);
 
   @override
   LanguageOption? fromJson(Map<String, dynamic> json) =>

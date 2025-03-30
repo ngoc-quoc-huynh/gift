@@ -25,11 +25,10 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<LanguageOptionHydratedValueCubit>(
-          create:
-              (_) => LanguageOptionHydratedValueCubit(LanguageOption.system),
+          create: (_) => LanguageOptionHydratedValueCubit(),
         ),
         BlocProvider<ThemeModeHydratedValueCubit>(
-          create: (_) => ThemeModeHydratedValueCubit(ThemeMode.system),
+          create: (_) => ThemeModeHydratedValueCubit(),
         ),
       ],
       child: const _Body(),
