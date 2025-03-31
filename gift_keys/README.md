@@ -8,10 +8,9 @@
 
 The Gift Keys App is a Flutter application that allows users to manage digital keys unlock the Gifts
 from [Gift Box](../gift_box). Users can **add new keys** by providing an **AID (Application
-Identifier)**, a **password (PIN)**, and additional metadata. The app interacts with the **Gift Box
-**
-project, which uses **NFC Host Card Emulation (HCE)**. When scanned, the Gift Keys App transmits the
-stored AID and PIN for verification, enabling secure access to the associated gift.
+Identifier)**, a **password (PIN)**, and additional metadata. The app interacts with the
+**Gift Box** project, which uses **NFC Host Card Emulation (HCE)**. When scanned, the Gift Keys App
+transmits the stored AID and PIN for verification, enabling secure access to the associated gift.
 
 ## Getting Started
 
