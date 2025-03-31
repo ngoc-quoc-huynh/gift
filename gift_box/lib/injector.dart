@@ -20,26 +20,27 @@ final class Injector {
 
   static final GetIt instance = GetIt.instance;
 
-  static void setupDependencies() => instance
-    ..registerLazySingleton<Logger>(Logger.new)
-    ..registerLazySingleton<LoggerApi>(LoggerRepository.new)
-    ..registerLazySingleton<NfcApi>(NfcRepository.new)
-    ..registerLazySingleton<Translations>(_createTranslations)
-    ..registerLazySingleton<Random>(Random.new)
-    ..registerFactoryParam<Timer, Duration, void Function(Timer timer)>(
-      Timer.periodic,
-    )
-    ..registerLazySingleton<DateTime>(
-      () => DateTime(2025),
-      instanceName: 'birthday',
-    )
-    ..registerLazySingleton<Uint8List>(
-      () => Config.aid.toUint8List(isHex: true),
-      instanceName: 'aid',
-    )
-    ..registerLazySingleton<Uint8List>(
-      () => Config.pin.toHexString().toUint8List(),
-      instanceName: 'pin',
-    );
+  static void setupDependencies() =>
+      instance
+        ..registerLazySingleton<Logger>(Logger.new)
+        ..registerLazySingleton<LoggerApi>(LoggerRepository.new)
+        ..registerLazySingleton<NfcApi>(NfcRepository.new)
+        ..registerLazySingleton<Translations>(_createTranslations)
+        ..registerLazySingleton<Random>(Random.new)
+        ..registerFactoryParam<Timer, Duration, void Function(Timer timer)>(
+          Timer.periodic,
+        )
+        ..registerLazySingleton<DateTime>(
+          () => DateTime(2025),
+          instanceName: 'birthday',
+        )
+        ..registerLazySingleton<Uint8List>(
+          () => Config.aid.toUint8List(isHex: true),
+          instanceName: 'aid',
+        )
+        ..registerLazySingleton<Uint8List>(
+          () => Config.pin.toHexString().toUint8List(),
+          instanceName: 'pin',
+        );
   static Translations _createTranslations() => AppLocale.en.buildSync();
 }

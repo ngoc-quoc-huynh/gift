@@ -1,5 +1,1 @@
-enum NfcStatus {
-  error,
-  idle,
-  success,
-}
+enum NfcStatus { error, idle, success }

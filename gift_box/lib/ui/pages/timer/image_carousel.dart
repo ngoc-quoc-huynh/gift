@@ -27,30 +27,36 @@ class _TimerImageCarouselState extends State<TimerImageCarousel> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ImageCarouselCubit>(
-      create: (_) => ImageCarouselCubit(
-        count: Assets.items.length,
-        imageDuration: Config.carouselImageDuration,
-      )..init(),
+      create:
+          (_) => ImageCarouselCubit(
+            count: Assets.items.length,
+            imageDuration: Config.carouselImageDuration,
+          )..init(),
       child: LayoutBuilder(
-        builder: (context, constraints) =>
-            BlocListener<ImageCarouselCubit, ImageCarouselState>(
-          listener: (_, state) => _onImageCarouselStateChange(
-            state: state,
-            maxWidth: constraints.maxWidth,
-          ),
-          child: IgnorePointer(
-            // TODO: Change logic if https://github.com/flutter/flutter/issues/161369 is resolved.
-            child: CarouselView(
-              controller: _controller,
-              itemExtent: constraints.maxWidth,
-              padding: EdgeInsets.zero,
-              shape: const RoundedRectangleBorder(),
-              enableSplash: false,
-              itemSnapping: true,
-              children: (Assets.items..shuffleSeeded()).map(_Item.new).toList(),
+        builder:
+            (
+              context,
+              constraints,
+            ) => BlocListener<ImageCarouselCubit, ImageCarouselState>(
+              listener:
+                  (_, state) => _onImageCarouselStateChange(
+                    state: state,
+                    maxWidth: constraints.maxWidth,
+                  ),
+              child: IgnorePointer(
+                // TODO: Change logic if https://github.com/flutter/flutter/issues/161369 is resolved.
+                child: CarouselView(
+                  controller: _controller,
+                  itemExtent: constraints.maxWidth,
+                  padding: EdgeInsets.zero,
+                  shape: const RoundedRectangleBorder(),
+                  enableSplash: false,
+                  itemSnapping: true,
+                  children:
+                      (Assets.items..shuffleSeeded()).map(_Item.new).toList(),
+                ),
+              ),
             ),
-          ),
-        ),
       ),
     );
   }
@@ -58,15 +64,14 @@ class _TimerImageCarouselState extends State<TimerImageCarousel> {
   void _onImageCarouselStateChange({
     required ImageCarouselState state,
     required double maxWidth,
-  }) =>
-      unawaited(
-        // TODO: Change if https://github.com/flutter/flutter/issues/161368 is resolved.
-        _controller.animateTo(
-          maxWidth * state.index,
-          duration: Config.carouselAnimationDuration,
-          curve: Curves.easeInOut,
-        ),
-      );
+  }) => unawaited(
+    // TODO: Change if https://github.com/flutter/flutter/issues/161368 is resolved.
+    _controller.animateTo(
+      maxWidth * state.index,
+      duration: Config.carouselAnimationDuration,
+      curve: Curves.easeInOut,
+    ),
+  );
 }
 
 class _Item extends StatelessWidget {
@@ -76,9 +81,6 @@ class _Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      asset(),
-      fit: BoxFit.cover,
-    );
+    return Image.asset(asset(), fit: BoxFit.cover);
   }
 }

@@ -29,10 +29,11 @@ class _GiftBoxState extends State<GiftBox> {
     return AspectRatio(
       aspectRatio: 1,
       child: BlocProvider<GiftBoxBloc>(
-        create: (_) => GiftBoxBloc(
-          aid: Injector.instance.aid,
-          pin: Injector.instance.pin,
-        )..add(const GiftBoxInitializeEvent()),
+        create:
+            (_) => GiftBoxBloc(
+              aid: Injector.instance.aid,
+              pin: Injector.instance.pin,
+            )..add(const GiftBoxInitializeEvent()),
         child: BlocListener<GiftBoxBloc, GiftBoxState>(
           listener: _onGiftBoxStateChanged,
           child: RiveAnimation.asset(
@@ -48,11 +49,9 @@ class _GiftBoxState extends State<GiftBox> {
   }
 
   void _onInit(Artboard artboard) {
-    _controller = StateMachineController.fromArtboard(
-      artboard,
-      'State Machine',
-    )!
-      ..addEventListener(_onRiveEvent);
+    _controller =
+        StateMachineController.fromArtboard(artboard, 'State Machine')!
+          ..addEventListener(_onRiveEvent);
     _isCorrect = _controller.getBoolInput('Is key correct')!;
     _isWrong = _controller.getBoolInput('Is key wrong')!;
     artboard.addController(_controller);
@@ -66,7 +65,7 @@ class _GiftBoxState extends State<GiftBox> {
       };
 
   void _onRiveEvent(RiveEvent event) => switch (event.name) {
-        'Animation end event' => context.read<BoolCubit>().update(true),
-        _ => null,
-      };
+    'Animation end event' => context.read<BoolCubit>().update(true),
+    _ => null,
+  };
 }

@@ -12,25 +12,35 @@ class GiftNfcStatus extends StatelessWidget {
     return BlocProvider<NfcStatusBloc>(
       create: (_) => NfcStatusBloc()..add(const NfcStatusCheckEvent()),
       child: Builder(
-        builder: (context) => AppLifecycleObserver(
-          onResume: () =>
-              context.read<NfcStatusBloc>().add(const NfcStatusCheckEvent()),
-          child: BlocBuilder<NfcStatusBloc, NfcStatusState>(
-            builder: (context, state) => switch (state) {
-              NfcStatusLoadInProgress() => const SizedBox.shrink(),
-              NfcStatusLoadOnSuccess(:final isEnabled) => Tooltip(
-                  message: Injector.instance.translations.pages.gift.nfcTooltip,
-                  child: Icon(
-                    Icons.nfc,
-                    color: switch (isEnabled) {
-                      false => Colors.red,
-                      true => Colors.green,
-                    },
+        builder:
+            (context) => AppLifecycleObserver(
+              onResume:
+                  () => context.read<NfcStatusBloc>().add(
+                    const NfcStatusCheckEvent(),
                   ),
-                ),
-            },
-          ),
-        ),
+              child: BlocBuilder<NfcStatusBloc, NfcStatusState>(
+                builder:
+                    (context, state) => switch (state) {
+                      NfcStatusLoadInProgress() => const SizedBox.shrink(),
+                      NfcStatusLoadOnSuccess(:final isEnabled) => Tooltip(
+                        message:
+                            Injector
+                                .instance
+                                .translations
+                                .pages
+                                .gift
+                                .nfcTooltip,
+                        child: Icon(
+                          Icons.nfc,
+                          color: switch (isEnabled) {
+                            false => Colors.red,
+                            true => Colors.green,
+                          },
+                        ),
+                      ),
+                    },
+              ),
+            ),
       ),
     );
   }

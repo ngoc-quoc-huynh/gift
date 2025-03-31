@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppLifecycleObserver extends StatefulWidget {
-  const AppLifecycleObserver({
-    required this.child,
-    this.onResume,
-    super.key,
-  });
+  const AppLifecycleObserver({required this.child, this.onResume, super.key});
 
   final VoidCallback? onResume;
   final Widget child;
@@ -20,9 +16,7 @@ class _AppLifecycleObserverState extends State<AppLifecycleObserver> {
   @override
   void initState() {
     super.initState();
-    _listener = AppLifecycleListener(
-      onResume: widget.onResume,
-    );
+    _listener = AppLifecycleListener(onResume: widget.onResume);
   }
 
   @override

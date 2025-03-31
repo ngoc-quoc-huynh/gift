@@ -9,10 +9,7 @@ part 'state.dart';
 
 final class NfcStatusBloc extends Bloc<NfcStatusEvent, NfcStatusState> {
   NfcStatusBloc() : super(const NfcStatusLoadInProgress()) {
-    on<NfcStatusCheckEvent>(
-      _onNfcStatusCheckEvent,
-      transformer: droppable(),
-    );
+    on<NfcStatusCheckEvent>(_onNfcStatusCheckEvent, transformer: droppable());
   }
 
   static final _nfcApi = Injector.instance.nfcApi;
@@ -20,6 +17,5 @@ final class NfcStatusBloc extends Bloc<NfcStatusEvent, NfcStatusState> {
   Future<void> _onNfcStatusCheckEvent(
     NfcStatusCheckEvent event,
     Emitter<NfcStatusState> emit,
-  ) async =>
-      emit(NfcStatusLoadOnSuccess(isEnabled: await _nfcApi.isEnabled()));
+  ) async => emit(NfcStatusLoadOnSuccess(isEnabled: await _nfcApi.isEnabled()));
 }

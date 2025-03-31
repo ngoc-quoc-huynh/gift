@@ -8,8 +8,9 @@ import 'package:go_router/go_router.dart';
 final class GoRouterConfig {
   const GoRouterConfig._();
 
-  static final _rootNavigatorKey =
-      GlobalKey<NavigatorState>(debugLabel: 'root');
+  static final _rootNavigatorKey = GlobalKey<NavigatorState>(
+    debugLabel: 'root',
+  );
 
   static final routes = GoRouter(
     navigatorKey: _rootNavigatorKey,
@@ -18,17 +19,17 @@ final class GoRouterConfig {
       GoRoute(
         name: Routes.homePage(),
         path: '/',
-        builder: (_, __) => const HomePage(),
+        builder: (_, _) => const HomePage(),
       ),
       GoRoute(
         name: Routes.giftPage(),
         path: '/gift',
-        builder: (_, __) => const GiftPage(),
+        builder: (_, _) => const GiftPage(),
       ),
       GoRoute(
         name: Routes.timerPage(),
         path: '/timer',
-        builder: (_, __) => const TimerPage(),
+        builder: (_, _) => const TimerPage(),
       ),
     ],
   );

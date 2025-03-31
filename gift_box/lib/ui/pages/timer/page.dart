@@ -8,12 +8,7 @@ class TimerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Stack(
-        children: [
-          TimerImageCarousel(),
-          TimerCountdown(),
-        ],
-      ),
+      body: Stack(children: [TimerImageCarousel(), TimerCountdown()]),
     );
   }
 }

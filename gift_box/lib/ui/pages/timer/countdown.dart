@@ -29,8 +29,9 @@ class TimerCountdown extends StatelessWidget {
                 ),
                 child: Center(
                   child: BlocProvider<CountdownCubit>(
-                    create: (_) =>
-                        CountdownCubit(Injector.instance.birthday)..init(),
+                    create:
+                        (_) =>
+                            CountdownCubit(Injector.instance.birthday)..init(),
                     child: const _Text(),
                   ),
                 ),
@@ -51,21 +52,22 @@ class _Text extends StatelessWidget {
     final textStyle = context.textTheme.displayLarge;
 
     return BlocBuilder<CountdownCubit, CountdownState>(
-      builder: (context, state) => switch (state) {
-        CountdownLoadInProgress() => const SizedBox.shrink(),
-        CountdownRunning(:final remainingTime) => Text(
-            remainingTime.toHHMMSS(),
-            style: textStyle?.copyWith(letterSpacing: 1.5),
-          ),
-        CountdownFinished() => TextButton(
-            style: TextButton.styleFrom(overlayColor: Colors.transparent),
-            onPressed: () => context.goRoute(Routes.giftPage),
-            child: Text(
-              Injector.instance.translations.pages.timer.tapMe,
-              style: textStyle,
+      builder:
+          (context, state) => switch (state) {
+            CountdownLoadInProgress() => const SizedBox.shrink(),
+            CountdownRunning(:final remainingTime) => Text(
+              remainingTime.toHHMMSS(),
+              style: textStyle?.copyWith(letterSpacing: 1.5),
             ),
-          ),
-      },
+            CountdownFinished() => TextButton(
+              style: TextButton.styleFrom(overlayColor: Colors.transparent),
+              onPressed: () => context.goRoute(Routes.giftPage),
+              child: Text(
+                Injector.instance.translations.pages.timer.tapMe,
+                style: textStyle,
+              ),
+            ),
+          },
     );
   }
 }

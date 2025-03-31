@@ -13,10 +13,8 @@ final class CustomTheme {
     pageTransitionsTheme: PageTransitionsTheme(
       builders: Map.fromEntries(
         TargetPlatform.values.map(
-          (platform) => MapEntry(
-            platform,
-            const FadeForwardsPageTransitionsBuilder(),
-          ),
+          (platform) =>
+              MapEntry(platform, const FadeForwardsPageTransitionsBuilder()),
         ),
       ),
     ),

@@ -13,16 +13,16 @@ final class NfcRepository implements NfcApi {
   Future<bool> isEnabled() => _instance.isNfcEnabled();
 
   @override
-  Stream<NfcStatus> startEmulation(Uint8List aid, Uint8List pin) =>
-      _instance.startEmulation(aid: aid, pin: pin).map(
-            (status) => switch (status) {
-              HostCardEmulationStatus.invalidCommand ||
-              HostCardEmulationStatus.invalidAid ||
-              HostCardEmulationStatus.wrongPin ||
-              HostCardEmulationStatus.functionNotSupported =>
-                NfcStatus.error,
-              HostCardEmulationStatus.pinVerified => NfcStatus.success,
-              _ => NfcStatus.idle,
-            },
-          );
+  Stream<NfcStatus> startEmulation(Uint8List aid, Uint8List pin) => _instance
+      .startEmulation(aid: aid, pin: pin)
+      .map(
+        (status) => switch (status) {
+          HostCardEmulationStatus.invalidCommand ||
+          HostCardEmulationStatus.invalidAid ||
+          HostCardEmulationStatus.wrongPin ||
+          HostCardEmulationStatus.functionNotSupported => NfcStatus.error,
+          HostCardEmulationStatus.pinVerified => NfcStatus.success,
+          _ => NfcStatus.idle,
+        },
+      );
 }

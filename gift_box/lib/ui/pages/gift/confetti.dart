@@ -4,10 +4,7 @@ import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 
 class GiftConfetti extends StatefulWidget {
-  const GiftConfetti({
-    required this.child,
-    super.key,
-  });
+  const GiftConfetti({required this.child, super.key});
   final Widget child;
 
   @override

@@ -11,10 +11,8 @@ part 'event.dart';
 part 'state.dart';
 
 final class GiftBoxBloc extends Bloc<GiftBoxEvent, GiftBoxState> {
-  GiftBoxBloc({
-    required this.aid,
-    required this.pin,
-  }) : super(const GiftBoxIdle()) {
+  GiftBoxBloc({required this.aid, required this.pin})
+    : super(const GiftBoxIdle()) {
     on<GiftBoxInitializeEvent>(
       _onGiftBoxInitializeEvent,
       transformer: droppable(),
@@ -27,10 +25,7 @@ final class GiftBoxBloc extends Bloc<GiftBoxEvent, GiftBoxState> {
       _onGiftBoxOpenWrongEvent,
       transformer: droppable(),
     );
-    on<GiftBoxIdleEvent>(
-      _onGiftBoxIdleEvent,
-      transformer: droppable(),
-    );
+    on<GiftBoxIdleEvent>(_onGiftBoxIdleEvent, transformer: droppable());
   }
 
   final Uint8List aid;
@@ -42,7 +37,9 @@ final class GiftBoxBloc extends Bloc<GiftBoxEvent, GiftBoxState> {
     GiftBoxInitializeEvent event,
     Emitter<GiftBoxState> emit,
   ) =>
-      _sub = _nfcApi.startEmulation(aid, pin).listen(
+      _sub = _nfcApi
+          .startEmulation(aid, pin)
+          .listen(
             (status) => switch (status) {
               NfcStatus.error => add(const GiftBoxOpenWrongEvent()),
               NfcStatus.idle => add(const GiftBoxIdleEvent()),
@@ -70,8 +67,7 @@ final class GiftBoxBloc extends Bloc<GiftBoxEvent, GiftBoxState> {
   void _onGiftBoxIdleEvent(
     GiftBoxIdleEvent event,
     Emitter<GiftBoxState> emit,
-  ) =>
-      emit(const GiftBoxIdle());
+  ) => emit(const GiftBoxIdle());
 
   Future<void> _stopEmulation() async {
     await _sub?.cancel();
