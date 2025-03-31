@@ -107,5 +107,31 @@ void main() {
       ).called(1);
       verify(() => loggerApi.logInfo(any())).called(1);
     });
+
+    test('returns false if NfcException is thrown.', () async {
+      when(
+        () => nfcManager.sendCommand(
+          SelectAidCommand(aid.toUint8List(isHex: true)),
+        ),
+      ).thenThrow(const TagConnectionException());
+
+      final result = await repository.sendCommand(
+        const domain.SelectAidCommand(aid),
+      );
+
+      expect(result, isFalse);
+      verify(
+        () => nfcManager.sendCommand(
+          SelectAidCommand(aid.toUint8List(isHex: true)),
+        ),
+      ).called(1);
+      verify(
+        () => loggerApi.logException(
+          any(),
+          exception: const TagConnectionException(),
+          stackTrace: any(named: 'stackTrace'),
+        ),
+      ).called(1);
+    });
   });
 }
