@@ -1,47 +1,43 @@
-# gift_keys
+# Gift Keys
 
-Source code for the Gift Keys Flutter app.
+[![build status](https://github.com/ngoc-quoc-huynh/gift/actions/workflows/gift_keys.yaml/badge.svg?branch=main)](https://github.com/ngoc-quoc-huynh/gift/actions/workflows/gift_keys.yaml?query=branch%3Amain)
+[![style](https://img.shields.io/badge/style-cosee__lints-brightgreen)](https://pub.dev/packages/cosee_lints)
+[![license](https://img.shields.io/github/license/ngoc-quoc-huynh/gift)](https://raw.githubusercontent.com/ngoc-quoc-huynh/gift/refs/heads/main/LICENSE)
 
-## Prerequisites
+## Overview
 
-### Flutter setup
+The Gift Keys App is a Flutter application that allows users to manage digital keys unlock the Gifts
+from [Gift Box](../gift_box). Users can **add new keys** by providing an **AID (Application
+Identifier)**, a **password (PIN)**, and additional metadata. The app interacts with the **Gift Box
+**
+project, which uses **NFC Host Card Emulation (HCE)**. When scanned, the Gift Keys App transmits the
+stored AID and PIN for verification, enabling secure access to the associated gift.
 
-We recommend using [asdf](https://asdf-vm.com/) as a version manager. Follow these steps to set up:
+## Getting Started
 
-- Install [asdf](https://asdf-vm.com/guide/getting-started.html).
-- Use the Flutter version specified in [.tool-versions](.tool-versions) by running this command:
+### asdf
 
-```sh
+We are using [asdf](https://asdf-vm.com/) to manage the dependencies. Make sure you have it
+installed and then run the following command to install the required versions:
+
+```bash
 asdf install
-````
+```
 
-- Check whether your system is properly set up: `flutter doctor`
+If you don't have asdf installed or prefer not to use it, you can
+install [Flutter](https://docs.flutter.dev/) directly by following the
+official[Flutter installation guide](https://docs.flutter.dev/get-started/install). Make sure to use
+the version specified in the [.tool-versions ](../.tool-versions) file to avoid compatibility
+issues.
 
-### Android setup
+### Code generation for translations
 
-- Install the [Android SDK](https://developer.android.com/studio)
-- Set environment variable `ANDROID_HOME` to the location of the SDK
+We are using [slang](https://pub.dev/packages/slang) to manage the translations.
 
-### iOS setup
+Run the following command to generate the translations:
 
-- Be a Mac OS user
-- Install XCode
-    - You'll need to be logged in with an Apple Developer account to download XCode
-- Start XCode once and follow the instructions
-
-## Code generation for translations
-
-The app relies on code generation for translations. This is handled using the 
-[slang](https://pub.dev/packages/slang) package.
-A few parts of the app rely on automatic code generation. Translations generation can be executed at
-once using [`slang`](#slang).
-
-### slang
-
-You can generate all the necessary translation files using:
-
-```sh
-make generate
+```bash
+make i18n
 ```
 
 ## Code style
@@ -59,12 +55,30 @@ To format and analyze the codebase, you can run the following command:
 make style
 ```
 
+### Code style enforcement with lefthook
+
+To automatically format staged code before committing, we
+use [lefthook](https://github.com/evilmartians/lefthook) as a pre-commit hook.
+Our configuration ensures that only staged Dart files in the app directory are formatted with dart
+format.
+
+```sh
+lefthook install
+```
+
 ## Tests
 
 To execute the tests, run the following command in your terminal:
 
 ```sh
 make test
+```
+
+This will run the test in random order.
+If you want to specify a seed for randomizing the test order, you can use the following command:
+
+```sh
+make test seed=1
 ```
 
 ### Golden tests
@@ -83,27 +97,3 @@ make update-goldens
 
 This will update all golden files, so be careful when running this command to ensure that all
 changes to the UI are intentional.
-
-## Git hooks
-
-We use [lefthook](https://github.com/evilmartians/lefthook) to run all coding convention checks as
-git pre-commit/pre-push hook.
-
-### Installation
-
-To install lefthook run the following command:
-
-```sh
-brew install lefthook
-```
-
-### Usage
-
-To initialize lefthook run the following command:
-
-```sh
-lefthook install
-```
-
-This will set up git pre-commit/pre-push hooks containing checks as configured
-in [`lefthook.yaml`](lefthook.yaml).
