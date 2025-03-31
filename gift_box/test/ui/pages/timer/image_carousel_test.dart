@@ -10,15 +10,17 @@ import '../../../utils.dart';
 
 Future<void> main() async {
   setUpAll(
-    () => Injector.instance
-      ..registerPeriodicTimer()
-      ..registerSingleton<Random>(Random(1)),
+    () =>
+        Injector.instance
+          ..registerPeriodicTimer()
+          ..registerSingleton<Random>(Random(1)),
   );
 
   tearDownAll(
-    () => Injector.instance
-      ..unregister<Timer>()
-      ..unregister<Random>(),
+    () =>
+        Injector.instance
+          ..unregister<Timer>()
+          ..unregister<Random>(),
   );
 
   await goldenTest(

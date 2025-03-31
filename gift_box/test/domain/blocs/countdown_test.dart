@@ -17,10 +17,8 @@ void main() {
 
   test(
     'initial state is CountdownLoadInProgress',
-    () => expect(
-      CountdownCubit(birthday).state,
-      const CountdownLoadInProgress(),
-    ),
+    () =>
+        expect(CountdownCubit(birthday).state, const CountdownLoadInProgress()),
   );
 
   group('init', () {

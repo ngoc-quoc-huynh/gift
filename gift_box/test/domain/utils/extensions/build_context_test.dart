@@ -46,18 +46,20 @@ void main() {
               GoRoute(
                 path: '/a',
                 name: pageA(),
-                builder: (context, _) => Scaffold(
-                  appBar: AppBar(title: const Text('A')),
-                  floatingActionButton: FloatingActionButton(
-                    onPressed: () => context.goRoute(pageB),
-                  ),
-                ),
+                builder:
+                    (context, _) => Scaffold(
+                      appBar: AppBar(title: const Text('A')),
+                      floatingActionButton: FloatingActionButton(
+                        onPressed: () => context.goRoute(pageB),
+                      ),
+                    ),
               ),
               GoRoute(
                 path: '/b',
                 name: pageB(),
-                builder: (_, state) =>
-                    Scaffold(appBar: AppBar(title: const Text('B'))),
+                builder:
+                    (_, state) =>
+                        Scaffold(appBar: AppBar(title: const Text('B'))),
               ),
             ],
           ),

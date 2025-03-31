@@ -13,36 +13,22 @@ void main() {
   const testClass = _TestClass();
   final loggerApi = MockLoggerApi();
 
-  setUpAll(
-    () => Injector.instance.registerSingleton<LoggerApi>(loggerApi),
-  );
+  setUpAll(() => Injector.instance.registerSingleton<LoggerApi>(loggerApi));
 
-  tearDownAll(
-    () async => Injector.instance.unregister<LoggerApi>(),
-  );
+  tearDownAll(() async => Injector.instance.unregister<LoggerApi>());
 
   group('logInfo', () {
     test('returns correctly.', () {
       final stackTrace = StackTrace.fromString('');
       when(
-        () => loggerApi.logInfo(
-          'methodName',
-          'message',
-          stackTrace: stackTrace,
-        ),
+        () =>
+            loggerApi.logInfo('methodName', 'message', stackTrace: stackTrace),
       ).thenReturn(null);
-      testClass.logInfo(
-        'methodName',
-        'message',
-        stackTrace: stackTrace,
-      );
+      testClass.logInfo('methodName', 'message', stackTrace: stackTrace);
 
       verify(
-        () => loggerApi.logInfo(
-          'methodName',
-          'message',
-          stackTrace: stackTrace,
-        ),
+        () =>
+            loggerApi.logInfo('methodName', 'message', stackTrace: stackTrace),
       ).called(1);
     });
   });
@@ -57,11 +43,7 @@ void main() {
           stackTrace: stackTrace,
         ),
       ).thenReturn(null);
-      testClass.logWarning(
-        'methodName',
-        'message',
-        stackTrace: stackTrace,
-      );
+      testClass.logWarning('methodName', 'message', stackTrace: stackTrace);
 
       verify(
         () => loggerApi.logWarning(

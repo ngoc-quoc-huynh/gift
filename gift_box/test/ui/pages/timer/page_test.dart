@@ -11,18 +11,20 @@ import '../../../utils.dart';
 
 Future<void> main() async {
   setUpAll(
-    () => Injector.instance
-      ..registerBirthday(DateTime(2025))
-      ..registerPeriodicTimer()
-      ..registerSingleton<Translations>(AppLocale.en.buildSync())
-      ..registerSingleton<Random>(Random(2)),
+    () =>
+        Injector.instance
+          ..registerBirthday(DateTime(2025))
+          ..registerPeriodicTimer()
+          ..registerSingleton<Translations>(AppLocale.en.buildSync())
+          ..registerSingleton<Random>(Random(2)),
   );
 
   tearDownAll(
-    () => Injector.instance
-      ..unregisterBirthday()
-      ..unregister<Timer>()
-      ..unregister<Random>(),
+    () =>
+        Injector.instance
+          ..unregisterBirthday()
+          ..unregister<Timer>()
+          ..unregister<Random>(),
   );
 
   await goldenTest(
@@ -32,10 +34,11 @@ Future<void> main() async {
       await precacheImages(tester);
       await tester.pump(const Duration(seconds: 1));
     },
-    pumpWidget: (tester, widget) => withClock(
-      Clock.fixed(DateTime(2024, 12, 31)),
-      () => tester.pumpWidget(widget),
-    ),
+    pumpWidget:
+        (tester, widget) => withClock(
+          Clock.fixed(DateTime(2024, 12, 31)),
+          () => tester.pumpWidget(widget),
+        ),
     constraints: pageConstraints,
     builder: TimerPage.new,
   );

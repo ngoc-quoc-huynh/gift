@@ -12,10 +12,7 @@ void main() {
       Injector.instance.registerSingleton<Random>(Random(0));
       addTearDown(Injector.instance.unregister<Random>);
 
-      expectList(
-        [1, 2, 3]..shuffleSeeded(),
-        [3, 2, 1],
-      );
+      expectList([1, 2, 3]..shuffleSeeded(), [3, 2, 1]);
     });
   });
 }

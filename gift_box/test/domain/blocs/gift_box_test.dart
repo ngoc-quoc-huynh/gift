@@ -15,43 +15,35 @@ void main() {
   final pin = Uint8List(0);
   final nfcApi = MockNfcApi();
 
-  setUpAll(
-    () => Injector.instance.registerSingleton<NfcApi>(nfcApi),
-  );
+  setUpAll(() => Injector.instance.registerSingleton<NfcApi>(nfcApi));
 
   tearDownAll(Injector.instance.unregister<NfcApi>);
 
   test(
     'initial state is GiftBoxIdle.',
-    () => expect(
-      GiftBoxBloc(aid: aid, pin: pin).state,
-      const GiftBoxIdle(),
-    ),
+    () => expect(GiftBoxBloc(aid: aid, pin: pin).state, const GiftBoxIdle()),
   );
 
   group('GiftBoxInitializeEvent', () {
     blocTest<GiftBoxBloc, GiftBoxState>(
       'emits GiftBoxOpenWrongEvent when NfcStatus is error.',
       setUp: () {
-        when(() => nfcApi.startEmulation(aid, pin)).thenAnswer(
-          (_) => Stream.value(NfcStatus.error),
-        );
+        when(
+          () => nfcApi.startEmulation(aid, pin),
+        ).thenAnswer((_) => Stream.value(NfcStatus.error));
       },
       build: () => GiftBoxBloc(aid: aid, pin: pin),
       act: (bloc) => bloc.add(const GiftBoxInitializeEvent()),
-      expect: () => const [
-        GiftBoxOpenOnFailure(),
-        GiftBoxIdle(),
-      ],
+      expect: () => const [GiftBoxOpenOnFailure(), GiftBoxIdle()],
       verify: (_) => verify(() => nfcApi.startEmulation(aid, pin)).called(1),
     );
 
     blocTest<GiftBoxBloc, GiftBoxState>(
       'emits GiftBoxOpenWrongEvent when NfcStatus is idle.',
       setUp: () {
-        when(() => nfcApi.startEmulation(aid, pin)).thenAnswer(
-          (_) => Stream.value(NfcStatus.idle),
-        );
+        when(
+          () => nfcApi.startEmulation(aid, pin),
+        ).thenAnswer((_) => Stream.value(NfcStatus.idle));
       },
       build: () => GiftBoxBloc(aid: aid, pin: pin),
       act: (bloc) => bloc.add(const GiftBoxInitializeEvent()),
@@ -62,16 +54,13 @@ void main() {
     blocTest<GiftBoxBloc, GiftBoxState>(
       'emits GiftBoxOpenCorrectEvent when NfcStatus is success.',
       setUp: () {
-        when(() => nfcApi.startEmulation(aid, pin)).thenAnswer(
-          (_) => Stream.value(NfcStatus.success),
-        );
+        when(
+          () => nfcApi.startEmulation(aid, pin),
+        ).thenAnswer((_) => Stream.value(NfcStatus.success));
       },
       build: () => GiftBoxBloc(aid: aid, pin: pin),
       act: (bloc) => bloc.add(const GiftBoxInitializeEvent()),
-      expect: () => const [
-        GiftBoxOpenOnSuccess(),
-        GiftBoxIdle(),
-      ],
+      expect: () => const [GiftBoxOpenOnSuccess(), GiftBoxIdle()],
       verify: (_) => verify(() => nfcApi.startEmulation(aid, pin)).called(1),
     );
   });
@@ -81,10 +70,7 @@ void main() {
       'emits GiftBoxOpenOnSuccess.',
       build: () => GiftBoxBloc(aid: aid, pin: pin),
       act: (bloc) => bloc.add(const GiftBoxOpenCorrectEvent()),
-      expect: () => const [
-        GiftBoxOpenOnSuccess(),
-        GiftBoxIdle(),
-      ],
+      expect: () => const [GiftBoxOpenOnSuccess(), GiftBoxIdle()],
     );
   });
 
@@ -93,10 +79,7 @@ void main() {
       'emits GiftBoxOpenOnFailure.',
       build: () => GiftBoxBloc(aid: aid, pin: pin),
       act: (bloc) => bloc.add(const GiftBoxOpenWrongEvent()),
-      expect: () => const [
-        GiftBoxOpenOnFailure(),
-        GiftBoxIdle(),
-      ],
+      expect: () => const [GiftBoxOpenOnFailure(), GiftBoxIdle()],
     );
   });
 

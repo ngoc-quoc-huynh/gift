@@ -16,10 +16,7 @@ void main() {
     Injector.instance.registerAid(aid);
     addTearDown(Injector.instance.unregisterAid);
 
-    expectList(
-      Injector.instance.aid,
-      aid,
-    );
+    expectList(Injector.instance.aid, aid);
   });
 
   test('returns birthday.', () {
@@ -27,10 +24,7 @@ void main() {
     Injector.instance.registerBirthday(birthday);
     addTearDown(Injector.instance.unregisterBirthday);
 
-    expect(
-      Injector.instance.birthday,
-      birthday,
-    );
+    expect(Injector.instance.birthday, birthday);
   });
 
   test('returns Logger.', () {
@@ -38,10 +32,7 @@ void main() {
     Injector.instance.registerSingleton<Logger>(logger);
     addTearDown(Injector.instance.unregister<Logger>);
 
-    expect(
-      Injector.instance.logger,
-      logger,
-    );
+    expect(Injector.instance.logger, logger);
   });
 
   test('returns LoggerApi.', () {
@@ -49,23 +40,17 @@ void main() {
     Injector.instance.registerSingleton<LoggerApi>(loggerApi);
     addTearDown(Injector.instance.unregister<LoggerApi>);
 
-    expect(
-      Injector.instance.loggerApi,
-      loggerApi,
-    );
+    expect(Injector.instance.loggerApi, loggerApi);
   });
 
   test('returns periodic timer correctly.', () {
     Injector.instance
         .registerFactoryParam<Timer, Duration, void Function(Timer timer)>(
-      Timer.periodic,
-    );
-    final periodicTimer = Injector.instance.periodicTimer(
-      Duration.zero,
-      (_) {
-        return;
-      },
-    );
+          Timer.periodic,
+        );
+    final periodicTimer = Injector.instance.periodicTimer(Duration.zero, (_) {
+      return;
+    });
     addTearDown(periodicTimer.cancel);
 
     expect(periodicTimer, isA<Timer>());
@@ -76,10 +61,7 @@ void main() {
     Injector.instance.registerPin(pin);
     addTearDown(Injector.instance.unregisterPin);
 
-    expectList(
-      Injector.instance.pin,
-      pin,
-    );
+    expectList(Injector.instance.pin, pin);
   });
 
   test('returns Random.', () {
@@ -87,10 +69,7 @@ void main() {
     Injector.instance.registerSingleton<Random>(random);
     addTearDown(Injector.instance.unregister<Random>);
 
-    expect(
-      Injector.instance.random,
-      random,
-    );
+    expect(Injector.instance.random, random);
   });
 
   test('returns Translations.', () {
@@ -98,9 +77,6 @@ void main() {
     Injector.instance.registerSingleton<Translations>(translations);
     addTearDown(Injector.instance.unregister<Translations>);
 
-    expect(
-      Injector.instance.translations,
-      translations,
-    );
+    expect(Injector.instance.translations, translations);
   });
 }

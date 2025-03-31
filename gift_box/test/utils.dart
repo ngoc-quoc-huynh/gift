@@ -9,26 +9,18 @@ import 'package:get_it/get_it.dart';
 final pageConstraints = BoxConstraints.tight(const Size(360, 640));
 final widgetConstraints = BoxConstraints.tight(const Size.square(500));
 
-void expectList<T>(List<T> actual, List<T> matcher) => expect(
-      ListEquality<T>().equals(actual, matcher),
-      isTrue,
-    );
+void expectList<T>(List<T> actual, List<T> matcher) =>
+    expect(ListEquality<T>().equals(actual, matcher), isTrue);
 
 extension GetItTestExtension on GetIt {
-  void registerAid(Uint8List aid) => registerLazySingleton<Uint8List>(
-        () => aid,
-        instanceName: 'aid',
-      );
+  void registerAid(Uint8List aid) =>
+      registerLazySingleton<Uint8List>(() => aid, instanceName: 'aid');
 
-  void registerBirthday(DateTime dateTime) => registerLazySingleton<DateTime>(
-        () => dateTime,
-        instanceName: 'birthday',
-      );
+  void registerBirthday(DateTime dateTime) =>
+      registerLazySingleton<DateTime>(() => dateTime, instanceName: 'birthday');
 
-  void registerPin(Uint8List pin) => registerLazySingleton<Uint8List>(
-        () => pin,
-        instanceName: 'pin',
-      );
+  void registerPin(Uint8List pin) =>
+      registerLazySingleton<Uint8List>(() => pin, instanceName: 'pin');
 
   FutureOr<void> unregisterAid() async =>
       unregister<Uint8List>(instanceName: 'aid');

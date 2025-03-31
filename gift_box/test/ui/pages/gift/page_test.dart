@@ -15,24 +15,26 @@ void main() {
   final nfcApi = MockNfcApi();
 
   setUpAll(
-    () => Injector.instance
-      ..registerAid(aid)
-      ..registerPin(pin)
-      ..registerSingleton<NfcApi>(nfcApi)
-      ..registerSingleton<Translations>(AppLocale.en.buildSync()),
+    () =>
+        Injector.instance
+          ..registerAid(aid)
+          ..registerPin(pin)
+          ..registerSingleton<NfcApi>(nfcApi)
+          ..registerSingleton<Translations>(AppLocale.en.buildSync()),
   );
 
   tearDownAll(
-    () async => Injector.instance
-      ..unregisterAid()
-      ..unregisterPin()
-      ..unregister<NfcApi>()
-      ..unregister<Translations>(),
+    () async =>
+        Injector.instance
+          ..unregisterAid()
+          ..unregisterPin()
+          ..unregister<NfcApi>()
+          ..unregister<Translations>(),
   );
 
-  when(() => nfcApi.startEmulation(aid, pin)).thenAnswer(
-    (_) => const Stream<NfcStatus>.empty(),
-  );
+  when(
+    () => nfcApi.startEmulation(aid, pin),
+  ).thenAnswer((_) => const Stream<NfcStatus>.empty());
 
   // TODO: Currently no possible to test due to this issue: https://github.com/rive-app/rive-flutter/issues/354
 }

@@ -12,10 +12,7 @@ void main() {
     'initial state is ImageCarouselState(index: 0, isReverse: false).',
     () => expect(
       ImageCarouselCubit(count: 2, imageDuration: Duration.zero).state,
-      const ImageCarouselState(
-        index: 0,
-        isReverse: false,
-      ),
+      const ImageCarouselState(index: 0, isReverse: false),
     ),
   );
 
@@ -57,10 +54,11 @@ void main() {
       'emits nothing if timer is not triggered.',
       setUp: Injector.instance.registerPeriodicTimer,
       tearDown: Injector.instance.unregister<Timer>,
-      build: () => ImageCarouselCubit(
-        count: 2,
-        imageDuration: const Duration(seconds: 1),
-      ),
+      build:
+          () => ImageCarouselCubit(
+            count: 2,
+            imageDuration: const Duration(seconds: 1),
+          ),
       act: (cubit) => cubit.init(),
       expect: () => const <ImageCarouselState>[],
     );
@@ -69,10 +67,11 @@ void main() {
       'emits correctly if when index is not the last and timer is triggered.',
       setUp: Injector.instance.registerPeriodicTimer,
       tearDown: Injector.instance.unregister<Timer>,
-      build: () => ImageCarouselCubit(
-        count: 2,
-        imageDuration: const Duration(seconds: 1),
-      ),
+      build:
+          () => ImageCarouselCubit(
+            count: 2,
+            imageDuration: const Duration(seconds: 1),
+          ),
       act: (cubit) => cubit.init(),
       wait: const Duration(seconds: 1),
       expect: () => [const ImageCarouselState(index: 1, isReverse: false)],
@@ -82,10 +81,11 @@ void main() {
       'emits correctly when index is the last and timer is triggered.',
       setUp: Injector.instance.registerPeriodicTimer,
       tearDown: Injector.instance.unregister<Timer>,
-      build: () => ImageCarouselCubit(
-        count: 2,
-        imageDuration: const Duration(seconds: 1),
-      ),
+      build:
+          () => ImageCarouselCubit(
+            count: 2,
+            imageDuration: const Duration(seconds: 1),
+          ),
       seed: () => const ImageCarouselState(index: 1, isReverse: false),
       act: (cubit) => cubit.init(),
       wait: const Duration(seconds: 1),
@@ -97,10 +97,11 @@ void main() {
       'triggered.',
       setUp: Injector.instance.registerPeriodicTimer,
       tearDown: Injector.instance.unregister<Timer>,
-      build: () => ImageCarouselCubit(
-        count: 2,
-        imageDuration: const Duration(seconds: 1),
-      ),
+      build:
+          () => ImageCarouselCubit(
+            count: 2,
+            imageDuration: const Duration(seconds: 1),
+          ),
       seed: () => const ImageCarouselState(index: 0, isReverse: true),
       act: (cubit) => cubit.init(),
       wait: const Duration(seconds: 1),

@@ -5,32 +5,33 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_box/static/resources/theme.dart';
 
-Future<void> testExecutable(FutureOr<void> Function() testMain) async =>
-    AlchemistConfig.runWithConfig(
-      config: AlchemistConfig(
-        theme: CustomTheme.light,
-        platformGoldensConfig: const PlatformGoldensConfig(
-          // ignore: avoid_redundant_argument_values, will be true running on CI.
-          enabled: !bool.fromEnvironment('CI'),
-        ),
-      ),
-      run: () {
-        final testUrl = (goldenFileComparator as LocalFileComparator).basedir;
-        goldenFileComparator = _LocalFileComparatorWithThreshold(
-          Uri.parse('$testUrl/test.dart'),
-          0.001,
-        );
-
-        return testMain();
-      },
+Future<void> testExecutable(
+  FutureOr<void> Function() testMain,
+) async => AlchemistConfig.runWithConfig(
+  config: AlchemistConfig(
+    theme: CustomTheme.light,
+    platformGoldensConfig: const PlatformGoldensConfig(
+      // ignore: avoid_redundant_argument_values, will be true running on CI.
+      enabled: !bool.fromEnvironment('CI'),
+    ),
+  ),
+  run: () {
+    final testUrl = (goldenFileComparator as LocalFileComparator).basedir;
+    goldenFileComparator = _LocalFileComparatorWithThreshold(
+      Uri.parse('$testUrl/test.dart'),
+      0.001,
     );
+
+    return testMain();
+  },
+);
 
 class _LocalFileComparatorWithThreshold extends LocalFileComparator {
   _LocalFileComparatorWithThreshold(super.testFile, this.threshold)
-      : assert(
-          threshold >= 0 && threshold <= 1,
-          'Threshold must be between 0 and 1! ',
-        );
+    : assert(
+        threshold >= 0 && threshold <= 1,
+        'Threshold must be between 0 and 1! ',
+      );
 
   final double threshold;
 

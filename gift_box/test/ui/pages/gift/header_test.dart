@@ -7,8 +7,9 @@ import 'package:gift_box/ui/pages/gift/header.dart';
 
 Future<void> main() async {
   setUpAll(
-    () => Injector.instance
-        .registerSingleton<Translations>(AppLocale.en.buildSync()),
+    () => Injector.instance.registerSingleton<Translations>(
+      AppLocale.en.buildSync(),
+    ),
   );
 
   tearDownAll(Injector.instance.unregister<Translations>);
@@ -16,23 +17,24 @@ Future<void> main() async {
   await goldenTest(
     'renders correctly.',
     fileName: 'header',
-    builder: () => GoldenTestGroup(
-      children: [
-        GoldenTestScenario(
-          name: 'Invisible',
-          child: BlocProvider<BoolCubit>(
-            create: (_) => BoolCubit(false),
-            child: const GiftHeader(),
-          ),
+    builder:
+        () => GoldenTestGroup(
+          children: [
+            GoldenTestScenario(
+              name: 'Invisible',
+              child: BlocProvider<BoolCubit>(
+                create: (_) => BoolCubit(false),
+                child: const GiftHeader(),
+              ),
+            ),
+            GoldenTestScenario(
+              name: 'Visible',
+              child: BlocProvider<BoolCubit>(
+                create: (_) => BoolCubit(true),
+                child: const GiftHeader(),
+              ),
+            ),
+          ],
         ),
-        GoldenTestScenario(
-          name: 'Visible',
-          child: BlocProvider<BoolCubit>(
-            create: (_) => BoolCubit(true),
-            child: const GiftHeader(),
-          ),
-        ),
-      ],
-    ),
   );
 }

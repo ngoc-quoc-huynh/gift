@@ -10,18 +10,13 @@ import '../../mocks.dart';
 void main() {
   final nfcApi = MockNfcApi();
 
-  setUpAll(
-    () => Injector.instance.registerSingleton<NfcApi>(nfcApi),
-  );
+  setUpAll(() => Injector.instance.registerSingleton<NfcApi>(nfcApi));
 
   tearDownAll(Injector.instance.unregister<NfcApi>);
 
   test(
     'initial state is NfcStatusLoadInProgress.',
-    () => expect(
-      NfcStatusBloc().state,
-      const NfcStatusLoadInProgress(),
-    ),
+    () => expect(NfcStatusBloc().state, const NfcStatusLoadInProgress()),
   );
 
   group('NfcStatusCheckEvent', () {
