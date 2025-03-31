@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
+import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 
 class GiftHeader extends StatelessWidget {
@@ -13,7 +14,7 @@ class GiftHeader extends StatelessWidget {
         visible: isOpen,
         child: Text(
           Injector.instance.translations.pages.gift.openMe,
-          style: Theme.of(context).textTheme.displayLarge,
+          style: context.textTheme.displayLarge,
         ),
       ),
     );
