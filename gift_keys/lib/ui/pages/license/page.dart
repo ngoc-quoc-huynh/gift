@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gift_keys/injector.dart';
+import 'package:gift_keys/static/resources/assets.dart';
 
 class CustomLicensePage extends StatelessWidget {
   const CustomLicensePage({super.key});
@@ -9,8 +10,8 @@ class CustomLicensePage extends StatelessWidget {
     return LicensePage(
       applicationName: _translations.appName,
       applicationVersion: Injector.instance.packageInfo.version,
-      // TODO: Add app icon
-      // TODO: Add copyright
+      applicationIcon: Image.asset(Assets.launcherIcon(), height: 75),
+      applicationLegalese: _translations.pages.license.copyright,
     );
   }
 

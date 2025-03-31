@@ -32,6 +32,8 @@ pages:
     error:
       button: 'Issue erstellen'
       load: 'Schlüsseln konnten nicht geladen werden. Bitte erstelle ein Issue auf GitHub.'
+  license:
+    copyright: '© 2025 Ngoc Quoc Huynh. Alle Rechte vorbehalten. Lizensiert unter der BSD 3-Klausel-Lizenz. Die Weitergabe und Verwendung in Quell- und Binärform, mit oder ohne Änderungen, ist unter den Lizenzbedingungen gestattet.'
   settings:
     appBar: 'Einstellungen'
     cache: 'Cache löschen'
