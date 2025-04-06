@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/gift_box/bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
 import 'package:gift_box/injector.dart';
+import 'package:gift_box/static/config.dart';
 import 'package:gift_box/static/resources/assets.dart';
 import 'package:rive/rive.dart';
 
@@ -52,6 +53,9 @@ class _GiftBoxState extends State<GiftBox> {
     _controller =
         StateMachineController.fromArtboard(artboard, 'State Machine')!
           ..addEventListener(_onRiveEvent);
+    _controller
+        .getNumberInput('Skin number')!
+        .change(Config.skin.index.toDouble());
     _isCorrect = _controller.getBoolInput('Is key correct')!;
     _isWrong = _controller.getBoolInput('Is key wrong')!;
     artboard.addController(_controller);

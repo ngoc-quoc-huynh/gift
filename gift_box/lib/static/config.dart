@@ -1,5 +1,10 @@
+import 'package:gift_box/domain/models/skin.dart';
+
 final class Config {
   const Config._();
+
+  // TODO: Adjust skin color if needed.
+  static const skin = Skin.red;
 
   // TODO: Adjust AID if needed, this should match the apduservice.xml.
   static const aid = 'F000000001';
