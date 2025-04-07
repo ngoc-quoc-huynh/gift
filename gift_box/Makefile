@@ -1,4 +1,4 @@
-.PHONY: i18n check-i18n check-code check-files style test test-unit test-ui update-goldens splash-screen
+.PHONY: i18n check-i18n check-code check-files style test test-unit test-ui update-goldens launcher-icon splash-screen
 
 ci_test := $(if $(findstring ci,$(MAKECMDGOALS)),--dart-define=CI=true,)
 
@@ -37,6 +37,9 @@ test-ui:
 
 update-goldens:
 	flutter test --update-goldens --tags=golden  $(ci_test)
+
+launcher-icon:
+	dart run flutter_launcher_icons --file launcher_icon.yaml
 
 splash-screen:
 	dart run flutter_native_splash:create --path=splash_screen.yaml

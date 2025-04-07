@@ -1,4 +1,3 @@
-# TODO: Specify Splash Screen
 flutter_native_splash:
   android: true
   ios: true
@@ -7,24 +6,11 @@ flutter_native_splash:
   # Hide notification bar if set to true.
   fullscreen: false
 
-  # Either color or background_image must be provided.
-  color: '#000000'
-  # background_image: assets/background.png
-
-  # The image used in the splash_screen screen. Should be sized for 4x pixel density (xxxhdpi).
-  # images: assets/image.png
-
-  # Specify an image used as branding in the splash_screen screen.
-  # branding: assets/branding.png
-
-  # Position of the branding.
-  # branding_mode: bottom
+  color: '#FFFFFF'
+  image: 'assets/splash_screen/image.png'
 
   ### Dark Mode ###
-  # color_dark: "#000000"
-  # background_image_dark: "assets/background_dark.png"
-  # image_dark: assets/image_dark.png
-  # branding_dark: assets/branding_dark.png
+  color_dark: "#000000"
 
   ### Android 12 ###
   # Android 12 handles the splash_screen screen differently than previous versions.
@@ -36,21 +22,11 @@ flutter_native_splash:
     # 640 pixels in diameter.
     # App icon without an icon background: This should be 1152×1152 pixels, and fit within a circle
     # 768 pixels in diameter.
-    # image: assets/image.png
-
-    # Splash screen background color.
-    # color: "#000000"
-
-    # App icon background color.
-    # icon_background_color: '#000000'
-
-    # Specify an image used as branding in the splash_screen screen..
-    # branding: assets/branding.png
+    image: 'assets/splash_screen/android_12.png'
+    color: "#FFFFFF"
 
     ### Dark Mode ###
-    # image_dark: assets/image_dark.png
-    # color_dark: "#000000"
-    # icon_background_color_dark: "#000000"
+    color_dark: "#000000"
 
   ### Splash screen position ###
 
