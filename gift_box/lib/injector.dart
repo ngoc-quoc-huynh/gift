@@ -23,7 +23,13 @@ final class Injector {
   static void setupDependencies() =>
       instance
         ..registerLazySingleton<Logger>(Logger.new)
-        ..registerLazySingleton<LoggerApi>(LoggerRepository.new)
+        ..registerLazySingleton<LoggerApi>(
+          () => LoggerRepository(
+            Logger(
+              printer: PrettyPrinter(stackTraceBeginIndex: 2, methodCount: 4),
+            ),
+          ),
+        )
         ..registerLazySingleton<NfcApi>(NfcRepository.new)
         ..registerLazySingleton<Translations>(_createTranslations)
         ..registerLazySingleton<Random>(Random.new)

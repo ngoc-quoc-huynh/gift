@@ -1,40 +1,18 @@
 import 'package:gift_box/injector.dart';
 
 mixin LoggerMixin {
-  void logInfo(
-    String methodName,
-    String message, {
-    required StackTrace stackTrace,
-    Map<String, String?>? parameters,
-  }) => _loggerAPI.logInfo(
-    methodName,
-    message,
-    parameters: parameters,
-    stackTrace: stackTrace,
-  );
+  void logInfo(String message) => _loggerAPI.logInfo(message);
 
-  void logWarning(
-    String methodName,
-    String message, {
-    required StackTrace stackTrace,
-    Map<String, String?>? parameters,
-  }) => _loggerAPI.logWarning(
-    methodName,
-    message,
-    parameters: parameters,
-    stackTrace: stackTrace,
-  );
+  void logWarning(String message) => _loggerAPI.logWarning(message);
 
   void logException(
-    String methodName, {
+    String message, {
     required Exception exception,
-    required StackTrace stackTrace,
-    Map<String, String?>? parameters,
+    StackTrace? stackTrace,
   }) => _loggerAPI.logException(
-    methodName,
+    message,
     exception: exception,
     stackTrace: stackTrace,
-    parameters: parameters,
   );
 
   static final _loggerAPI = Injector.instance.loggerApi;
