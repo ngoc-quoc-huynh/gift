@@ -1,47 +1,66 @@
-# gift_box
+# Gift Box
 
-Source code for the Gift Flutter app.
+[![build status](https://github.com/ngoc-quoc-huynh/gift/actions/workflows/gift_box.yaml/badge.svg?branch=main)](https://github.com/ngoc-quoc-huynh/gift/actions/workflows/gift_box.yaml?query=branch%3Amain)
+[![style](https://img.shields.io/badge/style-cosee__lints-brightgreen)](https://pub.dev/packages/cosee_lints)
+[![license](https://img.shields.io/github/license/ngoc-quoc-huynh/gift)](https://raw.githubusercontent.com/ngoc-quoc-huynh/gift/refs/heads/main/LICENSE)
 
-## Prerequisites
+## Overview
 
-### Flutter setup
+Gift Box App is a Flutter application designed for birthday celebrants to receive and open their
+digital gifts. Integrated with NFC Host Card Emulation (HCE), the app acts as a secure gift
+receiver, waiting to be unlocked by a [Gift Key](../gift_keys).
+When someone scans their phone using the Gift Keys App, the Gift Box App authenticates the incoming
+**AID (Application Identifier)** and **password (PIN)**, unlocking the gift.
 
-We recommend using [asdf](https://asdf-vm.com/) as a version manager. Follow these steps to set up:
+## Getting Started
 
-- Install [asdf](https://asdf-vm.com/guide/getting-started.html).
-- Use the Flutter version specified in [.tool-versions](.tool-versions) by running this command:
+### asdf
 
-```sh
+We are using [asdf](https://asdf-vm.com/) to manage the dependencies. Make sure you have it
+installed and then run the following command to install the required versions:
+
+```bash
 asdf install
-````
+```
 
-- Check whether your system is properly set up: `flutter doctor`
+If you don't have asdf installed or prefer not to use it, you can
+install [Flutter](https://docs.flutter.dev/) directly by following the
+official[Flutter installation guide](https://docs.flutter.dev/get-started/install). Make sure to use
+the version specified in the [.tool-versions ](../.tool-versions) file to avoid compatibility
+issues.
 
-### Android setup
+### Local development
 
-- Install the [Android SDK](https://developer.android.com/studio)
-- Set environment variable `ANDROID_HOME` to the location of the SDK
+1. Choose a gift box skin
+    - In [config](lib/static/config.dart#1), set your preferred app skin.
+    ```dart
+    static const skin = Skin.red;
+    ```
+    - Update the launcher icon and splash screen with the following command:
+   ```shell
+   make skin color=red
+   ```
+2. Configure the AID
+    - Update the AID in [apduservice.xml](android/app/src/main/res/xml/apduservice.xml) to a custom
+      one if needed
+    - Set the AID in [config](lib/static/config.dart) to the one in the apduservice.xml
+   ```dart
+   static const aid = 'F0010203040506';
+   ```
+3. Set a PIN
+    - Set a PIN in [config](lib/static/config.dart)
+   ```dart
+   static const pin = '1234';
+   ```
 
-### iOS setup
+### Code generation for translations
 
-- Be a Mac OS user
-- Install XCode
-    - You'll need to be logged in with an Apple Developer account to download XCode
-- Start XCode once and follow the instructions
+We are using [slang](https://pub.dev/packages/slang) to manage the translations.
 
-## Code generation for translations
+Run the following command to generate the translations:
 
-The app relies on code generation for translations. This is handled using the 
-[slang](https://pub.dev/packages/slang) package.
-A few parts of the app rely on automatic code generation. Translations generation can be executed at
-once using [`slang`](#slang).
-
-### slang
-
-You can generate all the necessary translation files using:
-
-```sh
-make generate
+```bash
+make i18n
 ```
 
 ## Code style
@@ -59,12 +78,30 @@ To format and analyze the codebase, you can run the following command:
 make style
 ```
 
+### Code style enforcement with lefthook
+
+To automatically format staged code before committing, we
+use [lefthook](https://github.com/evilmartians/lefthook) as a pre-commit hook.
+Our configuration ensures that only staged Dart files in the app directory are formatted with dart
+format.
+
+```sh
+lefthook install
+```
+
 ## Tests
 
 To execute the tests, run the following command in your terminal:
 
 ```sh
 make test
+```
+
+This will run the test in random order.
+If you want to specify a seed for randomizing the test order, you can use the following command:
+
+```sh
+make test seed=1
 ```
 
 ### Golden tests
@@ -83,27 +120,3 @@ make update-goldens
 
 This will update all golden files, so be careful when running this command to ensure that all
 changes to the UI are intentional.
-
-## Git hooks
-
-We use [lefthook](https://github.com/evilmartians/lefthook) to run all coding convention checks as
-git pre-commit/pre-push hook.
-
-### Installation
-
-To install lefthook run the following command:
-
-```sh
-brew install lefthook
-```
-
-### Usage
-
-To initialize lefthook run the following command:
-
-```sh
-lefthook install
-```
-
-This will set up git pre-commit/pre-push hooks containing checks as configured
-in [`lefthook.yaml`](lefthook.yaml).

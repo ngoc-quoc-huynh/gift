@@ -39,7 +39,26 @@ update-goldens:
 	flutter test --update-goldens --tags=golden  $(ci_test)
 
 launcher-icon:
+	@$(MAKE) check-color
+	cp assets/skins/launcher_icon/android/$(color).png assets/launcher_icon/android.png
+	cp assets/skins/launcher_icon/ios/$(color).png assets/launcher_icon/ios.png
 	dart run flutter_launcher_icons --file launcher_icon.yaml
 
 splash-screen:
+	@$(MAKE) check-color
+	cp assets/skins/splash_screen/android_12/$(color).png assets/splash_screen/android_12.png
+	cp assets/skins/splash_screen/image/$(color).png assets/splash_screen/image.png
 	dart run flutter_native_splash:create --path=splash_screen.yaml
+
+skin:
+	@$(MAKE) check-color
+	cp assets/skins/launcher_icon/app/$(color).webp assets/launcher_icon.webp
+	@$(MAKE) launcher-icon
+	@$(MAKE) splash-screen
+
+check-color:
+	@if ! echo "blue green purple red" | grep -wq "$(color)"; then \
+        printf "Error: Please provide a correct color."; \
+        printf "\nAllowed colors: blue, green, purple, red.\n\n"; \
+        exit 1; \
+    fi; \
