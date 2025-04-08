@@ -1,4 +1,4 @@
-.PHONY: i18n check-i18n check-code check-files style test test-unit test-ui update-goldens launcher-icon splash-screen
+.PHONY: i18n check-i18n check-code check-files style test test-unit test-ui update-goldens launcher-icon splash-screen skin
 
 ci_test := $(if $(findstring ci,$(MAKECMDGOALS)),--dart-define=CI=true,)
 
@@ -33,7 +33,6 @@ test-unit:
 test-ui:
 	flutter test test/ui --coverage --test-randomize-ordering-seed=$(or $(seed),random) $(ci_test)
 	dart run test_cov_console --exclude=static,domain,infrastructure,injector.dart
-
 
 update-goldens:
 	flutter test --update-goldens --tags=golden  $(ci_test)
