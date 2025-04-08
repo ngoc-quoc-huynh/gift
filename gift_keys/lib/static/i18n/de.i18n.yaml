@@ -17,7 +17,7 @@ pages:
     content: 'Die URL ${url: String} konnte nicht gefunden werden.'
   key:
     appBar: 'Geschenk Schlüssel'
-    nfcHintEnabled: 'Du benötigst einen Schlüssen, um das Geschenk zu öffnen.'
+    nfcHintEnabled: 'Suche ein Geschenk, um es mit dem Schlüssel zu öffnen.'
     nfcHintDisabled: 'Aktiviere NFC, um das Geschenk zu öffnen.'
     edit: 'Bearbeiten'
     delete: 'Löschen'

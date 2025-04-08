@@ -17,7 +17,7 @@ pages:
     content: 'The URL ${url: String} could not be found.'
   key:
     appBar: 'Gift Key'
-    nfcHintEnabled: 'You need a key to open this gift'
+    nfcHintEnabled: 'Search for a gift to open it with the key.'
     nfcHintDisabled: 'Enable NFC to open this gift.'
     edit: 'Edit'
     delete: 'Delete'
