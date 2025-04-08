@@ -34,20 +34,22 @@ class KeyMetaItem extends StatelessWidget {
       child: KeyMetaImageBackground(
         id: meta.id,
         child: FadeBox(
-          child: ResponsiveBox(
-            child: FrostedCard(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    meta.name,
-                    style: textTheme.displayLarge?.copyWith(color: textColor),
-                  ),
-                  Text(
-                    meta.birthday.format(DateTimeFormat.normal),
-                    style: textTheme.displaySmall?.copyWith(color: textColor),
-                  ),
-                ],
+          child: Center(
+            child: ResponsiveBox(
+              child: FrostedCard(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      meta.name,
+                      style: textTheme.displayLarge?.copyWith(color: textColor),
+                    ),
+                    Text(
+                      meta.birthday.format(DateTimeFormat.normal),
+                      style: textTheme.displaySmall?.copyWith(color: textColor),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

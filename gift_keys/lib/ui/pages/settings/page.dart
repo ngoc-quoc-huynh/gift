@@ -28,86 +28,92 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(_settingsTranslations.appBar)),
       bottomNavigationBar: const SettingsAppVersion(),
-      body: ResponsiveBox(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.horizontalPadding,
-            vertical: Sizes.verticalPadding,
+      body: Center(
+        child: ResponsiveBox(
+          child: ListView(
+            padding: const EdgeInsets.symmetric(
+              horizontal: Sizes.horizontalPadding,
+              vertical: Sizes.verticalPadding,
+            ),
+            children: [
+              SettingsCard(
+                children: [
+                  BlocListener<ThemeModeHydratedValueCubit, ThemeMode>(
+                    listener: _onThemeModeChanged,
+                    child: SettingsItem(
+                      icon: Icons.brightness_6_rounded,
+                      title: _settingsTranslations.design,
+                      onTap:
+                          () => unawaited(
+                            SettingsDesignDialog.show(
+                              context,
+                              context.read<ThemeModeHydratedValueCubit>().state,
+                            ),
+                          ),
+                    ),
+                  ),
+                  BlocListener<
+                    LanguageOptionHydratedValueCubit,
+                    LanguageOption
+                  >(
+                    listener: _onLanguageOptionChanged,
+                    child: SettingsItem(
+                      icon: Icons.flag_outlined,
+                      title: _settingsTranslations.language,
+                      onTap:
+                          () => unawaited(
+                            SettingsLanguageDialog.show(
+                              context,
+                              context
+                                  .read<LanguageOptionHydratedValueCubit>()
+                                  .state,
+                            ),
+                          ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              SettingsCard(
+                children: [
+                  SettingsItem(
+                    icon: Icons.cached_outlined,
+                    title: _settingsTranslations.cache,
+                    onTap: () => unawaited(SettingsCacheDialog.show(context)),
+                  ),
+                  BlocListener<KeyMetasBloc, KeyMetasState>(
+                    listener: _onKeysStateChanged,
+                    child: SettingsItem(
+                      icon: Icons.restart_alt,
+                      title: _settingsTranslations.reset,
+                      onTap: () => unawaited(SettingsResetDialog.show(context)),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              SettingsCard(
+                children: [
+                  SettingsItem(
+                    icon: Icons.feedback_outlined,
+                    title: _settingsTranslations.feedback,
+                    onTap:
+                        () => unawaited(SettingsFeedbackDialog.show(context)),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              SettingsCard(
+                children: [
+                  SettingsItem(
+                    icon: Icons.library_books_outlined,
+                    title: _settingsTranslations.license,
+                    onTap: () => context.pushRoute(Routes.licensePage),
+                  ),
+                ],
+              ),
+            ],
           ),
-          children: [
-            SettingsCard(
-              children: [
-                BlocListener<ThemeModeHydratedValueCubit, ThemeMode>(
-                  listener: _onThemeModeChanged,
-                  child: SettingsItem(
-                    icon: Icons.brightness_6_rounded,
-                    title: _settingsTranslations.design,
-                    onTap:
-                        () => unawaited(
-                          SettingsDesignDialog.show(
-                            context,
-                            context.read<ThemeModeHydratedValueCubit>().state,
-                          ),
-                        ),
-                  ),
-                ),
-                BlocListener<LanguageOptionHydratedValueCubit, LanguageOption>(
-                  listener: _onLanguageOptionChanged,
-                  child: SettingsItem(
-                    icon: Icons.flag_outlined,
-                    title: _settingsTranslations.language,
-                    onTap:
-                        () => unawaited(
-                          SettingsLanguageDialog.show(
-                            context,
-                            context
-                                .read<LanguageOptionHydratedValueCubit>()
-                                .state,
-                          ),
-                        ),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            SettingsCard(
-              children: [
-                SettingsItem(
-                  icon: Icons.cached_outlined,
-                  title: _settingsTranslations.cache,
-                  onTap: () => unawaited(SettingsCacheDialog.show(context)),
-                ),
-                BlocListener<KeyMetasBloc, KeyMetasState>(
-                  listener: _onKeysStateChanged,
-                  child: SettingsItem(
-                    icon: Icons.restart_alt,
-                    title: _settingsTranslations.reset,
-                    onTap: () => unawaited(SettingsResetDialog.show(context)),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            SettingsCard(
-              children: [
-                SettingsItem(
-                  icon: Icons.feedback_outlined,
-                  title: _settingsTranslations.feedback,
-                  onTap: () => unawaited(SettingsFeedbackDialog.show(context)),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            SettingsCard(
-              children: [
-                SettingsItem(
-                  icon: Icons.library_books_outlined,
-                  title: _settingsTranslations.license,
-                  onTap: () => context.pushRoute(Routes.licensePage),
-                ),
-              ],
-            ),
-          ],
         ),
       ),
     );

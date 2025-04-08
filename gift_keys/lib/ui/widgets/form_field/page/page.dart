@@ -34,22 +34,24 @@ class FormFieldPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: ResponsiveBox(
-        child: AutofillGroup(
-          child: Form(
-            child: MultiBlocProvider(
-              providers: [
-                BlocProvider<DateTimeValueCubit>(
-                  create: (_) => DateTimeValueCubit(giftKey?.birthday),
+      body: Center(
+        child: ResponsiveBox(
+          child: AutofillGroup(
+            child: Form(
+              child: MultiBlocProvider(
+                providers: [
+                  BlocProvider<DateTimeValueCubit>(
+                    create: (_) => DateTimeValueCubit(giftKey?.birthday),
+                  ),
+                  BlocProvider<FileValueCubit>(
+                    create: (_) => FileValueCubit(_loadInitialImage()),
+                  ),
+                ],
+                child: FormFieldPageBody(
+                  buttonTitle: buttonTitle,
+                  giftKey: giftKey,
+                  onSubmitted: onSubmitted,
                 ),
-                BlocProvider<FileValueCubit>(
-                  create: (_) => FileValueCubit(_loadInitialImage()),
-                ),
-              ],
-              child: FormFieldPageBody(
-                buttonTitle: buttonTitle,
-                giftKey: giftKey,
-                onSubmitted: onSubmitted,
               ),
             ),
           ),

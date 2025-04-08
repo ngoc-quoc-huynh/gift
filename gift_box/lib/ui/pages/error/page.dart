@@ -17,8 +17,10 @@ class ErrorPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
           horizontal: Sizes.horizontalPadding,
         ),
-        child: ResponsiveBox(
-          child: ErrorText(text: _translations.content(url: url)),
+        child: Center(
+          child: ResponsiveBox(
+            child: ErrorText(text: _translations.content(url: url)),
+          ),
         ),
       ),
     );
