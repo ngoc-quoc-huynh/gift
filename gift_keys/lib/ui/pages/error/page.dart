@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/widgets/error_text.dart';
+import 'package:gift_keys/ui/widgets/responsive_box.dart';
 
 class ErrorPage extends StatelessWidget {
   const ErrorPage({required this.url, super.key});
@@ -16,7 +17,9 @@ class ErrorPage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(
           horizontal: Sizes.horizontalPadding,
         ),
-        child: ErrorText(text: _translations.content(url: url)),
+        child: ResponsiveBox(
+          child: ErrorText(text: _translations.content(url: url)),
+        ),
       ),
     );
   }

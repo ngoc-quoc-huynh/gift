@@ -3,6 +3,4 @@ final class Sizes {
 
   static const horizontalPadding = 20.0;
   static const verticalPadding = 20.0;
-
-  static const maxWidgetWith = 350.0;
 }

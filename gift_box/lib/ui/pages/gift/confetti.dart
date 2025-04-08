@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:gift_box/domain/utils/extensions/build_context.dart';
 
 class GiftConfetti extends StatefulWidget {
   const GiftConfetti({required this.child, super.key});
@@ -12,7 +13,7 @@ class GiftConfetti extends StatefulWidget {
 }
 
 class _GiftConfettiState extends State<GiftConfetti> {
-  late ConfettiController _controller;
+  late final ConfettiController _controller;
 
   @override
   void initState() {
@@ -29,11 +30,18 @@ class _GiftConfettiState extends State<GiftConfetti> {
 
   @override
   Widget build(BuildContext context) {
+    final (minimumSize, maximumSize) = switch (context.screenSize.width) {
+      < 600 => (const Size(20, 10), const Size(30, 15)),
+      _ => (const Size(60, 30), const Size(90, 45)),
+    };
+
     return ConfettiWidget(
       confettiController: _controller,
       blastDirectionality: BlastDirectionality.explosive,
       emissionFrequency: 0.05,
       numberOfParticles: 20,
+      minimumSize: minimumSize,
+      maximumSize: maximumSize,
       shouldLoop: true,
       colors: Colors.primaries,
       createParticlePath: _drawStar,

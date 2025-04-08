@@ -5,6 +5,7 @@ import 'package:gift_keys/domain/blocs/value/cubit.dart';
 import 'package:gift_keys/domain/models/key.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/widgets/form_field/page/body.dart';
+import 'package:gift_keys/ui/widgets/responsive_box.dart';
 
 typedef FormFieldSubmitCallback =
     void Function(
@@ -33,21 +34,23 @@ class FormFieldPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(title)),
-      body: AutofillGroup(
-        child: Form(
-          child: MultiBlocProvider(
-            providers: [
-              BlocProvider<DateTimeValueCubit>(
-                create: (_) => DateTimeValueCubit(giftKey?.birthday),
+      body: ResponsiveBox(
+        child: AutofillGroup(
+          child: Form(
+            child: MultiBlocProvider(
+              providers: [
+                BlocProvider<DateTimeValueCubit>(
+                  create: (_) => DateTimeValueCubit(giftKey?.birthday),
+                ),
+                BlocProvider<FileValueCubit>(
+                  create: (_) => FileValueCubit(_loadInitialImage()),
+                ),
+              ],
+              child: FormFieldPageBody(
+                buttonTitle: buttonTitle,
+                giftKey: giftKey,
+                onSubmitted: onSubmitted,
               ),
-              BlocProvider<FileValueCubit>(
-                create: (_) => FileValueCubit(_loadInitialImage()),
-              ),
-            ],
-            child: FormFieldPageBody(
-              buttonTitle: buttonTitle,
-              giftKey: giftKey,
-              onSubmitted: onSubmitted,
             ),
           ),
         ),

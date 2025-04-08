@@ -7,6 +7,7 @@ import 'package:gift_keys/ui/pages/key_metas/item/image.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/form_field/fade_out.dart';
 import 'package:gift_keys/ui/widgets/frosted_card.dart';
+import 'package:gift_keys/ui/widgets/responsive_box.dart';
 
 class KeyMetaItem extends StatelessWidget {
   const KeyMetaItem({required this.meta, super.key});
@@ -33,7 +34,7 @@ class KeyMetaItem extends StatelessWidget {
       child: KeyMetaImageBackground(
         id: meta.id,
         child: FadeBox(
-          child: Center(
+          child: ResponsiveBox(
             child: FrostedCard(
               child: Column(
                 mainAxisSize: MainAxisSize.min,

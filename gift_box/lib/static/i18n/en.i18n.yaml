@@ -1,8 +1,11 @@
 appName: 'Gift'
 
 pages:
-  timer:
-    tapMe: 'Tap me'
+  error:
+    appBar: 'Page not found!'
+    content: 'The URL ${url: String} could not be found.'
   gift:
     openMe: 'Open me'
     nfcTooltip: 'Enable NFC to unlock the gift.'
+  timer:
+    tapMe: 'Tap me'

@@ -13,6 +13,7 @@ import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/pages/key/menu_anchor.dart';
 import 'package:gift_keys/ui/pages/key/nfc_status.dart';
 import 'package:gift_keys/ui/pages/key/rive.dart';
+import 'package:gift_keys/ui/widgets/responsive_box.dart';
 import 'package:gift_keys/ui/widgets/snack_bar.dart';
 import 'package:go_router/go_router.dart';
 
@@ -99,29 +100,31 @@ class _Body extends StatelessWidget {
                 horizontal: Sizes.horizontalPadding,
                 vertical: Sizes.verticalPadding,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: RiveKey(
-                      aid: giftKey.aid,
-                      password: giftKey.password,
+              child: ResponsiveBox(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: RiveKey(
+                        aid: giftKey.aid,
+                        password: giftKey.password,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    giftKey.name,
-                    style: textTheme.displayLarge?.copyWith(
-                      color: primaryColor,
+                    const SizedBox(height: 20),
+                    Text(
+                      giftKey.name,
+                      style: textTheme.displayLarge?.copyWith(
+                        color: primaryColor,
+                      ),
                     ),
-                  ),
-                  Text(
-                    giftKey.birthday.format(DateTimeFormat.normal),
-                    style: textTheme.displaySmall?.copyWith(
-                      color: primaryColor,
+                    Text(
+                      giftKey.birthday.format(DateTimeFormat.normal),
+                      style: textTheme.displaySmall?.copyWith(
+                        color: primaryColor,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

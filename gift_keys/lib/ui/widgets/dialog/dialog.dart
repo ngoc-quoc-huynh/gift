@@ -5,6 +5,7 @@ import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/widgets/dialog/alert_action.dart';
 import 'package:gift_keys/ui/widgets/dialog/radio_option.dart';
+import 'package:gift_keys/ui/widgets/responsive_box.dart';
 
 sealed class CustomDialog extends StatelessWidget {
   const CustomDialog({super.key});
@@ -61,7 +62,7 @@ final class _Alert extends CustomDialog {
       contentPadding: CustomDialog.contentPadding,
       titlePadding: CustomDialog.titlePadding,
       title: Text(title),
-      content: content,
+      content: ResponsiveBox(child: content),
       actions: actions,
     );
   }
@@ -88,7 +89,7 @@ final class _Normal extends CustomDialog {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [Text(title), const CloseButton()],
       ),
-      content: content,
+      content: ResponsiveBox(child: content),
       actionsAlignment: MainAxisAlignment.center,
       actionsPadding: context.dialogTheme.actionsPadding?.add(
         const EdgeInsets.only(bottom: Sizes.verticalPadding / 2),
@@ -110,7 +111,9 @@ final class _Radio<T extends Object> extends CustomDialog {
       contentPadding: CustomDialog.contentPadding,
       titlePadding: CustomDialog.titlePadding,
       title: Text(title),
-      content: Column(mainAxisSize: MainAxisSize.min, children: options),
+      content: ResponsiveBox(
+        child: Column(mainAxisSize: MainAxisSize.min, children: options),
+      ),
       actions: [
         const AlertDialogAction.cancel(),
         AlertDialogAction.confirm(
