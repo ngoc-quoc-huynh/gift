@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:gift_box/ui/pages/error/page.dart';
 import 'package:gift_box/ui/pages/gift/page.dart';
 import 'package:gift_box/ui/pages/home/page.dart';
 import 'package:gift_box/ui/pages/timer/page.dart';
@@ -15,6 +16,7 @@ final class GoRouterConfig {
   static final routes = GoRouter(
     navigatorKey: _rootNavigatorKey,
     initialLocation: '/timer',
+    errorBuilder: (_, state) => ErrorPage(url: state.matchedLocation),
     routes: [
       GoRoute(
         name: Routes.homePage(),
