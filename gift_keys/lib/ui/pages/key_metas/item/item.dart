@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:gift_keys/domain/models/date_time_format.dart';
 import 'package:gift_keys/domain/models/key_meta.dart';
@@ -8,6 +6,7 @@ import 'package:gift_keys/domain/utils/extensions/date_time.dart';
 import 'package:gift_keys/ui/pages/key_metas/item/image.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/form_field/fade_out.dart';
+import 'package:gift_keys/ui/widgets/frosted_card.dart';
 
 class KeyMetaItem extends StatelessWidget {
   const KeyMetaItem({required this.meta, super.key});
@@ -35,36 +34,19 @@ class KeyMetaItem extends StatelessWidget {
         id: meta.id,
         child: FadeBox(
           child: Center(
-            child: ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
-                child: ColoredBox(
-                  color: colorScheme.surface.withValues(alpha: 0.2),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          meta.name,
-                          style: textTheme.displayLarge?.copyWith(
-                            color: textColor,
-                          ),
-                        ),
-                        Text(
-                          meta.birthday.format(DateTimeFormat.normal),
-                          style: textTheme.displaySmall?.copyWith(
-                            color: textColor,
-                          ),
-                        ),
-                      ],
-                    ),
+            child: FrostedCard(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    meta.name,
+                    style: textTheme.displayLarge?.copyWith(color: textColor),
                   ),
-                ),
+                  Text(
+                    meta.birthday.format(DateTimeFormat.normal),
+                    style: textTheme.displaySmall?.copyWith(color: textColor),
+                  ),
+                ],
               ),
             ),
           ),

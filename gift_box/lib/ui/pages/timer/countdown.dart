@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/countdown/cubit.dart';
@@ -7,6 +5,7 @@ import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/domain/utils/extensions/duration.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/ui/router/routes.dart';
+import 'package:gift_box/ui/widgets/frosted_card.dart';
 
 class TimerCountdown extends StatelessWidget {
   const TimerCountdown({super.key});
@@ -15,28 +14,10 @@ class TimerCountdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: FittedBox(
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(16)),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-            child: ColoredBox(
-              // TODO: Handle light/dark mode like in keys app
-              color: context.colorScheme.surface.withValues(alpha: 0.1),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 8,
-                ),
-                child: Center(
-                  child: BlocProvider<CountdownCubit>(
-                    create:
-                        (_) =>
-                            CountdownCubit(Injector.instance.birthday)..init(),
-                    child: const _Text(),
-                  ),
-                ),
-              ),
-            ),
+        child: FrostedCard(
+          child: BlocProvider<CountdownCubit>(
+            create: (_) => CountdownCubit(Injector.instance.birthday)..init(),
+            child: const _Text(),
           ),
         ),
       ),
@@ -49,7 +30,16 @@ class _Text extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = context.textTheme.displayLarge;
+    final theme = context.theme;
+    final brightness = theme.brightness;
+    final colorScheme = theme.colorScheme;
+    final textColor = switch (brightness) {
+      Brightness.light => colorScheme.surface,
+      Brightness.dark => colorScheme.inverseSurface,
+    };
+    final textStyle = context.textTheme.displayLarge?.copyWith(
+      color: textColor,
+    );
 
     return BlocBuilder<CountdownCubit, CountdownState>(
       builder:

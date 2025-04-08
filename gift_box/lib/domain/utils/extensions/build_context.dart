@@ -7,5 +7,7 @@ extension BuildContextExtension on BuildContext {
 
   TextTheme get textTheme => TextTheme.of(this);
 
+  ThemeData get theme => Theme.of(this);
+
   void goRoute(Route route) => goNamed(route());
 }
