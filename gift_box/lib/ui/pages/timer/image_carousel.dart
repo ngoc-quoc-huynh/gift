@@ -30,7 +30,7 @@ class _TimerImageCarouselState extends State<TimerImageCarousel> {
     return BlocProvider<ImageCarouselCubit>(
       create:
           (_) => ImageCarouselCubit(
-            count: Assets.items.length,
+            count: Assets.images.length,
             imageDuration: Config.carouselImageDuration,
           )..init(),
       child: LayoutBuilder(
@@ -54,7 +54,7 @@ class _TimerImageCarouselState extends State<TimerImageCarousel> {
                   enableSplash: false,
                   itemSnapping: true,
                   children:
-                      (Assets.items..shuffleSeeded()).map(_Item.new).toList(),
+                      (Assets.images..shuffleSeeded()).map(_Item.new).toList(),
                 ),
               ),
             ),

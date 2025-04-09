@@ -40,6 +40,9 @@ issues.
    ```shell
    make skin color=red
    ```
+2. Use own images in assets
+   - If needed replace the images in [assets](assets/images) with your own images and update the
+     corresponding paths in the [Assets](lib/static/resources/assets.dart) class.
 2. Configure the AID
     - Update the AID in [apduservice.xml](android/app/src/main/res/xml/apduservice.xml) to a custom
       one if needed
