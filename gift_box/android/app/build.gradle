@@ -6,9 +6,9 @@ plugins {
 }
 
 def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('../.signing/android/keystore.properties')
+def keystorePropertiesFile = rootProject.file('key.properties')
 if (keystorePropertiesFile.exists()) {
-    keystorePropertiesFile.withInputStream { keystoreProperties.load(it) }
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 } else {
     keystoreProperties.setProperty('keystorePath', '__placeholder')
     logger.lifecycle('Could not read keystore.properties file')
@@ -20,8 +20,8 @@ android {
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     kotlinOptions {
@@ -36,10 +36,26 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        release {
+            keyAlias = keystoreProperties['keyAlias']
+            keyPassword = keystoreProperties['keyPassword']
+            storeFile = file('gift_box.jks')
+            storePassword = keystoreProperties['storePassword']
+        }
+    }
+
     buildTypes {
         release {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+            ndk {
+                //noinspection ChromeOsAbiSupport
+                abiFilters 'arm64-v8a'
+            }
+            minifyEnabled true
+            shrinkResources true
         }
+
         debug {
             signingConfig signingConfigs.debug
         }

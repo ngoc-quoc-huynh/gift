@@ -1,4 +1,4 @@
-.PHONY: i18n check-i18n check-code check-files style test test-unit test-ui update-goldens launcher-icon splash-screen skin
+.PHONY: i18n check-i18n check-code check-files style test test-unit test-ui update-goldens launcher-icon splash-screen skin apk
 
 ci_test := $(if $(findstring ci,$(MAKECMDGOALS)),--dart-define=CI=true,)
 
@@ -61,3 +61,9 @@ check-color:
         printf "\nAllowed colors: blue, green, purple, red.\n\n"; \
         exit 1; \
     fi; \
+
+apk:
+	flutter build apk \
+		--release \
+		--obfuscate \
+		--split-debug-info=./build/app/outputs/symbols
