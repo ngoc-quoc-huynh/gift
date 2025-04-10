@@ -19,6 +19,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          distribution: adopt
+          java-version: 21
+          cache: gradle
+          cache-dependency-path: |
+            gift_keys/android/*.gradle*
+            gift_keys/android/**/gradle-wrapper.properties
+
       - name: Setup asdf
         uses: asdf-vm/actions/setup@v3
       - name: Cache asdf
