@@ -2,12 +2,11 @@ import 'package:file/file.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart' as widget;
 import 'package:gift_keys/domain/interfaces/file.dart';
-import 'package:gift_keys/domain/utils/mixins/logger.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
-final class FileRepository with LoggerMixin implements FileApi {
+final class FileRepository implements FileApi {
   const FileRepository(this._imagePicker);
 
   final ImagePicker _imagePicker;
@@ -16,6 +15,7 @@ final class FileRepository with LoggerMixin implements FileApi {
   static final _fileSystem = Injector.instance.fileSystem;
   static final _imagesDir = _fileSystem.directory(join(_appDir.path, 'images'));
   static final _tmpDir = Injector.instance.tmpDir;
+  static final _loggerApi = Injector.instance.loggerApi;
 
   @override
   Future<File?> pickImageFromGallery() async {
@@ -27,11 +27,11 @@ final class FileRepository with LoggerMixin implements FileApi {
         null => null,
         XFile(:final path) => _fileSystem.file(path),
       };
-      logInfo('Picked image from gallery: ${result?.path}');
+      _loggerApi.logInfo('Picked image from gallery: ${result?.path}');
 
       return result;
     } on PlatformException catch (e, stackTrace) {
-      logException(
+      _loggerApi.logException(
         'Could not pick image from gallery.',
         exception: e,
         stackTrace: stackTrace,
@@ -47,9 +47,9 @@ final class FileRepository with LoggerMixin implements FileApi {
 
     if (file.path != sourcePath) {
       await _fileSystem.file(sourcePath).rename(file.path);
-      logInfo('Moved file to app dir: ${file.path}');
+      _loggerApi.logInfo('Moved file to app dir: ${file.path}');
     } else {
-      logWarning(
+      _loggerApi.logWarning(
         'Source path $sourcePath does already exist in app directory, '
         'skipping movement.',
       );
@@ -59,7 +59,7 @@ final class FileRepository with LoggerMixin implements FileApi {
   @override
   File loadImage(int id) {
     final path = join(_imagesDir.path, '$id.webp');
-    logInfo('Loaded image: $path');
+    _loggerApi.logInfo('Loaded image: $path');
 
     return _fileSystem.file(path);
   }
@@ -69,9 +69,9 @@ final class FileRepository with LoggerMixin implements FileApi {
     if (_imagesDir.existsSync()) {
       await _imagesDir.delete(recursive: true);
 
-      logInfo('Deleted all images.');
+      _loggerApi.logInfo('Deleted all images.');
     } else {
-      logWarning('No image directory found, skipping deletion.');
+      _loggerApi.logWarning('No image directory found, skipping deletion.');
     }
   }
 
@@ -81,9 +81,11 @@ final class FileRepository with LoggerMixin implements FileApi {
 
     if (file.existsSync()) {
       await file.delete();
-      logInfo('Deleting image: ${file.path}');
+      _loggerApi.logInfo('Deleting image: ${file.path}');
     } else {
-      logWarning('Image: ${file.path} not found, skipping deletion.');
+      _loggerApi.logWarning(
+        'Image: ${file.path} not found, skipping deletion.',
+      );
     }
   }
 
@@ -92,9 +94,11 @@ final class FileRepository with LoggerMixin implements FileApi {
     widget.imageCache.clear();
     if (_tmpDir.existsSync()) {
       await _tmpDir.delete(recursive: true);
-      logInfo('Clearing cache.');
+      _loggerApi.logInfo('Clearing cache.');
     } else {
-      logWarning('Temporary directory not found, skipping deletion.');
+      _loggerApi.logWarning(
+        'Temporary directory not found, skipping deletion.',
+      );
     }
   }
 }
