@@ -4,19 +4,16 @@ import 'package:gift_keys/static/resources/theme.dart';
 import 'package:meta/meta.dart';
 
 extension WidgetTesterExtension on WidgetTester {
-  Future<void> pumpGoldenFile(String name, Widget widget) async {
-    await pumpWidget(
-      MaterialApp(
-        theme: CustomTheme.lightTheme(const TextTheme()),
-        home: Scaffold(body: widget),
-      ),
-    );
-    await expectLater(
-      find.byWidget(widget),
-      matchesGoldenFile('goldens/$name.png'),
-    );
-  }
+  Future<void> pumpGoldenWidget(Widget widget) => pumpWidget(
+    MaterialApp(
+      theme: CustomTheme.lightTheme(const TextTheme()),
+      home: Scaffold(body: widget),
+    ),
+  );
 }
+
+Future<void> expectGoldenFile(String name, Widget widget) =>
+    expectLater(find.byWidget(widget), matchesGoldenFile('goldens/$name.png'));
 
 @isTest
 void testGolden(

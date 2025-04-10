@@ -5,9 +5,8 @@ import '../../utils.dart';
 
 void main() {
   testGolden('renders correctly.', (tester) async {
-    await tester.pumpGoldenFile(
-      'error_text',
-      const ErrorText(text: 'An error occurred.'),
-    );
-  }, surfaceSize: const Size(300, 100));
+    const widget = ErrorText(text: 'Error');
+    await tester.pumpGoldenWidget(widget);
+    await expectGoldenFile('error_text', widget);
+  }, surfaceSize: const Size.square(100));
 }
