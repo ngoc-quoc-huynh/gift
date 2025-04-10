@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_keys/domain/exceptions/base.dart';
+import 'package:gift_keys/domain/exceptions/local_database.dart';
 import 'package:gift_keys/domain/interfaces/logger.dart';
 import 'package:gift_keys/domain/utils/mixins/logger.dart';
 import 'package:gift_keys/injector.dart';
@@ -41,20 +41,20 @@ void main() {
       when(
         () => loggerApi.logException(
           'message',
-          exception: const UnknownException(),
+          exception: const LocalDatabaseException(),
           stackTrace: stackTrace,
         ),
       ).thenReturn(null);
       testClass.logException(
         'message',
-        exception: const UnknownException(),
+        exception: const LocalDatabaseException(),
         stackTrace: stackTrace,
       );
 
       verify(
         () => loggerApi.logException(
           'message',
-          exception: const UnknownException(),
+          exception: const LocalDatabaseException(),
           stackTrace: stackTrace,
         ),
       ).called(1);

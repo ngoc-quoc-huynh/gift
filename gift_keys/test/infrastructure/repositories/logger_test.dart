@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_keys/domain/exceptions/base.dart';
+import 'package:gift_keys/domain/exceptions/local_database.dart';
 import 'package:gift_keys/infrastructure/repositories/logger.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -15,14 +15,14 @@ void main() {
     test('returns correctly.', () {
       repository.logException(
         'message',
-        exception: const UnknownException(),
+        exception: const LocalDatabaseException(),
         stackTrace: StackTrace.empty,
       );
 
       verify(
         () => logger.e(
           'message',
-          error: const UnknownException(),
+          error: const LocalDatabaseException(),
           stackTrace: StackTrace.empty,
         ),
       );

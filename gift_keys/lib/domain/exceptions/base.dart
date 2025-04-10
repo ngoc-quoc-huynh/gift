@@ -6,7 +6,3 @@ abstract base class CustomException extends Equatable implements Exception {
   @override
   List<Object?> get props => [];
 }
-
-final class UnknownException extends CustomException {
-  const UnknownException();
-}
