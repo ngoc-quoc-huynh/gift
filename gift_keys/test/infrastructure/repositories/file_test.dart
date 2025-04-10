@@ -171,6 +171,8 @@ void main() {
   });
 
   group('clearCache', () {
+    TestWidgetsFlutterBinding.ensureInitialized();
+
     test('returns correctly when tmp directory exists.', () async {
       tmpDir.createSync();
       await expectLater(repository.clearCache(), completes);
