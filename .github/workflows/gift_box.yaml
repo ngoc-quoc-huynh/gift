@@ -9,6 +9,7 @@ on:
 
 jobs:
   build:
+    # TODO: Change to ubuntu after changing golden tests
     runs-on: macos-latest
     environment: gift_box
 
@@ -23,9 +24,12 @@ jobs:
         uses: actions/setup-java@v4
         if: github.event_name == 'workflow_dispatch'
         with:
-          distribution: 'adopt'
-          java-version: '21'
-          cache: 'gradle'
+          distribution: adopt
+          java-version: 21
+          cache: gradle
+          cache-dependency-path: |
+            gift_box/android/*.gradle*
+            gift_box/android/**/gradle-wrapper.properties
 
       - name: Setup asdf
         uses: asdf-vm/actions/setup@v3
@@ -99,5 +103,5 @@ jobs:
         with:
           name: Gift Keys APK
           path: |
-            app/build/app/outputs/apk/release/gift_box_release_v*.apk
-            build/app/outputs/symbols
+            gift_box/build/app/outputs/apk/release/gift_box_release_v*.apk
+            gift_box/build/app/outputs/symbols
