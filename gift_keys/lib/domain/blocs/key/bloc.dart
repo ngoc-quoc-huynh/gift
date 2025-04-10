@@ -9,6 +9,9 @@ import 'package:gift_keys/injector.dart';
 part 'event.dart';
 part 'state.dart';
 
+@visibleForTesting
+base mixin TestKeyBlocMixin implements KeyBloc {}
+
 final class KeyBloc extends Bloc<KeyEvent, KeyState> {
   KeyBloc(this._id) : super(const KeyLoadInProgress()) {
     on<KeyInitializeEvent>(_onKeyInitializeEvent, transformer: droppable());

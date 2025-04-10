@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:bloc_test/bloc_test.dart';
 import 'package:file/file.dart';
+import 'package:gift_keys/domain/blocs/key/bloc.dart';
 import 'package:gift_keys/domain/interfaces/file.dart';
 import 'package:gift_keys/domain/interfaces/local_database.dart';
 import 'package:gift_keys/domain/interfaces/logger.dart';
@@ -34,3 +36,6 @@ final class MockStorage extends Mock implements Storage {}
 
 final class MockStreamSubscription<T> extends Mock
     implements StreamSubscription<T> {}
+
+final class MockKeyBloc extends MockBloc<KeyEvent, KeyState>
+    with TestKeyBlocMixin {}
