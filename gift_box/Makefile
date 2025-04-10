@@ -1,4 +1,4 @@
-.PHONY: i18n check-i18n check-code check-files style test test-unit test-ui update-goldens launcher-icon splash-screen skin apk
+.PHONY: i18n check-i18n check-code check-files style test test-unit test-ui update-goldens launcher-icon splash-screen skin apk jks encode-jks
 
 ci_test := $(if $(findstring ci,$(MAKECMDGOALS)),--dart-define=CI=true,)
 
@@ -67,3 +67,9 @@ apk:
 		--release \
 		--obfuscate \
 		--split-debug-info=./build/app/outputs/symbols
+
+jks:
+	keytool -genkey -v -keystore android/app/gift_box.jks -keyalg RSA -keysize 2048 -validity 10000 -alias gift_box
+
+encode-jks:
+	base64 -i android/app/gift_keys.jks -w 0

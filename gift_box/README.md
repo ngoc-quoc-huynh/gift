@@ -92,6 +92,57 @@ format.
 lefthook install
 ```
 
+## Create a release APK
+
+To generate a release APK for your application, follow the steps below:
+
+1. Create a `key.properties` file in the android root directory. Use the
+   [`key.example.properties`](android/key.example.properties) file as a template:
+
+   ```sh
+   cp android/key.example.properties android/key.properties
+   ```
+2. Create a `keystore` file:
+   - **Option 1**: Using Android Studio
+
+     You can generate a keystore directly from Android Studio by following
+     the [official guide](https://developer.android.com/studio/publish/app-signing#generate-key).
+   - **Option 2**: Using the Command Line
+
+     Alternatively, use the `keytool` command to generate a keystore:
+      ```sh
+     make jks
+      ```
+3. Create an environment on  [GitHub](https://github.com) with `gift_box` as name (optional, for
+   GitHub Actions):
+4. Set up secrets in GitHub (optional, for GitHub Actions):
+
+   Next, you need to set up the following secrets in your GitHub repository:
+
+   - **KEY_PASSWORD**: The password for the key.
+   - **STORE_PASSWORD**: The password for the keystore.
+   - **KEY_ALIAS**: The alias of the key, by default it is `gift_box`.
+   - **KEYSTORE**: The base64-encoded version of your keystore file.
+
+### Encoding the keystore file
+
+1. Run the following command to encode your [`gift_box.jks`](android/app/gift_box.jks) file:
+
+   ```sh
+   make encode-jks
+   ```
+
+2. Copy the content, and then paste it into the `KEYSTORE` secret on GitHub.
+
+### Generate the release APK
+
+Once your `keystore` and `key.properties` are set up, you can generate the release APK by running
+the following command:
+
+```sh
+make apk
+```
+
 ## Tests
 
 To execute the tests, run the following command in your terminal:

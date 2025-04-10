@@ -1,4 +1,4 @@
-.PHONY: i18n check-i18n check-code check-files style test test-unit test-ui update-goldens launcher-icon splash-screen apk
+.PHONY: i18n check-i18n check-code check-files style test test-unit test-ui update-goldens launcher-icon splash-screen apk jks encode-jks
 
 i18n:
 	dart run slang
@@ -45,3 +45,9 @@ apk:
 		--release \
 		--obfuscate \
 		--split-debug-info=./build/app/outputs/symbols
+
+jks:
+	keytool -genkey -v -keystore android/app/gift_keys.jks -keyalg RSA -keysize 2048 -validity 10000 -alias gift_keys
+
+encode-jks:
+	base64 -i android/app/gift_keys.jks -w 0
