@@ -32,7 +32,8 @@ final class NfcDiscoveryBloc
   }
 
   static final _nfcApi = Injector.instance.nfcApi;
-  StreamSubscription<String>? _sub;
+  @visibleForTesting
+  StreamSubscription<String>? sub;
 
   Future<void> _onNfcDiscoveryInitializeEvent(
     NfcDiscoveryInitializeEvent event,
@@ -43,7 +44,7 @@ final class NfcDiscoveryBloc
     await _cancelSub();
     emit(NfcDiscoveryConnectInProgress(event.aid, event.password));
 
-    _sub = _nfcApi.startDiscovery().listen(
+    sub = _nfcApi.startDiscovery().listen(
       (_) => add(const NfcDiscoverySendCommandEvent()),
     );
   }
@@ -80,7 +81,7 @@ final class NfcDiscoveryBloc
   ) {
     if (state is NfcDiscoveryConnectInProgress &&
         state is! NfcDiscoveryConnectOnSuccess) {
-      _sub?.pause();
+      sub?.pause();
     }
   }
 
@@ -90,13 +91,13 @@ final class NfcDiscoveryBloc
   ) {
     if (state is NfcDiscoveryConnectInProgress &&
         state is! NfcDiscoveryConnectOnSuccess) {
-      _sub?.resume();
+      sub?.resume();
     }
   }
 
   Future<void> _cancelSub() async {
-    await _sub?.cancel();
-    _sub = null;
+    await sub?.cancel();
+    sub = null;
   }
 
   @override

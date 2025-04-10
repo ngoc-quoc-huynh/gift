@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:file/file.dart';
 import 'package:gift_keys/domain/interfaces/file.dart';
 import 'package:gift_keys/domain/interfaces/local_database.dart';
@@ -29,3 +31,6 @@ final class MockNfcApi extends Mock implements NfcApi {}
 final class MockNfcManager extends Mock implements NfcManager {}
 
 final class MockStorage extends Mock implements Storage {}
+
+final class MockStreamSubscription<T> extends Mock
+    implements StreamSubscription<T> {}
