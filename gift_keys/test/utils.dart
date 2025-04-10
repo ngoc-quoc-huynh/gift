@@ -25,3 +25,5 @@ void testGolden(
   addTearDown(() => tester.binding.setSurfaceSize(null));
   return callback.call(tester);
 }, tags: ['golden']);
+
+const pageSurfaceSize = Size(360, 640);
