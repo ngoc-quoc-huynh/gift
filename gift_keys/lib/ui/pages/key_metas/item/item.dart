@@ -5,7 +5,7 @@ import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/domain/utils/extensions/date_time.dart';
 import 'package:gift_keys/ui/pages/key_metas/item/image.dart';
 import 'package:gift_keys/ui/router/routes.dart';
-import 'package:gift_keys/ui/widgets/form_field/fade_out.dart';
+import 'package:gift_keys/ui/widgets/fade_out.dart';
 import 'package:gift_keys/ui/widgets/frosted_card.dart';
 import 'package:gift_keys/ui/widgets/responsive_box.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/router/routes.dart';
-import 'package:gift_keys/ui/widgets/form_field/fade_out.dart';
+import 'package:gift_keys/ui/widgets/fade_out.dart';
 
 class KeyMetaAddButton extends StatelessWidget {
   const KeyMetaAddButton({super.key});
