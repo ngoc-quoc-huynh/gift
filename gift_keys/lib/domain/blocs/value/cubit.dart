@@ -5,6 +5,9 @@ import 'package:gift_keys/domain/models/language.dart';
 
 part 'types.dart';
 
+@visibleForTesting
+base mixin TestValueCubit<State> implements ValueCubit<State> {}
+
 final class ValueCubit<State> extends Cubit<State> {
   ValueCubit(super.initialState);
 
