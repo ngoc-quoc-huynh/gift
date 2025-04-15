@@ -17,7 +17,7 @@ import 'package:nfc_manager/nfc_manager.dart';
 
 final class MockDirectory extends Mock implements Directory {}
 
-final class MockFileAPi extends Mock implements FileApi {}
+final class MockFileApi extends Mock implements FileApi {}
 
 final class MockImagePicker extends Mock implements ImagePicker {}
 

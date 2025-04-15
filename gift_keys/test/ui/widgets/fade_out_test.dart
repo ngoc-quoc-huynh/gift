@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_keys/ui/widgets/fade_out.dart';
 
 import '../../utils.dart';
@@ -21,7 +22,7 @@ void main() {
     );
     await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('fade_out_full', widget);
+    await expectGoldenFile('fade_out_full', find.byWidget(widget));
   }, surfaceSize: size);
 
   testGolden('renders correctly with partial opacity.', (tester) async {
@@ -39,7 +40,7 @@ void main() {
     );
     await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('fade_out_partial', widget);
+    await expectGoldenFile('fade_out_partial', find.byWidget(widget));
   }, surfaceSize: size);
 
   testGolden('renders correctly with zero opacity.', (tester) async {
@@ -57,6 +58,6 @@ void main() {
     );
     await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('fade_out_zero', widget);
+    await expectGoldenFile('fade_out_zero', find.byWidget(widget));
   }, surfaceSize: size);
 }

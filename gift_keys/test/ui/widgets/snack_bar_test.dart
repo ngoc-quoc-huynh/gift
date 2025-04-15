@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_keys/ui/widgets/snack_bar.dart';
 
 import '../../utils.dart';
@@ -10,7 +11,7 @@ void main() {
     );
     await tester.pumpGoldenWidget(widget);
     await tester.pumpAndSettle();
-    await expectGoldenFile('snack_bar_error', widget);
+    await expectGoldenFile('snack_bar_error', find.byWidget(widget));
   }, surfaceSize: const Size(200, 80));
 
   testGolden('renders info correctly.', (tester) async {
@@ -19,7 +20,7 @@ void main() {
     );
     await tester.pumpGoldenWidget(widget);
     await tester.pumpAndSettle();
-    await expectGoldenFile('snack_bar_info', widget);
+    await expectGoldenFile('snack_bar_info', find.byWidget(widget));
   }, surfaceSize: const Size(200, 80));
 
   testGolden('renders success correctly.', (tester) async {
@@ -28,7 +29,7 @@ void main() {
     );
     await tester.pumpGoldenWidget(widget);
     await tester.pumpAndSettle();
-    await expectGoldenFile('snack_bar_success', widget);
+    await expectGoldenFile('snack_bar_success', find.byWidget(widget));
   }, surfaceSize: const Size(200, 80));
 }
 

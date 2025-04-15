@@ -22,7 +22,7 @@ void main() {
     );
     await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('radio_option_selected', widget);
+    await expectGoldenFile('radio_option_selected', find.byWidget(widget));
   }, surfaceSize: size);
 
   testGolden('renders unselected correctly.', (tester) async {
@@ -34,7 +34,7 @@ void main() {
     );
     await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('radio_option_unselected', widget);
+    await expectGoldenFile('radio_option_unselected', find.byWidget(widget));
   }, surfaceSize: size);
 
   testWidgets('changes value correctly.', (tester) async {

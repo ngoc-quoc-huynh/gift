@@ -22,7 +22,7 @@ void main() {
       const widget = AlertDialogAction.cancel();
       await tester.pumpGoldenWidget(widget);
 
-      await expectGoldenFile('alert_action_cancel', widget);
+      await expectGoldenFile('alert_action_cancel', find.byWidget(widget));
     }, surfaceSize: size);
 
     testWidgets('pops correctly.', (tester) async {
@@ -54,7 +54,7 @@ void main() {
       final widget = AlertDialogAction.confirm(result: () => true);
       await tester.pumpGoldenWidget(widget);
 
-      await expectGoldenFile('alert_action_confirm', widget);
+      await expectGoldenFile('alert_action_confirm', find.byWidget(widget));
     }, surfaceSize: size);
 
     testWidgets('pops correctly.', (tester) async {

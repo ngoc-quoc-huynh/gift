@@ -32,7 +32,7 @@ void main() {
     await tester.pumpGoldenWidget(widget);
     await tester.pumpAndSettle();
 
-    await expectGoldenFile('provider_loading', widget);
+    await expectGoldenFile('provider_loading', find.byWidget(widget));
     verify(() => localDatabaseApi.loadKey(1)).called(1);
   }, surfaceSize: pageSurfaceSize);
 
@@ -44,7 +44,7 @@ void main() {
     await tester.pumpGoldenWidget(widget);
     await tester.pumpAndSettle();
 
-    await expectGoldenFile('provider_error', widget);
+    await expectGoldenFile('provider_error', find.byWidget(widget));
     verify(() => localDatabaseApi.loadKey(1)).called(1);
   }, surfaceSize: pageSurfaceSize);
 
@@ -62,7 +62,7 @@ void main() {
     await tester.pumpGoldenWidget(widget);
     await tester.pumpAndSettle();
 
-    await expectGoldenFile('provider_success', widget);
+    await expectGoldenFile('provider_success', find.byWidget(widget));
     verify(() => localDatabaseApi.loadKey(1)).called(1);
   }, surfaceSize: pageSurfaceSize);
 }

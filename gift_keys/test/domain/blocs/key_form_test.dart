@@ -13,7 +13,7 @@ import '../../mocks.dart';
 // ignore_for_file: discarded_futures, mocked methods should not be awaited.
 
 void main() {
-  final fileApi = MockFileAPi();
+  final fileApi = MockFileApi();
   final localDatabaseApi = MockLocalDatabaseApi();
 
   setUpAll(

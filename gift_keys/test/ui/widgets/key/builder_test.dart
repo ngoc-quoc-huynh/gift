@@ -33,7 +33,7 @@ void main() {
     );
     await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('builder', widget);
+    await expectGoldenFile('builder', find.byWidget(widget));
   }, surfaceSize: pageSurfaceSize);
 
   testWidgets('throws assertion error when state is not success.', (

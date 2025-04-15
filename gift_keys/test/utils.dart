@@ -6,14 +6,15 @@ import 'package:meta/meta.dart';
 extension WidgetTesterExtension on WidgetTester {
   Future<void> pumpGoldenWidget(Widget widget) => pumpWidget(
     MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: CustomTheme.lightTheme(const TextTheme()),
       home: Scaffold(body: widget),
     ),
   );
 }
 
-Future<void> expectGoldenFile(String name, Widget widget) =>
-    expectLater(find.byWidget(widget), matchesGoldenFile('goldens/$name.png'));
+Future<void> expectGoldenFile(String name, FinderBase<Element> finder) =>
+    expectLater(finder, matchesGoldenFile('goldens/$name.png'));
 
 @isTest
 void testGolden(

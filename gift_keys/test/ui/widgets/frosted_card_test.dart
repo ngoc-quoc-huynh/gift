@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_keys/ui/widgets/frosted_card.dart';
 
 import '../../utils.dart';
@@ -19,6 +20,6 @@ void main() {
       ),
     );
     await tester.pumpGoldenWidget(widget);
-    await expectGoldenFile('frosted_card', widget);
+    await expectGoldenFile('frosted_card', find.byWidget(widget));
   }, surfaceSize: const Size.square(100));
 }

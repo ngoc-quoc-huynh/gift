@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_keys/ui/widgets/responsive_box.dart';
 
 import '../../utils.dart';
@@ -14,7 +15,7 @@ void main() {
         ),
       );
       await tester.pumpGoldenWidget(widget);
-      await expectGoldenFile('responsive_box_small', widget);
+      await expectGoldenFile('responsive_box_small', find.byWidget(widget));
     },
     surfaceSize: const Size(120, 100),
   );
@@ -30,7 +31,7 @@ void main() {
         ),
       );
       await tester.pumpGoldenWidget(widget);
-      await expectGoldenFile('responsive_box_big', widget);
+      await expectGoldenFile('responsive_box_big', find.byWidget(widget));
     },
     surfaceSize: const Size(610, 100),
   );

@@ -41,7 +41,7 @@ void main() {
   });
 
   test('returns FileApi.', () {
-    final fileApi = MockFileAPi();
+    final fileApi = MockFileApi();
     Injector.instance.registerSingleton<FileApi>(fileApi);
     addTearDown(Injector.instance.unregister<FileApi>);
 

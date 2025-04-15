@@ -36,7 +36,7 @@ void main() {
     );
     await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('dialog_alert', widget);
+    await expectGoldenFile('dialog_alert', find.byWidget(widget));
   }, surfaceSize: size);
 
   testGolden('renders normal correctly.', (tester) async {
@@ -47,7 +47,7 @@ void main() {
     );
     await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('dialog_normal', widget);
+    await expectGoldenFile('dialog_normal', find.byWidget(widget));
   }, surfaceSize: size);
 
   group('radio', () {
@@ -66,7 +66,7 @@ void main() {
       );
       await tester.pumpGoldenWidget(widget);
 
-      await expectGoldenFile('dialog_radio', widget);
+      await expectGoldenFile('dialog_radio', find.byWidget(widget));
     }, surfaceSize: size);
 
     testWidgets('changes value correctly.', (tester) async {
