@@ -90,6 +90,7 @@ class _FormFieldPageBodyState extends State<FormFieldPageBody> {
                     icon: Icons.badge,
                     keyboardType: TextInputType.visiblePassword,
                     textInputAction: TextInputAction.next,
+                    textCapitalization: TextCapitalization.characters,
                     validator: FormValidators.validateAid,
                   ),
                   const SizedBox(height: 10),
