@@ -9,6 +9,8 @@ import 'package:gift_keys/injector.dart';
 part 'event.dart';
 part 'state.dart';
 
+base mixin TestKeyFormBlocMixin implements KeyFormBloc {}
+
 final class KeyFormBloc extends Bloc<KeyFormEvent, KeyFormState> {
   KeyFormBloc() : super(const KeyFormInitial()) {
     on<KeyFormAddEvent>(_onKeyFormAddEvent, transformer: droppable());

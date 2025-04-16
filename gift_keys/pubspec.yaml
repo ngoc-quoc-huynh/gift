@@ -33,6 +33,7 @@ dependencies:
   rive: ^0.13.20
 
   # Utils
+  clock: ^1.1.2
   collection: ^1.19.1
   equatable: ^2.0.5
   file: ^7.0.1

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:file/file.dart';
 import 'package:gift_keys/domain/blocs/key/bloc.dart';
+import 'package:gift_keys/domain/blocs/key_form/bloc.dart';
 import 'package:gift_keys/domain/blocs/value/cubit.dart';
 import 'package:gift_keys/domain/interfaces/file.dart';
 import 'package:gift_keys/domain/interfaces/local_database.dart';
@@ -40,5 +41,8 @@ final class MockStreamSubscription<T> extends Mock
 
 final class MockKeyBloc extends MockBloc<KeyEvent, KeyState>
     with TestKeyBlocMixin {}
+
+final class MockKeyFormBloc extends MockBloc<KeyFormEvent, KeyFormState>
+    with TestKeyFormBlocMixin {}
 
 final class MockValueCubit<T> extends MockCubit<T> with TestValueCubit<T> {}

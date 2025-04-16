@@ -1,3 +1,4 @@
+import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/value/cubit.dart';
@@ -23,12 +24,12 @@ class DateFormField extends FormField<DateTime> {
     final context = field.context;
     final date = await showDatePicker(
       context: context,
+      initialDate: clock.now(),
       firstDate: DateTime(2025),
       lastDate: DateTime(3000),
       fieldLabelText: labelText,
       locale: Injector.instance.translations.$meta.locale.flutterLocale,
     );
-
     if (context.mounted && date != null) {
       field.didChange(date);
       context.read<DateTimeValueCubit>().update(date);

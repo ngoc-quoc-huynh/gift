@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/key_form/bloc.dart';
 import 'package:gift_keys/domain/blocs/value/cubit.dart';
 import 'package:gift_keys/domain/models/key.dart';
+import 'package:gift_keys/domain/utils/form_validators.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/widgets/form_field/date.dart';
@@ -75,12 +76,12 @@ class _FormFieldPageBodyState extends State<FormFieldPageBody> {
                     keyboardType: TextInputType.name,
                     textCapitalization: TextCapitalization.words,
                     textInputAction: TextInputAction.next,
-                    validator: _nameValidator,
+                    validator: FormValidators.validateName,
                   ),
                   const SizedBox(height: 10),
                   DateFormField(
                     labelText: _translations.birthday.hint,
-                    validator: _birthdayValidator,
+                    validator: FormValidators.validateBirthday,
                   ),
                   const SizedBox(height: 10),
                   CustomTextFormField(
@@ -89,7 +90,7 @@ class _FormFieldPageBodyState extends State<FormFieldPageBody> {
                     icon: Icons.badge,
                     keyboardType: TextInputType.visiblePassword,
                     textInputAction: TextInputAction.next,
-                    validator: _aidValidator,
+                    validator: FormValidators.validateAid,
                   ),
                   const SizedBox(height: 10),
                   CustomTextFormField(
@@ -99,7 +100,7 @@ class _FormFieldPageBodyState extends State<FormFieldPageBody> {
                     autofillHints: const [AutofillHints.newPassword],
                     keyboardType: TextInputType.visiblePassword,
                     textInputAction: TextInputAction.done,
-                    validator: _passwordValidator,
+                    validator: FormValidators.validatePassword,
                     onSubmitted: () => _onSubmitted(context),
                   ),
                   const SizedBox(height: 20),
@@ -116,38 +117,6 @@ class _FormFieldPageBodyState extends State<FormFieldPageBody> {
           ),
     );
   }
-
-  String? _aidValidator(String? val) => switch (val) {
-    null => _translations.aid.validation.empty,
-    final val when val.isEmpty => _translations.aid.validation.empty,
-    String() when !RegExp(r'^[0-9A-Fa-f]+$').hasMatch(val) =>
-      _translations.aid.validation.hex,
-    String() when val.length < 10 || val.length > 32 =>
-      _translations.aid.validation.length,
-    String() => null,
-  };
-
-  String? _birthdayValidator(DateTime? val) => switch (val) {
-    null => _translations.birthday.validation,
-    DateTime() => null,
-  };
-
-  String? _nameValidator(String? val) =>
-      _emptyValidator(val, _translations.name.validation);
-
-  String? _passwordValidator(String? val) => switch (val) {
-    null => _translations.password.validation.empty,
-    final val when val.isEmpty => _translations.password.validation.empty,
-
-    String() when val.length < 4 => _translations.password.validation.length,
-    String() => null,
-  };
-
-  String? _emptyValidator(String? val, String message) => switch (val) {
-    null => message,
-    final val when val.isEmpty => message,
-    String() => null,
-  };
 
   void _onSubmitted(BuildContext context) {
     if (Form.of(context).validate()) {
