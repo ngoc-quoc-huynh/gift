@@ -15,6 +15,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 final class MockDirectory extends Mock implements Directory {}
 
@@ -33,6 +34,9 @@ final class MockNativeApi extends Mock implements NativeApi {}
 final class MockNfcApi extends Mock implements NfcApi {}
 
 final class MockNfcManager extends Mock implements NfcManager {}
+
+// ignore: avoid_implementing_value_types, for testing purpose.
+final class MockPackageInfo extends Mock implements PackageInfo {}
 
 final class MockStorage extends Mock implements Storage {}
 
