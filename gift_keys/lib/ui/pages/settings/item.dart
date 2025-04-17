@@ -5,14 +5,12 @@ class SettingsItem extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.onTap,
-    this.trailing,
     super.key,
   });
 
   final IconData icon;
   final String title;
   final VoidCallback onTap;
-  final Widget? trailing;
 
   @override
   Widget build(BuildContext context) {

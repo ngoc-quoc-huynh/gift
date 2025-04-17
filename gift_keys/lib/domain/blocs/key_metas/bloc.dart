@@ -12,6 +12,9 @@ import 'package:gift_keys/injector.dart';
 part 'event.dart';
 part 'state.dart';
 
+@visibleForTesting
+base mixin TestKeyMetasBlocMixin implements KeyMetasBloc {}
+
 final class KeyMetasBloc extends Bloc<KeyMetasEvent, KeyMetasState> {
   KeyMetasBloc() : super(const KeyMetasLoadInProgress()) {
     on<KeyMetasInitializeEvent>(

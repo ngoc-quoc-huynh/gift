@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/widgets/dialog/alert_action.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../utils.dart';
 
@@ -26,16 +25,18 @@ void main() {
     }, surfaceSize: size);
 
     testWidgets('pops correctly.', (tester) async {
-      final widget = _TestWidget((context) {
-        WidgetsBinding.instance.addPostFrameCallback(
-          (_) => showDialog<void>(
-            context: context,
-            builder:
-                (context) => const Dialog(child: AlertDialogAction.cancel()),
-          ),
-        );
-        return const SizedBox.shrink();
-      });
+      final widget = TestGoRouter(
+        onTestSetup:
+            (context) => WidgetsBinding.instance.addPostFrameCallback(
+              (_) => showDialog<void>(
+                context: context,
+                builder:
+                    (context) =>
+                        const Dialog(child: AlertDialogAction.cancel()),
+              ),
+            ),
+      );
+
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
 
@@ -58,19 +59,20 @@ void main() {
     }, surfaceSize: size);
 
     testWidgets('pops correctly.', (tester) async {
-      final widget = _TestWidget((context) {
-        WidgetsBinding.instance.addPostFrameCallback((_) async {
-          final result = await showDialog<bool>(
-            context: context,
-            builder:
-                (context) => Dialog(
-                  child: AlertDialogAction.confirm(result: () => true),
-                ),
-          );
-          expect(result, isTrue);
-        });
-        return const SizedBox.shrink();
-      });
+      final widget = TestGoRouter(
+        onTestSetup:
+            (context) =>
+                WidgetsBinding.instance.addPostFrameCallback((_) async {
+                  final result = await showDialog<bool>(
+                    context: context,
+                    builder:
+                        (context) => Dialog(
+                          child: AlertDialogAction.confirm(result: () => true),
+                        ),
+                  );
+                  expect(result, isTrue);
+                }),
+      );
 
       await tester.pumpWidget(widget);
       await tester.pumpAndSettle();
@@ -84,20 +86,4 @@ void main() {
       expect(button, findsNothing);
     });
   });
-}
-
-class _TestWidget extends StatelessWidget {
-  const _TestWidget(this._builder);
-
-  final WidgetBuilder _builder;
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: GoRouter(
-        routes: [
-          GoRoute(path: '/', builder: (context, _) => _builder(context)),
-        ],
-      ),
-    );
-  }
 }

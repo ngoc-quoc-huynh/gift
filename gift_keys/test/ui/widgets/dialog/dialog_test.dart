@@ -9,7 +9,6 @@ import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/widgets/dialog/alert_action.dart';
 import 'package:gift_keys/ui/widgets/dialog/dialog.dart';
 import 'package:gift_keys/ui/widgets/dialog/radio_option.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../mocks.dart';
 import '../../../utils.dart';
@@ -73,12 +72,9 @@ void main() {
       final cubit = MockValueCubit<int>();
       whenListen(cubit, const Stream<int>.empty(), initialState: 0);
 
-      final widget = MaterialApp.router(
-        routerConfig: GoRouter(
-          routes: [
-            GoRoute(
-              path: '/',
-              builder: (context, _) {
+      final widget = TestGoRouter(
+        onTestSetup:
+            (context) =>
                 WidgetsBinding.instance.addPostFrameCallback((_) async {
                   final result = await showDialog<int>(
                     context: context,
@@ -94,12 +90,7 @@ void main() {
                         ),
                   );
                   expect(result, 0);
-                });
-                return const SizedBox.shrink();
-              },
-            ),
-          ],
-        ),
+                }),
       );
 
       await tester.pumpWidget(widget);

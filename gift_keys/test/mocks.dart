@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:file/file.dart';
+import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_keys/domain/blocs/key/bloc.dart';
 import 'package:gift_keys/domain/blocs/key_form/bloc.dart';
+import 'package:gift_keys/domain/blocs/key_metas/bloc.dart';
 import 'package:gift_keys/domain/blocs/value/cubit.dart';
 import 'package:gift_keys/domain/interfaces/file.dart';
 import 'package:gift_keys/domain/interfaces/local_database.dart';
@@ -49,4 +51,13 @@ final class MockKeyBloc extends MockBloc<KeyEvent, KeyState>
 final class MockKeyFormBloc extends MockBloc<KeyFormEvent, KeyFormState>
     with TestKeyFormBlocMixin {}
 
+final class MockKeyMetasBloc extends MockBloc<KeyMetasEvent, KeyMetasState>
+    with TestKeyMetasBlocMixin {}
+
 final class MockValueCubit<T> extends MockCubit<T> with TestValueCubit<T> {}
+
+final class MockLanguageOptionHydratedValueCubit extends Mock
+    with TestLanguageOptionHydratedValueCubitMixin {}
+
+final class MockThemeModeHydratedValueCubit extends Mock
+    with TestThemeModeHydratedValueCubitMixin {}

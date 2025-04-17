@@ -1,5 +1,9 @@
 part of 'cubit.dart';
 
+@visibleForTesting
+base mixin TestThemeModeHydratedValueCubitMixin
+    implements ThemeModeHydratedValueCubit {}
+
 final class ThemeModeHydratedValueCubit extends HydratedValueCubit<ThemeMode> {
   ThemeModeHydratedValueCubit() : super(ThemeMode.system);
 
