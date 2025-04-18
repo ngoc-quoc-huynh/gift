@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:file/file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/value/cubit.dart';
+import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/widgets/form_field/image/avatar.dart';
 import 'package:gift_keys/ui/widgets/form_field/image/button.dart';
@@ -23,7 +26,7 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void onImagePicked(File image) => _onImagePicked(context, image);
+    void onImagePicked() => unawaited(_onImagePicked(context));
 
     return Column(
       children: [
@@ -49,8 +52,22 @@ class _Body extends StatelessWidget {
     );
   }
 
-  void _onImagePicked(BuildContext context, File image) {
-    field.didChange(image);
-    context.read<FileValueCubit>().update(image);
+  Future<void> _onImagePicked(BuildContext context) async {
+    final file = await Injector.instance.fileApi.pickImageFromGallery();
+    if (!context.mounted || file == null) {
+      return;
+    }
+
+    final compressedFile = await Injector.instance.nativeApi.compressImage(
+      file.path,
+      context.screenSize.width.toInt(),
+    );
+
+    if (!context.mounted || compressedFile == null) {
+      return;
+    }
+
+    field.didChange(compressedFile);
+    context.read<FileValueCubit>().update(compressedFile);
   }
 }

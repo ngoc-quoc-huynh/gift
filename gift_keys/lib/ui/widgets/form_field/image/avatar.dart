@@ -3,47 +3,25 @@ import 'dart:async';
 import 'package:file/file.dart';
 import 'package:flutter/material.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
-import 'package:gift_keys/injector.dart';
 
 sealed class ImagePickerAvatar extends StatefulWidget {
   const ImagePickerAvatar({required this.onImagePicked, super.key});
 
   const factory ImagePickerAvatar.selected({
     required File file,
-    required ValueChanged<File> onImagePicked,
+    required VoidCallback onImagePicked,
     Key? key,
   }) = _Selected;
 
   const factory ImagePickerAvatar.empty({
-    required ValueChanged<File> onImagePicked,
+    required VoidCallback onImagePicked,
     Key? key,
   }) = _Empty;
 
-  final ValueChanged<File> onImagePicked;
+  final VoidCallback onImagePicked;
 
   @protected
   static const radius = 50.0;
-
-  static final _fileApi = Injector.instance.fileApi;
-  static final _nativeApi = Injector.instance.nativeApi;
-
-  @protected
-  Future<void> onTap(double screenWidth) async {
-    final file = await _fileApi.pickImageFromGallery();
-    if (file == null) {
-      return;
-    }
-
-    final compressedFile = await _nativeApi.compressImage(
-      file.path,
-      screenWidth.toInt(),
-    );
-    if (compressedFile == null) {
-      return;
-    }
-
-    onImagePicked(compressedFile);
-  }
 }
 
 class _Selected extends ImagePickerAvatar {
@@ -111,9 +89,7 @@ class _SelectedState extends State<_Selected> {
         shape: const CircleBorder(),
         color: Colors.transparent,
         clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          onTap: () => unawaited(widget.onTap(context.screenSize.width)),
-        ),
+        child: InkWell(onTap: widget.onImagePicked),
       ),
     );
   }
@@ -148,9 +124,7 @@ class _EmptyState extends State<_Empty> {
           child: SizedBox(
             width: ImagePickerAvatar.radius * 2,
             height: ImagePickerAvatar.radius * 2,
-            child: InkWell(
-              onTap: () => unawaited(widget.onTap(context.screenSize.width)),
-            ),
+            child: InkWell(onTap: widget.onImagePicked),
           ),
         ),
       ],

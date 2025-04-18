@@ -1,24 +1,16 @@
-import 'package:file/file.dart';
 import 'package:flutter/material.dart';
 import 'package:gift_keys/injector.dart';
 
 class ImagePickerButton extends StatelessWidget {
   const ImagePickerButton({required this.onImagePicked, super.key});
 
-  final ValueChanged<File> onImagePicked;
+  final VoidCallback onImagePicked;
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: _onPressed,
+      onPressed: onImagePicked,
       child: Text(Injector.instance.translations.widgets.form.image.add),
     );
-  }
-
-  Future<void> _onPressed() async {
-    final file = await Injector.instance.fileApi.pickImageFromGallery();
-    if (file != null) {
-      onImagePicked.call(file);
-    }
   }
 }
