@@ -6,6 +6,7 @@ import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_keys/domain/blocs/key/bloc.dart';
 import 'package:gift_keys/domain/blocs/key_form/bloc.dart';
 import 'package:gift_keys/domain/blocs/key_metas/bloc.dart';
+import 'package:gift_keys/domain/blocs/nfc_discovery/bloc.dart';
 import 'package:gift_keys/domain/blocs/value/cubit.dart';
 import 'package:gift_keys/domain/interfaces/file.dart';
 import 'package:gift_keys/domain/interfaces/local_database.dart';
@@ -53,6 +54,10 @@ final class MockKeyFormBloc extends MockBloc<KeyFormEvent, KeyFormState>
 
 final class MockKeyMetasBloc extends MockBloc<KeyMetasEvent, KeyMetasState>
     with TestKeyMetasBlocMixin {}
+
+final class MockNfcDiscoveryBloc
+    extends MockBloc<NfcDiscoveryEvent, NfcDiscoveryState>
+    with TestNfcDiscoveryBlocMixin {}
 
 final class MockValueCubit<T> extends MockCubit<T> with TestValueCubit<T> {}
 

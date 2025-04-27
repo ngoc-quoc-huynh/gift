@@ -10,6 +10,9 @@ import 'package:gift_keys/injector.dart';
 part 'event.dart';
 part 'state.dart';
 
+@visibleForTesting
+base mixin TestNfcDiscoveryBlocMixin implements NfcDiscoveryBloc {}
+
 final class NfcDiscoveryBloc
     extends Bloc<NfcDiscoveryEvent, NfcDiscoveryState> {
   NfcDiscoveryBloc() : super(const NfcDiscoveryLoadInProgress()) {
