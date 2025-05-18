@@ -1,7 +1,8 @@
 import 'package:path/path.dart';
 
 enum Asset {
-  gift('gift.riv');
+  gift('rive/gift.riv'),
+  satisfactory('rive/satisfactory.riv');
 
   const Asset(this.path);
 
