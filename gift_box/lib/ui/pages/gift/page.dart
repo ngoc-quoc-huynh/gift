@@ -4,7 +4,6 @@ import 'package:gift_box/domain/blocs/value/cubit.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/ui/pages/gift/box.dart';
 import 'package:gift_box/ui/pages/gift/confetti.dart';
-import 'package:gift_box/ui/pages/gift/header.dart';
 import 'package:gift_box/ui/pages/gift/nfc_status.dart';
 import 'package:gift_box/ui/router/routes.dart';
 
@@ -35,10 +34,7 @@ class GiftPage extends StatelessWidget {
                         false => null,
                         true => () => context.goRoute(Routes.homePage),
                       },
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [GiftHeader(), GiftBox()],
-                      ),
+                      child: const GiftBox(),
                     ),
               ),
             ),

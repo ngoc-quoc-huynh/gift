@@ -13,25 +13,30 @@ final class GoRouterConfig {
     debugLabel: 'root',
   );
 
-  static final routes = GoRouter(
+  static GoRouter build({required bool hasOpenedGift}) => GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: '/timer',
+    initialLocation: switch (hasOpenedGift) {
+      false => '/timer',
+      true => '/',
+    },
     errorBuilder: (_, state) => ErrorPage(url: state.matchedLocation),
     routes: [
-      GoRoute(
-        name: Routes.homePage(),
-        path: '/',
-        builder: (_, _) => const HomePage(),
-      ),
-      GoRoute(
-        name: Routes.giftPage(),
-        path: '/gift',
-        builder: (_, _) => const GiftPage(),
-      ),
       GoRoute(
         name: Routes.timerPage(),
         path: '/timer',
         builder: (_, _) => const TimerPage(),
+        routes: [
+          GoRoute(
+            name: Routes.giftPage(),
+            path: 'gift',
+            builder: (_, _) => const GiftPage(),
+          ),
+        ],
+      ),
+      GoRoute(
+        name: Routes.homePage(),
+        path: '/',
+        builder: (_, _) => const HomePage(),
       ),
     ],
   );

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/gift_box/bloc.dart';
-import 'package:gift_box/domain/blocs/value/cubit.dart';
+import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
+import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/config.dart';
 import 'package:gift_box/static/resources/assets.dart';
+import 'package:gift_box/ui/router/routes.dart';
 import 'package:gift_box/ui/widgets/rive_player.dart';
 import 'package:rive_native/rive_native.dart';
 
@@ -21,21 +23,18 @@ class _GiftBoxState extends State<GiftBox> {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1,
-      child: BlocProvider<GiftBoxBloc>(
-        create:
-            (_) => GiftBoxBloc(
-              aid: Injector.instance.aid,
-              pin: Injector.instance.pin,
-            )..add(const GiftBoxInitializeEvent()),
-        child: BlocListener<GiftBoxBloc, GiftBoxState>(
-          listener: _onGiftBoxStateChanged,
-          child: RivePlayer(
-            asset: Assets.gift(),
-            artboardName: 'Gift',
-            withStateMachine: _onInit,
-          ),
+    return BlocProvider<GiftBoxBloc>(
+      create:
+          (_) => GiftBoxBloc(
+            aid: Injector.instance.aid,
+            pin: Injector.instance.pin,
+          )..add(const GiftBoxInitializeEvent()),
+      child: BlocListener<GiftBoxBloc, GiftBoxState>(
+        listener: _onGiftBoxStateChanged,
+        child: RivePlayer(
+          asset: Assets.gift(),
+          artboardName: 'Gift',
+          withStateMachine: _onInit,
         ),
       ),
     );
@@ -56,7 +55,10 @@ class _GiftBoxState extends State<GiftBox> {
       };
 
   void _onRiveEvent(Event event) => switch (event.name) {
-    'Animation end event' => context.read<BoolCubit>().update(true),
+    'Animation end event' =>
+      context
+        ..read<HydratedBoolCubit>().update(true)
+        ..goRoute(Routes.homePage),
     _ => null,
   };
 }
