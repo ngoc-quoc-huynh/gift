@@ -5,4 +5,5 @@ final class Assets {
 
   static final key = Asset('assets/key.riv');
   static final launcherIcon = Asset('assets/launcher_icon.webp');
+  static final satisfactory = Asset('assets/satisfactory.rive');
 }
