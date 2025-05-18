@@ -5,7 +5,8 @@ import 'package:gift_box/domain/blocs/value/cubit.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/config.dart';
 import 'package:gift_box/static/resources/assets.dart';
-import 'package:rive/rive.dart';
+import 'package:gift_box/ui/widgets/rive_player.dart';
+import 'package:rive_native/rive_native.dart';
 
 class GiftBox extends StatefulWidget {
   const GiftBox({super.key});
@@ -15,15 +16,8 @@ class GiftBox extends StatefulWidget {
 }
 
 class _GiftBoxState extends State<GiftBox> {
-  late StateMachineController _controller;
-  late SMIBool _isCorrect;
-  late SMIBool _isWrong;
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+  late BooleanInput _isCorrect;
+  late BooleanInput _isWrong;
 
   @override
   Widget build(BuildContext context) {
@@ -37,38 +31,31 @@ class _GiftBoxState extends State<GiftBox> {
             )..add(const GiftBoxInitializeEvent()),
         child: BlocListener<GiftBoxBloc, GiftBoxState>(
           listener: _onGiftBoxStateChanged,
-          child: RiveAnimation.asset(
-            Assets.gift(),
-            fit: BoxFit.contain,
-            artboard: 'Gift',
-            stateMachines: const ['State Machine'],
-            onInit: _onInit,
+          child: RivePlayer(
+            asset: Assets.gift(),
+            artboardName: 'Gift',
+            withStateMachine: _onInit,
           ),
         ),
       ),
     );
   }
 
-  void _onInit(Artboard artboard) {
-    _controller =
-        StateMachineController.fromArtboard(artboard, 'State Machine')!
-          ..addEventListener(_onRiveEvent);
-    _controller
-        .getNumberInput('Skin number')!
-        .change(Config.skin.index.toDouble());
-    _isCorrect = _controller.getBoolInput('Is key correct')!;
-    _isWrong = _controller.getBoolInput('Is key wrong')!;
-    artboard.addController(_controller);
+  void _onInit(StateMachine stateMachine) {
+    _isCorrect = stateMachine.boolean('Is key correct')!;
+    _isWrong = stateMachine.boolean('Is key wrong')!;
+    stateMachine.number('Skin number')!.value = Config.skin.index.toDouble();
+    stateMachine.addEventListener(_onRiveEvent);
   }
 
   void _onGiftBoxStateChanged(BuildContext _, GiftBoxState state) =>
       switch (state) {
         GiftBoxIdle() => null,
-        GiftBoxOpenOnSuccess() => _isCorrect.change(true),
-        GiftBoxOpenOnFailure() => _isWrong.change(true),
+        GiftBoxOpenOnSuccess() => _isCorrect.value = true,
+        GiftBoxOpenOnFailure() => _isWrong.value = true,
       };
 
-  void _onRiveEvent(RiveEvent event) => switch (event.name) {
+  void _onRiveEvent(Event event) => switch (event.name) {
     'Animation end event' => context.read<BoolCubit>().update(true),
     _ => null,
   };

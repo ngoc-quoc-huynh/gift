@@ -4,11 +4,14 @@ PODS:
     - Flutter
   - rive_common (0.0.1):
     - Flutter
+  - rive_native (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - rive_common (from `.symlinks/plugins/rive_common/ios`)
+  - rive_native (from `.symlinks/plugins/rive_native/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
@@ -17,11 +20,14 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
   rive_common:
     :path: ".symlinks/plugins/rive_common/ios"
+  rive_native:
+    :path: ".symlinks/plugins/rive_native/ios"
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_native_splash: 6cad9122ea0fad137d23137dd14b937f3e90b145
   rive_common: dd421daaf9ae69f0125aa761dd96abd278399952
+  rive_native: 329a0612c7c80230e808a2c0afdd1f5d6e6e4a0a
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 

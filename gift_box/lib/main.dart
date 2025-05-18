@@ -3,9 +3,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/theme.dart';
 import 'package:gift_box/ui/router/config.dart';
+import 'package:rive_native/rive_native.dart';
 
-void main() {
+Future<void> main() async {
   Injector.setupDependencies();
+  await RiveNative.init();
   runApp(const App());
 }
 
