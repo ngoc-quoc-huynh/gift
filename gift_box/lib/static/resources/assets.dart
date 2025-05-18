@@ -3,7 +3,8 @@ import 'package:gift_box/domain/models/asset.dart';
 final class Assets {
   const Assets._();
 
-  static final gift = Asset('assets/gift.riv');
+  static final gift = Asset('assets/rive/gift.riv');
+  static final satisfactory = Asset('assets/rive/satisfactory.riv');
 
   static final images = [
     Asset('assets/images/example_1.webp'),
