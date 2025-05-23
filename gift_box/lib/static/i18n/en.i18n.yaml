@@ -9,3 +9,6 @@ pages:
     nfcTooltip: 'Enable NFC to unlock the gift.'
   timer:
     tapMe: 'Tap me'
+  awesomeShop:
+    volumeUp: 'Crank up the volume!'
+    tap: 'Tap to unlock the Awesome Shop experience!'
