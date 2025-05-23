@@ -64,7 +64,7 @@ class _GiftBoxState extends State<GiftBox> {
     'Animation end event' =>
       context
         ..read<HydratedBoolCubit>().update(true)
-        ..goRoute(AppRoute.home),
+        ..goRoute(AppRoute.awesomeSink),
     _ => null,
   };
 }
