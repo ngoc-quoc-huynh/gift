@@ -21,12 +21,12 @@ class _AwesomeSinkPageState extends State<AwesomeSinkPage> {
       body: RivePlayer(
         asset: Asset.satisfactory(),
         artboardName: 'Awesome Sink',
-        withStateMachine: _onInit,
+        onLoaded: _onLoaded,
       ),
     );
   }
 
-  void _onInit(StateMachine stateMachine) =>
+  void _onLoaded(StateMachine stateMachine) =>
       stateMachine.addEventListener(_onRiveEvent);
 
   void _onRiveEvent(Event event) => switch (event.name) {
