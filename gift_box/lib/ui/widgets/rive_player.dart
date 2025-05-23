@@ -6,14 +6,12 @@ import 'package:rive_native/rive_native.dart';
 class RivePlayer extends StatefulWidget {
   const RivePlayer({
     required this.asset,
-    this.stateMachineName,
     this.artboardName,
     this.withStateMachine,
     super.key,
   });
 
   final String asset;
-  final String? stateMachineName;
   final String? artboardName;
   final void Function(StateMachine stateMachine)? withStateMachine;
 
@@ -62,7 +60,6 @@ class _RivePlayerState extends State<RivePlayer> {
           final artboardName => _riveFile!.artboard(artboardName)!,
         };
         _stateMachinePainter = RivePainter.stateMachine(
-          stateMachineName: widget.stateMachineName,
           withStateMachine: (stateMachine) {
             widget.withStateMachine?.call(stateMachine);
 
