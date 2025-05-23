@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:alchemist/alchemist.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,13 +15,7 @@ Future<void> main() async {
           ..registerSingleton<Translations>(AppLocale.en.buildSync()),
   );
 
-  tearDownAll(
-    () =>
-        Injector.instance
-          ..unregisterBirthday()
-          ..unregister<Timer>()
-          ..unregister<Translations>(),
-  );
+  tearDownAll(Injector.instance.reset);
 
   await goldenTest(
     'renders initial correctly.',

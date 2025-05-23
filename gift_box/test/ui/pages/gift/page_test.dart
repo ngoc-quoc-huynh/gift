@@ -23,14 +23,7 @@ void main() {
           ..registerSingleton<Translations>(AppLocale.en.buildSync()),
   );
 
-  tearDownAll(
-    () async =>
-        Injector.instance
-          ..unregisterAid()
-          ..unregisterPin()
-          ..unregister<NfcApi>()
-          ..unregister<Translations>(),
-  );
+  tearDownAll(Injector.instance.reset);
 
   when(
     () => nfcApi.startEmulation(aid, pin),

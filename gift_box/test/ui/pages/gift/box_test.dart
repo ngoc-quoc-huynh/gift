@@ -22,13 +22,7 @@ void main() {
           ..registerSingleton<NfcApi>(nfcApi),
   );
 
-  tearDownAll(
-    () async =>
-        Injector.instance
-          ..unregisterAid()
-          ..unregisterPin()
-          ..unregister<NfcApi>(),
-  );
+  tearDownAll(Injector.instance.reset);
 
   when(
     () => nfcApi.startEmulation(aid, pin),

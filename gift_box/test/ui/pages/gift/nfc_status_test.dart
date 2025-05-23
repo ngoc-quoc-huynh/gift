@@ -17,7 +17,7 @@ Future<void> main() async {
           ..registerSingleton<Translations>(AppLocale.en.buildSync()),
   );
 
-  tearDownAll(Injector.instance.unregister<NfcApi>);
+  tearDownAll(Injector.instance.reset);
 
   when(nfcApi.isEnabled).thenAnswer((_) async => true);
 
