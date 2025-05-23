@@ -1,14 +1,23 @@
 appName: 'Gift'
 
 pages:
+  awesomeShop:
+    volumeUp: 'Crank up the volume!'
+    tap: 'Tap to unlock the Awesome Shop experience!'
+  awesomeShopCatalog:
+    appBar: 'Awesome Shop'
+    navigationBar:
+      customizer: 'Customizer'
+      equipment: 'Equiptment'
+      specials: 'Specials'
+    settingsTooltip: 'Settings'
   error:
     appBar: 'Page not found!'
     content: 'The URL ${url: String} could not be found.'
   gift:
     openMe: 'Open me'
     nfcTooltip: 'Enable NFC to unlock the gift.'
+  settings:
+    appBar: 'Settings'
   timer:
     tapMe: 'Tap me'
-  awesomeShop:
-    volumeUp: 'Crank up the volume!'
-    tap: 'Tap to unlock the Awesome Shop experience!'

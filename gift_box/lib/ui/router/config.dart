@@ -5,6 +5,7 @@ import 'package:gift_box/ui/pages/awesome_shop_catalog/page.dart';
 import 'package:gift_box/ui/pages/awesome_sink/page.dart';
 import 'package:gift_box/ui/pages/error/page.dart';
 import 'package:gift_box/ui/pages/gift/page.dart';
+import 'package:gift_box/ui/pages/settings/page.dart';
 import 'package:gift_box/ui/pages/timer/page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -47,10 +48,15 @@ final class GoRouterConfig {
         routes: [
           GoRoute(
             name: AppRoute.awesomeShopCatalog(),
-            path: '/catalog',
+            path: 'catalog',
             builder: (_, _) => const AwesomeShopCatalogPage(),
           ),
         ],
+      ),
+      GoRoute(
+        name: AppRoute.settings(),
+        path: '/settings',
+        builder: (_, _) => const SettingsPage(),
       ),
     ],
   );
