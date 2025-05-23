@@ -37,10 +37,9 @@ void main() {
     final widget = BlocProvider<KeyMetasBloc>(
       create: (_) => bloc,
       child: TestGoRouter(
-        onTestSetup:
-            (context) => WidgetsBinding.instance.addPostFrameCallback(
-              (_) => SettingsResetDialog.show(context),
-            ),
+        onTestSetup: (context) => WidgetsBinding.instance.addPostFrameCallback(
+          (_) => SettingsResetDialog.show(context),
+        ),
       ),
     );
     await tester.pumpWidget(widget);

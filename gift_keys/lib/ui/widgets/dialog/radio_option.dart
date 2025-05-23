@@ -16,17 +16,15 @@ class RadioDialogOption<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ValueCubit<T>, T>(
-      builder:
-          (context, selectedOption) => RadioListTile<T>(
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: Sizes.horizontalPadding,
-            ),
-            title: Text(title),
-            value: value,
-            groupValue: selectedOption,
-            onChanged:
-                (value) => context.read<ValueCubit<T>>().update(value as T),
-          ),
+      builder: (context, selectedOption) => RadioListTile<T>(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: Sizes.horizontalPadding,
+        ),
+        title: Text(title),
+        value: value,
+        groupValue: selectedOption,
+        onChanged: (value) => context.read<ValueCubit<T>>().update(value as T),
+      ),
     );
   }
 }

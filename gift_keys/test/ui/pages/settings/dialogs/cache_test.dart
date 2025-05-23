@@ -12,10 +12,9 @@ void main() {
   final fileApi = MockFileApi();
 
   setUpAll(
-    () =>
-        Injector.instance
-          ..registerSingleton<FileApi>(fileApi)
-          ..registerSingleton<Translations>(AppLocale.en.buildSync()),
+    () => Injector.instance
+      ..registerSingleton<FileApi>(fileApi)
+      ..registerSingleton<Translations>(AppLocale.en.buildSync()),
   );
 
   tearDownAll(Injector.instance.reset);
@@ -32,10 +31,9 @@ void main() {
     when(fileApi.clearCache).thenAnswer((_) => Future<void>.value());
 
     final widget = TestGoRouter(
-      onTestSetup:
-          (context) => WidgetsBinding.instance.addPostFrameCallback(
-            (_) => SettingsCacheDialog.show(context),
-          ),
+      onTestSetup: (context) => WidgetsBinding.instance.addPostFrameCallback(
+        (_) => SettingsCacheDialog.show(context),
+      ),
     );
     await tester.pumpWidget(widget);
     await tester.pump();

@@ -8,11 +8,10 @@ import '../../../utils.dart';
 
 Future<void> main() async {
   setUpAll(
-    () =>
-        Injector.instance
-          ..registerBirthday(DateTime(2025))
-          ..registerPeriodicTimer()
-          ..registerSingleton<Translations>(AppLocale.en.buildSync()),
+    () => Injector.instance
+      ..registerBirthday(DateTime(2025))
+      ..registerPeriodicTimer()
+      ..registerSingleton<Translations>(AppLocale.en.buildSync()),
   );
 
   tearDownAll(Injector.instance.reset);
@@ -20,11 +19,10 @@ Future<void> main() async {
   await goldenTest(
     'renders initial correctly.',
     fileName: 'countdown_initial',
-    pumpWidget:
-        (tester, widget) => withClock(
-          Clock.fixed(DateTime(2025)),
-          () => tester.pumpWidget(widget),
-        ),
+    pumpWidget: (tester, widget) => withClock(
+      Clock.fixed(DateTime(2025)),
+      () => tester.pumpWidget(widget),
+    ),
     builder: TimerCountdown.new,
     // TODO: Fix me
     skip: true,
@@ -34,11 +32,10 @@ Future<void> main() async {
     'renders end correctly.',
     fileName: 'countdown_end',
     pumpBeforeTest: (tester) => tester.pump(const Duration(seconds: 1)),
-    pumpWidget:
-        (tester, widget) => withClock(
-          Clock.fixed(DateTime(2025)),
-          () => tester.pumpWidget(widget),
-        ),
+    pumpWidget: (tester, widget) => withClock(
+      Clock.fixed(DateTime(2025)),
+      () => tester.pumpWidget(widget),
+    ),
     builder: TimerCountdown.new,
     // TODO: Fix me
     skip: true,
@@ -48,11 +45,10 @@ Future<void> main() async {
     'renders running correctly.',
     fileName: 'countdown_running',
     pumpBeforeTest: (tester) => tester.pump(const Duration(seconds: 1)),
-    pumpWidget:
-        (tester, widget) => withClock(
-          Clock.fixed(DateTime(2024, 12, 31)),
-          () => tester.pumpWidget(widget),
-        ),
+    pumpWidget: (tester, widget) => withClock(
+      Clock.fixed(DateTime(2024, 12, 31)),
+      () => tester.pumpWidget(widget),
+    ),
     builder: TimerCountdown.new,
     // TODO: Fix me
     skip: true,

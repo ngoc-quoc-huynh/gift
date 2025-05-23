@@ -11,10 +11,9 @@ void main() {
   final fileApi = MockFileApi();
 
   setUpAll(
-    () =>
-        Injector.instance
-          ..registerSingleton<FileApi>(fileApi)
-          ..registerSingleton<Translations>(AppLocale.en.buildSync()),
+    () => Injector.instance
+      ..registerSingleton<FileApi>(fileApi)
+      ..registerSingleton<Translations>(AppLocale.en.buildSync()),
   );
 
   tearDownAll(Injector.instance.reset);

@@ -15,10 +15,9 @@ void main() {
   final repository = NfcRepository(nfcManager);
 
   setUpAll(
-    () =>
-        Injector.instance
-          ..registerSingleton<NfcApi>(NfcRepository(nfcManager))
-          ..registerSingleton<LoggerApi>(loggerApi),
+    () => Injector.instance
+      ..registerSingleton<NfcApi>(NfcRepository(nfcManager))
+      ..registerSingleton<LoggerApi>(loggerApi),
   );
 
   tearDownAll(Injector.instance.reset);

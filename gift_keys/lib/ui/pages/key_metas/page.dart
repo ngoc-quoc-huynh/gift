@@ -21,12 +21,11 @@ class KeyMetasPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<KeyMetasBloc, KeyMetasState>(
-        builder:
-            (context, state) => switch (state) {
-              KeyMetasLoadInProgress() => const LoadingIndicator(),
-              KeyMetasOperationState(:final metas) => _Body(metas),
-              KeyMetasLoadOnFailure() => const KeyMetasErrorView(),
-            },
+        builder: (context, state) => switch (state) {
+          KeyMetasLoadInProgress() => const LoadingIndicator(),
+          KeyMetasOperationState(:final metas) => _Body(metas),
+          KeyMetasLoadOnFailure() => const KeyMetasErrorView(),
+        },
       ),
     );
   }

@@ -53,69 +53,68 @@ class _FormFieldPageBodyState extends State<FormFieldPageBody> {
   Widget build(BuildContext context) {
     return BlocSelector<KeyFormBloc, KeyFormState, bool>(
       selector: (state) => state is KeyFormLoadInProgress,
-      builder:
-          (context, isLoading) => PopScope(
-            canPop: !isLoading,
-            child: IgnorePointer(
-              ignoring: isLoading,
-              child: ListView(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: Sizes.horizontalPadding,
-                  vertical: Sizes.verticalPadding,
-                ),
-                children: [
-                  ImagePickerFormField(
-                    initialValue: context.read<FileValueCubit>().state,
-                  ),
-                  const SizedBox(height: 10),
-                  CustomTextFormField(
-                    controller: _nameController,
-                    icon: Icons.person,
-                    label: _translations.name.hint,
-                    autofillHints: const [AutofillHints.name],
-                    keyboardType: TextInputType.name,
-                    textCapitalization: TextCapitalization.words,
-                    textInputAction: TextInputAction.next,
-                    validator: FormValidators.validateName,
-                  ),
-                  const SizedBox(height: 10),
-                  DateFormField(
-                    labelText: _translations.birthday.hint,
-                    validator: FormValidators.validateBirthday,
-                  ),
-                  const SizedBox(height: 10),
-                  CustomTextFormField(
-                    controller: _aidController,
-                    label: _translations.aid.hint,
-                    icon: Icons.badge,
-                    keyboardType: TextInputType.visiblePassword,
-                    textInputAction: TextInputAction.next,
-                    textCapitalization: TextCapitalization.characters,
-                    validator: FormValidators.validateAid,
-                  ),
-                  const SizedBox(height: 10),
-                  CustomTextFormField(
-                    controller: _passwordController,
-                    label: _translations.password.hint,
-                    icon: Icons.lock,
-                    autofillHints: const [AutofillHints.newPassword],
-                    keyboardType: TextInputType.visiblePassword,
-                    textInputAction: TextInputAction.done,
-                    validator: FormValidators.validatePassword,
-                    onSubmitted: () => _onSubmitted(context),
-                  ),
-                  const SizedBox(height: 20),
-                  switch (isLoading) {
-                    true => const FormFieldSubmitButton.loading(),
-                    false => FormFieldSubmitButton.normal(
-                      buttonTitle: widget.buttonTitle,
-                      onPressed: () => _onSubmitted(context),
-                    ),
-                  },
-                ],
-              ),
+      builder: (context, isLoading) => PopScope(
+        canPop: !isLoading,
+        child: IgnorePointer(
+          ignoring: isLoading,
+          child: ListView(
+            padding: const EdgeInsets.symmetric(
+              horizontal: Sizes.horizontalPadding,
+              vertical: Sizes.verticalPadding,
             ),
+            children: [
+              ImagePickerFormField(
+                initialValue: context.read<FileValueCubit>().state,
+              ),
+              const SizedBox(height: 10),
+              CustomTextFormField(
+                controller: _nameController,
+                icon: Icons.person,
+                label: _translations.name.hint,
+                autofillHints: const [AutofillHints.name],
+                keyboardType: TextInputType.name,
+                textCapitalization: TextCapitalization.words,
+                textInputAction: TextInputAction.next,
+                validator: FormValidators.validateName,
+              ),
+              const SizedBox(height: 10),
+              DateFormField(
+                labelText: _translations.birthday.hint,
+                validator: FormValidators.validateBirthday,
+              ),
+              const SizedBox(height: 10),
+              CustomTextFormField(
+                controller: _aidController,
+                label: _translations.aid.hint,
+                icon: Icons.badge,
+                keyboardType: TextInputType.visiblePassword,
+                textInputAction: TextInputAction.next,
+                textCapitalization: TextCapitalization.characters,
+                validator: FormValidators.validateAid,
+              ),
+              const SizedBox(height: 10),
+              CustomTextFormField(
+                controller: _passwordController,
+                label: _translations.password.hint,
+                icon: Icons.lock,
+                autofillHints: const [AutofillHints.newPassword],
+                keyboardType: TextInputType.visiblePassword,
+                textInputAction: TextInputAction.done,
+                validator: FormValidators.validatePassword,
+                onSubmitted: () => _onSubmitted(context),
+              ),
+              const SizedBox(height: 20),
+              switch (isLoading) {
+                true => const FormFieldSubmitButton.loading(),
+                false => FormFieldSubmitButton.normal(
+                  buttonTitle: widget.buttonTitle,
+                  onPressed: () => _onSubmitted(context),
+                ),
+              },
+            ],
           ),
+        ),
+      ),
     );
   }
 

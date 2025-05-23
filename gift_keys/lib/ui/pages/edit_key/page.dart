@@ -24,24 +24,22 @@ class EditKeyPage extends StatelessWidget {
         child: BlocListener<KeyFormBloc, KeyFormState>(
           listener: _onKeyFormStateChanged,
           child: Builder(
-            builder:
-                (context) => FormFieldPage(
-                  title: _editKeyTranslations.appBar,
-                  buttonTitle: _editKeyTranslations.update,
-                  giftKey: giftKey,
-                  onSubmitted:
-                      (imagePath, name, birthday, aid, password) =>
-                          context.read<KeyFormBloc>().add(
-                            KeyFormUpdateEvent(
-                              id: giftKey.id,
-                              imagePath: imagePath,
-                              name: name,
-                              birthday: birthday,
-                              aid: aid,
-                              password: password,
-                            ),
-                          ),
-                ),
+            builder: (context) => FormFieldPage(
+              title: _editKeyTranslations.appBar,
+              buttonTitle: _editKeyTranslations.update,
+              giftKey: giftKey,
+              onSubmitted: (imagePath, name, birthday, aid, password) =>
+                  context.read<KeyFormBloc>().add(
+                    KeyFormUpdateEvent(
+                      id: giftKey.id,
+                      imagePath: imagePath,
+                      name: name,
+                      birthday: birthday,
+                      aid: aid,
+                      password: password,
+                    ),
+                  ),
+            ),
           ),
         ),
       ),

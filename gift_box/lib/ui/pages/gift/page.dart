@@ -28,14 +28,13 @@ class GiftPage extends StatelessWidget {
             child: BlocProvider<BoolCubit>(
               create: (_) => BoolCubit(false),
               child: BlocBuilder<BoolCubit, bool>(
-                builder:
-                    (context, isOpen) => GestureDetector(
-                      onTap: switch (isOpen) {
-                        false => null,
-                        true => () => context.goRoute(Routes.homePage),
-                      },
-                      child: const GiftBox(),
-                    ),
+                builder: (context, isOpen) => GestureDetector(
+                  onTap: switch (isOpen) {
+                    false => null,
+                    true => () => context.goRoute(Routes.homePage),
+                  },
+                  child: const GiftBox(),
+                ),
               ),
             ),
           ),

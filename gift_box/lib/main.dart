@@ -19,11 +19,10 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HydratedBoolCubit>(
-      create:
-          (_) => HydratedBoolCubit(
-            initialState: false,
-            storageKey: 'has_opened_gift',
-          ),
+      create: (_) => HydratedBoolCubit(
+        initialState: false,
+        storageKey: 'has_opened_gift',
+      ),
       child: const _Body(),
     );
   }

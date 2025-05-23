@@ -29,20 +29,17 @@ void main() {
   group('NfcDiscoveryInitializeEvent', () {
     blocTest<NfcDiscoveryBloc, NfcDiscoveryState>(
       'emits NfcDiscoveryConnectInProgress.',
-      setUp:
-          () => when(
-            nfcApi.startDiscovery,
-          ).thenAnswer((_) => const Stream<String>.empty()),
+      setUp: () => when(
+        nfcApi.startDiscovery,
+      ).thenAnswer((_) => const Stream<String>.empty()),
       build: NfcDiscoveryBloc.new,
-      act:
-          (bloc) => bloc.add(
-            const NfcDiscoveryInitializeEvent(aid: aid, password: password),
-          ),
-      expect:
-          () => const [
-            NfcDiscoveryLoadInProgress(),
-            NfcDiscoveryConnectInProgress(aid, password),
-          ],
+      act: (bloc) => bloc.add(
+        const NfcDiscoveryInitializeEvent(aid: aid, password: password),
+      ),
+      expect: () => const [
+        NfcDiscoveryLoadInProgress(),
+        NfcDiscoveryConnectInProgress(aid, password),
+      ],
       verify: (_) => verify(nfcApi.startDiscovery).called(1),
     );
 
@@ -58,16 +55,14 @@ void main() {
         ).thenAnswer((_) async => true);
       },
       build: NfcDiscoveryBloc.new,
-      act:
-          (bloc) => bloc.add(
-            const NfcDiscoveryInitializeEvent(aid: aid, password: password),
-          ),
-      expect:
-          () => const [
-            NfcDiscoveryLoadInProgress(),
-            NfcDiscoveryConnectInProgress(aid, password),
-            NfcDiscoveryConnectOnSuccess(aid, password),
-          ],
+      act: (bloc) => bloc.add(
+        const NfcDiscoveryInitializeEvent(aid: aid, password: password),
+      ),
+      expect: () => const [
+        NfcDiscoveryLoadInProgress(),
+        NfcDiscoveryConnectInProgress(aid, password),
+        NfcDiscoveryConnectOnSuccess(aid, password),
+      ],
       verify: (_) {
         final verifications = verifyInOrder([
           nfcApi.startDiscovery,
@@ -109,10 +104,9 @@ void main() {
 
     blocTest<NfcDiscoveryBloc, NfcDiscoveryState>(
       'emits NfcDiscoveryConnectOnFailure when select fails.',
-      setUp:
-          () => when(
-            () => nfcApi.sendCommand(const SelectAidCommand(aid)),
-          ).thenAnswer((_) async => false),
+      setUp: () => when(
+        () => nfcApi.sendCommand(const SelectAidCommand(aid)),
+      ).thenAnswer((_) async => false),
       build: NfcDiscoveryBloc.new,
       seed: () => const NfcDiscoveryConnectInProgress(aid, password),
       act: (bloc) => bloc.add(const NfcDiscoverySendCommandEvent()),

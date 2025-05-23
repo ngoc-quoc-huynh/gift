@@ -29,40 +29,37 @@ void main() {
   group('KeyInitializeEvent', () {
     blocTest<KeyBloc, KeyState>(
       'emits KeyLoadOnSuccess.',
-      setUp:
-          () => when(() => localDatabaseApi.loadKey(id)).thenAnswer(
-            (_) async => GiftKey(
-              id: id,
-              name: 'Name',
-              birthday: DateTime.utc(2025),
-              aid: 'F000000001',
-              password: '1234',
-            ),
-          ),
+      setUp: () => when(() => localDatabaseApi.loadKey(id)).thenAnswer(
+        (_) async => GiftKey(
+          id: id,
+          name: 'Name',
+          birthday: DateTime.utc(2025),
+          aid: 'F000000001',
+          password: '1234',
+        ),
+      ),
       build: () => KeyBloc(id),
       act: (bloc) => bloc.add(const KeyInitializeEvent()),
-      expect:
-          () => [
-            const KeyLoadInProgress(),
-            KeyLoadOnSuccess(
-              GiftKey(
-                id: id,
-                name: 'Name',
-                birthday: DateTime.utc(2025),
-                aid: 'F000000001',
-                password: '1234',
-              ),
-            ),
-          ],
+      expect: () => [
+        const KeyLoadInProgress(),
+        KeyLoadOnSuccess(
+          GiftKey(
+            id: id,
+            name: 'Name',
+            birthday: DateTime.utc(2025),
+            aid: 'F000000001',
+            password: '1234',
+          ),
+        ),
+      ],
       verify: (_) => verify(() => localDatabaseApi.loadKey(id)).called(1),
     );
 
     blocTest<KeyBloc, KeyState>(
       'emits KeyLoadOnFailure when LocalDatabaseException is thrown.',
-      setUp:
-          () => when(
-            () => localDatabaseApi.loadKey(id),
-          ).thenThrow(const LocalDatabaseException()),
+      setUp: () => when(
+        () => localDatabaseApi.loadKey(id),
+      ).thenThrow(const LocalDatabaseException()),
       build: () => KeyBloc(id),
       act: (bloc) => bloc.add(const KeyInitializeEvent()),
       expect: () => const [KeyLoadInProgress(), KeyLoadOnFailure()],

@@ -17,11 +17,10 @@ class SettingsLanguageDialog extends StatelessWidget {
     final option = await showDialog<LanguageOption>(
       context: context,
       useRootNavigator: false,
-      builder:
-          (_) => BlocProvider<LanguageOptionValueCubit>(
-            create: (_) => LanguageOptionValueCubit(currentOption),
-            child: const SettingsLanguageDialog(),
-          ),
+      builder: (_) => BlocProvider<LanguageOptionValueCubit>(
+        create: (_) => LanguageOptionValueCubit(currentOption),
+        child: const SettingsLanguageDialog(),
+      ),
     );
 
     if (context.mounted && option != null) {

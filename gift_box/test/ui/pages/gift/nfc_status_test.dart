@@ -11,10 +11,9 @@ Future<void> main() async {
   final nfcApi = MockNfcApi();
 
   setUpAll(
-    () =>
-        Injector.instance
-          ..registerSingleton<NfcApi>(nfcApi)
-          ..registerSingleton<Translations>(AppLocale.en.buildSync()),
+    () => Injector.instance
+      ..registerSingleton<NfcApi>(nfcApi)
+      ..registerSingleton<Translations>(AppLocale.en.buildSync()),
   );
 
   tearDownAll(Injector.instance.reset);

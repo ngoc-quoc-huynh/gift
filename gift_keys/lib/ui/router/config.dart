@@ -26,12 +26,10 @@ final class GoRouterConfig {
     errorBuilder: (_, state) => ErrorPage(url: state.matchedLocation),
     routes: [
       ShellRoute(
-        builder:
-            (_, _, child) => BlocProvider<KeyMetasBloc>(
-              create:
-                  (_) => KeyMetasBloc()..add(const KeyMetasInitializeEvent()),
-              child: child,
-            ),
+        builder: (_, _, child) => BlocProvider<KeyMetasBloc>(
+          create: (_) => KeyMetasBloc()..add(const KeyMetasInitializeEvent()),
+          child: child,
+        ),
         routes: [
           GoRoute(
             name: Routes.keysPage(),
@@ -44,28 +42,24 @@ final class GoRouterConfig {
                 builder: (_, _) => const AddKeyPage(),
               ),
               ShellRoute(
-                builder:
-                    (_, state, child) => KeyPageProvider(
-                      id: int.parse(state.pathParameters['id']!),
-                      child: child,
-                    ),
+                builder: (_, state, child) => KeyPageProvider(
+                  id: int.parse(state.pathParameters['id']!),
+                  child: child,
+                ),
                 routes: [
                   GoRoute(
                     name: Routes.keyPage(),
                     path: ':id',
-                    builder:
-                        (context, state) => KeyPageBuilder(
-                          builder: (giftKey) => KeyPage(giftKey: giftKey),
-                        ),
+                    builder: (context, state) => KeyPageBuilder(
+                      builder: (giftKey) => KeyPage(giftKey: giftKey),
+                    ),
                     routes: [
                       GoRoute(
                         name: Routes.editKeyPage(),
                         path: 'edit',
-                        builder:
-                            (_, state) => KeyPageBuilder(
-                              builder:
-                                  (giftKey) => EditKeyPage(giftKey: giftKey),
-                            ),
+                        builder: (_, state) => KeyPageBuilder(
+                          builder: (giftKey) => EditKeyPage(giftKey: giftKey),
+                        ),
                       ),
                     ],
                   ),

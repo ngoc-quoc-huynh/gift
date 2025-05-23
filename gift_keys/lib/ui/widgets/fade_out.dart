@@ -13,14 +13,13 @@ class FadeBox extends StatelessWidget {
     final screenWidth = context.screenSize.width;
 
     return LayoutBuilder(
-      builder:
-          (context, constraints) => OverflowBox(
-            maxWidth: screenWidth,
-            child: Opacity(
-              opacity: _computeOpacity(constraints.maxWidth, screenWidth),
-              child: child,
-            ),
-          ),
+      builder: (context, constraints) => OverflowBox(
+        maxWidth: screenWidth,
+        child: Opacity(
+          opacity: _computeOpacity(constraints.maxWidth, screenWidth),
+          child: child,
+        ),
+      ),
     );
   }
 

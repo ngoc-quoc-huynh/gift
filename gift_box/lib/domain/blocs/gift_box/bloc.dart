@@ -36,16 +36,15 @@ final class GiftBoxBloc extends Bloc<GiftBoxEvent, GiftBoxState> {
   void _onGiftBoxInitializeEvent(
     GiftBoxInitializeEvent event,
     Emitter<GiftBoxState> emit,
-  ) =>
-      _sub = _nfcApi
-          .startEmulation(aid, pin)
-          .listen(
-            (status) => switch (status) {
-              NfcStatus.error => add(const GiftBoxOpenWrongEvent()),
-              NfcStatus.idle => add(const GiftBoxIdleEvent()),
-              NfcStatus.success => add(const GiftBoxOpenCorrectEvent()),
-            },
-          );
+  ) => _sub = _nfcApi
+      .startEmulation(aid, pin)
+      .listen(
+        (status) => switch (status) {
+          NfcStatus.error => add(const GiftBoxOpenWrongEvent()),
+          NfcStatus.idle => add(const GiftBoxIdleEvent()),
+          NfcStatus.success => add(const GiftBoxOpenCorrectEvent()),
+        },
+      );
 
   Future<void> _onGiftBoxOpenCorrectEvent(
     GiftBoxOpenCorrectEvent event,

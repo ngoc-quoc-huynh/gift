@@ -49,10 +49,9 @@ void main() {
     final widget = BlocProvider<ThemeModeHydratedValueCubit>(
       create: (_) => cubit,
       child: TestGoRouter(
-        onTestSetup:
-            (context) => WidgetsBinding.instance.addPostFrameCallback(
-              (_) => SettingsDesignDialog.show(context, ThemeMode.light),
-            ),
+        onTestSetup: (context) => WidgetsBinding.instance.addPostFrameCallback(
+          (_) => SettingsDesignDialog.show(context, ThemeMode.light),
+        ),
       ),
     );
     await tester.pumpWidget(widget);

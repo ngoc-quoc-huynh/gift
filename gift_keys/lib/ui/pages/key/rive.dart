@@ -40,9 +40,10 @@ class _RiveKeyState extends State<RiveKey> {
   }
 
   void _onInit(Artboard artboard) {
-    _controller =
-        StateMachineController.fromArtboard(artboard, 'State Machine')!
-          ..addEventListener(_onRiveEvent);
+    _controller = StateMachineController.fromArtboard(
+      artboard,
+      'State Machine',
+    )!..addEventListener(_onRiveEvent);
     _isCorrect = _controller.getBoolInput('Is key correct')!;
     _isWrong = _controller.getBoolInput('Is key wrong')!;
     artboard.addController(_controller);

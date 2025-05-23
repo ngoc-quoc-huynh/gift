@@ -42,22 +42,21 @@ class _Text extends StatelessWidget {
     );
 
     return BlocBuilder<CountdownCubit, CountdownState>(
-      builder:
-          (context, state) => switch (state) {
-            CountdownLoadInProgress() => const SizedBox.shrink(),
-            CountdownRunning(:final remainingTime) => Text(
-              remainingTime.toHHMMSS(),
-              style: textStyle?.copyWith(letterSpacing: 1.5),
-            ),
-            CountdownFinished() => TextButton(
-              style: TextButton.styleFrom(overlayColor: Colors.transparent),
-              onPressed: () => context.goRoute(Routes.giftPage),
-              child: Text(
-                Injector.instance.translations.pages.timer.tapMe,
-                style: textStyle,
-              ),
-            ),
-          },
+      builder: (context, state) => switch (state) {
+        CountdownLoadInProgress() => const SizedBox.shrink(),
+        CountdownRunning(:final remainingTime) => Text(
+          remainingTime.toHHMMSS(),
+          style: textStyle?.copyWith(letterSpacing: 1.5),
+        ),
+        CountdownFinished() => TextButton(
+          style: TextButton.styleFrom(overlayColor: Colors.transparent),
+          onPressed: () => context.goRoute(Routes.giftPage),
+          child: Text(
+            Injector.instance.translations.pages.timer.tapMe,
+            style: textStyle,
+          ),
+        ),
+      },
     );
   }
 }

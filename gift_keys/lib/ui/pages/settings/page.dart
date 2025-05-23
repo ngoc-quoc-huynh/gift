@@ -43,13 +43,12 @@ class SettingsPage extends StatelessWidget {
                     child: SettingsItem(
                       icon: Icons.brightness_6_rounded,
                       title: _settingsTranslations.design,
-                      onTap:
-                          () => unawaited(
-                            SettingsDesignDialog.show(
-                              context,
-                              context.read<ThemeModeHydratedValueCubit>().state,
-                            ),
-                          ),
+                      onTap: () => unawaited(
+                        SettingsDesignDialog.show(
+                          context,
+                          context.read<ThemeModeHydratedValueCubit>().state,
+                        ),
+                      ),
                     ),
                   ),
                   BlocListener<
@@ -60,15 +59,14 @@ class SettingsPage extends StatelessWidget {
                     child: SettingsItem(
                       icon: Icons.flag_outlined,
                       title: _settingsTranslations.language,
-                      onTap:
-                          () => unawaited(
-                            SettingsLanguageDialog.show(
-                              context,
-                              context
-                                  .read<LanguageOptionHydratedValueCubit>()
-                                  .state,
-                            ),
-                          ),
+                      onTap: () => unawaited(
+                        SettingsLanguageDialog.show(
+                          context,
+                          context
+                              .read<LanguageOptionHydratedValueCubit>()
+                              .state,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -97,8 +95,8 @@ class SettingsPage extends StatelessWidget {
                   SettingsItem(
                     icon: Icons.feedback_outlined,
                     title: _settingsTranslations.feedback,
-                    onTap:
-                        () => unawaited(SettingsFeedbackDialog.show(context)),
+                    onTap: () =>
+                        unawaited(SettingsFeedbackDialog.show(context)),
                   ),
                 ],
               ),

@@ -47,9 +47,10 @@ class KeyPage extends StatelessWidget {
     BuildContext context,
     KeyState state,
   ) => switch (state) {
-    KeyLoadOnSuccess(giftKey: GiftKey(:final aid, :final password)) => context
-        .read<NfcDiscoveryBloc>()
-        .add(NfcDiscoveryInitializeEvent(aid: aid, password: password)),
+    KeyLoadOnSuccess(giftKey: GiftKey(:final aid, :final password)) =>
+      context.read<NfcDiscoveryBloc>().add(
+        NfcDiscoveryInitializeEvent(aid: aid, password: password),
+      ),
     _ => null,
   };
 
@@ -85,14 +86,13 @@ class _Body extends StatelessWidget {
         children: [
           BlocSelector<KeyFormBloc, KeyFormState, bool>(
             selector: (state) => state is KeyFormLoadInProgress,
-            builder:
-                (context, isDeleting) => PopScope(
-                  canPop: isDeleting,
-                  child: const Align(
-                    alignment: Alignment.topRight,
-                    child: KeyNfcStatus(),
-                  ),
-                ),
+            builder: (context, isDeleting) => PopScope(
+              canPop: isDeleting,
+              child: const Align(
+                alignment: Alignment.topRight,
+                child: KeyNfcStatus(),
+              ),
+            ),
           ),
           Expanded(
             child: Padding(

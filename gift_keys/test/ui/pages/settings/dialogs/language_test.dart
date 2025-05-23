@@ -50,11 +50,9 @@ void main() {
     final widget = BlocProvider<LanguageOptionHydratedValueCubit>(
       create: (_) => cubit,
       child: TestGoRouter(
-        onTestSetup:
-            (context) => WidgetsBinding.instance.addPostFrameCallback(
-              (_) =>
-                  SettingsLanguageDialog.show(context, LanguageOption.english),
-            ),
+        onTestSetup: (context) => WidgetsBinding.instance.addPostFrameCallback(
+          (_) => SettingsLanguageDialog.show(context, LanguageOption.english),
+        ),
       ),
     );
     await tester.pumpWidget(widget);

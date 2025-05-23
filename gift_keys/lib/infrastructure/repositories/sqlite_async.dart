@@ -21,10 +21,9 @@ final class SqliteAsyncRepository implements LocalDatabaseApi {
 
   Future<SqliteAsyncRepository> initialize() async {
     await _db.initialize();
-    final migrations =
-        SqliteMigrations()
-          ..createDatabase = _createDatabaseMigration
-          ..add(_createDatabaseMigration);
+    final migrations = SqliteMigrations()
+      ..createDatabase = _createDatabaseMigration
+      ..add(_createDatabaseMigration);
     await migrations.migrate(_db);
     _loggerApi.logInfo('SQLite database initialized.');
 
@@ -42,8 +41,9 @@ FROM $_tableName
 ORDER BY birthday ASC;
     ''');
 
-      final metas =
-          result.map((json) => GiftKeyMeta.fromJson(json).toDomain()).toList();
+      final metas = result
+          .map((json) => GiftKeyMeta.fromJson(json).toDomain())
+          .toList();
       _loggerApi.logInfo('Loaded ${metas.length} key metas.');
 
       return metas;
@@ -224,7 +224,8 @@ RETURNING
     1,
     (tx) => tx.execute(_createTable),
   );
-  static const _createTable = '''
+  static const _createTable =
+      '''
 CREATE TABLE IF NOT EXISTS $_tableName (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR(50) NOT NULL,

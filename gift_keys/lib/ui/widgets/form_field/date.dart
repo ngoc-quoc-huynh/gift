@@ -9,12 +9,11 @@ import 'package:gift_keys/injector.dart';
 class DateFormField extends FormField<DateTime> {
   DateFormField({required String labelText, super.validator, super.key})
     : super(
-        builder:
-            (field) => _Body(
-              field: field,
-              labelText: labelText,
-              onTap: () => _show(field, labelText),
-            ),
+        builder: (field) => _Body(
+          field: field,
+          labelText: labelText,
+          onTap: () => _show(field, labelText),
+        ),
       );
 
   static Future<void> _show(

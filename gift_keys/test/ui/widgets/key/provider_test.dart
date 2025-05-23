@@ -16,10 +16,9 @@ void main() {
   final localDatabaseApi = MockLocalDatabaseApi();
 
   setUpAll(
-    () =>
-        Injector.instance
-          ..registerSingleton<LocalDatabaseApi>(localDatabaseApi)
-          ..registerSingleton<Translations>(AppLocale.en.buildSync()),
+    () => Injector.instance
+      ..registerSingleton<LocalDatabaseApi>(localDatabaseApi)
+      ..registerSingleton<Translations>(AppLocale.en.buildSync()),
   );
 
   tearDownAll(Injector.instance.reset);

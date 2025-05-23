@@ -11,10 +11,9 @@ void main() {
   final packageInfo = MockPackageInfo();
 
   setUpAll(
-    () =>
-        Injector.instance
-          ..registerSingleton<PackageInfo>(packageInfo)
-          ..registerSingleton<Translations>(AppLocale.en.buildSync()),
+    () => Injector.instance
+      ..registerSingleton<PackageInfo>(packageInfo)
+      ..registerSingleton<Translations>(AppLocale.en.buildSync()),
   );
 
   tearDownAll(Injector.instance.reset);

@@ -25,10 +25,9 @@ final class CustomSnackBar extends SnackBar {
     required BuildContext context,
     required Color color,
     required String text,
-  }) =>
-      ScaffoldMessenger.of(context)
-        ..removeCurrentSnackBar()
-        ..showSnackBar(
-          CustomSnackBar(content: Text(text), backgroundColor: color),
-        );
+  }) => ScaffoldMessenger.of(context)
+    ..removeCurrentSnackBar()
+    ..showSnackBar(
+      CustomSnackBar(content: Text(text), backgroundColor: color),
+    );
 }

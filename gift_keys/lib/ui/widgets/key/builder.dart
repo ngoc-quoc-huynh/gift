@@ -11,12 +11,10 @@ class KeyPageBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<KeyBloc, KeyState>(
-      builder:
-          (context, state) => switch (state) {
-            KeyLoadOnSuccess(:final giftKey) => builder.call(giftKey),
-            _ =>
-              throw AssertionError('At this point, the key should be loaded.'),
-          },
+      builder: (context, state) => switch (state) {
+        KeyLoadOnSuccess(:final giftKey) => builder.call(giftKey),
+        _ => throw AssertionError('At this point, the key should be loaded.'),
+      },
     );
   }
 }

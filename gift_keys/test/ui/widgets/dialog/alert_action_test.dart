@@ -26,15 +26,13 @@ void main() {
 
     testWidgets('pops correctly.', (tester) async {
       final widget = TestGoRouter(
-        onTestSetup:
-            (context) => WidgetsBinding.instance.addPostFrameCallback(
-              (_) => showDialog<void>(
-                context: context,
-                builder:
-                    (context) =>
-                        const Dialog(child: AlertDialogAction.cancel()),
-              ),
-            ),
+        onTestSetup: (context) => WidgetsBinding.instance.addPostFrameCallback(
+          (_) => showDialog<void>(
+            context: context,
+            builder: (context) =>
+                const Dialog(child: AlertDialogAction.cancel()),
+          ),
+        ),
       );
 
       await tester.pumpWidget(widget);
@@ -60,18 +58,16 @@ void main() {
 
     testWidgets('pops correctly.', (tester) async {
       final widget = TestGoRouter(
-        onTestSetup:
-            (context) =>
-                WidgetsBinding.instance.addPostFrameCallback((_) async {
-                  final result = await showDialog<bool>(
-                    context: context,
-                    builder:
-                        (context) => Dialog(
-                          child: AlertDialogAction.confirm(result: () => true),
-                        ),
-                  );
-                  expect(result, isTrue);
-                }),
+        onTestSetup: (context) =>
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
+              final result = await showDialog<bool>(
+                context: context,
+                builder: (context) => Dialog(
+                  child: AlertDialogAction.confirm(result: () => true),
+                ),
+              );
+              expect(result, isTrue);
+            }),
       );
 
       await tester.pumpWidget(widget);

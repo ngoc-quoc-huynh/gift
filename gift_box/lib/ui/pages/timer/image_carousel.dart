@@ -28,22 +28,20 @@ class _TimerImageCarouselState extends State<TimerImageCarousel> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ImageCarouselCubit>(
-      create:
-          (_) => ImageCarouselCubit(
-            count: Assets.images.length,
-            imageDuration: Config.carouselImageDuration,
-          )..init(),
+      create: (_) => ImageCarouselCubit(
+        count: Assets.images.length,
+        imageDuration: Config.carouselImageDuration,
+      )..init(),
       child: LayoutBuilder(
         builder:
             (
               context,
               constraints,
             ) => BlocListener<ImageCarouselCubit, ImageCarouselState>(
-              listener:
-                  (_, state) => _onImageCarouselStateChange(
-                    state: state,
-                    maxWidth: constraints.maxWidth,
-                  ),
+              listener: (_, state) => _onImageCarouselStateChange(
+                state: state,
+                maxWidth: constraints.maxWidth,
+              ),
               child: IgnorePointer(
                 // TODO: Change logic if https://github.com/flutter/flutter/issues/161369 is resolved.
                 child: CarouselView(
@@ -53,8 +51,9 @@ class _TimerImageCarouselState extends State<TimerImageCarousel> {
                   shape: const RoundedRectangleBorder(),
                   enableSplash: false,
                   itemSnapping: true,
-                  children:
-                      (Assets.images..shuffleSeeded()).map(_Item.new).toList(),
+                  children: (Assets.images..shuffleSeeded())
+                      .map(_Item.new)
+                      .toList(),
                 ),
               ),
             ),

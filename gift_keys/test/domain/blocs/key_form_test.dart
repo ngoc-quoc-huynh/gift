@@ -17,10 +17,9 @@ void main() {
   final localDatabaseApi = MockLocalDatabaseApi();
 
   setUpAll(
-    () =>
-        Injector.instance
-          ..registerSingleton<FileApi>(fileApi)
-          ..registerSingleton<LocalDatabaseApi>(localDatabaseApi),
+    () => Injector.instance
+      ..registerSingleton<FileApi>(fileApi)
+      ..registerSingleton<LocalDatabaseApi>(localDatabaseApi),
   );
 
   tearDownAll(Injector.instance.reset);
@@ -50,23 +49,21 @@ void main() {
         ).thenAnswer((_) => Future<void>.value());
       },
       build: KeyFormBloc.new,
-      act:
-          (bloc) => bloc.add(
-            KeyFormAddEvent(
-              imagePath: 'test.webp',
-              name: 'Name',
-              birthday: DateTime.utc(2025),
-              aid: 'F000000001',
-              password: '1234',
-            ),
-          ),
-      expect:
-          () => [
-            const KeyFormLoadInProgress(),
-            KeyFormLoadOnSuccess(
-              GiftKeyMeta(id: 1, name: 'Name', birthday: DateTime.utc(2025)),
-            ),
-          ],
+      act: (bloc) => bloc.add(
+        KeyFormAddEvent(
+          imagePath: 'test.webp',
+          name: 'Name',
+          birthday: DateTime.utc(2025),
+          aid: 'F000000001',
+          password: '1234',
+        ),
+      ),
+      expect: () => [
+        const KeyFormLoadInProgress(),
+        KeyFormLoadOnSuccess(
+          GiftKeyMeta(id: 1, name: 'Name', birthday: DateTime.utc(2025)),
+        ),
+      ],
       verify: (_) {
         final verifications = verifyInOrder([
           () => localDatabaseApi.saveKey(
@@ -86,26 +83,24 @@ void main() {
 
     blocTest<KeyFormBloc, KeyFormState>(
       'emits KeyFormLoadOnFailure when LocalDatabaseException is thrown.',
-      setUp:
-          () => when(
-            () => localDatabaseApi.saveKey(
-              name: 'Name',
-              birthday: DateTime.utc(2025),
-              aid: 'F000000001',
-              password: '1234',
-            ),
-          ).thenThrow(const LocalDatabaseException()),
+      setUp: () => when(
+        () => localDatabaseApi.saveKey(
+          name: 'Name',
+          birthday: DateTime.utc(2025),
+          aid: 'F000000001',
+          password: '1234',
+        ),
+      ).thenThrow(const LocalDatabaseException()),
       build: KeyFormBloc.new,
-      act:
-          (bloc) => bloc.add(
-            KeyFormAddEvent(
-              imagePath: 'test.webp',
-              name: 'Name',
-              birthday: DateTime.utc(2025),
-              aid: 'F000000001',
-              password: '1234',
-            ),
-          ),
+      act: (bloc) => bloc.add(
+        KeyFormAddEvent(
+          imagePath: 'test.webp',
+          name: 'Name',
+          birthday: DateTime.utc(2025),
+          aid: 'F000000001',
+          password: '1234',
+        ),
+      ),
       expect: () => const [KeyFormLoadInProgress(), KeyFormLoadOnFailure()],
       verify: (_) {
         verify(
@@ -142,24 +137,22 @@ void main() {
         ).thenAnswer((_) => Future<void>.value());
       },
       build: KeyFormBloc.new,
-      act:
-          (bloc) => bloc.add(
-            KeyFormUpdateEvent(
-              id: 1,
-              imagePath: 'test.webp',
-              name: 'Name',
-              birthday: DateTime.utc(2025),
-              aid: 'F000000001',
-              password: '1234',
-            ),
-          ),
-      expect:
-          () => [
-            const KeyFormLoadInProgress(),
-            KeyFormLoadOnSuccess(
-              GiftKeyMeta(id: 1, name: 'Name', birthday: DateTime.utc(2025)),
-            ),
-          ],
+      act: (bloc) => bloc.add(
+        KeyFormUpdateEvent(
+          id: 1,
+          imagePath: 'test.webp',
+          name: 'Name',
+          birthday: DateTime.utc(2025),
+          aid: 'F000000001',
+          password: '1234',
+        ),
+      ),
+      expect: () => [
+        const KeyFormLoadInProgress(),
+        KeyFormLoadOnSuccess(
+          GiftKeyMeta(id: 1, name: 'Name', birthday: DateTime.utc(2025)),
+        ),
+      ],
       verify: (_) {
         final verifications = verifyInOrder([
           () => localDatabaseApi.updateKey(
@@ -192,17 +185,16 @@ void main() {
         ).thenThrow(const LocalDatabaseException());
       },
       build: KeyFormBloc.new,
-      act:
-          (bloc) => bloc.add(
-            KeyFormUpdateEvent(
-              id: 1,
-              imagePath: 'test.webp',
-              name: 'Name',
-              birthday: DateTime.utc(2025),
-              aid: 'F000000001',
-              password: '1234',
-            ),
-          ),
+      act: (bloc) => bloc.add(
+        KeyFormUpdateEvent(
+          id: 1,
+          imagePath: 'test.webp',
+          name: 'Name',
+          birthday: DateTime.utc(2025),
+          aid: 'F000000001',
+          password: '1234',
+        ),
+      ),
       expect: () => const [KeyFormLoadInProgress(), KeyFormLoadOnFailure()],
       verify: (_) {
         verify(
@@ -247,10 +239,9 @@ void main() {
 
     blocTest<KeyFormBloc, KeyFormState>(
       'emits KeyFormLoadOnFailure when LocalDatabaseException is thrown.',
-      setUp:
-          () => when(
-            () => localDatabaseApi.deleteKey(1),
-          ).thenThrow(const LocalDatabaseException()),
+      setUp: () => when(
+        () => localDatabaseApi.deleteKey(1),
+      ).thenThrow(const LocalDatabaseException()),
       build: KeyFormBloc.new,
       act: (bloc) => bloc.add(const KeyFormDeleteEvent(1)),
       expect: () => const [KeyFormLoadInProgress(), KeyFormLoadOnFailure()],

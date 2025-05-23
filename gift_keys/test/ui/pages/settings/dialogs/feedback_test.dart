@@ -13,10 +13,9 @@ void main() {
   final nativeApi = MockNativeApi();
 
   setUpAll(
-    () =>
-        Injector.instance
-          ..registerSingleton<NativeApi>(nativeApi)
-          ..registerSingleton<Translations>(AppLocale.en.buildSync()),
+    () => Injector.instance
+      ..registerSingleton<NativeApi>(nativeApi)
+      ..registerSingleton<Translations>(AppLocale.en.buildSync()),
   );
 
   tearDownAll(Injector.instance.reset);
@@ -35,10 +34,9 @@ void main() {
     ).thenAnswer((_) => Future<void>.value());
 
     final widget = TestGoRouter(
-      onTestSetup:
-          (context) => WidgetsBinding.instance.addPostFrameCallback(
-            (_) => SettingsFeedbackDialog.show(context),
-          ),
+      onTestSetup: (context) => WidgetsBinding.instance.addPostFrameCallback(
+        (_) => SettingsFeedbackDialog.show(context),
+      ),
     );
     await tester.pumpWidget(widget);
     await tester.pump();

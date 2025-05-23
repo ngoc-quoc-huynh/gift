@@ -16,11 +16,10 @@ class SettingsDesignDialog extends StatelessWidget {
     final themeMode = await showDialog<ThemeMode>(
       context: context,
       useRootNavigator: false,
-      builder:
-          (context) => BlocProvider<ThemeModeValueCubit>(
-            create: (_) => ThemeModeValueCubit(currentThemeMode),
-            child: const SettingsDesignDialog(),
-          ),
+      builder: (context) => BlocProvider<ThemeModeValueCubit>(
+        create: (_) => ThemeModeValueCubit(currentThemeMode),
+        child: const SettingsDesignDialog(),
+      ),
     );
 
     if (context.mounted && themeMode != null) {

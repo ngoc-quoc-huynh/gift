@@ -28,12 +28,11 @@ void main() {
   final nativeApi = MockNativeApi();
 
   setUpAll(
-    () =>
-        Injector.instance
-          ..registerSingleton<FileApi>(fileApi)
-          ..registerSingleton<LocalDatabaseApi>(localDatabaseApi)
-          ..registerSingleton<NativeApi>(nativeApi)
-          ..registerSingleton<Translations>(AppLocale.en.buildSync()),
+    () => Injector.instance
+      ..registerSingleton<FileApi>(fileApi)
+      ..registerSingleton<LocalDatabaseApi>(localDatabaseApi)
+      ..registerSingleton<NativeApi>(nativeApi)
+      ..registerSingleton<Translations>(AppLocale.en.buildSync()),
   );
 
   tearDownAll(Injector.instance.reset);

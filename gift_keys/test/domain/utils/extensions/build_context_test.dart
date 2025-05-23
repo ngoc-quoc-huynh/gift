@@ -149,27 +149,25 @@ class _App extends StatelessWidget {
           GoRoute(
             path: '/a',
             name: _Routes.pageA(),
-            builder:
-                (context, _) => Scaffold(
-                  appBar: AppBar(title: const Text('A')),
-                  floatingActionButton: FloatingActionButton(
-                    onPressed: () => onPressed.call(context),
-                  ),
-                ),
+            builder: (context, _) => Scaffold(
+              appBar: AppBar(title: const Text('A')),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () => onPressed.call(context),
+              ),
+            ),
           ),
           GoRoute(
             path: '/b',
             name: _Routes.pageB(),
-            builder:
-                (_, state) => Scaffold(appBar: AppBar(title: const Text('B'))),
+            builder: (_, state) =>
+                Scaffold(appBar: AppBar(title: const Text('B'))),
           ),
           GoRoute(
             path: '/:id',
             name: _Routes.pageC(),
-            builder:
-                (_, state) => Scaffold(
-                  appBar: AppBar(title: Text(state.pathParameters['id']!)),
-                ),
+            builder: (_, state) => Scaffold(
+              appBar: AppBar(title: Text(state.pathParameters['id']!)),
+            ),
           ),
         ],
       ),

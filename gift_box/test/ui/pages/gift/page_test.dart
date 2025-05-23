@@ -15,12 +15,11 @@ void main() {
   final nfcApi = MockNfcApi();
 
   setUpAll(
-    () =>
-        Injector.instance
-          ..registerAid(aid)
-          ..registerPin(pin)
-          ..registerSingleton<NfcApi>(nfcApi)
-          ..registerSingleton<Translations>(AppLocale.en.buildSync()),
+    () => Injector.instance
+      ..registerAid(aid)
+      ..registerPin(pin)
+      ..registerSingleton<NfcApi>(nfcApi)
+      ..registerSingleton<Translations>(AppLocale.en.buildSync()),
   );
 
   tearDownAll(Injector.instance.reset);

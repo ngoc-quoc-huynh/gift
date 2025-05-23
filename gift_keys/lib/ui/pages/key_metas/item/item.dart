@@ -26,11 +26,10 @@ class KeyMetaItem extends StatelessWidget {
     };
 
     return InkWell(
-      onTap:
-          () => context.goRoute(
-            Routes.keyPage,
-            pathParameters: {'id': meta.id.toString()},
-          ),
+      onTap: () => context.goRoute(
+        Routes.keyPage,
+        pathParameters: {'id': meta.id.toString()},
+      ),
       child: KeyMetaImageBackground(
         id: meta.id,
         child: FadeBox(

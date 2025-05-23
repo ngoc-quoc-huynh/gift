@@ -59,22 +59,19 @@ class _BodyState extends State<_Body> {
 
     return BlocConsumer<LanguageOptionHydratedValueCubit, LanguageOption>(
       listener: _onLanguageOptionChanged,
-      builder:
-          (context, language) =>
-              BlocBuilder<ThemeModeHydratedValueCubit, ThemeMode>(
-                builder:
-                    (context, themeMode) => MaterialApp.router(
-                      title: Injector.instance.translations.appName,
-                      theme: CustomTheme.lightTheme(textTheme),
-                      darkTheme: CustomTheme.darkTheme(textTheme),
-                      themeMode: themeMode,
-                      locale: _getLocaleByLanguageOption(language),
-                      supportedLocales: AppLocaleUtils.supportedLocales,
-                      localizationsDelegates:
-                          GlobalMaterialLocalizations.delegates,
-                      routerConfig: GoRouterConfig.routes,
-                    ),
-              ),
+      builder: (context, language) =>
+          BlocBuilder<ThemeModeHydratedValueCubit, ThemeMode>(
+            builder: (context, themeMode) => MaterialApp.router(
+              title: Injector.instance.translations.appName,
+              theme: CustomTheme.lightTheme(textTheme),
+              darkTheme: CustomTheme.darkTheme(textTheme),
+              themeMode: themeMode,
+              locale: _getLocaleByLanguageOption(language),
+              supportedLocales: AppLocaleUtils.supportedLocales,
+              localizationsDelegates: GlobalMaterialLocalizations.delegates,
+              routerConfig: GoRouterConfig.routes,
+            ),
+          ),
     );
   }
 
@@ -94,9 +91,8 @@ class _BodyState extends State<_Body> {
         LanguageOption.system => _updateTranslations(AppLocale.en),
       };
 
-  void _updateTranslations(AppLocale appLocale) =>
-      Injector.instance
-        // ignore: discarded_futures, the method is synchronously called.
-        ..unregister<Translations>()
-        ..registerLazySingleton<Translations>(() => appLocale.buildSync());
+  void _updateTranslations(AppLocale appLocale) => Injector.instance
+    // ignore: discarded_futures, the method is synchronously called.
+    ..unregister<Translations>()
+    ..registerLazySingleton<Translations>(() => appLocale.buildSync());
 }

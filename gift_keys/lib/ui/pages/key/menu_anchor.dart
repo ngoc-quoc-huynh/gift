@@ -16,27 +16,23 @@ class KeyMenuAnchor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MenuAnchor(
-      builder:
-          (_, controller, child) => IconButton(
-            onPressed:
-                () => switch (controller.isOpen) {
-                  false => controller.open(),
-                  true => controller.close(),
-                },
-            icon: child!,
-          ),
+      builder: (_, controller, child) => IconButton(
+        onPressed: () => switch (controller.isOpen) {
+          false => controller.open(),
+          true => controller.close(),
+        },
+        icon: child!,
+      ),
       menuChildren: [
         MenuItemButton(
-          onPressed:
-              () =>
-                  context
-                    ..read<NfcDiscoveryBloc>().add(
-                      const NfcDiscoveryPauseEvent(),
-                    )
-                    ..goRoute(
-                      Routes.editKeyPage,
-                      pathParameters: {'id': id.toString()},
-                    ),
+          onPressed: () => context
+            ..read<NfcDiscoveryBloc>().add(
+              const NfcDiscoveryPauseEvent(),
+            )
+            ..goRoute(
+              Routes.editKeyPage,
+              pathParameters: {'id': id.toString()},
+            ),
           child: Text(_translations.edit),
         ),
         MenuItemButton(

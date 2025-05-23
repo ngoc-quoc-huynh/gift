@@ -17,22 +17,20 @@ class AddKeyPage extends StatelessWidget {
       child: BlocListener<KeyFormBloc, KeyFormState>(
         listener: _onKeyFormStateChanged,
         child: Builder(
-          builder:
-              (context) => FormFieldPage(
-                title: _addKeyTranslations.appBar,
-                buttonTitle: _addKeyTranslations.create,
-                onSubmitted:
-                    (imagePath, name, birthday, aid, password) =>
-                        context.read<KeyFormBloc>().add(
-                          KeyFormAddEvent(
-                            imagePath: imagePath,
-                            name: name,
-                            birthday: birthday,
-                            aid: aid,
-                            password: password,
-                          ),
-                        ),
-              ),
+          builder: (context) => FormFieldPage(
+            title: _addKeyTranslations.appBar,
+            buttonTitle: _addKeyTranslations.create,
+            onSubmitted: (imagePath, name, birthday, aid, password) =>
+                context.read<KeyFormBloc>().add(
+                  KeyFormAddEvent(
+                    imagePath: imagePath,
+                    name: name,
+                    birthday: birthday,
+                    aid: aid,
+                    password: password,
+                  ),
+                ),
+          ),
         ),
       ),
     );

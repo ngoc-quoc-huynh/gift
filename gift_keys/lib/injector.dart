@@ -31,11 +31,10 @@ final class Injector {
   static final GetIt instance = GetIt.instance;
 
   static Future<void> setupDependencies() async {
-    final (appDir, tmpDir) =
-        await (
-          getApplicationDocumentsDirectory(),
-          getTemporaryDirectory(),
-        ).wait;
+    final (appDir, tmpDir) = await (
+      getApplicationDocumentsDirectory(),
+      getTemporaryDirectory(),
+    ).wait;
     const fileSystem = LocalFileSystem();
 
     instance
@@ -70,9 +69,8 @@ final class Injector {
     );
   }
 
-  static Translations _createTranslations() =>
-      switch (Platform.localeName) {
-        'de_DE' => AppLocale.de,
-        _ => AppLocale.en,
-      }.buildSync();
+  static Translations _createTranslations() => switch (Platform.localeName) {
+    'de_DE' => AppLocale.de,
+    _ => AppLocale.en,
+  }.buildSync();
 }

@@ -24,11 +24,10 @@ class _GiftBoxState extends State<GiftBox> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<GiftBoxBloc>(
-      create:
-          (_) => GiftBoxBloc(
-            aid: Injector.instance.aid,
-            pin: Injector.instance.pin,
-          )..add(const GiftBoxInitializeEvent()),
+      create: (_) => GiftBoxBloc(
+        aid: Injector.instance.aid,
+        pin: Injector.instance.pin,
+      )..add(const GiftBoxInitializeEvent()),
       child: BlocListener<GiftBoxBloc, GiftBoxState>(
         listener: _onGiftBoxStateChanged,
         child: RivePlayer(

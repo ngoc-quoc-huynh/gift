@@ -17,33 +17,30 @@ class KeyPageProvider extends StatelessWidget {
     return BlocProvider<KeyBloc>(
       create: (_) => KeyBloc(id)..add(const KeyInitializeEvent()),
       child: BlocBuilder<KeyBloc, KeyState>(
-        builder:
-            (context, state) => switch (state) {
-              KeyLoadInProgress() => const Scaffold(),
-              KeyLoadOnSuccess(:final giftKey) =>
-                BlocProvider<NfcDiscoveryBloc>(
-                  create:
-                      (_) =>
-                          NfcDiscoveryBloc()..add(
-                            NfcDiscoveryInitializeEvent(
-                              aid: giftKey.aid,
-                              password: giftKey.password,
-                            ),
-                          ),
-                  child: child,
-                ),
-              KeyLoadOnFailure() => Scaffold(
-                appBar: AppBar(),
-                body: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Sizes.horizontalPadding,
-                  ),
-                  child: ErrorText(
-                    text: Injector.instance.translations.general.error,
-                  ),
+        builder: (context, state) => switch (state) {
+          KeyLoadInProgress() => const Scaffold(),
+          KeyLoadOnSuccess(:final giftKey) => BlocProvider<NfcDiscoveryBloc>(
+            create: (_) => NfcDiscoveryBloc()
+              ..add(
+                NfcDiscoveryInitializeEvent(
+                  aid: giftKey.aid,
+                  password: giftKey.password,
                 ),
               ),
-            },
+            child: child,
+          ),
+          KeyLoadOnFailure() => Scaffold(
+            appBar: AppBar(),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Sizes.horizontalPadding,
+              ),
+              child: ErrorText(
+                text: Injector.instance.translations.general.error,
+              ),
+            ),
+          ),
+        },
       ),
     );
   }

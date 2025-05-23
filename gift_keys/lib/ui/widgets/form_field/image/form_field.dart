@@ -31,14 +31,13 @@ class _Body extends StatelessWidget {
     return Column(
       children: [
         BlocBuilder<FileValueCubit, File?>(
-          builder:
-              (context, state) => switch (state) {
-                null => ImagePickerAvatar.empty(onImagePicked: onImagePicked),
-                final file => ImagePickerAvatar.selected(
-                  file: file,
-                  onImagePicked: onImagePicked,
-                ),
-              },
+          builder: (context, state) => switch (state) {
+            null => ImagePickerAvatar.empty(onImagePicked: onImagePicked),
+            final file => ImagePickerAvatar.selected(
+              file: file,
+              onImagePicked: onImagePicked,
+            ),
+          },
         ),
         switch (field.errorText) {
           null => const SizedBox.shrink(),

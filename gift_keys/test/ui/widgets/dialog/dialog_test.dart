@@ -73,24 +73,22 @@ void main() {
       whenListen(cubit, const Stream<int>.empty(), initialState: 0);
 
       final widget = TestGoRouter(
-        onTestSetup:
-            (context) =>
-                WidgetsBinding.instance.addPostFrameCallback((_) async {
-                  final result = await showDialog<int>(
-                    context: context,
-                    builder:
-                        (context) => BlocProvider<ValueCubit<int>>(
-                          create: (_) => cubit,
-                          child: CustomDialog.radio(
-                            title: 'Title',
-                            options: const [
-                              RadioDialogOption(title: 'Option 0', value: 0),
-                            ],
-                          ),
-                        ),
-                  );
-                  expect(result, 0);
-                }),
+        onTestSetup: (context) =>
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
+              final result = await showDialog<int>(
+                context: context,
+                builder: (context) => BlocProvider<ValueCubit<int>>(
+                  create: (_) => cubit,
+                  child: CustomDialog.radio(
+                    title: 'Title',
+                    options: const [
+                      RadioDialogOption(title: 'Option 0', value: 0),
+                    ],
+                  ),
+                ),
+              );
+              expect(result, 0);
+            }),
       );
 
       await tester.pumpWidget(widget);
