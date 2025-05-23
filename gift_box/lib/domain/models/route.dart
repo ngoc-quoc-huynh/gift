@@ -1,6 +1,7 @@
 enum AppRoute {
-  awesomeSink,
   awesomeShop,
+  awesomeShopCatalog,
+  awesomeSink,
   gift,
   timer
   ;
