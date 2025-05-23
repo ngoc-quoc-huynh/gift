@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math';
 
 import 'package:alchemist/alchemist.dart';
@@ -19,13 +18,7 @@ Future<void> main() async {
           ..registerSingleton<Random>(Random(2)),
   );
 
-  tearDownAll(
-    () =>
-        Injector.instance
-          ..unregisterBirthday()
-          ..unregister<Timer>()
-          ..unregister<Random>(),
-  );
+  tearDownAll(Injector.instance.reset);
 
   await goldenTest(
     'renders correctly.',

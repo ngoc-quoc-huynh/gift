@@ -12,7 +12,7 @@ void main() {
 
   setUpAll(() => Injector.instance.registerSingleton<NfcApi>(nfcApi));
 
-  tearDownAll(Injector.instance.unregister<NfcApi>);
+  tearDownAll(Injector.instance.reset);
 
   test(
     'initial state is NfcStatusLoadInProgress.',
