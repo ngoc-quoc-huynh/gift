@@ -7,6 +7,10 @@ on:
       - '.github/workflows/gift_box.yaml'
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   build:
     # TODO: Change to ubuntu after changing golden tests
