@@ -1,5 +1,6 @@
 enum AppRoute {
-  home,
+  awesomeSink,
+  awesomeShop,
   gift,
   timer
   ;

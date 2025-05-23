@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:gift_box/domain/models/route.dart';
+import 'package:gift_box/ui/pages/awesome_sink/page.dart';
 import 'package:gift_box/ui/pages/error/page.dart';
 import 'package:gift_box/ui/pages/gift/page.dart';
-import 'package:gift_box/ui/pages/home/page.dart';
 import 'package:gift_box/ui/pages/timer/page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,7 +17,7 @@ final class GoRouterConfig {
     navigatorKey: _rootNavigatorKey,
     initialLocation: switch (hasOpenedGift) {
       false => '/timer',
-      true => '/',
+      true => '/awesome-sink',
     },
     errorBuilder: (_, state) => ErrorPage(url: state.matchedLocation),
     routes: [
@@ -34,9 +34,9 @@ final class GoRouterConfig {
         ],
       ),
       GoRoute(
-        name: AppRoute.home(),
-        path: '/',
-        builder: (_, _) => const HomePage(),
+        name: AppRoute.awesomeSink(),
+        path: '/awesome-sink',
+        builder: (_, _) => const AwesomeSinkPage(),
       ),
     ],
   );

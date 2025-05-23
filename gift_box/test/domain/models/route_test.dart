@@ -5,7 +5,8 @@ void main() {
   test(
     'call returns correctly.',
     () {
-      expect(AppRoute.home(), AppRoute.home.name);
+      expect(AppRoute.awesomeSink(), AppRoute.awesomeSink.name);
+      expect(AppRoute.awesomeShop(), AppRoute.awesomeShop.name);
       expect(AppRoute.gift(), AppRoute.gift.name);
       expect(AppRoute.timer(), AppRoute.timer.name);
     },
