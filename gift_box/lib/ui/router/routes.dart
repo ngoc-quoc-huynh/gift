@@ -8,4 +8,5 @@ final class Routes {
   static final awesomeShopCatalog = Route('awesome-shop-catalog');
   static final giftPage = Route('gift');
   static final timerPage = Route('timer');
+  static final settingsPage = Route('settings');
 }
