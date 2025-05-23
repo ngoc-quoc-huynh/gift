@@ -31,7 +31,7 @@ class GiftPage extends StatelessWidget {
                 builder: (context, isOpen) => GestureDetector(
                   onTap: switch (isOpen) {
                     false => null,
-                    true => () => context.goRoute(Routes.homePage),
+                    true => () => context.goRoute(Routes.awesomeSink),
                   },
                   child: const GiftBox(),
                 ),
