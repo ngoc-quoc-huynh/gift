@@ -42,17 +42,17 @@ void main() {
             routes: [
               GoRoute(
                 path: '/a',
-                name: AppRoute.home(),
+                name: AppRoute.gift(),
                 builder: (context, _) => Scaffold(
                   appBar: AppBar(title: const Text('A')),
                   floatingActionButton: FloatingActionButton(
-                    onPressed: () => context.goRoute(AppRoute.gift),
+                    onPressed: () => context.goRoute(AppRoute.awesomeShop),
                   ),
                 ),
               ),
               GoRoute(
                 path: '/b',
-                name: AppRoute.gift(),
+                name: AppRoute.awesomeShop(),
                 builder: (_, state) =>
                     Scaffold(appBar: AppBar(title: const Text('B'))),
               ),
