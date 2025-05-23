@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:gift_box/domain/models/route.dart';
+import 'package:gift_box/ui/pages/awesome_shop/page.dart';
+import 'package:gift_box/ui/pages/awesome_shop_catalog/page.dart';
 import 'package:gift_box/ui/pages/awesome_sink/page.dart';
 import 'package:gift_box/ui/pages/error/page.dart';
 import 'package:gift_box/ui/pages/gift/page.dart';
@@ -17,7 +19,7 @@ final class GoRouterConfig {
     navigatorKey: _rootNavigatorKey,
     initialLocation: switch (hasOpenedGift) {
       false => '/timer',
-      true => '/awesome-sink',
+      true => '/awesome-shop',
     },
     errorBuilder: (_, state) => ErrorPage(url: state.matchedLocation),
     routes: [
@@ -37,6 +39,18 @@ final class GoRouterConfig {
         name: AppRoute.awesomeSink(),
         path: '/awesome-sink',
         builder: (_, _) => const AwesomeSinkPage(),
+      ),
+      GoRoute(
+        name: AppRoute.awesomeShop(),
+        path: '/awesome-shop',
+        builder: (_, _) => const AwesomeShopPage(),
+        routes: [
+          GoRoute(
+            name: AppRoute.awesomeShopCatalog(),
+            path: '/catalog',
+            builder: (_, _) => const AwesomeShopCatalogPage(),
+          ),
+        ],
       ),
     ],
   );
