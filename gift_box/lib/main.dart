@@ -36,6 +36,10 @@ class _Body extends StatefulWidget {
 }
 
 class _BodyState extends State<_Body> {
+  late final _routerConfig = GoRouterConfig.build(
+    hasOpenedGift: context.read<HydratedBoolCubit>().state,
+  );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
@@ -45,9 +49,7 @@ class _BodyState extends State<_Body> {
       locale: Injector.instance.translations.$meta.locale.flutterLocale,
       supportedLocales: AppLocaleUtils.supportedLocales,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
-      routerConfig: GoRouterConfig.build(
-        hasOpenedGift: context.read<HydratedBoolCubit>().state,
-      ),
+      routerConfig: _routerConfig,
     );
   }
 }
