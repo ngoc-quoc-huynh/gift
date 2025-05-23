@@ -9,6 +9,7 @@ void main() {
       expect(AppRoute.awesomeShopCatalog(), AppRoute.awesomeShopCatalog.name);
       expect(AppRoute.awesomeSink(), AppRoute.awesomeSink.name);
       expect(AppRoute.gift(), AppRoute.gift.name);
+      expect(AppRoute.settings(), AppRoute.settings.name);
       expect(AppRoute.timer(), AppRoute.timer.name);
     },
   );
