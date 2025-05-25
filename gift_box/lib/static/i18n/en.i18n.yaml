@@ -6,6 +6,13 @@ pages:
     tap: 'Tap to unlock the Awesome Shop experience!'
   awesomeShopCatalog:
     appBar: 'Awesome Shop'
+    items:
+      absoluteFicsitTape: 'Absolute FICSIT Tape'
+      ada: 'Artificial Directory and Assistant'
+      darkMode: 'Dark Mode'
+      ficsitCoffeeCup: 'FICSIT Coffee Cup'
+      germanDrive: 'German Drive'
+      memoryPurger: 'Memory Purger 5000'
     navigationBar:
       customizer: 'Customizer'
       equipment: 'Equiptment'
@@ -21,3 +28,6 @@ pages:
     appBar: 'Settings'
   timer:
     tapMe: 'Tap me'
+
+widgets:
+  couponAmount: 'x ${n: int}'
