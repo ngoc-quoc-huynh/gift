@@ -68,5 +68,6 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/awesome_shop/
     - assets/images/
     - assets/rive/
