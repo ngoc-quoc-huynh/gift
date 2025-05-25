@@ -7,17 +7,37 @@ pages:
   awesomeShopCatalog:
     appBar: 'Awesome Shop'
     items:
-      absoluteFicsitTape: 'Absolute FICSIT Tape'
-      ada: 'Artificial Directory and Assistant'
-      darkMode: 'Dark Mode'
-      ficsitCoffeeCup: 'FICSIT Coffee Cup'
-      germanDrive: 'German Drive'
-      memoryPurger: 'Memory Purger 5000'
+      ada:
+        name: 'Artificial Directory and Assistant'
+        description: 'A cutting-edge voice assistant with advanced sarcasm protocols and zero patience for inefficiency.\nShe won’t do your work for you — but she’ll make sure you know you’re doing it wrong.'
+      darkMode:
+        name: 'Dark Mode'
+        description: "Engage a sleek, low-luminance UI theme engineered for late-night productivity (or doomscrolling).\nIt won’t improve performance — but it will look like it does."
+      ficsitCoffeeCup:
+        name: 'FICSIT Coffee Cup'
+        description: "Worried about your body’s superfluous energy demands interrupting your work?\nWe’re proud to provide our pioneers with the means to stay efficient!\nGet your Coffee Cup now!\n(Coffee not included)."
+      germanDrive:
+        name: 'German Drive'
+        description: 'Unlock advanced localisation protocols with this certified Deutsch firmware patch.\nDesigned to enhance user comprehension and eliminate translation errors… mostly.'
+      memoryPurger:
+        name: 'Memory Purger 5000'
+        description: 'A high-powered reset protocol designed to obliterate progress with clinical precision.\nUse only when starting over feels more efficient than fixing your mess.\nCup retention guaranteed.'
+      musicTape:
+        name: 'Music Tape'
+        description: 'Finding silence painfully dull?\nLoad the Music Tape for curated background tracks—from “pleasantly ignorable” to “mildly inspiring.”\nWe’re proud to soundtrack your grind.\nProductivity not included.\nHead nodding optional.'
     navigationBar:
       customizer: 'Customizer'
       equipment: 'Equiptment'
       specials: 'Specials'
     settingsTooltip: 'Settings'
+  awesomeShopItem:
+    checkOut: 'Check out'
+    price: 'Price:'
+    confirmationDialog:
+      title: 'Buy ${name: String}?'
+      content: 'Spend ${price: int} FICSIT Coupons to buy “${name: String}”?'
+      cancel: 'Cancel'
+      buy: 'Buy'
   error:
     appBar: 'Page not found!'
     content: 'The URL ${url: String} could not be found.'
