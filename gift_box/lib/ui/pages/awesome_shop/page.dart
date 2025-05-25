@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/assets.dart';
+import 'package:gift_box/static/resources/sizes.dart';
 import 'package:gift_box/ui/router/routes.dart';
 import 'package:gift_box/ui/widgets/rive_player.dart';
 
@@ -26,24 +27,30 @@ class AwesomeShopPage extends StatelessWidget {
               artboardName: 'Awesome Shop',
             ),
             SafeArea(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: AnimatedTextKit(
-                  repeatForever: true,
-                  pause: const Duration(seconds: 3),
-                  animatedTexts: [
-                    TyperAnimatedText(
-                      _translations.volumeUp,
-                      textStyle: textStyle,
-                      speed: _typerAnimationSpeed,
-                    ),
-                    TyperAnimatedText(
-                      _translations.tap,
-                      textAlign: TextAlign.center,
-                      textStyle: textStyle,
-                      speed: _typerAnimationSpeed,
-                    ),
-                  ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Sizes.horizontalPadding,
+                  vertical: Sizes.verticalPadding,
+                ),
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: AnimatedTextKit(
+                    repeatForever: true,
+                    pause: const Duration(seconds: 3),
+                    animatedTexts: [
+                      TyperAnimatedText(
+                        _translations.volumeUp,
+                        textStyle: textStyle,
+                        speed: _typerAnimationSpeed,
+                      ),
+                      TyperAnimatedText(
+                        _translations.tap,
+                        textAlign: TextAlign.center,
+                        textStyle: textStyle,
+                        speed: _typerAnimationSpeed,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
