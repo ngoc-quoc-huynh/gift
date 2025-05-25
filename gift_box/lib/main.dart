@@ -48,6 +48,7 @@ class _BodyState extends State<_Body> {
     return MaterialApp.router(
       title: Injector.instance.translations.appName,
       theme: CustomTheme.light,
+      themeMode: ThemeMode.light,
       darkTheme: CustomTheme.dark,
       locale: Injector.instance.translations.$meta.locale.flutterLocale,
       supportedLocales: AppLocaleUtils.supportedLocales,
