@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/ui/pages/awesome_shop/page.dart';
 import 'package:gift_box/ui/pages/awesome_shop_catalog/page.dart';
+import 'package:gift_box/ui/pages/awesome_shop_item/page.dart';
 import 'package:gift_box/ui/pages/awesome_sink/page.dart';
 import 'package:gift_box/ui/pages/error/page.dart';
 import 'package:gift_box/ui/pages/gift/page.dart';
@@ -50,6 +51,14 @@ final class GoRouterConfig {
             name: AppRoute.awesomeShopCatalog(),
             path: 'catalog',
             builder: (_, _) => const AwesomeShopCatalogPage(),
+            routes: [
+              GoRoute(
+                name: AppRoute.awesomeShopItem(),
+                path: ':id',
+                builder: (_, state) =>
+                    AwesomeShopItemPage(id: state.pathParameters['id']!),
+              ),
+            ],
           ),
         ],
       ),
