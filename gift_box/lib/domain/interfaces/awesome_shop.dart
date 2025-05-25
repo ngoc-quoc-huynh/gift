@@ -1,3 +1,4 @@
+import 'package:gift_box/domain/models/awesome_shop_item.dart';
 import 'package:gift_box/domain/models/awesome_shop_item_meta.dart';
 
 abstract interface class AwesomeShopApi {
@@ -8,4 +9,6 @@ abstract interface class AwesomeShopApi {
   List<AwesomeShopItemMeta> loadEquipmentMetas();
 
   List<AwesomeShopItemMeta> loadSpecialMetas();
+
+  AwesomeShopItem loadItem(String id);
 }
