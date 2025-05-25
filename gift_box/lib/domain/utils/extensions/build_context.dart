@@ -11,7 +11,10 @@ extension BuildContextExtension on BuildContext {
 
   Size get screenSize => MediaQuery.sizeOf(this);
 
-  void goRoute(Route route) => goNamed(route());
+  void goRoute(
+    Route route, {
+    Map<String, String> pathParameters = const {},
+  }) => goNamed(route(), pathParameters: pathParameters);
 
   void pushRoute(Route route) => pushNamed(route());
 }
