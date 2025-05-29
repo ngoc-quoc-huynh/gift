@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
 import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
+import 'package:gift_box/static/resources/sizes.dart';
 import 'package:gift_box/ui/pages/awesome_shop_catalog/destinations/customizer.dart';
 import 'package:gift_box/ui/pages/awesome_shop_catalog/destinations/equipment.dart';
 import 'package:gift_box/ui/pages/awesome_shop_catalog/destinations/specials.dart';
@@ -64,9 +66,17 @@ class AwesomeShopCatalogPage extends StatelessWidget {
             ),
         body: Column(
           children: [
-            const Align(
-              alignment: Alignment.topRight,
-              child: CouponDisplay.large(amount: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: Sizes.horizontalPadding,
+              ),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: BlocBuilder<HydratedIntCubit, int>(
+                  builder: (context, amount) =>
+                      CouponDisplay.animated(amount: amount),
+                ),
+              ),
             ),
             Expanded(
               child: BlocBuilder<NavigationBarCubit, NavigationBarState>(

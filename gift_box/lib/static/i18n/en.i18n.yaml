@@ -50,4 +50,6 @@ pages:
     tapMe: 'Tap me'
 
 widgets:
-  couponAmount: 'x ${n: int}'
+  couponDisplay:
+    prefix: 'x'
+    amount: 'x ${n: int}'

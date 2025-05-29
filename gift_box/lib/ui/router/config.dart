@@ -1,4 +1,6 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/ui/pages/awesome_shop/page.dart';
 import 'package:gift_box/ui/pages/awesome_shop_catalog/page.dart';
@@ -47,16 +49,27 @@ final class GoRouterConfig {
         path: '/awesome-shop',
         builder: (_, _) => const AwesomeShopPage(),
         routes: [
-          GoRoute(
-            name: AppRoute.awesomeShopCatalog(),
-            path: 'catalog',
-            builder: (_, _) => const AwesomeShopCatalogPage(),
+          ShellRoute(
+            builder: (_, _, child) => BlocProvider<HydratedIntCubit>(
+              create: (_) => HydratedIntCubit(
+                initialState: 10,
+                storageKey: 'coupon_amount',
+              ),
+              child: child,
+            ),
             routes: [
               GoRoute(
-                name: AppRoute.awesomeShopItem(),
-                path: ':id',
-                builder: (_, state) =>
-                    AwesomeShopItemPage(id: state.pathParameters['id']!),
+                name: AppRoute.awesomeShopCatalog(),
+                path: 'catalog',
+                builder: (_, _) => const AwesomeShopCatalogPage(),
+                routes: [
+                  GoRoute(
+                    name: AppRoute.awesomeShopItem(),
+                    path: ':id',
+                    builder: (_, state) =>
+                        AwesomeShopItemPage(id: state.pathParameters['id']!),
+                  ),
+                ],
               ),
             ],
           ),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/awesome_shop_item/bloc.dart';
+import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/domain/models/awesome_shop_item.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/sizes.dart';
+import 'package:gift_box/ui/pages/awesome_shop_item/confirmation_dialog.dart';
 import 'package:gift_box/ui/widgets/asset_image.dart';
 import 'package:gift_box/ui/widgets/coupon_display.dart';
 import 'package:go_router/go_router.dart';
@@ -73,7 +75,11 @@ class AwesomeShopItemPage extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: FilledButton(
-                          onPressed: () => context.pop(),
+                          onPressed: () => _onPressed(
+                            context: context,
+                            name: name,
+                            price: price,
+                          ),
                           child: Text(_translations.checkOut),
                         ),
                       ),
@@ -85,6 +91,24 @@ class AwesomeShopItemPage extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Future<void> _onPressed({
+    required BuildContext context,
+    required String name,
+    required int price,
+  }) async {
+    final hasBought = await AwesomeShopItemConfirmationDialog.show(
+      context: context,
+      name: name,
+      price: price,
+    );
+
+    if (context.mounted && hasBought) {
+      context.pop();
+      final cubit = context.read<HydratedIntCubit>();
+      cubit.update(cubit.state - price);
+    }
   }
 
   static TranslationsPagesAwesomeShopItemEn get _translations =>
