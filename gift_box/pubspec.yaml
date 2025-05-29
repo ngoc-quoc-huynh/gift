@@ -23,6 +23,7 @@ dependencies:
   hydrated_bloc: ^10.0.0
 
   # UI
+  animated_flip_counter: ^0.3.4
   animated_text_kit: ^4.2.3
   confetti: ^0.8.0
   rive: ^0.14.0-dev.6
