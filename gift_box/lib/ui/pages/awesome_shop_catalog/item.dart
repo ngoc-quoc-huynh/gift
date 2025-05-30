@@ -1,14 +1,19 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Route;
 import 'package:gift_box/domain/models/awesome_shop_item_meta.dart';
+import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
-import 'package:gift_box/ui/router/routes.dart';
 import 'package:gift_box/ui/widgets/asset_image.dart';
 import 'package:gift_box/ui/widgets/coupon_display.dart';
 
 class AwesomeShopCatalogItem extends StatelessWidget {
-  const AwesomeShopCatalogItem({required this.meta, super.key});
+  const AwesomeShopCatalogItem({
+    required this.meta,
+    required this.detailRoute,
+    super.key,
+  });
 
   final AwesomeShopItemMeta meta;
+  final Route detailRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +24,9 @@ class AwesomeShopCatalogItem extends StatelessWidget {
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 250),
         child: Card(
-          clipBehavior: Clip.none,
           child: InkWell(
             onTap: () => context.goRoute(
-              Routes.awesomeShopItem,
+              detailRoute,
               pathParameters: {'id': meta.id},
             ),
             child: Padding(
