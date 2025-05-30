@@ -1,16 +1,19 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Route;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/awesome_shop_item_metas/bloc.dart';
+import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/static/resources/sizes.dart';
 import 'package:gift_box/ui/pages/awesome_shop_catalog/item.dart';
 
 abstract class AwesomeShopDestination extends StatelessWidget {
   const AwesomeShopDestination({
     required this.createBloc,
+    required this.detailRoute,
     super.key,
   });
 
   final AwesomeShopItemMetasBloc Function() createBloc;
+  final AppRoute detailRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +37,10 @@ abstract class AwesomeShopDestination extends StatelessWidget {
                   true => 0,
                 },
               ),
-              child: AwesomeShopCatalogItem(meta: metas[index]),
+              child: AwesomeShopCatalogItem(
+                meta: metas[index],
+                detailRoute: detailRoute,
+              ),
             ),
             itemCount: metas.length,
           ),
