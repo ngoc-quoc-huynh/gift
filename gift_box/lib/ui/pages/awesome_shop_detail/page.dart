@@ -6,13 +6,13 @@ import 'package:gift_box/domain/models/awesome_shop_item.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/sizes.dart';
-import 'package:gift_box/ui/pages/awesome_shop_item/confirmation_dialog.dart';
+import 'package:gift_box/ui/pages/awesome_shop_detail/confirmation_dialog.dart';
 import 'package:gift_box/ui/widgets/asset_image.dart';
 import 'package:gift_box/ui/widgets/coupon_display.dart';
 import 'package:go_router/go_router.dart';
 
-class AwesomeShopItemPage extends StatelessWidget {
-  const AwesomeShopItemPage({required this.id, super.key});
+class AwesomeShopDetailPage extends StatelessWidget {
+  const AwesomeShopDetailPage({required this.id, super.key});
 
   final String id;
 
