@@ -19,7 +19,7 @@ class AwesomeShopPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: GestureDetector(
-        onTap: () => context.goRoute(AppRoute.awesomeShopCatalog),
+        onTap: () => context.goRoute(AppRoute.awesomeShopSpecials),
         child: Stack(
           children: [
             RivePlayer(
