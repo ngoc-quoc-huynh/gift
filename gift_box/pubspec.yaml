@@ -32,7 +32,8 @@ dependencies:
   clock: ^1.1.2
   collection: ^1.19.0
   equatable: ^2.0.5
-  get_it: 9.0.5
+  get_it: ^9.0.5
+  hive_ce: ^2.11.3
   logger: ^2.4.0
   nfc_manager:
     git:
