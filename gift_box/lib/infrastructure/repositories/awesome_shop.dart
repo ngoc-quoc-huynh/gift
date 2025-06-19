@@ -5,35 +5,33 @@ import 'package:gift_box/domain/models/awesome_shop_item_meta.dart';
 import 'package:gift_box/infrastructure/dtos/awesome_shop/id.dart';
 import 'package:gift_box/infrastructure/dtos/awesome_shop/item.dart';
 import 'package:gift_box/injector.dart';
+import 'package:hive_ce/hive.dart';
 
 final class AwesomeShopRepository implements AwesomeShopApi {
-  const AwesomeShopRepository();
+  const AwesomeShopRepository(this._box);
+
+  final Box<bool> _box;
 
   @override
-  List<AwesomeShopItemMeta> loadCustomizerMetas() => [
-    AwesomeShopItemId.darkMode,
-    AwesomeShopItemId.germanDrive,
-  ].map((id) => _rawItems[id]!.toMeta()).toList();
+  List<AwesomeShopItemMeta> loadCustomizerMetas() =>
+      _loadMetas(_customizerKeys);
 
   @override
-  List<AwesomeShopItemMeta> loadSpecialMetas() => [
-    AwesomeShopItemId.ada,
-    AwesomeShopItemId.memoryPurger,
-    AwesomeShopItemId.musicTape,
-  ].map((id) => _rawItems[id]!.toMeta()).toList();
+  List<AwesomeShopItemMeta> loadEquipmentMetas() => _loadMetas(_equipmentKeys);
 
   @override
-  List<AwesomeShopItemMeta> loadEquipmentMetas() => [
-    _rawItems[AwesomeShopItemId.ficsitCoffeeCup]!.toMeta(),
-  ];
+  List<AwesomeShopItemMeta> loadSpecialMetas() => _loadMetas(_specialKey);
 
   @override
   AwesomeShopItem loadItem(String id) =>
-      _rawItems[AwesomeShopItemId.byId(id)]!.toItem();
+      _rawItems[AwesomeShopItemKey.byId(id)]!.toItem();
+
+  @override
+  Future<void> buyItem(String id) => _box.put(id, true);
 
   static final _rawItems = {
-    AwesomeShopItemId.ada: RawAwesomeShopItem(
-      id: AwesomeShopItemId.ada.id,
+    AwesomeShopItemKey.ada: RawAwesomeShopItem(
+      id: AwesomeShopItemKey.ada.id,
       name: _translations.ada.name,
       description: _translations.ada.description,
       price: 2,
@@ -41,8 +39,8 @@ final class AwesomeShopRepository implements AwesomeShopApi {
       metaHeight: 50,
       height: 100,
     ),
-    AwesomeShopItemId.darkMode: RawAwesomeShopItem(
-      id: AwesomeShopItemId.darkMode.id,
+    AwesomeShopItemKey.darkMode: RawAwesomeShopItem(
+      id: AwesomeShopItemKey.darkMode.id,
       name: _translations.darkMode.name,
       description: _translations.darkMode.description,
       price: 1,
@@ -50,8 +48,8 @@ final class AwesomeShopRepository implements AwesomeShopApi {
       metaHeight: 100,
       height: 150,
     ),
-    AwesomeShopItemId.germanDrive: RawAwesomeShopItem(
-      id: AwesomeShopItemId.germanDrive.id,
+    AwesomeShopItemKey.germanDrive: RawAwesomeShopItem(
+      id: AwesomeShopItemKey.germanDrive.id,
       name: _translations.germanDrive.name,
       description: _translations.germanDrive.description,
       price: 1,
@@ -59,8 +57,8 @@ final class AwesomeShopRepository implements AwesomeShopApi {
       metaHeight: 100,
       height: 175,
     ),
-    AwesomeShopItemId.ficsitCoffeeCup: RawAwesomeShopItem(
-      id: AwesomeShopItemId.ficsitCoffeeCup.id,
+    AwesomeShopItemKey.ficsitCoffeeCup: RawAwesomeShopItem(
+      id: AwesomeShopItemKey.ficsitCoffeeCup.id,
       name: _translations.ficsitCoffeeCup.name,
       description: _translations.ficsitCoffeeCup.description,
       price: 1,
@@ -68,8 +66,8 @@ final class AwesomeShopRepository implements AwesomeShopApi {
       metaHeight: 100,
       height: 175,
     ),
-    AwesomeShopItemId.memoryPurger: RawAwesomeShopItem(
-      id: AwesomeShopItemId.memoryPurger.id,
+    AwesomeShopItemKey.memoryPurger: RawAwesomeShopItem(
+      id: AwesomeShopItemKey.memoryPurger.id,
       name: _translations.memoryPurger.name,
       description: _translations.memoryPurger.description,
       price: 3,
@@ -77,8 +75,8 @@ final class AwesomeShopRepository implements AwesomeShopApi {
       metaHeight: 100,
       height: 150,
     ),
-    AwesomeShopItemId.musicTape: RawAwesomeShopItem(
-      id: AwesomeShopItemId.musicTape.id,
+    AwesomeShopItemKey.musicTape: RawAwesomeShopItem(
+      id: AwesomeShopItemKey.musicTape.id,
       name: _translations.musicTape.name,
       description: _translations.musicTape.description,
       price: 2,
@@ -87,6 +85,30 @@ final class AwesomeShopRepository implements AwesomeShopApi {
       height: 150,
     ),
   };
+
+  static const _customizerKeys = [
+    AwesomeShopItemKey.darkMode,
+    AwesomeShopItemKey.germanDrive,
+  ];
+
+  static const _specialKey = [
+    AwesomeShopItemKey.ada,
+    AwesomeShopItemKey.memoryPurger,
+    AwesomeShopItemKey.musicTape,
+  ];
+
+  static const _equipmentKeys = [AwesomeShopItemKey.ficsitCoffeeCup];
+
+  bool _loadIsItemPurchased(AwesomeShopItemKey key) =>
+      _box.get(key.id) ?? false;
+
+  List<AwesomeShopItemMeta> _loadMetas(List<AwesomeShopItemKey> keys) => keys
+      .map(
+        (id) => _rawItems[id]!.toMeta(
+          isPurchased: _loadIsItemPurchased(id),
+        ),
+      )
+      .toList();
 
   static TranslationsPagesAwesomeShopCatalogItemsEn get _translations =>
       Injector.instance.translations.pages.awesomeShopCatalog.items;

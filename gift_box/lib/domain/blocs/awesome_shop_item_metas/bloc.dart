@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +16,11 @@ sealed class AwesomeShopItemMetasBloc
     : super(const AwesomeShopItemMetasLoadInProgress()) {
     on<AwesomeShopItemMetasInitializeEvent>(
       _onAwesomeShopItemMetasInitializeEvent,
+      transformer: droppable(),
+    );
+    on<AwesomeShopItemMetasBuyEvent>(
+      _onAwesomeShopItemMetasBuyEvent,
+      transformer: droppable(),
     );
   }
 
@@ -27,6 +35,22 @@ sealed class AwesomeShopItemMetasBloc
   ) {
     final metas = _lodMetas();
     emit(AwesomeShopItemMetasLoadOnSuccess(metas));
+  }
+
+  void _onAwesomeShopItemMetasBuyEvent(
+    AwesomeShopItemMetasBuyEvent event,
+    Emitter<AwesomeShopItemMetasState> emit,
+  ) {
+    if (state case AwesomeShopItemMetasLoadOnSuccess(:final metas)) {
+      unawaited(awesomeShopApi.buyItem(event.id));
+      final newMetas = List.of(metas);
+      final index = newMetas.indexWhere((meta) => meta.id == event.id);
+
+      if (index != -1) {
+        newMetas[index] = newMetas[index].copyWith(isPurchased: true);
+        emit(AwesomeShopItemMetasLoadOnSuccess(newMetas));
+      }
+    }
   }
 }
 

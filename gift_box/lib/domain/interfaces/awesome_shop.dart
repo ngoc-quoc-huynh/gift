@@ -11,4 +11,6 @@ abstract interface class AwesomeShopApi {
   List<AwesomeShopItemMeta> loadSpecialMetas();
 
   AwesomeShopItem loadItem(String id);
+
+  Future<void> buyItem(String id);
 }

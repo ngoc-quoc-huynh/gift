@@ -1,4 +1,4 @@
-enum AwesomeShopItemId {
+enum AwesomeShopItemKey {
   ada('ada'),
   darkMode('dark-mode'),
   germanDrive('german-drive'),
@@ -6,9 +6,9 @@ enum AwesomeShopItemId {
   memoryPurger('memory-purger-500'),
   musicTape('music-tape');
 
-  const AwesomeShopItemId(this.id);
+  const AwesomeShopItemKey(this.id);
 
-  factory AwesomeShopItemId.byId(String id) => switch (id) {
+  factory AwesomeShopItemKey.byId(String id) => switch (id) {
     'ada' => ada,
     'dark-mode' => darkMode,
     'german-drive' => germanDrive,

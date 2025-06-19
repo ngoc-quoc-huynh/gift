@@ -13,6 +13,7 @@ import 'package:gift_box/infrastructure/repositories/logger.dart';
 import 'package:gift_box/infrastructure/repositories/nfc.dart';
 import 'package:gift_box/static/config.dart';
 import 'package:gift_box/static/i18n/translations.g.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:nfc_manager/nfc_manager.dart';
@@ -27,9 +28,13 @@ final class Injector {
   static final GetIt instance = GetIt.instance;
 
   static Future<void> setupDependencies() async {
+    final hiveBox = await _initHive();
+
     instance
       ..registerLazySingleton<AssetApi>(AssetRepository.new)
-      ..registerLazySingleton<AwesomeShopApi>(AwesomeShopRepository.new)
+      ..registerLazySingleton<AwesomeShopApi>(
+        () => AwesomeShopRepository(hiveBox),
+      )
       ..registerLazySingleton<Logger>(Logger.new)
       ..registerLazySingleton<LoggerApi>(
         () => LoggerRepository(
@@ -56,11 +61,26 @@ final class Injector {
         () => Config.pin.toHexString().toUint8List(),
         instanceName: 'pin',
       );
+  }
 
+  static Future<Box<bool>> _initHive() async {
     final appDir = await getApplicationDocumentsDirectory();
-    HydratedBloc.storage = await HydratedStorage.build(
-      storageDirectory: HydratedStorageDirectory(appDir.path),
+    Hive.init(appDir.path);
+
+    final [
+      hiveBox as Box<bool>,
+      hiveStorage as HydratedStorage,
+    ] = await Future.wait(
+      [
+        Hive.openBox<bool>('awesome_shop_items'),
+        HydratedStorage.build(
+          storageDirectory: HydratedStorageDirectory(appDir.path),
+        ),
+      ],
     );
+    HydratedBloc.storage = hiveStorage;
+
+    return hiveBox;
   }
 
   static Translations _createTranslations() => AppLocale.en.buildSync();
