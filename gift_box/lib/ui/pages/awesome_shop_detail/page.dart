@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/awesome_shop_item/bloc.dart';
+import 'package:gift_box/domain/blocs/awesome_shop_item_metas/bloc.dart';
 import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/domain/models/awesome_shop_item.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
@@ -11,7 +12,10 @@ import 'package:gift_box/ui/widgets/asset_image.dart';
 import 'package:gift_box/ui/widgets/coupon_display.dart';
 import 'package:go_router/go_router.dart';
 
-class AwesomeShopDetailPage extends StatelessWidget {
+// ignore_for_file: prefer-single-widget-per-file
+
+sealed class AwesomeShopDetailPage<Bloc extends AwesomeShopItemMetasBloc>
+    extends StatelessWidget {
   const AwesomeShopDetailPage({required this.id, super.key});
 
   final String id;
@@ -30,6 +34,7 @@ class AwesomeShopDetailPage extends StatelessWidget {
           ),
           AwesomeShopItemLoadOnSuccess(
             item: AwesomeShopItem(
+              :final id,
               :final name,
               :final description,
               :final price,
@@ -77,6 +82,7 @@ class AwesomeShopDetailPage extends StatelessWidget {
                         child: FilledButton(
                           onPressed: () => _onPressed(
                             context: context,
+                            id: id,
                             name: name,
                             price: price,
                           ),
@@ -95,6 +101,7 @@ class AwesomeShopDetailPage extends StatelessWidget {
 
   Future<void> _onPressed({
     required BuildContext context,
+    required String id,
     required String name,
     required int price,
   }) async {
@@ -105,7 +112,11 @@ class AwesomeShopDetailPage extends StatelessWidget {
     );
 
     if (context.mounted && hasBought) {
-      context.pop();
+      context
+        ..read<AwesomeShopItemMetasSpecialsBloc>().add(
+          AwesomeShopItemMetasBuyEvent(id),
+        )
+        ..pop();
       final cubit = context.read<HydratedIntCubit>();
       cubit.update(cubit.state - price);
     }
@@ -113,4 +124,19 @@ class AwesomeShopDetailPage extends StatelessWidget {
 
   static TranslationsPagesAwesomeShopItemEn get _translations =>
       Injector.instance.translations.pages.awesomeShopItem;
+}
+
+final class AwesomeShopCustomizerDetailPage
+    extends AwesomeShopDetailPage<AwesomeShopItemMetasCustomizerBloc> {
+  const AwesomeShopCustomizerDetailPage({required super.id, super.key});
+}
+
+final class AwesomeShopEquipmentsDetailPage
+    extends AwesomeShopDetailPage<AwesomeShopItemMetasEquipmentBloc> {
+  const AwesomeShopEquipmentsDetailPage({required super.id, super.key});
+}
+
+final class AwesomeShopSpecialsDetailPage
+    extends AwesomeShopDetailPage<AwesomeShopItemMetasSpecialsBloc> {
+  const AwesomeShopSpecialsDetailPage({required super.id, super.key});
 }
