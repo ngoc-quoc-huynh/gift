@@ -22,13 +22,15 @@ final class RawAwesomeShopItem extends Equatable {
   final double metaHeight;
   final double height;
 
-  AwesomeShopItemMeta toMeta() => AwesomeShopItemMeta(
-    id: id,
-    name: name,
-    price: price,
-    asset: asset,
-    height: metaHeight,
-  );
+  AwesomeShopItemMeta toMeta({required bool isPurchased}) =>
+      AwesomeShopItemMeta(
+        id: id,
+        name: name,
+        price: price,
+        asset: asset,
+        height: metaHeight,
+        isPurchased: isPurchased,
+      );
 
   AwesomeShopItem toItem() => AwesomeShopItem(
     id: id,
