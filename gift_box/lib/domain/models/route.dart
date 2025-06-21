@@ -1,3 +1,7 @@
-extension type Route(String name) {
+enum AppRoute {
+  home,
+  gift,
+  timer;
+
   String call() => name;
 }

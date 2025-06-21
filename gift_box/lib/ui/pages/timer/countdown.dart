@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/countdown/cubit.dart';
+import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/domain/utils/extensions/duration.dart';
 import 'package:gift_box/injector.dart';
-import 'package:gift_box/ui/router/routes.dart';
 import 'package:gift_box/ui/widgets/frosted_card.dart';
 
 class TimerCountdown extends StatelessWidget {
@@ -50,7 +50,7 @@ class _Text extends StatelessWidget {
         ),
         CountdownFinished() => TextButton(
           style: TextButton.styleFrom(overlayColor: Colors.transparent),
-          onPressed: () => context.goRoute(Routes.giftPage),
+          onPressed: () => context.goRoute(AppRoute.gift),
           child: Text(
             Injector.instance.translations.pages.timer.tapMe,
             style: textStyle,

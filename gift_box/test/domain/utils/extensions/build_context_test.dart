@@ -35,9 +35,6 @@ void main() {
 
   group('goRoute', () {
     testWidgets('navigates correctly.', (WidgetTester tester) async {
-      final pageA = Route('page-a');
-      final pageB = Route('page-B');
-
       await tester.pumpWidget(
         MaterialApp.router(
           routerConfig: GoRouter(
@@ -45,17 +42,17 @@ void main() {
             routes: [
               GoRoute(
                 path: '/a',
-                name: pageA(),
+                name: AppRoute.home(),
                 builder: (context, _) => Scaffold(
                   appBar: AppBar(title: const Text('A')),
                   floatingActionButton: FloatingActionButton(
-                    onPressed: () => context.goRoute(pageB),
+                    onPressed: () => context.goRoute(AppRoute.gift),
                   ),
                 ),
               ),
               GoRoute(
                 path: '/b',
-                name: pageB(),
+                name: AppRoute.gift(),
                 builder: (_, state) =>
                     Scaffold(appBar: AppBar(title: const Text('B'))),
               ),
