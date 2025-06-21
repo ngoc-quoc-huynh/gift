@@ -3,7 +3,7 @@ enum AwesomeShopItemKey {
   darkMode('dark-mode'),
   germanDrive('german-drive'),
   coffeeCup('coffee-cup'),
-  memoryPurger('memory-purger-500'),
+  reset('reset'),
   musicTape('music-tape');
 
   const AwesomeShopItemKey(this.id);
@@ -13,7 +13,7 @@ enum AwesomeShopItemKey {
     'dark-mode' => darkMode,
     'german-drive' => germanDrive,
     'coffee-cup' => coffeeCup,
-    'memory-purger-500' => memoryPurger,
+    'reset' => reset,
     'music-tape' => musicTape,
     String() => throw ArgumentError.value(
       id,

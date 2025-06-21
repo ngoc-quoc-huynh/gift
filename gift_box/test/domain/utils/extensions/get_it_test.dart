@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_box/domain/interfaces/asset.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/injector.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
 
 import '../../../mocks.dart';
@@ -18,6 +19,14 @@ void main() {
     addTearDown(Injector.instance.unregisterAid);
 
     expectList(Injector.instance.aid, aid);
+  });
+
+  test('returns AudioPlayer.', () {
+    final audioPlayer = MockAudioPlayer();
+    Injector.instance.registerSingleton<AudioPlayer>(audioPlayer);
+    addTearDown(Injector.instance.unregister<AudioPlayer>);
+
+    expect(Injector.instance.audioPlayer, audioPlayer);
   });
 
   test('returns AssetApi.', () {

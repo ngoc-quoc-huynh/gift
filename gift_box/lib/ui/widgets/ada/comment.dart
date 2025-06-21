@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_box/domain/blocs/ada_audio/bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
 import 'package:gift_box/static/resources/sizes.dart';
 
 class AdaComment extends StatelessWidget {
-  const AdaComment({required this.comment, super.key});
-
-  final String comment;
+  const AdaComment({super.key});
 
   static const _startOpacity = 0.0;
   static const _endOpacity = 1.0;
@@ -21,16 +20,21 @@ class AdaComment extends StatelessWidget {
         },
         curve: Sizes.adaAnimationCurve,
         duration: Sizes.adaAnimationDuration,
-        child: _Body(comment),
+        child: BlocBuilder<AdaAudioBloc, AdaAudioState>(
+          builder: (context, state) => switch (state) {
+            AdaAudioLoadOnSuccess(:final text) => _Body(text),
+            _ => const SizedBox.shrink(),
+          },
+        ),
       ),
     );
   }
 }
 
 class _Body extends StatefulWidget {
-  const _Body(this.comment);
+  const _Body(this.text);
 
-  final String comment;
+  final String text;
 
   @override
   State<_Body> createState() => _BodyState();
@@ -46,6 +50,14 @@ class _BodyState extends State<_Body> {
   }
 
   @override
+  void didUpdateWidget(covariant _Body oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.text != widget.text) {
+      _updateWidgetSize();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
       key: _key,
@@ -56,7 +68,7 @@ class _BodyState extends State<_Body> {
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Text(
-              widget.comment,
+              widget.text,
               style: const TextStyle(color: Colors.white),
             ),
           ),
