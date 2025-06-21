@@ -6,11 +6,8 @@ void main() {
     'call returns correctly.',
     () {
       expect(Asset.ada(), 'assets/awesome_shop/ada.webp');
-      expect(Asset.ficsitCoupon(), 'assets/awesome_shop/ficsit_coupon.webp');
-      expect(
-        Asset.ficsitCoffeeCup(),
-        'assets/awesome_shop/ficsit_coffee_cup.webp',
-      );
+      expect(Asset.coupon(), 'assets/awesome_shop/coupon.webp');
+      expect(Asset.coffeeCup(), 'assets/awesome_shop/coffee_cup.webp');
       expect(Asset.darkMode(), 'assets/awesome_shop/dark_mode.webp');
       expect(Asset.germanDrive(), 'assets/awesome_shop/german_drive.webp');
       expect(Asset.musicTape(), 'assets/awesome_shop/music_tape.webp');
