@@ -2,7 +2,7 @@ enum AwesomeShopItemKey {
   ada('ada'),
   darkMode('dark-mode'),
   germanDrive('german-drive'),
-  ficsitCoffeeCup('ficsit-coffee-cup'),
+  coffeeCup('coffee-cup'),
   memoryPurger('memory-purger-500'),
   musicTape('music-tape');
 
@@ -12,7 +12,7 @@ enum AwesomeShopItemKey {
     'ada' => ada,
     'dark-mode' => darkMode,
     'german-drive' => germanDrive,
-    'ficsit-coffee-cup' => ficsitCoffeeCup,
+    'coffee-cup' => coffeeCup,
     'memory-purger-500' => memoryPurger,
     'music-tape' => musicTape,
     String() => throw ArgumentError.value(
