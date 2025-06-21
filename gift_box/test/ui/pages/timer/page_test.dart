@@ -31,7 +31,10 @@ Future<void> main() async {
     },
     pumpWidget: (tester, widget) => withClock(
       Clock.fixed(DateTime(2024, 12, 31)),
-      () => tester.pumpWidget(widget),
+      () async {
+        await tester.pumpWidget(widget);
+        await tester.pumpAndSettle();
+      },
     ),
     constraints: pageConstraints,
     builder: TimerPage.new,

@@ -23,6 +23,10 @@ Future<void> main() async {
     'renders correctly.',
     fileName: 'timer_carousel',
     pumpBeforeTest: precacheImages,
+    pumpWidget: (tester, widget) async {
+      await tester.pumpWidget(widget);
+      await tester.pumpAndSettle();
+    },
     constraints: widgetConstraints,
     builder: () => const TimerImageCarousel(),
   );
