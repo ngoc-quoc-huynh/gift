@@ -46,7 +46,7 @@ class _Body extends StatelessWidget {
       spacing: 10,
       children: [
         CustomAssetImage(
-          asset: Asset.ficsitCoupon,
+          asset: Asset.coupon,
           height: assetHeight,
         ),
         builder.call(

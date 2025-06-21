@@ -3,8 +3,8 @@ import 'package:path/path.dart';
 enum Asset {
   // Awesome shop items
   ada('awesome_shop/ada.webp'),
-  ficsitCoupon('awesome_shop/ficsit_coupon.webp'),
-  ficsitCoffeeCup('awesome_shop/ficsit_coffee_cup.webp'),
+  coupon('awesome_shop/coupon.webp'),
+  coffeeCup('awesome_shop/coffee_cup.webp'),
   darkMode('awesome_shop/dark_mode.webp'),
   germanDrive('awesome_shop/german_drive.webp'),
   musicTape('awesome_shop/music_tape.webp'),
