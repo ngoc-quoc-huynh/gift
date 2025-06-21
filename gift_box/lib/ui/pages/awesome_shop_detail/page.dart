@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/awesome_shop_item/bloc.dart';
@@ -8,6 +10,7 @@ import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/sizes.dart';
 import 'package:gift_box/ui/pages/awesome_shop_detail/confirmation_dialog.dart';
+import 'package:gift_box/ui/widgets/ada/ada.dart';
 import 'package:gift_box/ui/widgets/asset_image.dart';
 import 'package:gift_box/ui/widgets/coupon_display.dart';
 import 'package:go_router/go_router.dart';
@@ -119,6 +122,7 @@ sealed class AwesomeShopDetailPage<Bloc extends AwesomeShopItemMetasBloc>
         ..pop();
       final cubit = context.read<HydratedIntCubit>();
       cubit.update(cubit.state - price);
+      Ada.show(context, id);
     }
   }
 
