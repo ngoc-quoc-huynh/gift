@@ -3,8 +3,10 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:get_it/get_it.dart';
+import 'package:gift_box/domain/interfaces/asset.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/domain/interfaces/nfc.dart';
+import 'package:gift_box/infrastructure/repositories/asset.dart';
 import 'package:gift_box/infrastructure/repositories/logger.dart';
 import 'package:gift_box/infrastructure/repositories/nfc.dart';
 import 'package:gift_box/static/config.dart';
@@ -24,6 +26,7 @@ final class Injector {
 
   static Future<void> setupDependencies() async {
     instance
+      ..registerLazySingleton<AssetApi>(AssetRepository.new)
       ..registerLazySingleton<Logger>(Logger.new)
       ..registerLazySingleton<LoggerApi>(
         () => LoggerRepository(

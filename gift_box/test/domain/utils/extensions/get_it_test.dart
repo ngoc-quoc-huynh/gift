@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:gift_box/domain/interfaces/asset.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/injector.dart';
 import 'package:logger/logger.dart';
@@ -17,6 +18,14 @@ void main() {
     addTearDown(Injector.instance.unregisterAid);
 
     expectList(Injector.instance.aid, aid);
+  });
+
+  test('returns AssetApi.', () {
+    final assetApi = MockAssetApi();
+    Injector.instance.registerSingleton<AssetApi>(assetApi);
+    addTearDown(Injector.instance.unregister<AssetApi>);
+
+    expect(Injector.instance.assetApi, assetApi);
   });
 
   test('returns birthday.', () {

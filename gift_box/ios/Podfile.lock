@@ -28,7 +28,7 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_native_splash: c32d145d68aeda5502d5f543ee38c192065986cf
   path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
-  rive_native: 329a0612c7c80230e808a2c0afdd1f5d6e6e4a0a
+  rive_native: a57df296c558867395bfe82fafe857ec67640f58
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 

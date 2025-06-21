@@ -1,8 +1,11 @@
+import 'package:gift_box/domain/interfaces/asset.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/domain/interfaces/nfc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
+
+final class MockAssetApi extends Mock implements AssetApi {}
 
 final class MockLogger extends Mock implements Logger {}
 

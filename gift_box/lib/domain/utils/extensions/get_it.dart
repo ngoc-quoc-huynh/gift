@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:get_it/get_it.dart';
+import 'package:gift_box/domain/interfaces/asset.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/domain/interfaces/nfc.dart';
 import 'package:gift_box/static/i18n/translations.g.dart';
@@ -10,6 +11,8 @@ import 'package:logger/logger.dart';
 
 extension GetItExtension on GetIt {
   Uint8List get aid => get<Uint8List>(instanceName: 'aid');
+
+  AssetApi get assetApi => get<AssetApi>();
 
   DateTime get birthday => get<DateTime>(instanceName: 'birthday');
 
