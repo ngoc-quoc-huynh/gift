@@ -14,7 +14,7 @@ pages:
       darkMode:
         name: 'Dark Mode'
         description: "Engage a sleek, low-luminance UI theme engineered for late-night productivity (or doomscrolling).\nIt won’t improve performance — but it will look like it does."
-      ficsitCoffeeCup:
+      coffeeCup:
         name: 'FICSIT Coffee Cup'
         description: "Worried about your body’s superfluous energy demands interrupting your work?\nWe’re proud to provide our pioneers with the means to stay efficient!\nGet your Coffee Cup now!\n(Coffee not included)."
       germanDrive:

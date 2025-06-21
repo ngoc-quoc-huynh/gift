@@ -57,12 +57,12 @@ final class AwesomeShopRepository implements AwesomeShopApi {
       metaHeight: 100,
       height: 175,
     ),
-    AwesomeShopItemKey.ficsitCoffeeCup: RawAwesomeShopItem(
-      id: AwesomeShopItemKey.ficsitCoffeeCup.id,
-      name: _translations.ficsitCoffeeCup.name,
-      description: _translations.ficsitCoffeeCup.description,
+    AwesomeShopItemKey.coffeeCup: RawAwesomeShopItem(
+      id: AwesomeShopItemKey.coffeeCup.id,
+      name: _translations.coffeeCup.name,
+      description: _translations.coffeeCup.description,
       price: 1,
-      asset: Asset.ficsitCoffeeCup,
+      asset: Asset.coffeeCup,
       metaHeight: 100,
       height: 175,
     ),
@@ -97,7 +97,7 @@ final class AwesomeShopRepository implements AwesomeShopApi {
     AwesomeShopItemKey.musicTape,
   ];
 
-  static const _equipmentKeys = [AwesomeShopItemKey.ficsitCoffeeCup];
+  static const _equipmentKeys = [AwesomeShopItemKey.coffeeCup];
 
   bool _loadIsItemPurchased(AwesomeShopItemKey key) =>
       _box.get(key.id) ?? false;
