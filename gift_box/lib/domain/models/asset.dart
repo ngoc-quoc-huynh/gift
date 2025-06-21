@@ -1,6 +1,14 @@
 import 'package:path/path.dart';
 
 enum Asset {
+  // ADA audios
+  adaAudio('audios/ada/ada.mp3'),
+  coffeeCupAudio('audios/ada/coffee_cup.mp3'),
+  darkModeAudio('audios/ada/dark_mode.mp3'),
+  germanDriveAudio('audios/ada/german_drive.mp3'),
+  musicTapeAudio('audios/ada/music_tape.mp3'),
+  resetAudio('audios/ada/reset.mp3'),
+
   // Awesome shop items
   ada('awesome_shop/ada.webp'),
   coupon('awesome_shop/coupon.webp'),
