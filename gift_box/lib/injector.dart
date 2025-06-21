@@ -15,6 +15,7 @@ import 'package:gift_box/static/config.dart';
 import 'package:gift_box/static/i18n/translations.g.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:path_provider/path_provider.dart';
@@ -29,8 +30,9 @@ final class Injector {
 
   static Future<void> setupDependencies() async {
     final hiveBox = await _initHive();
-
+    await hiveBox.clear();
     instance
+      ..registerFactory<AudioPlayer>(AudioPlayer.new)
       ..registerLazySingleton<AssetApi>(AssetRepository.new)
       ..registerLazySingleton<AwesomeShopApi>(
         () => AwesomeShopRepository(hiveBox),
@@ -79,6 +81,7 @@ final class Injector {
       ],
     );
     HydratedBloc.storage = hiveStorage;
+    await hiveStorage.clear();
 
     return hiveBox;
   }

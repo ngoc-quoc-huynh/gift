@@ -8,10 +8,13 @@ import 'package:gift_box/domain/interfaces/awesome_shop.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/domain/interfaces/nfc.dart';
 import 'package:gift_box/static/i18n/translations.g.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
 
 extension GetItExtension on GetIt {
   Uint8List get aid => get<Uint8List>(instanceName: 'aid');
+
+  AudioPlayer get audioPlayer => get<AudioPlayer>();
 
   AssetApi get assetApi => get<AssetApi>();
 

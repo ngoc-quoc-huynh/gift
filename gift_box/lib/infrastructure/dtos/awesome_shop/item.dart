@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:gift_box/domain/models/ada_audio.dart';
 import 'package:gift_box/domain/models/asset.dart';
 import 'package:gift_box/domain/models/awesome_shop_item.dart';
 import 'package:gift_box/domain/models/awesome_shop_item_meta.dart';
@@ -12,6 +13,7 @@ final class RawAwesomeShopItem extends Equatable {
     required this.asset,
     required this.metaHeight,
     required this.height,
+    required this.audio,
   });
 
   final String id;
@@ -21,6 +23,7 @@ final class RawAwesomeShopItem extends Equatable {
   final Asset asset;
   final double metaHeight;
   final double height;
+  final AdaAudio audio;
 
   AwesomeShopItemMeta toMeta({required bool isPurchased}) =>
       AwesomeShopItemMeta(
@@ -50,5 +53,6 @@ final class RawAwesomeShopItem extends Equatable {
     asset,
     metaHeight,
     height,
+    audio,
   ];
 }
