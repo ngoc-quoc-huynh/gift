@@ -6,10 +6,12 @@ import 'package:get_it/get_it.dart';
 import 'package:gift_box/domain/interfaces/asset.dart';
 import 'package:gift_box/domain/interfaces/awesome_shop.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
+import 'package:gift_box/domain/interfaces/native.dart';
 import 'package:gift_box/domain/interfaces/nfc.dart';
 import 'package:gift_box/static/i18n/translations.g.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 extension GetItExtension on GetIt {
   Uint8List get aid => get<Uint8List>(instanceName: 'aid');
@@ -26,7 +28,11 @@ extension GetItExtension on GetIt {
 
   LoggerApi get loggerApi => get<LoggerApi>();
 
+  NativeApi get nativeApi => get<NativeApi>();
+
   NfcApi get nfcApi => get<NfcApi>();
+
+  PackageInfo get packageInfo => get<PackageInfo>();
 
   Uint8List get pin => get<Uint8List>(instanceName: 'pin');
 

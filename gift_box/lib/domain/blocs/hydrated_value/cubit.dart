@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:gift_box/domain/models/locale.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 
 part 'types.dart';
@@ -13,5 +15,5 @@ final class HydratedValueCubit<State> extends HydratedCubit<State> {
   State fromJson(Map<String, dynamic> json) => json[storageKey] as State;
 
   @override
-  Map<String, dynamic>? toJson(State state) => {storageKey: state};
+  Map<String, dynamic>? toJson(State state) => {storageKey: state.toString()};
 }

@@ -81,10 +81,10 @@ pages:
       feedback: 'Design has been updated successfully.'
     feedback:
       label: 'Feedback'
-      title: 'Give Feedback'
+      title: 'Feedback'
       subtitle: 'We value your feedback'
       description: 'Have an issue or suggestion? Let us know to help improve the app! You’ll be redirected to our feedback page. \n\nNote: A GitHub account is required to provide feedback.'
-      button: 'Create feedback'
+      button: 'Give feedback'
     language:
       label: 'Language'
       title: 'Choose language'

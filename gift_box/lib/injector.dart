@@ -6,10 +6,12 @@ import 'package:get_it/get_it.dart';
 import 'package:gift_box/domain/interfaces/asset.dart';
 import 'package:gift_box/domain/interfaces/awesome_shop.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
+import 'package:gift_box/domain/interfaces/native.dart';
 import 'package:gift_box/domain/interfaces/nfc.dart';
 import 'package:gift_box/infrastructure/repositories/asset.dart';
 import 'package:gift_box/infrastructure/repositories/awesome_shop.dart';
 import 'package:gift_box/infrastructure/repositories/logger.dart';
+import 'package:gift_box/infrastructure/repositories/native.dart';
 import 'package:gift_box/infrastructure/repositories/nfc.dart';
 import 'package:gift_box/static/config.dart';
 import 'package:gift_box/static/i18n/translations.g.dart';
@@ -18,6 +20,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
 import 'package:nfc_manager/nfc_manager.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
 export 'package:gift_box/domain/utils/extensions/get_it.dart';
@@ -30,7 +33,6 @@ final class Injector {
 
   static Future<void> setupDependencies() async {
     final hiveBox = await _initHive();
-    await hiveBox.clear();
     instance
       ..registerFactory<AudioPlayer>(AudioPlayer.new)
       ..registerLazySingleton<AssetApi>(AssetRepository.new)
@@ -45,8 +47,10 @@ final class Injector {
           ),
         ),
       )
+      ..registerLazySingleton<NativeApi>(NativeRepository.new)
       ..registerLazySingleton<NfcApi>(NfcRepository.new)
       ..registerLazySingleton<Translations>(_createTranslations)
+      ..registerSingletonAsync<PackageInfo>(PackageInfo.fromPlatform)
       ..registerLazySingleton<Random>(Random.new)
       ..registerFactoryParam<Timer, Duration, void Function(Timer timer)>(
         Timer.periodic,
@@ -81,7 +85,6 @@ final class Injector {
       ],
     );
     HydratedBloc.storage = hiveStorage;
-    await hiveStorage.clear();
 
     return hiveBox;
   }

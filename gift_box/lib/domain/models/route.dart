@@ -10,6 +10,7 @@ enum AppRoute {
   awesomeShopItem,
   awesomeSink,
   gift,
+  license,
   settings,
   timer
   ;
