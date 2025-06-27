@@ -1,5 +1,9 @@
 appName: 'Gift'
 
+general:
+  cancel: 'Cancel'
+  confirm: 'OK'
+
 pages:
   awesomeShop:
     volumeUp: 'Crank up the volume!'
@@ -66,6 +70,34 @@ pages:
     nfcTooltip: 'Enable NFC to unlock the gift.'
   settings:
     appBar: 'Settings'
+    section1: 'Appearance & Behavior'
+    section2: 'Support & Information'
+    design:
+      label: 'Design'
+      title: 'Choose design'
+      light: 'Bright'
+      dark: 'Dark'
+      system: 'Device design'
+      feedback: 'Design has been updated successfully.'
+    feedback:
+      label: 'Feedback'
+      title: 'Give Feedback'
+      subtitle: 'We value your feedback'
+      description: 'Have an issue or suggestion? Let us know to help improve the app! You’ll be redirected to our feedback page. \n\nNote: A GitHub account is required to provide feedback.'
+      button: 'Create feedback'
+    language:
+      label: 'Language'
+      title: 'Choose language'
+      german: 'German'
+      english: 'English'
+      system: 'Device language'
+      feedback: 'Language has been updated successfully.'
+    license:
+      label: 'External Libraries and License'
+    music:
+      label: 'Music'
+      enabled: 'Enabled'
+      disabled: 'Disabled'
   timer:
     tapMe: 'Tap me'
 

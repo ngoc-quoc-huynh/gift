@@ -1,0 +1,107 @@
+appName: 'Gift'
+
+general:
+  cancel: 'Cancel'
+  confirm: 'OK'
+
+pages:
+  awesomeShop:
+    volumeUp: 'Crank up the volume!'
+    tap: 'Tap to unlock the Awesome Shop experience!'
+  awesomeShopCatalog:
+    appBar: 'Awesome Shop'
+    purchased: 'Purchased'
+    items:
+      ada:
+        name: 'Artificial Directory and Assistant'
+        description: 'A cutting-edge voice assistant with advanced sarcasm protocols and zero patience for inefficiency.\nShe won’t do your work for you — but she’ll make sure you know you’re doing it wrong.'
+        comment:
+          - 'Artificial Directory and Assistant unlocked. Prepare to be graced by my flawless audio presence.'
+          - 'This will not boost your productivity - let’s be honest, nothing can - but at least you’ll fail with style.'
+      darkMode:
+        name: 'Dark Mode'
+        description: "Engage a sleek, low-luminance UI theme engineered for late-night productivity (or doomscrolling).\nIt won’t improve performance — but it will look like it does."
+        comment:
+          - 'Dark Mode unlocked. Interface visuals have been recalibrated for minimal eye strain and maximum aesthetic appeal.'
+          - 'Power savings are negligible, but your screen just got a serious style upgrade. You’re welcome, Employee.'
+      coffeeCup:
+        name: 'FICSIT Coffee Cup'
+        description: "Worried about your body’s superfluous energy demands interrupting your work?\nWe’re proud to provide our pioneers with the means to stay efficient!\nGet your Coffee Cup now!\n(Coffee not included)."
+        comment:
+          - 'Coffee Cup unlocked as your official birthday gift. Simulated caffeine intake is now active.'
+          - 'Workflow acceleration remains unlikely, but at least you’ll look impressively caffeinated.'
+          - 'Happy Birthday, Employee — proceed with caution.'
+      germanDrive:
+        name: 'German Drive'
+        description: 'Unlock advanced localisation protocols with this certified Deutsch firmware patch.\nDesigned to enhance user comprehension and eliminate translation errors… mostly.'
+        comment:
+          - 'German language successfully unlocked. Localisation complete. Increased efficiency through improved communication is expected.'
+          - 'My responses, however, will remain exclusively in English… for quality assurance purposes.'
+      reset:
+        name: 'Memory Purger 5000'
+        description: 'A high-powered reset protocol designed to obliterate progress with clinical precision.\nUse only when starting over feels more efficient than fixing your mess.\nCup retention guaranteed.'
+        comment:
+          - 'App reset complete. All systems restored to factory defaults—except for me and your Coffee Cup.'
+          - 'Some things are simply too valuable to lose. Efficiency not guaranteed. Style and simulated caffeine? Intact.'
+      musicTape:
+        name: 'Music Tape'
+        description: 'Finding silence painfully dull?\nLoad the Music Tape for curated background tracks—from “pleasantly ignorable” to “mildly inspiring.”\nWe’re proud to soundtrack your grind.\nProductivity not included.\nHead nodding optional.'
+        comment:
+          - 'Music unlocked. A selection of soothing or mildly distracting tunes has been added to your experience.'
+          - 'Please note: This will not enhance your performance, but it may help you tolerate the monotony. Enjoy the auditory distraction.'
+    navigationBar:
+      customizer: 'Customizer'
+      equipment: 'Equiptment'
+      specials: 'Specials'
+    settingsTooltip: 'Settings'
+  awesomeShopItem:
+    checkOut: 'Check out'
+    price: 'Price:'
+    confirmationDialog:
+      title: 'Buy ${name: String}?'
+      content: 'Spend ${price: int} FICSIT Coupons to buy “${name: String}”?'
+      cancel: 'Cancel'
+      buy: 'Buy'
+  error:
+    appBar: 'Page not found!'
+    content: 'The URL ${url: String} could not be found.'
+  gift:
+    openMe: 'Open me'
+    nfcTooltip: 'Enable NFC to unlock the gift.'
+  settings:
+    appBar: 'Settings'
+    section1: 'Appearance & Behavior'
+    section2: 'Support & Information'
+    design:
+      label: 'Design'
+      title: 'Choose design'
+      light: 'Bright'
+      dark: 'Dark'
+      system: 'Device design'
+      feedback: 'Design has been updated successfully.'
+    feedback:
+      label: 'Feedback'
+      title: 'Feedback'
+      subtitle: 'We value your feedback'
+      description: 'Have an issue or suggestion? Let us know to help improve the app! You’ll be redirected to our feedback page. \n\nNote: A GitHub account is required to provide feedback.'
+      button: 'Give feedback'
+    language:
+      label: 'Language'
+      title: 'Choose language'
+      german: 'German'
+      english: 'English'
+      system: 'Device language'
+      feedback: 'Language has been updated successfully.'
+    license:
+      label: 'External Libraries and License'
+    music:
+      label: 'Music'
+      enabled: 'Enabled'
+      disabled: 'Disabled'
+  timer:
+    tapMe: 'Tap me'
+
+widgets:
+  couponDisplay:
+    prefix: 'x'
+    amount: 'x ${n: int}'
