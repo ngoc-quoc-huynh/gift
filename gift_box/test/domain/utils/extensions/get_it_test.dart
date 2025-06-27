@@ -5,9 +5,11 @@ import 'dart:typed_data';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_box/domain/interfaces/asset.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
+import 'package:gift_box/domain/interfaces/native.dart';
 import 'package:gift_box/injector.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../mocks.dart';
 import '../../../utils.dart';
@@ -61,6 +63,14 @@ void main() {
     expect(Injector.instance.loggerApi, loggerApi);
   });
 
+  test('returns NativeApi.', () {
+    final nativeApi = MockNativeApi();
+    Injector.instance.registerSingleton<NativeApi>(nativeApi);
+    addTearDown(Injector.instance.unregister<NativeApi>);
+
+    expect(Injector.instance.nativeApi, nativeApi);
+  });
+
   test('returns periodic timer correctly.', () {
     Injector.instance
         .registerFactoryParam<Timer, Duration, void Function(Timer timer)>(
@@ -72,6 +82,14 @@ void main() {
     addTearDown(periodicTimer.cancel);
 
     expect(periodicTimer, isA<Timer>());
+  });
+
+  test('returns PackageInfo.', () {
+    final packageInfo = MockPackageInfo();
+    Injector.instance.registerSingleton<PackageInfo>(packageInfo);
+    addTearDown(Injector.instance.unregister<PackageInfo>);
+
+    expect(Injector.instance.packageInfo, packageInfo);
   });
 
   test('returns pin.', () {
