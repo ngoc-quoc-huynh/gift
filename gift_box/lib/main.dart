@@ -53,12 +53,14 @@ class _BodyState extends State<_Body> {
           create: (_) => HydratedTranslationLocaleCubit(
             initialState: TranslationLocale.english,
             storageKey: 'locale',
+            values: TranslationLocale.values,
           ),
         ),
         BlocProvider<HydratedThemeModeCubit>(
           create: (_) => HydratedThemeModeCubit(
             initialState: ThemeMode.light,
             storageKey: 'theme_mode',
+            values: ThemeMode.values,
           ),
         ),
         BlocProvider<MusicTapeBloc>(
