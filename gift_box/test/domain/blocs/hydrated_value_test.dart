@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -20,11 +21,13 @@ void main() {
 
   tearDownAll(() => HydratedBloc.storage = null);
 
-  group('HydratedBoolCubit', () {
+  group('HydratedValueCubit', () {
+    const storageKey = 'bool';
+
     test(
       'initial state is provided state.',
       () => expect(
-        HydratedBoolCubit(initialState: false, storageKey: 'test').state,
+        HydratedBoolCubit(initialState: false, storageKey: storageKey).state,
         isFalse,
       ),
     );
@@ -32,7 +35,8 @@ void main() {
     group('update', () {
       blocTest<HydratedBoolCubit, bool>(
         'emits new state correctly.',
-        build: () => HydratedBoolCubit(initialState: false, storageKey: 'test'),
+        build: () =>
+            HydratedBoolCubit(initialState: false, storageKey: storageKey),
         act: (cubit) => cubit.update(true),
         expect: () => [true],
       );
@@ -42,8 +46,9 @@ void main() {
       test('returns correctly.', () {
         final result = HydratedBoolCubit(
           initialState: false,
-          storageKey: 'test',
-        ).fromJson({'test': false});
+          storageKey: storageKey,
+        ).fromJson({storageKey: false});
+
         expect(result, isFalse);
       });
     });
@@ -52,9 +57,63 @@ void main() {
       test('returns correctly.', () {
         final result = HydratedBoolCubit(
           initialState: false,
-          storageKey: 'test',
+          storageKey: storageKey,
         ).toJson(false);
-        expect(result, {'test': false});
+
+        expect(result, {storageKey: false});
+      });
+    });
+  });
+
+  group('HydratedEnumCubit', () {
+    const storageKey = 'theme_mode';
+
+    test(
+      'initial state is provided state.',
+      () => expect(
+        HydratedThemeModeCubit(
+          initialState: ThemeMode.system,
+          storageKey: storageKey,
+          values: ThemeMode.values,
+        ).state,
+        ThemeMode.system,
+      ),
+    );
+
+    group('update', () {
+      blocTest<HydratedThemeModeCubit, ThemeMode>(
+        'emits new state correctly.',
+        build: () => HydratedThemeModeCubit(
+          initialState: ThemeMode.system,
+          storageKey: storageKey,
+          values: ThemeMode.values,
+        ),
+        act: (cubit) => cubit.update(ThemeMode.dark),
+        expect: () => [ThemeMode.dark],
+      );
+    });
+
+    group('fromJson', () {
+      test('returns correctly.', () {
+        final result = HydratedThemeModeCubit(
+          initialState: ThemeMode.system,
+          storageKey: storageKey,
+          values: ThemeMode.values,
+        ).fromJson({storageKey: ThemeMode.system.name});
+
+        expect(result, ThemeMode.system);
+      });
+    });
+
+    group('toJson', () {
+      test('returns correctly.', () {
+        final result = HydratedThemeModeCubit(
+          initialState: ThemeMode.system,
+          storageKey: storageKey,
+          values: ThemeMode.values,
+        ).toJson(ThemeMode.system);
+
+        expect(result, {storageKey: ThemeMode.system.name});
       });
     });
   });
