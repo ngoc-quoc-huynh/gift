@@ -37,7 +37,7 @@ final class AdaAudioBloc extends Bloc<AdaAudioEvent, AdaAudioState> {
     AdaAudioInitializeEvent event,
     Emitter<AdaAudioState> emit,
   ) async {
-    final audio = _awesomeShopApi.loadAdaAudio(event.id);
+    final audio = await _awesomeShopApi.loadAdaAudio(event.id);
     emit(
       AdaAudioLoadOnSuccess(
         text: audio.transcript.first.text,

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:gift_box/domain/interfaces/awesome_shop.dart';
 import 'package:gift_box/domain/models/ada_audio.dart';
 import 'package:gift_box/domain/models/asset.dart';
@@ -15,28 +17,30 @@ final class AwesomeShopRepository implements AwesomeShopApi {
   final Box<bool> _box;
 
   @override
-  List<AwesomeShopItemMeta> loadCustomizerMetas() =>
+  FutureOr<List<AwesomeShopItemMeta>> loadCustomizerMetas() =>
       _loadMetas(_customizerKeys);
 
   @override
-  List<AwesomeShopItemMeta> loadEquipmentMetas() => _loadMetas(_equipmentKeys);
+  FutureOr<List<AwesomeShopItemMeta>> loadEquipmentMetas() =>
+      _loadMetas(_equipmentKeys);
 
   @override
-  List<AwesomeShopItemMeta> loadSpecialMetas() => _loadMetas(_specialKey);
+  FutureOr<List<AwesomeShopItemMeta>> loadSpecialMetas() =>
+      _loadMetas(_specialKey);
 
   @override
-  AwesomeShopItem loadItem(String id) =>
+  FutureOr<AwesomeShopItem> loadItem(String id) =>
       _rawItems[AwesomeShopItemKey.byId(id)]!.toItem();
 
   @override
   Future<void> buyItem(String id) => _box.put(id, true);
 
   @override
-  AdaAudio loadAdaAudio(String id) =>
+  FutureOr<AdaAudio> loadAdaAudio(String id) =>
       _rawItems[AwesomeShopItemKey.byId(id)]!.audio;
 
   @override
-  List<AwesomeShopItemId> loadPurchasedItemIds() => [
+  FutureOr<List<AwesomeShopItemId>> loadPurchasedItemIds() => [
     for (final item in _rawItems.values)
       if (_box.containsKey(item.id))
         AwesomeShopItemKey.byId(item.id).toDomain(),

@@ -24,16 +24,16 @@ sealed class AwesomeShopItemMetasBloc
     );
   }
 
-  final List<AwesomeShopItemMeta> Function() _lodMetas;
+  final FutureOr<List<AwesomeShopItemMeta>> Function() _lodMetas;
 
   @protected
   static final awesomeShopApi = Injector.instance.awesomeShopApi;
 
-  void _onAwesomeShopItemMetasInitializeEvent(
+  Future<void> _onAwesomeShopItemMetasInitializeEvent(
     AwesomeShopItemMetasInitializeEvent event,
     Emitter<AwesomeShopItemMetasState> emit,
-  ) {
-    final metas = _lodMetas();
+  ) async {
+    final metas = await _lodMetas();
     emit(AwesomeShopItemMetasLoadOnSuccess(metas));
   }
 

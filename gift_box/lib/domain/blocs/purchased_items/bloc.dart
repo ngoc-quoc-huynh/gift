@@ -19,11 +19,11 @@ final class PurchasedItemsBloc
 
   static final _awesomeShopApi = Injector.instance.awesomeShopApi;
 
-  void _onPurchasedItemsInitializeEvent(
+  Future<void> _onPurchasedItemsInitializeEvent(
     PurchasedItemsInitializeEvent event,
     Emitter<PurchasedItemsState> emit,
-  ) {
-    final ids = _awesomeShopApi.loadPurchasedItemIds();
+  ) async {
+    final ids = await _awesomeShopApi.loadPurchasedItemIds();
     emit(PurchasedItemsLoadOnSuccess(ids));
   }
 }
