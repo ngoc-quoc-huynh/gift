@@ -1,3 +1,5 @@
+import 'package:gift_box/domain/models/awesome_shop_item_id.dart';
+
 enum AwesomeShopItemKey {
   ada('ada'),
   darkMode('dark-mode'),
@@ -23,4 +25,13 @@ enum AwesomeShopItemKey {
   };
 
   final String id;
+
+  AwesomeShopItemId toDomain() => switch (this) {
+    AwesomeShopItemKey.ada => AwesomeShopItemId.ada,
+    AwesomeShopItemKey.darkMode => AwesomeShopItemId.darkMode,
+    AwesomeShopItemKey.germanDrive => AwesomeShopItemId.germanDrive,
+    AwesomeShopItemKey.coffeeCup => AwesomeShopItemId.coffeeCup,
+    AwesomeShopItemKey.reset => AwesomeShopItemId.reset,
+    AwesomeShopItemKey.musicTape => AwesomeShopItemId.musicTape,
+  };
 }
