@@ -4,14 +4,14 @@ import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gift_box/domain/interfaces/awesome_shop.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/domain/interfaces/native.dart';
 import 'package:gift_box/domain/interfaces/nfc.dart';
-import 'package:gift_box/infrastructure/repositories/awesome_shop.dart';
+import 'package:gift_box/domain/interfaces/shop.dart';
 import 'package:gift_box/infrastructure/repositories/logger.dart';
 import 'package:gift_box/infrastructure/repositories/native.dart';
 import 'package:gift_box/infrastructure/repositories/nfc.dart';
+import 'package:gift_box/infrastructure/repositories/shop.dart';
 import 'package:gift_box/static/config.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
@@ -34,8 +34,8 @@ final class Injector {
 
     instance
       ..registerFactory<AudioPlayer>(AudioPlayer.new)
-      ..registerLazySingleton<AwesomeShopApi>(
-        () => AwesomeShopRepository(hiveBox),
+      ..registerLazySingleton<ShopApi>(
+        () => LocalShopRepository(hiveBox),
       )
       ..registerLazySingleton<Logger>(Logger.new)
       ..registerLazySingleton<LoggerApi>(
@@ -77,7 +77,7 @@ final class Injector {
       hiveStorage as HydratedStorage,
     ] = await Future.wait(
       [
-        Hive.openBox<bool>('awesome_shop_items'),
+        Hive.openBox<bool>('shop_items'),
         HydratedStorage.build(
           storageDirectory: HydratedStorageDirectory(appDir.path),
         ),
