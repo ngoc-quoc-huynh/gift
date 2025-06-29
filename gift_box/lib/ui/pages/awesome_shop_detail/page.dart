@@ -116,9 +116,7 @@ sealed class AwesomeShopDetailPage<Bloc extends AwesomeShopItemMetasBloc>
 
     if (context.mounted && hasBought) {
       context
-        ..read<AwesomeShopItemMetasSpecialsBloc>().add(
-          AwesomeShopItemMetasBuyEvent(id),
-        )
+        ..read<Bloc>().add(AwesomeShopItemMetasBuyEvent(id))
         ..pop();
       final cubit = context.read<HydratedIntCubit>();
       cubit.update(cubit.state - price);
