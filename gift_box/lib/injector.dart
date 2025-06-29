@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:gift_box/domain/interfaces/asset.dart';
 import 'package:gift_box/domain/interfaces/awesome_shop.dart';
@@ -14,7 +15,6 @@ import 'package:gift_box/infrastructure/repositories/logger.dart';
 import 'package:gift_box/infrastructure/repositories/native.dart';
 import 'package:gift_box/infrastructure/repositories/nfc.dart';
 import 'package:gift_box/static/config.dart';
-import 'package:gift_box/static/i18n/translations.g.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:just_audio/just_audio.dart';
@@ -33,6 +33,7 @@ final class Injector {
 
   static Future<void> setupDependencies() async {
     final hiveBox = await _initHive();
+
     instance
       ..registerFactory<AudioPlayer>(AudioPlayer.new)
       ..registerLazySingleton<AssetApi>(AssetRepository.new)
@@ -47,9 +48,10 @@ final class Injector {
           ),
         ),
       )
-      ..registerLazySingleton<NativeApi>(NativeRepository.new)
+      ..registerLazySingleton<NativeApi>(
+        () => NativeRepository(WidgetsBinding.instance),
+      )
       ..registerLazySingleton<NfcApi>(NfcRepository.new)
-      ..registerLazySingleton<Translations>(_createTranslations)
       ..registerSingletonAsync<PackageInfo>(PackageInfo.fromPlatform)
       ..registerLazySingleton<Random>(Random.new)
       ..registerFactoryParam<Timer, Duration, void Function(Timer timer)>(
@@ -88,6 +90,4 @@ final class Injector {
 
     return hiveBox;
   }
-
-  static Translations _createTranslations() => AppLocale.en.buildSync();
 }
