@@ -6,4 +6,6 @@ abstract interface class NativeApi {
   TranslationLocale get locale;
 
   Future<void> openUrl(Uri uri);
+
+  Future<List<String>> loadImagePaths();
 }

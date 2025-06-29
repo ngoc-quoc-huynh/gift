@@ -74,6 +74,6 @@ flutter:
 
   assets:
     - assets/audios/ada/
-    - assets/awesome_shop/
-    - assets/images/
+    - assets/images/carousel/
+    - assets/images/shop/
     - assets/rive/
