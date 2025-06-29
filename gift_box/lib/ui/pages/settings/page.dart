@@ -4,9 +4,9 @@ import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/domain/blocs/music_tape/bloc.dart';
 import 'package:gift_box/domain/blocs/purchased_items/bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
-import 'package:gift_box/domain/models/awesome_shop_item_id.dart';
 import 'package:gift_box/domain/models/locale.dart';
 import 'package:gift_box/domain/models/route.dart';
+import 'package:gift_box/domain/models/shop_item_id.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/sizes.dart';
@@ -50,13 +50,13 @@ class SettingsPage extends StatelessWidget {
 class _Body extends StatelessWidget {
   const _Body(this.ids);
 
-  final List<AwesomeShopItemId> ids;
+  final List<ShopItemId> ids;
 
   @override
   Widget build(BuildContext context) {
-    final isDesignModeUnlocked = ids.contains(AwesomeShopItemId.darkMode);
-    final isLanguageUnlocked = ids.contains(AwesomeShopItemId.germanDrive);
-    final isMusicModeUnlocked = ids.contains(AwesomeShopItemId.musicTape);
+    final isDesignModeUnlocked = ids.contains(ShopItemId.darkMode);
+    final isLanguageUnlocked = ids.contains(ShopItemId.germanDrive);
+    final isMusicModeUnlocked = ids.contains(ShopItemId.musicTape);
     final isSectionUnlocked =
         isDesignModeUnlocked || isLanguageUnlocked || isMusicModeUnlocked;
 
