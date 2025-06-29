@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/ada_audio/bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
+import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/static/resources/sizes.dart';
 
 class AdaComment extends StatelessWidget {
@@ -46,7 +47,7 @@ class _BodyState extends State<_Body> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _updateWidgetSize());
+    _updateWidgetSize();
   }
 
   @override
@@ -61,7 +62,7 @@ class _BodyState extends State<_Body> {
   Widget build(BuildContext context) {
     return SizedBox(
       key: _key,
-      width: MediaQuery.sizeOf(context).width * 0.9,
+      width: context.screenSize.width * 0.9,
       child: Material(
         child: ColoredBox(
           color: Colors.black.withValues(alpha: 0.8),
@@ -77,10 +78,10 @@ class _BodyState extends State<_Body> {
     );
   }
 
-  void _updateWidgetSize() {
+  void _updateWidgetSize() => WidgetsBinding.instance.addPostFrameCallback((_) {
     final renderBox = _key.currentContext?.findRenderObject() as RenderBox?;
     if (renderBox != null) {
       context.read<DoubleCubit>().update(renderBox.size.height);
     }
-  }
+  });
 }
