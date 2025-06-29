@@ -3,7 +3,6 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:get_it/get_it.dart';
-import 'package:gift_box/domain/interfaces/asset.dart';
 import 'package:gift_box/domain/interfaces/awesome_shop.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/domain/interfaces/native.dart';
@@ -17,8 +16,6 @@ extension GetItExtension on GetIt {
   Uint8List get aid => get<Uint8List>(instanceName: 'aid');
 
   AudioPlayer get audioPlayer => get<AudioPlayer>();
-
-  AssetApi get assetApi => get<AssetApi>();
 
   AwesomeShopApi get awesomeShopApi => get<AwesomeShopApi>();
 
