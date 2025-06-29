@@ -1,19 +1,19 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/blocs/awesome_shop_item_metas/bloc.dart';
 import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
+import 'package:gift_box/domain/blocs/shop_item_metas/bloc.dart';
 import 'package:gift_box/domain/models/route.dart';
-import 'package:gift_box/ui/pages/awesome_shop/page.dart';
-import 'package:gift_box/ui/pages/awesome_shop_catalog/destinations/customizer.dart';
-import 'package:gift_box/ui/pages/awesome_shop_catalog/destinations/equipment.dart';
-import 'package:gift_box/ui/pages/awesome_shop_catalog/destinations/specials.dart';
-import 'package:gift_box/ui/pages/awesome_shop_catalog/page.dart';
-import 'package:gift_box/ui/pages/awesome_shop_detail/page.dart';
-import 'package:gift_box/ui/pages/awesome_sink/page.dart';
 import 'package:gift_box/ui/pages/error/page.dart';
 import 'package:gift_box/ui/pages/gift/page.dart';
 import 'package:gift_box/ui/pages/license/page.dart';
 import 'package:gift_box/ui/pages/settings/page.dart';
+import 'package:gift_box/ui/pages/shop/page.dart';
+import 'package:gift_box/ui/pages/shop_catalog/destinations/customizer.dart';
+import 'package:gift_box/ui/pages/shop_catalog/destinations/equipment.dart';
+import 'package:gift_box/ui/pages/shop_catalog/destinations/specials.dart';
+import 'package:gift_box/ui/pages/shop_catalog/page.dart';
+import 'package:gift_box/ui/pages/shop_detail/page.dart';
+import 'package:gift_box/ui/pages/sink/page.dart';
 import 'package:gift_box/ui/pages/timer/page.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,15 +30,15 @@ final class GoRouterConfig {
     navigatorKey: _rootNavigatorKey,
     initialLocation: switch (hasOpenedGift) {
       false => '/timer',
-      true => '/awesome-shop',
+      true => '/shop',
     },
     errorBuilder: (_, state) => ErrorPage(url: state.matchedLocation),
     routes: [
       _timerRoute,
       GoRoute(
-        name: AppRoute.awesomeSink(),
-        path: '/awesome-sink',
-        builder: (_, _) => const AwesomeSinkPage(),
+        name: AppRoute.sink(),
+        path: '/sink',
+        builder: (_, _) => const SinkPage(),
       ),
       _shopRoute,
       GoRoute(
@@ -55,9 +55,9 @@ final class GoRouterConfig {
   );
 
   static final _shopRoute = GoRoute(
-    name: AppRoute.awesomeShop(),
-    path: '/awesome-shop',
-    builder: (_, _) => const AwesomeShopPage(),
+    name: AppRoute.shop(),
+    path: '/shop',
+    builder: (_, _) => const ShopPage(),
     routes: [
       ShellRoute(
         navigatorKey: _shopKey,
@@ -69,20 +69,20 @@ final class GoRouterConfig {
                 storageKey: 'coupon_amount',
               ),
             ),
-            BlocProvider<AwesomeShopItemMetasCustomizerBloc>(
+            BlocProvider<ShopItemMetasCustomizerBloc>(
               create: (_) =>
-                  AwesomeShopItemMetasCustomizerBloc()
-                    ..add(const AwesomeShopItemMetasInitializeEvent()),
+                  ShopItemMetasCustomizerBloc()
+                    ..add(const ShopItemMetasInitializeEvent()),
             ),
-            BlocProvider<AwesomeShopItemMetasEquipmentBloc>(
+            BlocProvider<ShopItemMetasEquipmentBloc>(
               create: (_) =>
-                  AwesomeShopItemMetasEquipmentBloc()
-                    ..add(const AwesomeShopItemMetasInitializeEvent()),
+                  ShopItemMetasEquipmentBloc()
+                    ..add(const ShopItemMetasInitializeEvent()),
             ),
-            BlocProvider<AwesomeShopItemMetasSpecialsBloc>(
+            BlocProvider<ShopItemMetasSpecialsBloc>(
               create: (_) =>
-                  AwesomeShopItemMetasSpecialsBloc()
-                    ..add(const AwesomeShopItemMetasInitializeEvent()),
+                  ShopItemMetasSpecialsBloc()
+                    ..add(const ShopItemMetasInitializeEvent()),
             ),
           ],
           child: child,
@@ -91,7 +91,7 @@ final class GoRouterConfig {
           StatefulShellRoute(
             builder: (_, _, child) => child,
             navigatorContainerBuilder: (_, navigationShell, children) =>
-                AwesomeShopCatalogPage(
+                ShopCatalogPage(
                   navigationShell: navigationShell,
                   children: children,
                 ),
@@ -99,15 +99,15 @@ final class GoRouterConfig {
               StatefulShellBranch(
                 routes: [
                   GoRoute(
-                    name: AppRoute.awesomeShopSpecials(),
+                    name: AppRoute.shopSpecials(),
                     path: 'specials',
-                    builder: (_, _) => const AwesomeShopSpecialsDestination(),
+                    builder: (_, _) => const ShopSpecialsDestination(),
                     routes: [
                       GoRoute(
                         parentNavigatorKey: _shopKey,
-                        name: AppRoute.awesomeShopSpecialsDetail(),
+                        name: AppRoute.shopSpecialsDetail(),
                         path: ':id',
-                        builder: (_, state) => AwesomeShopSpecialsDetailPage(
+                        builder: (_, state) => ShopSpecialsDetailPage(
                           id: state.pathParameters['id']!,
                         ),
                       ),
@@ -118,15 +118,15 @@ final class GoRouterConfig {
               StatefulShellBranch(
                 routes: [
                   GoRoute(
-                    name: AppRoute.awesomeShopCustomizer(),
+                    name: AppRoute.shopCustomizer(),
                     path: 'customizer',
-                    builder: (_, _) => const AwesomeShopCustomizerDestination(),
+                    builder: (_, _) => const ShopCustomizerDestination(),
                     routes: [
                       GoRoute(
                         parentNavigatorKey: _shopKey,
-                        name: AppRoute.awesomeShopCustomizerDetail(),
+                        name: AppRoute.shopCustomizerDetail(),
                         path: ':id',
-                        builder: (_, state) => AwesomeShopCustomizerDetailPage(
+                        builder: (_, state) => ShopCustomizerDetailPage(
                           id: state.pathParameters['id']!,
                         ),
                       ),
@@ -137,15 +137,15 @@ final class GoRouterConfig {
               StatefulShellBranch(
                 routes: [
                   GoRoute(
-                    name: AppRoute.awesomeShopEquipment(),
+                    name: AppRoute.shopEquipment(),
                     path: 'equipment',
-                    builder: (_, _) => const AwesomeShopEquipmentDestination(),
+                    builder: (_, _) => const ShopEquipmentDestination(),
                     routes: [
                       GoRoute(
                         parentNavigatorKey: _shopKey,
-                        name: AppRoute.awesomeShopEquipmentDetail(),
+                        name: AppRoute.shopEquipmentDetail(),
                         path: ':id',
-                        builder: (_, state) => AwesomeShopEquipmentsDetailPage(
+                        builder: (_, state) => ShopEquipmentsDetailPage(
                           id: state.pathParameters['id']!,
                         ),
                       ),

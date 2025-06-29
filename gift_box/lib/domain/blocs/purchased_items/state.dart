@@ -15,7 +15,7 @@ final class PurchasedItemsLoadInProgress extends PurchasedItemsState {
 final class PurchasedItemsLoadOnSuccess extends PurchasedItemsState {
   const PurchasedItemsLoadOnSuccess(this.ids);
 
-  final List<AwesomeShopItemId> ids;
+  final List<ShopItemId> ids;
 
   @override
   List<Object?> get props => [ids];

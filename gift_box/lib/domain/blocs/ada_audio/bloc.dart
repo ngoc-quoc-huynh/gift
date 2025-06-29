@@ -31,13 +31,13 @@ final class AdaAudioBloc extends Bloc<AdaAudioEvent, AdaAudioState> {
   }
 
   final AudioPlayer _audioPlayer;
-  static final _awesomeShopApi = Injector.instance.awesomeShopApi;
+  static final _shopApi = Injector.instance.shopApi;
 
   Future<void> _onAdaAudioInitializeEvent(
     AdaAudioInitializeEvent event,
     Emitter<AdaAudioState> emit,
   ) async {
-    final audio = await _awesomeShopApi.loadAdaAudio(event.id);
+    final audio = await _shopApi.loadAdaAudio(event.id);
     emit(
       AdaAudioLoadOnSuccess(
         text: audio.transcript.first.text,
