@@ -1,4 +1,3 @@
-import 'package:gift_box/domain/interfaces/asset.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/domain/interfaces/native.dart';
 import 'package:gift_box/domain/interfaces/nfc.dart';
@@ -7,8 +6,6 @@ import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-
-final class MockAssetApi extends Mock implements AssetApi {}
 
 final class MockAudioPlayer extends Mock implements AudioPlayer {}
 

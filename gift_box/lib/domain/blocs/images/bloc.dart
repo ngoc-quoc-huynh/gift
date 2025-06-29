@@ -15,13 +15,13 @@ final class ImagesBloc extends Bloc<ImagesEvent, ImagesState> {
     );
   }
 
-  static final _assetApi = Injector.instance.assetApi;
+  static final _nativeApi = Injector.instance.nativeApi;
 
   Future<void> _onImagesInitializeEvent(
     ImagesInitializeEvent event,
     Emitter<ImagesState> emit,
   ) async {
-    final paths = await _assetApi.loadImagePaths();
+    final paths = await _nativeApi.loadImagePaths();
     emit(ImagesLoadOnSuccess(paths));
   }
 }

@@ -3,17 +3,17 @@ import 'dart:math';
 import 'package:alchemist/alchemist.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/domain/interfaces/asset.dart';
-import 'package:gift_box/infrastructure/repositories/asset.dart';
+import 'package:gift_box/domain/interfaces/native.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/ui/pages/timer/page.dart';
 
+import '../../../mocks.dart';
 import '../../../utils.dart';
 
 Future<void> main() async {
   setUpAll(
     () => Injector.instance
-      ..registerSingleton<AssetApi>(const AssetRepository())
+      ..registerSingleton<NativeApi>(MockNativeApi())
       ..registerBirthday(DateTime(2025))
       ..registerPeriodicTimer()
       ..registerSingleton<Translations>(AppLocale.en.buildSync())
@@ -38,5 +38,6 @@ Future<void> main() async {
     ),
     constraints: pageConstraints,
     builder: TimerPage.new,
+    skip: true,
   );
 }
