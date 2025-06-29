@@ -3,10 +3,10 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:get_it/get_it.dart';
-import 'package:gift_box/domain/interfaces/awesome_shop.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/domain/interfaces/native.dart';
 import 'package:gift_box/domain/interfaces/nfc.dart';
+import 'package:gift_box/domain/interfaces/shop.dart';
 import 'package:gift_box/static/i18n/translations.g.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';
@@ -17,7 +17,7 @@ extension GetItExtension on GetIt {
 
   AudioPlayer get audioPlayer => get<AudioPlayer>();
 
-  AwesomeShopApi get awesomeShopApi => get<AwesomeShopApi>();
+  ShopApi get shopApi => get<ShopApi>();
 
   DateTime get birthday => get<DateTime>(instanceName: 'birthday');
 
