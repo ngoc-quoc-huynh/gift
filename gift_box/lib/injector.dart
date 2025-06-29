@@ -4,12 +4,10 @@ import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gift_box/domain/interfaces/asset.dart';
 import 'package:gift_box/domain/interfaces/awesome_shop.dart';
 import 'package:gift_box/domain/interfaces/logger.dart';
 import 'package:gift_box/domain/interfaces/native.dart';
 import 'package:gift_box/domain/interfaces/nfc.dart';
-import 'package:gift_box/infrastructure/repositories/asset.dart';
 import 'package:gift_box/infrastructure/repositories/awesome_shop.dart';
 import 'package:gift_box/infrastructure/repositories/logger.dart';
 import 'package:gift_box/infrastructure/repositories/native.dart';
@@ -36,7 +34,6 @@ final class Injector {
 
     instance
       ..registerFactory<AudioPlayer>(AudioPlayer.new)
-      ..registerLazySingleton<AssetApi>(AssetRepository.new)
       ..registerLazySingleton<AwesomeShopApi>(
         () => AwesomeShopRepository(hiveBox),
       )
