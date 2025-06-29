@@ -10,13 +10,13 @@ enum Asset {
   resetAudio('audios/ada/reset.mp3'),
 
   // Awesome shop items
-  ada('awesome_shop/ada.webp'),
-  coupon('awesome_shop/coupon.webp'),
-  coffeeCup('awesome_shop/coffee_cup.webp'),
-  darkMode('awesome_shop/dark_mode.webp'),
-  germanDrive('awesome_shop/german_drive.webp'),
-  musicTape('awesome_shop/music_tape.webp'),
-  reset('awesome_shop/reset.webp'),
+  ada('images/shop/ada.webp'),
+  coupon('images/shop/coupon.webp'),
+  coffeeCup('images/shop/coffee_cup.webp'),
+  darkMode('images/shop/dark_mode.webp'),
+  germanDrive('images/shop/german_drive.webp'),
+  musicTape('images/shop/music_tape.webp'),
+  reset('images/shop/reset.webp'),
 
   // Rive files
   gift('rive/gift.riv')

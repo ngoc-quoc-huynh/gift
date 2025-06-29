@@ -11,13 +11,13 @@ void main() {
       expect(Asset.germanDriveAudio(), 'assets/audios/ada/german_drive.mp3');
       expect(Asset.musicTapeAudio(), 'assets/audios/ada/music_tape.mp3');
       expect(Asset.resetAudio(), 'assets/audios/ada/reset.mp3');
-      expect(Asset.ada(), 'assets/awesome_shop/ada.webp');
-      expect(Asset.coupon(), 'assets/awesome_shop/coupon.webp');
-      expect(Asset.coffeeCup(), 'assets/awesome_shop/coffee_cup.webp');
-      expect(Asset.darkMode(), 'assets/awesome_shop/dark_mode.webp');
-      expect(Asset.germanDrive(), 'assets/awesome_shop/german_drive.webp');
-      expect(Asset.musicTape(), 'assets/awesome_shop/music_tape.webp');
-      expect(Asset.reset(), 'assets/awesome_shop/reset.webp');
+      expect(Asset.ada(), 'assets/images/shop/ada.webp');
+      expect(Asset.coupon(), 'assets/images/shop/coupon.webp');
+      expect(Asset.coffeeCup(), 'assets/images/shop/coffee_cup.webp');
+      expect(Asset.darkMode(), 'assets/images/shop/dark_mode.webp');
+      expect(Asset.germanDrive(), 'assets/images/shop/german_drive.webp');
+      expect(Asset.musicTape(), 'assets/images/shop/music_tape.webp');
+      expect(Asset.reset(), 'assets/images/shop/reset.webp');
       expect(Asset.gift(), 'assets/rive/gift.riv');
       expect(Asset.satisfactory(), 'assets/rive/satisfactory.riv');
     },
