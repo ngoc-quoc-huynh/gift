@@ -2,6 +2,7 @@ import 'package:gift_box/domain/interfaces/awesome_shop.dart';
 import 'package:gift_box/domain/models/ada_audio.dart';
 import 'package:gift_box/domain/models/asset.dart';
 import 'package:gift_box/domain/models/awesome_shop_item.dart';
+import 'package:gift_box/domain/models/awesome_shop_item_id.dart';
 import 'package:gift_box/domain/models/awesome_shop_item_meta.dart';
 import 'package:gift_box/infrastructure/dtos/awesome_shop/id.dart';
 import 'package:gift_box/infrastructure/dtos/awesome_shop/item.dart';
@@ -33,6 +34,13 @@ final class AwesomeShopRepository implements AwesomeShopApi {
   @override
   AdaAudio loadAdaAudio(String id) =>
       _rawItems[AwesomeShopItemKey.byId(id)]!.audio;
+
+  @override
+  List<AwesomeShopItemId> loadPurchasedItemIds() => [
+    for (final item in _rawItems.values)
+      if (_box.containsKey(item.id))
+        AwesomeShopItemKey.byId(item.id).toDomain(),
+  ];
 
   static final _rawItems = {
     AwesomeShopItemKey.ada: RawAwesomeShopItem(

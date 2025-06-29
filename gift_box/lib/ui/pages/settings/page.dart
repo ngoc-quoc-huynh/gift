@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/domain/blocs/music_tape/bloc.dart';
+import 'package:gift_box/domain/blocs/purchased_items/bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
+import 'package:gift_box/domain/models/awesome_shop_item_id.dart';
 import 'package:gift_box/domain/models/locale.dart';
 import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
@@ -14,6 +16,7 @@ import 'package:gift_box/ui/pages/settings/dialogs/feedback.dart';
 import 'package:gift_box/ui/pages/settings/dialogs/language.dart';
 import 'package:gift_box/ui/pages/settings/item.dart';
 import 'package:gift_box/ui/pages/settings/section.dart';
+import 'package:gift_box/ui/widgets/loading_indicator.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -26,87 +29,123 @@ class SettingsPage extends StatelessWidget {
           title: Text(_translations.appBar),
         ),
         bottomNavigationBar: const SettingsAppVersion(),
-        body: ListView(
-          padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.horizontalPadding,
-            vertical: Sizes.verticalPadding,
+        body: BlocProvider<PurchasedItemsBloc>(
+          create: (_) =>
+              PurchasedItemsBloc()..add(const PurchasedItemsInitializeEvent()),
+          child: BlocBuilder<PurchasedItemsBloc, PurchasedItemsState>(
+            builder: (context, state) => switch (state) {
+              PurchasedItemsLoadInProgress() => const LoadingIndicator(),
+              PurchasedItemsLoadOnSuccess(:final ids) => _Body(ids),
+            },
           ),
-          children: [
-            SettingsSection(
+        ),
+      ),
+    );
+  }
+
+  TranslationsPagesSettingsEn get _translations =>
+      Injector.instance.translations.pages.settings;
+}
+
+class _Body extends StatelessWidget {
+  const _Body(this.ids);
+
+  final List<AwesomeShopItemId> ids;
+
+  @override
+  Widget build(BuildContext context) {
+    final isDesignModeUnlocked = ids.contains(AwesomeShopItemId.darkMode);
+    final isLanguageUnlocked = ids.contains(AwesomeShopItemId.germanDrive);
+    final isMusicModeUnlocked = ids.contains(AwesomeShopItemId.musicTape);
+    final isSectionUnlocked =
+        isDesignModeUnlocked || isLanguageUnlocked || isMusicModeUnlocked;
+
+    return ListView(
+      padding: const EdgeInsets.symmetric(
+        horizontal: Sizes.horizontalPadding,
+        vertical: Sizes.verticalPadding,
+      ),
+      children: [
+        if (isSectionUnlocked)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: SettingsSection(
               title: _translations.section1,
               items: [
-                BlocBuilder<HydratedThemeModeCubit, ThemeMode>(
-                  builder: (context, themeMode) => SettingsItem(
-                    icon: Icons.palette_outlined,
-                    iconColor: Colors.deepOrange,
-                    title: _translations.design.label,
-                    subtitle: switch (themeMode) {
-                      ThemeMode.dark => _translations.design.dark,
-                      ThemeMode.light => _translations.design.light,
-                      ThemeMode.system => _translations.design.system,
-                    },
-                    onPressed: () => SettingsDesignDialog.show(context),
-                  ),
-                ),
-                BlocBuilder<
-                  HydratedTranslationLocalePreferenceCubit,
-                  TranslationLocalePreference
-                >(
-                  builder: (context, locale) => SettingsItem(
-                    icon: Icons.language_outlined,
-                    iconColor: Colors.blue,
-                    title: _translations.language.label,
-                    subtitle: switch (locale) {
-                      TranslationLocalePreference.english =>
-                        _translations.language.english,
-                      TranslationLocalePreference.german =>
-                        _translations.language.german,
-                      TranslationLocalePreference.system =>
-                        _translations.language.system,
-                    },
-                    onPressed: () => SettingsLanguageDialog.show(context),
-                  ),
-                ),
-                BlocBuilder<MusicTapeBloc, bool>(
-                  builder: (context, isEnabled) => SettingsItem(
-                    icon: Icons.music_note_outlined,
-                    iconColor: Colors.green,
-                    title: _translations.music.label,
-                    subtitle: switch (isEnabled) {
-                      false => _translations.music.disabled,
-                      true => _translations.music.enabled,
-                    },
-                    trailing: Switch(
-                      value: isEnabled,
-                      onChanged: (isEnabled) =>
-                          _onMusicSwitchChanged(context, isEnabled),
+                if (isDesignModeUnlocked)
+                  BlocBuilder<HydratedThemeModeCubit, ThemeMode>(
+                    builder: (context, themeMode) => SettingsItem(
+                      icon: Icons.palette_outlined,
+                      iconColor: Colors.deepOrange,
+                      title: _translations.design.label,
+                      subtitle: switch (themeMode) {
+                        ThemeMode.dark => _translations.design.dark,
+                        ThemeMode.light => _translations.design.light,
+                        ThemeMode.system => _translations.design.system,
+                      },
+                      onPressed: () => SettingsDesignDialog.show(context),
                     ),
                   ),
-                ),
+                if (isLanguageUnlocked)
+                  BlocBuilder<
+                    HydratedTranslationLocalePreferenceCubit,
+                    TranslationLocalePreference
+                  >(
+                    builder: (context, locale) => SettingsItem(
+                      icon: Icons.language_outlined,
+                      iconColor: Colors.blue,
+                      title: _translations.language.label,
+                      subtitle: switch (locale) {
+                        TranslationLocalePreference.english =>
+                          _translations.language.english,
+                        TranslationLocalePreference.german =>
+                          _translations.language.german,
+                        TranslationLocalePreference.system =>
+                          _translations.language.system,
+                      },
+                      onPressed: () => SettingsLanguageDialog.show(context),
+                    ),
+                  ),
+                if (isMusicModeUnlocked)
+                  BlocBuilder<MusicTapeBloc, bool>(
+                    builder: (context, isEnabled) => SettingsItem(
+                      icon: Icons.music_note_outlined,
+                      iconColor: Colors.green,
+                      title: _translations.music.label,
+                      subtitle: switch (isEnabled) {
+                        false => _translations.music.disabled,
+                        true => _translations.music.enabled,
+                      },
+                      trailing: Switch(
+                        value: isEnabled,
+                        onChanged: (isEnabled) =>
+                            _onMusicSwitchChanged(context, isEnabled),
+                      ),
+                    ),
+                  ),
               ],
             ),
-            const SizedBox(height: 20),
-            SettingsSection(
-              title: _translations.section2,
-              items: [
-                SettingsItem(
-                  icon: Icons.feedback_outlined,
-                  iconColor: Colors.orange,
-                  title: _translations.feedback.label,
-                  subtitle: _translations.feedback.subtitle,
-                  onPressed: () => SettingsFeedbackDialog.show(context),
-                ),
-                SettingsItem(
-                  icon: Icons.description_outlined,
-                  iconColor: Colors.grey,
-                  title: _translations.license.label,
-                  onPressed: () => context.pushRoute(AppRoute.license),
-                ),
-              ],
+          ),
+
+        SettingsSection(
+          title: _translations.section2,
+          items: [
+            SettingsItem(
+              icon: Icons.feedback_outlined,
+              iconColor: Colors.orange,
+              title: _translations.feedback.label,
+              subtitle: _translations.feedback.subtitle,
+              onPressed: () => SettingsFeedbackDialog.show(context),
+            ),
+            SettingsItem(
+              icon: Icons.description_outlined,
+              iconColor: Colors.grey,
+              title: _translations.license.label,
+              onPressed: () => context.pushRoute(AppRoute.license),
             ),
           ],
         ),
-      ),
+      ],
     );
   }
 
