@@ -5,10 +5,10 @@ general:
   confirm: 'OK'
 
 pages:
-  awesomeShop:
+  shop:
     volumeUp: 'Crank up the volume!'
     tap: 'Tap to unlock the Awesome Shop experience!'
-  awesomeShopCatalog:
+  shopCatalog:
     appBar: 'Awesome Shop'
     purchased: 'Purchased'
     items:
@@ -54,7 +54,7 @@ pages:
       equipment: 'Equiptment'
       specials: 'Specials'
     settingsTooltip: 'Settings'
-  awesomeShopItem:
+  shopItem:
     checkOut: 'Check out'
     price: 'Price:'
     confirmationDialog:
@@ -81,10 +81,10 @@ pages:
       feedback: 'Design has been updated successfully.'
     feedback:
       label: 'Feedback'
-      title: 'Feedback'
+      title: 'Give Feedback'
       subtitle: 'We value your feedback'
       description: 'Have an issue or suggestion? Let us know to help improve the app! You’ll be redirected to our feedback page. \n\nNote: A GitHub account is required to provide feedback.'
-      button: 'Give feedback'
+      button: 'Create feedback'
     language:
       label: 'Language'
       title: 'Choose language'

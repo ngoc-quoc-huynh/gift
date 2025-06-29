@@ -46,13 +46,13 @@ void main() {
                 builder: (context, _) => Scaffold(
                   appBar: AppBar(title: const Text('A')),
                   floatingActionButton: FloatingActionButton(
-                    onPressed: () => context.goRoute(AppRoute.awesomeShop),
+                    onPressed: () => context.goRoute(AppRoute.shop),
                   ),
                 ),
               ),
               GoRoute(
                 path: '/b',
-                name: AppRoute.awesomeShop(),
+                name: AppRoute.shop(),
                 builder: (_, state) =>
                     Scaffold(appBar: AppBar(title: const Text('B'))),
               ),

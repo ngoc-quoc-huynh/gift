@@ -1,0 +1,143 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
+import 'package:gift_box/domain/blocs/shop_item/bloc.dart';
+import 'package:gift_box/domain/blocs/shop_item_metas/bloc.dart';
+import 'package:gift_box/domain/models/shop_item.dart';
+import 'package:gift_box/domain/utils/extensions/build_context.dart';
+import 'package:gift_box/injector.dart';
+import 'package:gift_box/static/resources/sizes.dart';
+import 'package:gift_box/ui/pages/shop_detail/confirmation_dialog.dart';
+import 'package:gift_box/ui/widgets/ada/ada.dart';
+import 'package:gift_box/ui/widgets/asset_image.dart';
+import 'package:gift_box/ui/widgets/coupon_display.dart';
+import 'package:go_router/go_router.dart';
+
+// ignore_for_file: prefer-single-widget-per-file
+
+sealed class ShopDetailPage<Bloc extends ShopItemMetasBloc>
+    extends StatelessWidget {
+  const ShopDetailPage({required this.id, super.key});
+
+  final String id;
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = context.textTheme;
+
+    return BlocProvider<ShopItemBloc>(
+      create: (_) => ShopItemBloc()..add(ShopItemInitializeEvent(id)),
+      child: BlocBuilder<ShopItemBloc, ShopItemState>(
+        builder: (context, state) => switch (state) {
+          ShopItemLoadInProgress() => Scaffold(
+            appBar: AppBar(),
+          ),
+          ShopItemLoadOnSuccess(
+            item: ShopItem(
+              :final id,
+              :final name,
+              :final description,
+              :final price,
+              :final asset,
+              :final height,
+            ),
+          ) =>
+            Scaffold(
+              appBar: AppBar(
+                title: Text(name),
+              ),
+              body: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: Sizes.horizontalPadding,
+                    vertical: Sizes.verticalPadding,
+                  ),
+                  child: Column(
+                    spacing: 20,
+                    children: [
+                      ConstrainedBox(
+                        constraints: BoxConstraints(maxHeight: height),
+                        child: CustomAssetImage(
+                          asset: asset,
+                          height: height,
+                        ),
+                      ),
+                      Text(
+                        description,
+                        style: textTheme.bodyLarge,
+                      ),
+                      const Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            _translations.price,
+                            style: textTheme.headlineMedium,
+                          ),
+                          CouponDisplay.large(amount: price),
+                        ],
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: FilledButton(
+                          onPressed: () => _onPressed(
+                            context: context,
+                            id: id,
+                            name: name,
+                            price: price,
+                          ),
+                          child: Text(_translations.checkOut),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+        },
+      ),
+    );
+  }
+
+  Future<void> _onPressed({
+    required BuildContext context,
+    required String id,
+    required String name,
+    required int price,
+  }) async {
+    final hasBought = await ShopItemConfirmationDialog.show(
+      context: context,
+      name: name,
+      price: price,
+    );
+
+    if (context.mounted && hasBought) {
+      context
+        ..read<Bloc>().add(ShopItemMetasBuyEvent(id))
+        ..pop();
+      final cubit = context.read<HydratedIntCubit>();
+      cubit.update(cubit.state - price);
+      Ada.show(context, id);
+    }
+  }
+
+  static TranslationsPagesShopItemEn get _translations =>
+      Injector.instance.translations.pages.shopItem;
+}
+
+final class ShopCustomizerDetailPage
+    extends ShopDetailPage<ShopItemMetasCustomizerBloc> {
+  const ShopCustomizerDetailPage({required super.id, super.key});
+}
+
+final class ShopEquipmentsDetailPage
+    extends ShopDetailPage<ShopItemMetasEquipmentBloc> {
+  const ShopEquipmentsDetailPage({required super.id, super.key});
+}
+
+final class ShopSpecialsDetailPage
+    extends ShopDetailPage<ShopItemMetasSpecialsBloc> {
+  const ShopSpecialsDetailPage({required super.id, super.key});
+}

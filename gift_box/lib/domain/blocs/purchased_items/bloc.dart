@@ -2,7 +2,7 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/models/awesome_shop_item_id.dart';
+import 'package:gift_box/domain/models/shop_item_id.dart';
 import 'package:gift_box/injector.dart';
 
 part 'event.dart';
@@ -17,13 +17,13 @@ final class PurchasedItemsBloc
     );
   }
 
-  static final _awesomeShopApi = Injector.instance.awesomeShopApi;
+  static final _shopApi = Injector.instance.shopApi;
 
   Future<void> _onPurchasedItemsInitializeEvent(
     PurchasedItemsInitializeEvent event,
     Emitter<PurchasedItemsState> emit,
   ) async {
-    final ids = await _awesomeShopApi.loadPurchasedItemIds();
+    final ids = await _shopApi.loadPurchasedItemIds();
     emit(PurchasedItemsLoadOnSuccess(ids));
   }
 }

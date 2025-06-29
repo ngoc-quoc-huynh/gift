@@ -5,10 +5,10 @@ general:
   confirm: 'OK'
 
 pages:
-  awesomeShop:
+  shop:
     volumeUp: 'Crank up the volume!'
     tap: 'Tap to unlock the Awesome Shop experience!'
-  awesomeShopCatalog:
+  shopCatalog:
     appBar: 'Awesome Shop'
     purchased: 'Purchased'
     items:
@@ -54,7 +54,7 @@ pages:
       equipment: 'Equiptment'
       specials: 'Specials'
     settingsTooltip: 'Settings'
-  awesomeShopItem:
+  shopItem:
     checkOut: 'Check out'
     price: 'Price:'
     confirmationDialog:
