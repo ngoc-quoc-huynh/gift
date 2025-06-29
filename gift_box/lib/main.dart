@@ -5,6 +5,7 @@ import 'package:gift_box/domain/models/locale.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/theme.dart';
 import 'package:gift_box/ui/router/config.dart';
+import 'package:gift_box/ui/widgets/translations_provider.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:rive/rive.dart';
 
@@ -48,11 +49,11 @@ class _BodyState extends State<_Body> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<HydratedTranslationLocaleCubit>(
-          create: (_) => HydratedTranslationLocaleCubit(
-            initialState: TranslationLocale.english,
+        BlocProvider<HydratedTranslationLocalePreferenceCubit>(
+          create: (_) => HydratedTranslationLocalePreferenceCubit(
+            initialState: TranslationLocalePreference.english,
             storageKey: 'locale',
-            values: TranslationLocale.values,
+            values: TranslationLocalePreference.values,
           ),
         ),
         BlocProvider<HydratedThemeModeCubit>(
@@ -67,24 +68,32 @@ class _BodyState extends State<_Body> {
           lazy: false,
         ),
       ],
-      child: BlocBuilder<HydratedTranslationLocaleCubit, TranslationLocale>(
-        builder: (context, locale) =>
-            BlocBuilder<HydratedThemeModeCubit, ThemeMode>(
-              builder: (context, themeMode) => MaterialApp.router(
-                title: Injector.instance.translations.appName,
-                theme: CustomTheme.light,
-                darkTheme: CustomTheme.dark,
-                themeMode: themeMode,
-                locale: switch (locale.code) {
-                  null => null,
-                  final code => Locale(code),
-                },
-                supportedLocales: AppLocaleUtils.supportedLocales,
-                localizationsDelegates: GlobalMaterialLocalizations.delegates,
-                routerConfig: _routerConfig,
-              ),
+      child:
+          BlocBuilder<
+            HydratedTranslationLocalePreferenceCubit,
+            TranslationLocalePreference
+          >(
+            builder: (context, localePreference) => TranslationsProvider(
+              localePreference: localePreference,
+              builder: (context, locale) =>
+                  BlocBuilder<HydratedThemeModeCubit, ThemeMode>(
+                    builder: (context, themeMode) => MaterialApp.router(
+                      title: Injector.instance.translations.appName,
+                      theme: CustomTheme.light,
+                      darkTheme: CustomTheme.dark,
+                      themeMode: themeMode,
+                      locale: switch (locale) {
+                        TranslationLocale.german => const Locale('de'),
+                        TranslationLocale.english => const Locale('en'),
+                      },
+                      supportedLocales: AppLocaleUtils.supportedLocales,
+                      localizationsDelegates:
+                          GlobalMaterialLocalizations.delegates,
+                      routerConfig: _routerConfig,
+                    ),
+                  ),
             ),
-      ),
+          ),
     );
   }
 }

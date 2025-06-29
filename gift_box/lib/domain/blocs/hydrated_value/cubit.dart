@@ -14,6 +14,7 @@ base class HydratedValueCubit<State> extends HydratedCubit<State> {
 
   final String storageKey;
 
+  @mustCallSuper
   void update(State newState) => emit(newState);
 
   @override

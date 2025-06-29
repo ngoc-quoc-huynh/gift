@@ -1,6 +1,9 @@
-// ignore: one_member_abstracts, for future extension.
+import 'package:gift_box/domain/models/locale.dart';
+
 abstract interface class NativeApi {
   const NativeApi();
+
+  TranslationLocale get locale;
 
   Future<void> openUrl(Uri uri);
 }
