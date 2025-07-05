@@ -50,11 +50,10 @@ class SettingsPage extends StatelessWidget {
 class _Body extends StatelessWidget {
   const _Body(this.ids);
 
-  final List<ShopItemId> ids;
+  final Set<ShopItemId> ids;
 
   @override
   Widget build(BuildContext context) {
-    final ids = this.ids.toSet();
     final isDesignModeUnlocked = ids.contains(ShopItemId.darkMode);
     final isLanguageUnlocked = ids.contains(ShopItemId.germanDrive);
     final isMusicModeUnlocked = ids.contains(ShopItemId.musicTape);
