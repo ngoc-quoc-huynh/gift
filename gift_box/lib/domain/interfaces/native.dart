@@ -8,4 +8,6 @@ abstract interface class NativeApi {
   Future<void> openUrl(Uri uri);
 
   Future<List<String>> loadImagePaths();
+
+  Future<List<String>> loadMusicTape();
 }
