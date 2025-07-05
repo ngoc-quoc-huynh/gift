@@ -15,6 +15,6 @@ final class AdaAudioPlayEvent extends AdaAudioEvent {
   const AdaAudioPlayEvent();
 }
 
-final class AdaAudioMonitorPlayerState extends AdaAudioEvent {
-  const AdaAudioMonitorPlayerState();
+final class AdaAudioMonitorPlayerStateEvent extends AdaAudioEvent {
+  const AdaAudioMonitorPlayerStateEvent();
 }
