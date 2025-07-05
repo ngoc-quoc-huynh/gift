@@ -16,3 +16,9 @@ final class MusicTapePlayEvent extends MusicTapeEvent {
 final class MusicTapeStopEvent extends MusicTapeEvent {
   const MusicTapeStopEvent();
 }
+
+final class MusicTapeDuckVolumeEvent extends MusicTapeEvent {
+  const MusicTapeDuckVolumeEvent({required this.isDucked});
+
+  final bool isDucked;
+}

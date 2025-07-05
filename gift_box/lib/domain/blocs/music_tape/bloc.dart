@@ -23,6 +23,10 @@ final class MusicTapeBloc extends HydratedBloc<MusicTapeEvent, bool> {
       _onMusicTapeStopEvent,
       transformer: droppable(),
     );
+    on<MusicTapeDuckVolumeEvent>(
+      _onMusicTapeDuckVolumeEvent,
+      transformer: droppable(),
+    );
   }
 
   static final _nativeApi = Injector.instance.nativeApi;
@@ -63,6 +67,17 @@ final class MusicTapeBloc extends HydratedBloc<MusicTapeEvent, bool> {
   ) async {
     await _disposeAudioPlayer();
     emit(false);
+  }
+
+  void _onMusicTapeDuckVolumeEvent(
+    MusicTapeDuckVolumeEvent event,
+    Emitter<bool> emit,
+  ) {
+    final volume = switch (event.isDucked) {
+      true => 0.3,
+      false => 1.0,
+    };
+    unawaited(_audioPlayer?.setVolume(volume));
   }
 
   Future<void> _disposeAudioPlayer() async {
