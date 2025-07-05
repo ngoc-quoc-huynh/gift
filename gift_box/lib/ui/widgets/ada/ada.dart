@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/ada_audio/bloc.dart';
+import 'package:gift_box/domain/blocs/music_tape/bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
 import 'package:gift_box/ui/widgets/ada/comment.dart';
 import 'package:gift_box/ui/widgets/ada/rive.dart';
@@ -18,6 +19,9 @@ class Ada extends StatelessWidget {
       builder: (_) => Ada(id: id, entry: entry),
     );
     overlay.insert(entry);
+    context.read<MusicTapeBloc>().add(
+      const MusicTapeDuckVolumeEvent(isDucked: true),
+    );
   }
 
   @override
@@ -66,9 +70,15 @@ class Ada extends StatelessWidget {
     ),
   };
 
-  void _onAdaAudioStateChanged(BuildContext _, AdaAudioState state) =>
-      switch (state) {
-        AdaAudioLoadOnComplete() => entry.remove(),
-        _ => null,
-      };
+  void _onAdaAudioStateChanged(BuildContext context, AdaAudioState state) {
+    switch (state) {
+      case AdaAudioLoadOnComplete():
+        entry.remove();
+        context.read<MusicTapeBloc>().add(
+          const MusicTapeDuckVolumeEvent(isDucked: false),
+        );
+      default:
+        break;
+    }
+  }
 }
