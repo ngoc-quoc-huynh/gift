@@ -42,10 +42,7 @@ class _TimerImageCarouselState extends State<TimerImageCarousel> {
                     context,
                     constraints,
                   ) => BlocListener<ImageCarouselCubit, ImageCarouselState>(
-                    listener: (_, state) => _onImageCarouselStateChange(
-                      state: state,
-                      maxWidth: constraints.maxWidth,
-                    ),
+                    listener: _onImageCarouselStateChange,
                     child: IgnorePointer(
                       // TODO: Change logic if https://github.com/flutter/flutter/issues/161369 is resolved.
                       child: CarouselView(
@@ -68,13 +65,12 @@ class _TimerImageCarouselState extends State<TimerImageCarousel> {
     );
   }
 
-  void _onImageCarouselStateChange({
-    required ImageCarouselState state,
-    required double maxWidth,
-  }) => unawaited(
-    // TODO: Change if https://github.com/flutter/flutter/issues/161368 is resolved.
-    _controller.animateTo(
-      maxWidth * state.index,
+  void _onImageCarouselStateChange(
+    BuildContext _,
+    ImageCarouselState state,
+  ) => unawaited(
+    _controller.animateToItem(
+      state.index,
       duration: Config.carouselAnimationDuration,
       curve: Curves.easeInOut,
     ),

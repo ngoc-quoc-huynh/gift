@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/key_metas/bloc.dart';
 import 'package:gift_keys/domain/models/key_meta.dart';
-import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/pages/key_metas/add_button.dart';
@@ -95,40 +94,43 @@ class _BodyState extends State<_Body> {
     );
   }
 
-  void _onKeysStateChanged(BuildContext context, KeyMetasState state) {
-    switch (state) {
-      case KeyMetasAddOnSuccess(:final index, :final metas):
-        unawaited(_precacheImage(context, metas[index].id));
-        unawaited(
-          _controller.animateTo(
-            context.screenSize.width * (index + 1),
-            duration: Duration(milliseconds: 500 * (index + 1)),
-            curve: Curves.easeInOut,
-          ),
-        );
-      case KeyMetasUpdateOnSuccess(:final index):
-        unawaited(
-          _controller.animateTo(
-            context.screenSize.width * (index + 1),
-            duration: Duration(milliseconds: 500 * (index + 1)),
-            curve: Curves.easeInOut,
-          ),
-        );
-      case KeyMetasDeleteOnSuccess():
-        // Prevent delay of showing SnackBar after popping page.
-        WidgetsBinding.instance.addPostFrameCallback(
-          (_) =>
-              CustomSnackBar.showSuccess(context, _translations.deleteSuccess),
-        );
-      case KeyMetasLoadOnSuccess(:final metas)
-          when state is! KeyMetasAddOnSuccess:
-        for (final meta in metas) {
-          unawaited(_precacheImage(context, meta.id));
-        }
-      default:
-        break;
-    }
-  }
+  void _onKeysStateChanged(BuildContext context, KeyMetasState state) =>
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) {
+          switch (state) {
+            case KeyMetasAddOnSuccess(:final index, :final metas):
+              unawaited(_precacheImage(context, metas[index].id));
+              unawaited(
+                _controller.animateToItem(
+                  index + 1,
+                  duration: Duration(milliseconds: 500 * (index + 1)),
+                  curve: Curves.easeInOut,
+                ),
+              );
+            case KeyMetasUpdateOnSuccess(:final index):
+              unawaited(
+                _controller.animateToItem(
+                  index + 1,
+                  duration: Duration(milliseconds: 500 * (index + 1)),
+                  curve: Curves.easeInOut,
+                ),
+              );
+            case KeyMetasDeleteOnSuccess():
+              // Prevent delay of showing SnackBar after popping page.
+              CustomSnackBar.showSuccess(
+                context,
+                _translations.deleteSuccess,
+              );
+            case KeyMetasLoadOnSuccess(:final metas)
+                when state is! KeyMetasAddOnSuccess:
+              for (final meta in metas) {
+                unawaited(_precacheImage(context, meta.id));
+              }
+            default:
+              break;
+          }
+        },
+      );
 
   Future<void> _precacheImage(BuildContext context, int id) {
     final file = Injector.instance.fileApi.loadImage(id);
