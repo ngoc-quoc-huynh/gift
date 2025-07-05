@@ -39,10 +39,10 @@ final class LocalShopRepository implements ShopApi {
       _rawItems[ShopItemKey.byId(id)]!.audio;
 
   @override
-  FutureOr<List<ShopItemId>> loadPurchasedItemIds() => [
+  FutureOr<Set<ShopItemId>> loadPurchasedItemIds() => {
     for (final item in _rawItems.values)
       if (_box.containsKey(item.id)) ShopItemKey.byId(item.id).toDomain(),
-  ];
+  };
 
   static final _rawItems = {
     ShopItemKey.ada: RawShopItem(

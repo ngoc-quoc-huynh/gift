@@ -47,7 +47,7 @@ class _Body extends StatelessWidget {
       child: RivePlayer(
         asset: Asset.satisfactory(),
         artboardName: 'ADA',
-        withStateMachine: (stateMachine) => _onInit(context, stateMachine),
+        onLoaded: (stateMachine) => _onInit(context, stateMachine),
       ),
     );
   }
