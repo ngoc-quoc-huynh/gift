@@ -45,7 +45,7 @@ class Ada extends StatelessWidget {
             MultiBlocListener(
               listeners: [
                 BlocListener<BoolCubit, bool>(
-                  listener: _onBollCubitStateChanged,
+                  listener: _onBoolCubitStateChanged,
                 ),
                 BlocListener<AdaAudioBloc, AdaAudioState>(
                   listener: _onAdaAudioStateChanged,
@@ -60,7 +60,7 @@ class Ada extends StatelessWidget {
     );
   }
 
-  void _onBollCubitStateChanged(
+  void _onBoolCubitStateChanged(
     BuildContext context,
     bool isAnimationComplete,
   ) => switch (isAnimationComplete) {
