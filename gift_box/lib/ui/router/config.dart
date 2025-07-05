@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/domain/blocs/shop_item_metas/bloc.dart';
+import 'package:gift_box/domain/blocs/shop_item_metas_reset/bloc.dart';
 import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/ui/pages/error/page.dart';
 import 'package:gift_box/ui/pages/gift/page.dart';
@@ -63,6 +64,9 @@ final class GoRouterConfig {
         navigatorKey: _shopKey,
         builder: (_, _, child) => MultiBlocProvider(
           providers: [
+            BlocProvider(
+              create: (_) => ShopItemMetasResetBloc(),
+            ),
             BlocProvider<HydratedIntCubit>(
               create: (_) => HydratedIntCubit(
                 initialState: 10,
