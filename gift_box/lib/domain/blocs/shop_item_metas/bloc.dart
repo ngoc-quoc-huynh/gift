@@ -4,6 +4,7 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_box/domain/models/shop_item_id.dart';
 import 'package:gift_box/domain/models/shop_item_meta.dart';
 import 'package:gift_box/injector.dart';
 
@@ -22,7 +23,13 @@ sealed class ShopItemMetasBloc
       _onShopItemMetasBuyEvent,
       transformer: droppable(),
     );
+    on<ShopItemMetasResetEvent>(
+      _onShopItemMetasResetEvent,
+      transformer: droppable(),
+    );
   }
+
+  static final _permanentIds = {ShopItemId.ada.id, ShopItemId.coffeeCup.id};
 
   final FutureOr<List<ShopItemMeta>> Function() _lodMetas;
 
@@ -50,6 +57,23 @@ sealed class ShopItemMetasBloc
         newMetas[index] = newMetas[index].copyWith(isPurchased: true);
         emit(ShopItemMetasLoadOnSuccess(newMetas));
       }
+    }
+  }
+
+  void _onShopItemMetasResetEvent(
+    ShopItemMetasResetEvent event,
+    Emitter<ShopItemMetasState> emit,
+  ) {
+    if (state case ShopItemMetasLoadOnSuccess(:final metas)) {
+      final newMetas = List.of(metas)
+          .map(
+            (meta) => switch (_permanentIds.contains(meta.id)) {
+              false => meta.copyWith(isPurchased: false),
+              true => meta,
+            },
+          )
+          .toList();
+      emit(ShopItemMetasLoadOnSuccess(newMetas));
     }
   }
 }

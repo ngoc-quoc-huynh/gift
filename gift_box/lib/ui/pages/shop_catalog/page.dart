@@ -22,6 +22,9 @@ class ShopCatalogPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: BackButton(
+          onPressed: () => context.pop(),
+        ),
         title: Text(_translations.appBar),
         actions: [
           IconButton(
