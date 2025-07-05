@@ -20,5 +20,5 @@ abstract interface class ShopApi {
 
   FutureOr<AdaAudio> loadAdaAudio(String id);
 
-  FutureOr<List<ShopItemId>> loadPurchasedItemIds();
+  FutureOr<Set<ShopItemId>> loadPurchasedItemIds();
 }
