@@ -54,11 +54,10 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ids = this.ids.toSet();
     final isDesignModeUnlocked = ids.contains(ShopItemId.darkMode);
     final isLanguageUnlocked = ids.contains(ShopItemId.germanDrive);
     final isMusicModeUnlocked = ids.contains(ShopItemId.musicTape);
-    final isSectionUnlocked =
-        isDesignModeUnlocked || isLanguageUnlocked || isMusicModeUnlocked;
 
     return ListView(
       padding: const EdgeInsets.symmetric(
@@ -66,66 +65,70 @@ class _Body extends StatelessWidget {
         vertical: Sizes.verticalPadding,
       ),
       children: [
-        if (isSectionUnlocked)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: SettingsSection(
-              title: _translations.section1,
-              items: [
-                if (isDesignModeUnlocked)
-                  BlocBuilder<HydratedThemeModeCubit, ThemeMode>(
-                    builder: (context, themeMode) => SettingsItem(
-                      icon: Icons.palette_outlined,
-                      iconColor: Colors.deepOrange,
-                      title: _translations.design.label,
-                      subtitle: switch (themeMode) {
-                        ThemeMode.dark => _translations.design.dark,
-                        ThemeMode.light => _translations.design.light,
-                        ThemeMode.system => _translations.design.system,
-                      },
-                      onPressed: () => SettingsDesignDialog.show(context),
-                    ),
-                  ),
-                if (isLanguageUnlocked)
-                  BlocBuilder<
-                    HydratedTranslationLocalePreferenceCubit,
-                    TranslationLocalePreference
-                  >(
-                    builder: (context, locale) => SettingsItem(
-                      icon: Icons.language_outlined,
-                      iconColor: Colors.blue,
-                      title: _translations.language.label,
-                      subtitle: switch (locale) {
-                        TranslationLocalePreference.english =>
-                          _translations.language.english,
-                        TranslationLocalePreference.german =>
-                          _translations.language.german,
-                        TranslationLocalePreference.system =>
-                          _translations.language.system,
-                      },
-                      onPressed: () => SettingsLanguageDialog.show(context),
-                    ),
-                  ),
-                if (isMusicModeUnlocked)
-                  BlocBuilder<MusicTapeBloc, bool>(
-                    builder: (context, isEnabled) => SettingsItem(
-                      icon: Icons.music_note_outlined,
-                      iconColor: Colors.green,
-                      title: _translations.music.label,
-                      subtitle: switch (isEnabled) {
-                        false => _translations.music.disabled,
-                        true => _translations.music.enabled,
-                      },
-                      trailing: Switch(
-                        value: isEnabled,
-                        onChanged: (isEnabled) =>
-                            _onMusicSwitchChanged(context, isEnabled),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: SettingsSection(
+            title: _translations.section1,
+            items: [
+              BlocBuilder<HydratedThemeModeCubit, ThemeMode>(
+                builder: (context, themeMode) => SettingsItem(
+                  icon: Icons.palette_outlined,
+                  iconColor: Colors.deepOrange,
+                  title: _translations.design.label,
+                  subtitle: switch (themeMode) {
+                    ThemeMode.dark => _translations.design.dark,
+                    ThemeMode.light => _translations.design.light,
+                    ThemeMode.system => _translations.design.system,
+                  },
+                  onPressed: () => SettingsDesignDialog.show(context),
+                  enabled: isDesignModeUnlocked,
+                ),
+              ),
+              BlocBuilder<
+                HydratedTranslationLocalePreferenceCubit,
+                TranslationLocalePreference
+              >(
+                builder: (context, locale) => SettingsItem(
+                  icon: Icons.language_outlined,
+                  iconColor: Colors.blue,
+                  title: _translations.language.label,
+                  subtitle: switch (locale) {
+                    TranslationLocalePreference.english =>
+                      _translations.language.english,
+                    TranslationLocalePreference.german =>
+                      _translations.language.german,
+                    TranslationLocalePreference.system =>
+                      _translations.language.system,
+                  },
+                  onPressed: () => SettingsLanguageDialog.show(context),
+                  enabled: isLanguageUnlocked,
+                ),
+              ),
+              BlocBuilder<MusicTapeBloc, bool>(
+                builder: (context, isEnabled) => SettingsItem(
+                  icon: Icons.music_note_outlined,
+                  iconColor: Colors.green,
+                  title: _translations.music.label,
+                  subtitle: switch (isEnabled) {
+                    false => _translations.music.disabled,
+                    true => _translations.music.enabled,
+                  },
+                  enabled: isMusicModeUnlocked,
+                  trailing: Switch(
+                    value: isEnabled,
+                    onChanged: switch (isMusicModeUnlocked) {
+                      false => null,
+                      true => (isEnabled) => _onMusicSwitchChanged(
+                        context,
+                        isEnabled,
                       ),
-                    ),
+                    },
                   ),
-              ],
-            ),
+                ),
+              ),
+            ],
           ),
+        ),
 
         SettingsSection(
           title: _translations.section2,
