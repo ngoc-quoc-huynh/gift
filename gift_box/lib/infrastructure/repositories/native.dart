@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:gift_box/domain/interfaces/native.dart';
 import 'package:gift_box/domain/models/locale.dart';
 import 'package:gift_box/injector.dart';
-import 'package:path/path.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final class NativeRepository implements NativeApi {
@@ -12,6 +11,9 @@ final class NativeRepository implements NativeApi {
   final WidgetsBinding widgetsBinding;
 
   static final _loggerApi = Injector.instance.loggerApi;
+
+  static const _imagePath = 'assets/images/carousel';
+  static const _musicTapePath = 'assets/audios/music_tape';
 
   @override
   TranslationLocale get locale {
@@ -27,24 +29,22 @@ final class NativeRepository implements NativeApi {
 
   @override
   Future<void> openUrl(Uri uri) async {
-    await launchUrl(
-      uri,
-      mode: LaunchMode.externalApplication,
-    );
-    _loggerApi.logInfo('Opened ${uri.path}');
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
+    _loggerApi.logInfo('Opened URL: $uri');
   }
 
-  static const _assetDir = 'assets';
+  @override
+  Future<List<String>> loadImagePaths() => _loadAssetPaths(_imagePath);
 
   @override
-  Future<List<String>> loadImagePaths() async {
+  Future<List<String>> loadMusicTape() => _loadAssetPaths(_musicTapePath);
+
+  Future<List<String>> _loadAssetPaths(String prefix) async {
     final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
 
     return assetManifest
         .listAssets()
-        .where(
-          (string) => string.startsWith(join(_assetDir, 'images', 'carousel')),
-        )
+        .where((asset) => asset.startsWith(prefix))
         .toList();
   }
 }
