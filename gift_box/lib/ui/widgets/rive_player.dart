@@ -21,7 +21,7 @@ class RivePlayer extends StatefulWidget {
 
 class _RivePlayerState extends State<RivePlayer> {
   File? _riveFile;
-  late Artboard _artboard;
+  Artboard? _artboard;
   late StateMachinePainter _stateMachinePainter;
 
   @override
@@ -32,16 +32,17 @@ class _RivePlayerState extends State<RivePlayer> {
 
   @override
   void dispose() {
-    _artboard.dispose();
+    _artboard?.dispose();
     _riveFile?.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) => switch (_riveFile) {
-    null => const SizedBox.shrink(),
-    File() => RiveArtboardWidget(
-      artboard: _artboard,
+  Widget build(BuildContext context) => switch ((_riveFile, _artboard)) {
+    (null, _) => const SizedBox.shrink(),
+    (_, null) => const SizedBox.shrink(),
+    (File(), final artboard?) => RiveArtboardWidget(
+      artboard: artboard,
       painter: _stateMachinePainter,
     ),
   };
@@ -63,7 +64,7 @@ class _RivePlayerState extends State<RivePlayer> {
           withStateMachine: (stateMachine) {
             widget.withStateMachine?.call(stateMachine);
 
-            final vm = _riveFile!.defaultArtboardViewModel(_artboard);
+            final vm = _riveFile!.defaultArtboardViewModel(_artboard!);
             if (vm == null) {
               return;
             }
