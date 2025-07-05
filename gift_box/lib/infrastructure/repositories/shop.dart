@@ -44,6 +44,16 @@ final class LocalShopRepository implements ShopApi {
       if (_box.containsKey(item.id)) ShopItemKey.byId(item.id).toDomain(),
   };
 
+  @override
+  Future<void> resetPurchasedItems() => _box.deleteAll(
+    [
+      ShopItemKey.darkMode.id,
+      ShopItemKey.germanDrive.id,
+      ShopItemKey.reset.id,
+      ShopItemKey.musicTape.id,
+    ],
+  );
+
   static final _rawItems = {
     ShopItemKey.ada: RawShopItem(
       id: ShopItemKey.ada.id,
