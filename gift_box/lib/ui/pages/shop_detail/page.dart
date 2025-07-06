@@ -7,6 +7,7 @@ import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/domain/blocs/music_tape/bloc.dart';
 import 'package:gift_box/domain/blocs/shop_item/bloc.dart';
 import 'package:gift_box/domain/blocs/shop_item_metas/bloc.dart';
+import 'package:gift_box/domain/blocs/shop_item_metas_reset/bloc.dart';
 import 'package:gift_box/domain/models/locale.dart';
 import 'package:gift_box/domain/models/shop_item.dart';
 import 'package:gift_box/domain/models/shop_item_id.dart';
@@ -147,14 +148,8 @@ sealed class ShopDetailPage<Bloc extends ShopItemMetasBloc>
           ..read<HydratedTranslationLocalePreferenceCubit>().update(
             TranslationLocalePreference.english,
           )
-          ..read<ShopItemMetasSpecialsBloc>().add(
-            const ShopItemMetasResetEvent(),
-          )
-          ..read<ShopItemMetasEquipmentBloc>().add(
-            const ShopItemMetasResetEvent(),
-          )
-          ..read<ShopItemMetasCustomizerBloc>().add(
-            const ShopItemMetasResetEvent(),
+          ..read<ShopItemMetasResetBloc>().add(
+            const ShopItemMetasResetInitializeEvent(),
           )
           ..read<MusicTapeBloc>().add(const MusicTapeStopEvent())
           ..read<HydratedIntCubit>().update(
