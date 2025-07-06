@@ -64,7 +64,7 @@ final class GoRouterConfig {
         navigatorKey: _shopKey,
         builder: (_, _, child) => MultiBlocProvider(
           providers: [
-            BlocProvider(
+            BlocProvider<ShopItemMetasResetBloc>(
               create: (_) => ShopItemMetasResetBloc(),
             ),
             BlocProvider<HydratedIntCubit>(
