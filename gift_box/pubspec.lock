@@ -729,10 +729,10 @@ packages:
     dependency: "direct main"
     description:
       name: rive_native
-      sha256: "97d3fd0c7a4e78b3227a5703841b9455da40632fc8abe1e66cc40ea3d3d9889c"
+      sha256: "72440c6291548230ed572262f709ed8c8209434c7f0922e4488c349cbb01e819"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.3"
   shelf:
     dependency: transitive
     description:
