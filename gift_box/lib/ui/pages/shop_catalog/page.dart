@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
+import 'package:gift_box/domain/blocs/value/cubit.dart';
 import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/sizes.dart';
+import 'package:gift_box/ui/pages/shop_catalog/welcome.dart';
 import 'package:gift_box/ui/widgets/coupon_display.dart';
 import 'package:go_router/go_router.dart';
 
-class ShopCatalogPage extends StatelessWidget {
+class ShopCatalogPage extends StatefulWidget {
   const ShopCatalogPage({
     required this.navigationShell,
     required this.children,
@@ -17,6 +19,21 @@ class ShopCatalogPage extends StatelessWidget {
 
   final StatefulNavigationShell navigationShell;
   final List<Widget> children;
+
+  @override
+  State<ShopCatalogPage> createState() => _ShopCatalogPageState();
+}
+
+class _ShopCatalogPageState extends State<ShopCatalogPage> {
+  @override
+  void initState() {
+    super.initState();
+    if (!context.read<BoolCubit>().state) {
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => WelcomeOverlay.show(context),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +52,10 @@ class ShopCatalogPage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: NavigationBar(
-        selectedIndex: navigationShell.currentIndex,
-        onDestinationSelected: (index) => navigationShell.goBranch(
+        selectedIndex: widget.navigationShell.currentIndex,
+        onDestinationSelected: (index) => widget.navigationShell.goBranch(
           index,
-          initialLocation: navigationShell.currentIndex == index,
+          initialLocation: widget.navigationShell.currentIndex == index,
         ),
         destinations: [
           NavigationDestination(
@@ -76,7 +93,7 @@ class ShopCatalogPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: children[navigationShell.currentIndex],
+            child: widget.children[widget.navigationShell.currentIndex],
           ),
         ],
       ),
