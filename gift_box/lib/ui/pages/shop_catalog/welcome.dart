@@ -5,26 +5,55 @@ import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/colors.dart';
 
 class WelcomeOverlay extends StatefulWidget {
-  const WelcomeOverlay({required this.entry, super.key});
+  const WelcomeOverlay({
+    required this.child,
+    super.key,
+  });
 
-  final OverlayEntry entry;
-
-  static void show(BuildContext context) {
-    final overlay = Overlay.of(context);
-    late final OverlayEntry entry;
-    entry = OverlayEntry(
-      builder: (_) => WelcomeOverlay(
-        entry: entry,
-      ),
-    );
-    overlay.insert(entry);
-  }
+  final Widget child;
 
   @override
   State<WelcomeOverlay> createState() => _WelcomeOverlayState();
 }
 
-class _WelcomeOverlayState extends State<WelcomeOverlay>
+class _WelcomeOverlayState extends State<WelcomeOverlay> {
+  final _controller = OverlayPortalController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (!context.read<BoolCubit>().state) {
+      _controller.show();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return OverlayPortal(
+      controller: _controller,
+      overlayChildBuilder: (_) => _Overlay(
+        _onWelcomeAnimationEnd,
+      ),
+      child: widget.child,
+    );
+  }
+
+  void _onWelcomeAnimationEnd() {
+    _controller.hide();
+    context.read<BoolCubit>().update(true);
+  }
+}
+
+class _Overlay extends StatefulWidget {
+  const _Overlay(this.onAnimationEnd);
+
+  final VoidCallback onAnimationEnd;
+
+  @override
+  State<_Overlay> createState() => _OverlayState();
+}
+
+class _OverlayState extends State<_Overlay>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _boxScaleAnimation;
@@ -121,8 +150,7 @@ class _WelcomeOverlayState extends State<WelcomeOverlay>
 
   void _onStatusChanged(AnimationStatus status) {
     if (status.isCompleted) {
-      context.read<BoolCubit>().update(true);
-      widget.entry.remove();
+      widget.onAnimationEnd.call();
     }
   }
 
