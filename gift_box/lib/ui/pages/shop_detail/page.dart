@@ -22,7 +22,7 @@ import 'package:go_router/go_router.dart';
 
 // ignore_for_file: prefer-single-widget-per-file
 
-sealed class ShopDetailPage<Bloc extends ShopItemMetasBloc>
+sealed class ShopDetailPage<T extends ShopItemMetasBloc>
     extends StatelessWidget {
   const ShopDetailPage({required this.id, super.key});
 
@@ -120,7 +120,7 @@ sealed class ShopDetailPage<Bloc extends ShopItemMetasBloc>
 
     if (context.mounted && hasBought) {
       context
-        ..read<Bloc>().add(ShopItemMetasBuyEvent(id))
+        ..read<T>().add(ShopItemMetasBuyEvent(id))
         ..pop();
 
       final cubit = context.read<HydratedIntCubit>();
@@ -168,10 +168,10 @@ sealed class ShopDetailPage<Bloc extends ShopItemMetasBloc>
     }
   }
 
-  int getPriceIfPurchased<T extends ShopItemMetasBloc>(
+  int getPriceIfPurchased<B extends ShopItemMetasBloc>(
     BuildContext context,
     ShopItemId id,
-  ) => switch (context.read<T>().state) {
+  ) => switch (context.read<B>().state) {
     ShopItemMetasLoadOnSuccess(:final metas) =>
       metas
               .firstWhereOrNull(
