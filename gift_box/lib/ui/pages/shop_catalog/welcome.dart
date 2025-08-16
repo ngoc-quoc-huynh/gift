@@ -101,6 +101,7 @@ class _OverlayState extends State<_Overlay>
           ),
         );
     _controller
+      // ignore: discarded_futures, we don't need to await the animation.
       ..forward()
       ..addStatusListener(_onStatusChanged);
   }
