@@ -6,9 +6,9 @@ import 'package:gift_box/injector.dart';
 part 'locale/cubit.dart';
 part 'types.dart';
 
-base class ValueCubit<State> extends Cubit<State> {
+base class ValueCubit<T> extends Cubit<T> {
   ValueCubit(super.initialState);
 
   @mustCallSuper
-  void update(State newState) => emit(newState);
+  void update(T newState) => emit(newState);
 }
