@@ -22,8 +22,6 @@ class RadioDialogOption<T> extends StatelessWidget {
         ),
         title: Text(title),
         value: value,
-        groupValue: selectedOption,
-        onChanged: (value) => context.read<ValueCubit<T>>().update(value as T),
       ),
     );
   }
