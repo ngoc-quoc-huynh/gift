@@ -6,10 +6,10 @@ import 'package:gift_keys/domain/models/language.dart';
 part 'types.dart';
 
 @visibleForTesting
-base mixin TestValueCubit<State> implements ValueCubit<State> {}
+base mixin TestValueCubit<T> implements ValueCubit<T> {}
 
-final class ValueCubit<State> extends Cubit<State> {
+final class ValueCubit<T> extends Cubit<T> {
   ValueCubit(super.initialState);
 
-  void update(State newState) => emit(newState);
+  void update(T newState) => emit(newState);
 }
