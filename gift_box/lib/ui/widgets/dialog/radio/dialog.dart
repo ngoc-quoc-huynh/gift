@@ -19,9 +19,15 @@ class RadioDialog<T extends Object> extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomDialog.alert(
       title: title,
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: options,
+      content: BlocBuilder<ValueCubit<T>, T>(
+        builder: (context, option) => RadioGroup(
+          groupValue: option,
+          onChanged: (value) => context.read<ValueCubit<T>>().update(value!),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: options,
+          ),
+        ),
       ),
       actions: [
         const AlertDialogAction.cancel(),
