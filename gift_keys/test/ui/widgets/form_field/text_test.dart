@@ -5,17 +5,21 @@ import 'package:gift_keys/ui/widgets/form_field/text.dart';
 import '../../../utils.dart';
 
 void main() {
-  testGolden('renders correctly.', (tester) async {
-    final widget = CustomTextFormField(
-      icon: Icons.person,
-      label: 'Name',
-      textInputAction: TextInputAction.done,
-      validator: (_) => null,
-    );
-    await tester.pumpGoldenWidget(widget);
+  testGolden(
+    'renders correctly.',
+    (tester) async {
+      final widget = CustomTextFormField(
+        icon: Icons.person,
+        label: 'Name',
+        textInputAction: TextInputAction.done,
+        validator: (_) => null,
+      );
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('text', find.byWidget(widget));
-  }, surfaceSize: const Size(250, 50));
+      await expectGoldenFile('text', find.byWidget(widget));
+    },
+    surfaceSize: const Size(250, 50),
+  );
 
   testWidgets('submits correctly.', (tester) async {
     bool submitted = false;

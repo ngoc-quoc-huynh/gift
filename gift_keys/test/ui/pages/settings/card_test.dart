@@ -6,20 +6,24 @@ import 'package:gift_keys/ui/pages/settings/item.dart';
 import '../../../utils.dart';
 
 void main() {
-  testGolden('renders correctly.', (tester) async {
-    final widget = SettingsCard(
-      children: [
-        SettingsItem(
-          icon: Icons.brightness_6_rounded,
-          title: 'Design',
-          onTap: () {
-            return;
-          },
-        ),
-      ],
-    );
-    await tester.pumpGoldenWidget(widget);
+  testGolden(
+    'renders correctly.',
+    (tester) async {
+      final widget = SettingsCard(
+        children: [
+          SettingsItem(
+            icon: Icons.brightness_6_rounded,
+            title: 'Design',
+            onTap: () {
+              return;
+            },
+          ),
+        ],
+      );
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('card', find.byWidget(widget));
-  }, surfaceSize: const Size(300, 70));
+      await expectGoldenFile('card', find.byWidget(widget));
+    },
+    surfaceSize: const Size(300, 70),
+  );
 }

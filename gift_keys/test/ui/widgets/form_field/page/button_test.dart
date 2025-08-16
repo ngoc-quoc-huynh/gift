@@ -8,26 +8,34 @@ void main() {
   const size = Size(150, 50);
 
   group('loading', () {
-    testGolden('renders correctly.', (tester) async {
-      const widget = FormFieldSubmitButton.loading();
-      await tester.pumpGoldenWidget(widget);
-      await tester.pump(const Duration(seconds: 1));
+    testGolden(
+      'renders correctly.',
+      (tester) async {
+        const widget = FormFieldSubmitButton.loading();
+        await tester.pumpGoldenWidget(widget);
+        await tester.pump(const Duration(seconds: 1));
 
-      await expectGoldenFile('button_loading', find.byWidget(widget));
-    }, surfaceSize: size);
+        await expectGoldenFile('button_loading', find.byWidget(widget));
+      },
+      surfaceSize: size,
+    );
   });
 
   group('normal', () {
-    testGolden('renders correctly.', (tester) async {
-      final widget = FormFieldSubmitButton.normal(
-        buttonTitle: 'Button',
-        onPressed: () {
-          return;
-        },
-      );
-      await tester.pumpGoldenWidget(widget);
+    testGolden(
+      'renders correctly.',
+      (tester) async {
+        final widget = FormFieldSubmitButton.normal(
+          buttonTitle: 'Button',
+          onPressed: () {
+            return;
+          },
+        );
+        await tester.pumpGoldenWidget(widget);
 
-      await expectGoldenFile('button_normal', find.byWidget(widget));
-    }, surfaceSize: size);
+        await expectGoldenFile('button_normal', find.byWidget(widget));
+      },
+      surfaceSize: size,
+    );
   });
 }

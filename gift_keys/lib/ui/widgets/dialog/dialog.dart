@@ -112,7 +112,16 @@ final class _Radio<T extends Object> extends CustomDialog {
       titlePadding: CustomDialog.titlePadding,
       title: Text(title),
       content: ResponsiveBox(
-        child: Column(mainAxisSize: MainAxisSize.min, children: options),
+        child: BlocBuilder<ValueCubit<T>, T>(
+          builder: (context, option) => RadioGroup<T>(
+            onChanged: (value) => context.read<ValueCubit<T>>().update(value!),
+            groupValue: option,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: options,
+            ),
+          ),
+        ),
       ),
       actions: [
         const AlertDialogAction.cancel(),

@@ -13,29 +13,37 @@ import '../../../utils.dart';
 
 void main() {
   const size = Size(250, 50);
-  testGolden('renders selected correctly.', (tester) async {
-    final cubit = MockValueCubit<int>();
-    whenListen(cubit, const Stream<int>.empty(), initialState: 0);
-    final widget = BlocProvider<ValueCubit<int>>(
-      create: (_) => cubit,
-      child: const RadioDialogOption(title: 'Option 0', value: 0),
-    );
-    await tester.pumpGoldenWidget(widget);
+  testGolden(
+    'renders selected correctly.',
+    (tester) async {
+      final cubit = MockValueCubit<int>();
+      whenListen(cubit, const Stream<int>.empty(), initialState: 0);
+      final widget = BlocProvider<ValueCubit<int>>(
+        create: (_) => cubit,
+        child: const RadioDialogOption(title: 'Option 0', value: 0),
+      );
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('radio_option_selected', find.byWidget(widget));
-  }, surfaceSize: size);
+      await expectGoldenFile('radio_option_selected', find.byWidget(widget));
+    },
+    surfaceSize: size,
+  );
 
-  testGolden('renders unselected correctly.', (tester) async {
-    final cubit = MockValueCubit<int>();
-    whenListen(cubit, const Stream<int>.empty(), initialState: 0);
-    final widget = BlocProvider<ValueCubit<int>>(
-      create: (_) => cubit,
-      child: const RadioDialogOption(title: 'Option 1', value: 1),
-    );
-    await tester.pumpGoldenWidget(widget);
+  testGolden(
+    'renders unselected correctly.',
+    (tester) async {
+      final cubit = MockValueCubit<int>();
+      whenListen(cubit, const Stream<int>.empty(), initialState: 0);
+      final widget = BlocProvider<ValueCubit<int>>(
+        create: (_) => cubit,
+        child: const RadioDialogOption(title: 'Option 1', value: 1),
+      );
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('radio_option_unselected', find.byWidget(widget));
-  }, surfaceSize: size);
+      await expectGoldenFile('radio_option_unselected', find.byWidget(widget));
+    },
+    surfaceSize: size,
+  );
 
   testWidgets('changes value correctly.', (tester) async {
     final cubit = MockValueCubit<int>();

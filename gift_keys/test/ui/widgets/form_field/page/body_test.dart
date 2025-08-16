@@ -23,56 +23,26 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden('renders correctly.', (tester) async {
-    final bloc = MockKeyFormBloc();
-    whenListen(
-      bloc,
-      const Stream<KeyFormState>.empty(),
-      initialState: const KeyFormInitial(),
-    );
-    final fileCubit = MockValueCubit<File?>();
-    whenListen(fileCubit, const Stream<File?>.empty());
-    final dateCubit = MockValueCubit<DateTime?>();
-    whenListen(dateCubit, const Stream<DateTime>.empty());
+  testGolden(
+    'renders correctly.',
+    (tester) async {
+      final bloc = MockKeyFormBloc();
+      whenListen(
+        bloc,
+        const Stream<KeyFormState>.empty(),
+        initialState: const KeyFormInitial(),
+      );
+      final fileCubit = MockValueCubit<File?>();
+      whenListen(fileCubit, const Stream<File?>.empty());
+      final dateCubit = MockValueCubit<DateTime?>();
+      whenListen(dateCubit, const Stream<DateTime>.empty());
 
-    final widget = MultiBlocProvider(
-      providers: [
-        BlocProvider<KeyFormBloc>(create: (_) => bloc),
-        BlocProvider<FileValueCubit>(create: (_) => fileCubit),
-        BlocProvider<DateTimeValueCubit>(create: (_) => dateCubit),
-      ],
-      child: FormFieldPageBody(
-        buttonTitle: 'Button',
-        giftKey: null,
-        onSubmitted: (_, _, _, _, _) {
-          return;
-        },
-      ),
-    );
-    await tester.pumpGoldenWidget(widget);
-
-    await expectGoldenFile('body', find.byWidget(widget));
-  }, surfaceSize: pageSurfaceSize);
-
-  testGolden('renders validators correctly.', (tester) async {
-    final bloc = MockKeyFormBloc();
-    whenListen(
-      bloc,
-      const Stream<KeyFormState>.empty(),
-      initialState: const KeyFormInitial(),
-    );
-    final fileCubit = MockValueCubit<File?>();
-    whenListen(fileCubit, const Stream<File?>.empty());
-    final dateCubit = MockValueCubit<DateTime?>();
-    whenListen(dateCubit, const Stream<DateTime>.empty());
-
-    final widget = MultiBlocProvider(
-      providers: [
-        BlocProvider<KeyFormBloc>(create: (_) => bloc),
-        BlocProvider<FileValueCubit>(create: (_) => fileCubit),
-        BlocProvider<DateTimeValueCubit>(create: (_) => dateCubit),
-      ],
-      child: Form(
+      final widget = MultiBlocProvider(
+        providers: [
+          BlocProvider<KeyFormBloc>(create: (_) => bloc),
+          BlocProvider<FileValueCubit>(create: (_) => fileCubit),
+          BlocProvider<DateTimeValueCubit>(create: (_) => dateCubit),
+        ],
         child: FormFieldPageBody(
           buttonTitle: 'Button',
           giftKey: null,
@@ -80,14 +50,52 @@ void main() {
             return;
           },
         ),
-      ),
-    );
-    await tester.pumpGoldenWidget(widget);
-    await tester.tap(find.byType(FilledButton));
-    await tester.pumpAndSettle();
+      );
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('body_validators', find.byWidget(widget));
-  }, surfaceSize: pageSurfaceSize);
+      await expectGoldenFile('body', find.byWidget(widget));
+    },
+    surfaceSize: pageSurfaceSize,
+  );
+
+  testGolden(
+    'renders validators correctly.',
+    (tester) async {
+      final bloc = MockKeyFormBloc();
+      whenListen(
+        bloc,
+        const Stream<KeyFormState>.empty(),
+        initialState: const KeyFormInitial(),
+      );
+      final fileCubit = MockValueCubit<File?>();
+      whenListen(fileCubit, const Stream<File?>.empty());
+      final dateCubit = MockValueCubit<DateTime?>();
+      whenListen(dateCubit, const Stream<DateTime>.empty());
+
+      final widget = MultiBlocProvider(
+        providers: [
+          BlocProvider<KeyFormBloc>(create: (_) => bloc),
+          BlocProvider<FileValueCubit>(create: (_) => fileCubit),
+          BlocProvider<DateTimeValueCubit>(create: (_) => dateCubit),
+        ],
+        child: Form(
+          child: FormFieldPageBody(
+            buttonTitle: 'Button',
+            giftKey: null,
+            onSubmitted: (_, _, _, _, _) {
+              return;
+            },
+          ),
+        ),
+      );
+      await tester.pumpGoldenWidget(widget);
+      await tester.tap(find.byType(FilledButton));
+      await tester.pumpAndSettle();
+
+      await expectGoldenFile('body_validators', find.byWidget(widget));
+    },
+    surfaceSize: pageSurfaceSize,
+  );
 
   group('submit', () {
     final giftKey = GiftKey(

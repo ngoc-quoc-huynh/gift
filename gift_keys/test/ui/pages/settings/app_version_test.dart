@@ -18,12 +18,16 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden('renders correctly.', (tester) async {
-    when(() => packageInfo.version).thenReturn('1.0.0');
+  testGolden(
+    'renders correctly.',
+    (tester) async {
+      when(() => packageInfo.version).thenReturn('1.0.0');
 
-    const widget = SettingsAppVersion();
-    await tester.pumpGoldenWidget(widget);
+      const widget = SettingsAppVersion();
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('app_version', find.byWidget(widget));
-  }, surfaceSize: const Size(100, 50));
+      await expectGoldenFile('app_version', find.byWidget(widget));
+    },
+    surfaceSize: const Size(100, 50),
+  );
 }

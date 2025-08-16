@@ -17,12 +17,16 @@ void main() {
   tearDownAll(Injector.instance.reset);
 
   group('cancel', () {
-    testGolden('renders correctly.', (tester) async {
-      const widget = AlertDialogAction.cancel();
-      await tester.pumpGoldenWidget(widget);
+    testGolden(
+      'renders correctly.',
+      (tester) async {
+        const widget = AlertDialogAction.cancel();
+        await tester.pumpGoldenWidget(widget);
 
-      await expectGoldenFile('alert_action_cancel', find.byWidget(widget));
-    }, surfaceSize: size);
+        await expectGoldenFile('alert_action_cancel', find.byWidget(widget));
+      },
+      surfaceSize: size,
+    );
 
     testWidgets('pops correctly.', (tester) async {
       final widget = TestGoRouter(
@@ -49,12 +53,16 @@ void main() {
   });
 
   group('confirm', () {
-    testGolden('renders correctly.', (tester) async {
-      final widget = AlertDialogAction.confirm(result: () => true);
-      await tester.pumpGoldenWidget(widget);
+    testGolden(
+      'renders correctly.',
+      (tester) async {
+        final widget = AlertDialogAction.confirm(result: () => true);
+        await tester.pumpGoldenWidget(widget);
 
-      await expectGoldenFile('alert_action_confirm', find.byWidget(widget));
-    }, surfaceSize: size);
+        await expectGoldenFile('alert_action_confirm', find.byWidget(widget));
+      },
+      surfaceSize: size,
+    );
 
     testWidgets('pops correctly.', (tester) async {
       final widget = TestGoRouter(

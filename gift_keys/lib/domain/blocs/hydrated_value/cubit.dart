@@ -5,8 +5,8 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 part 'language_option.dart';
 part 'theme_mode.dart';
 
-sealed class HydratedValueCubit<State> extends HydratedCubit<State> {
+sealed class HydratedValueCubit<T> extends HydratedCubit<T> {
   HydratedValueCubit(super.state);
 
-  void update(State newState) => emit(newState);
+  void update(T newState) => emit(newState);
 }

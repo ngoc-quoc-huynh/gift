@@ -20,12 +20,16 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden('renders correctly.', (tester) async {
-    const widget = SettingsFeedbackDialog();
-    await tester.pumpGoldenWidget(widget);
+  testGolden(
+    'renders correctly.',
+    (tester) async {
+      const widget = SettingsFeedbackDialog();
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('feedback', find.byWidget(widget));
-  }, surfaceSize: const Size(500, 300));
+      await expectGoldenFile('feedback', find.byWidget(widget));
+    },
+    surfaceSize: const Size(500, 300),
+  );
 
   // ignore: missing-test-assertion, verify is sufficient.
   testWidgets('show returns correctly.', (tester) async {

@@ -18,13 +18,17 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden('renders correctly.', (tester) async {
-    when(() => packageInfo.version).thenReturn('1.0.0');
+  testGolden(
+    'renders correctly.',
+    (tester) async {
+      when(() => packageInfo.version).thenReturn('1.0.0');
 
-    const widget = CustomLicensePage();
-    await tester.pumpGoldenWidget(widget);
+      const widget = CustomLicensePage();
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('page', find.byWidget(widget));
-    verify(() => packageInfo.version).called(1);
-  }, surfaceSize: pageSurfaceSize);
+      await expectGoldenFile('page', find.byWidget(widget));
+      verify(() => packageInfo.version).called(1);
+    },
+    surfaceSize: pageSurfaceSize,
+  );
 }

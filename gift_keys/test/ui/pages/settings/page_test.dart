@@ -51,27 +51,31 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden('renders correctly.', (tester) async {
-    whenListen(
-      themeModeCubit,
-      const Stream<ThemeMode>.empty(),
-      initialState: ThemeMode.light,
-    );
-    whenListen(
-      languageOptionCubit,
-      const Stream<LanguageOption>.empty(),
-      initialState: LanguageOption.english,
-    );
-    whenListen(
-      keyMetasBloc,
-      const Stream<KeyMetasState>.empty(),
-      initialState: const KeyMetasLoadOnSuccess([]),
-    );
+  testGolden(
+    'renders correctly.',
+    (tester) async {
+      whenListen(
+        themeModeCubit,
+        const Stream<ThemeMode>.empty(),
+        initialState: ThemeMode.light,
+      );
+      whenListen(
+        languageOptionCubit,
+        const Stream<LanguageOption>.empty(),
+        initialState: LanguageOption.english,
+      );
+      whenListen(
+        keyMetasBloc,
+        const Stream<KeyMetasState>.empty(),
+        initialState: const KeyMetasLoadOnSuccess([]),
+      );
 
-    await tester.pumpGoldenWidget(widget);
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('page', find.byWidget(widget));
-  }, surfaceSize: pageSurfaceSize);
+      await expectGoldenFile('page', find.byWidget(widget));
+    },
+    surfaceSize: pageSurfaceSize,
+  );
 
   group('items', () {
     final theme = CustomTheme.lightTheme(const TextTheme());
