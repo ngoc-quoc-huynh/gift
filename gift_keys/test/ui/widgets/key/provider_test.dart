@@ -23,45 +23,57 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden('renders KeyLoadInProgress correctly.', (tester) async {
-    when(
-      () => localDatabaseApi.loadKey(1),
-    ).thenAnswer((_) => Completer<GiftKey>().future);
-    const widget = KeyPageProvider(id: 1, child: SizedBox.shrink());
-    await tester.pumpGoldenWidget(widget);
-    await tester.pumpAndSettle();
+  testGolden(
+    'renders KeyLoadInProgress correctly.',
+    (tester) async {
+      when(
+        () => localDatabaseApi.loadKey(1),
+      ).thenAnswer((_) => Completer<GiftKey>().future);
+      const widget = KeyPageProvider(id: 1, child: SizedBox.shrink());
+      await tester.pumpGoldenWidget(widget);
+      await tester.pumpAndSettle();
 
-    await expectGoldenFile('provider_loading', find.byWidget(widget));
-    verify(() => localDatabaseApi.loadKey(1)).called(1);
-  }, surfaceSize: pageSurfaceSize);
+      await expectGoldenFile('provider_loading', find.byWidget(widget));
+      verify(() => localDatabaseApi.loadKey(1)).called(1);
+    },
+    surfaceSize: pageSurfaceSize,
+  );
 
-  testGolden('renders KeyLoadOnFailure correctly.', (tester) async {
-    when(
-      () => localDatabaseApi.loadKey(1),
-    ).thenThrow(const LocalDatabaseException());
-    const widget = KeyPageProvider(id: 1, child: SizedBox.shrink());
-    await tester.pumpGoldenWidget(widget);
-    await tester.pumpAndSettle();
+  testGolden(
+    'renders KeyLoadOnFailure correctly.',
+    (tester) async {
+      when(
+        () => localDatabaseApi.loadKey(1),
+      ).thenThrow(const LocalDatabaseException());
+      const widget = KeyPageProvider(id: 1, child: SizedBox.shrink());
+      await tester.pumpGoldenWidget(widget);
+      await tester.pumpAndSettle();
 
-    await expectGoldenFile('provider_error', find.byWidget(widget));
-    verify(() => localDatabaseApi.loadKey(1)).called(1);
-  }, surfaceSize: pageSurfaceSize);
+      await expectGoldenFile('provider_error', find.byWidget(widget));
+      verify(() => localDatabaseApi.loadKey(1)).called(1);
+    },
+    surfaceSize: pageSurfaceSize,
+  );
 
-  testGolden('renders KeyLoadOnSuccess correctly.', (tester) async {
-    when(() => localDatabaseApi.loadKey(1)).thenAnswer(
-      (_) async => GiftKey(
-        id: 1,
-        name: 'Name',
-        birthday: DateTime.utc(2025),
-        aid: 'F000000001',
-        password: '1234',
-      ),
-    );
-    const widget = KeyPageProvider(id: 1, child: Text('Success'));
-    await tester.pumpGoldenWidget(widget);
-    await tester.pumpAndSettle();
+  testGolden(
+    'renders KeyLoadOnSuccess correctly.',
+    (tester) async {
+      when(() => localDatabaseApi.loadKey(1)).thenAnswer(
+        (_) async => GiftKey(
+          id: 1,
+          name: 'Name',
+          birthday: DateTime.utc(2025),
+          aid: 'F000000001',
+          password: '1234',
+        ),
+      );
+      const widget = KeyPageProvider(id: 1, child: Text('Success'));
+      await tester.pumpGoldenWidget(widget);
+      await tester.pumpAndSettle();
 
-    await expectGoldenFile('provider_success', find.byWidget(widget));
-    verify(() => localDatabaseApi.loadKey(1)).called(1);
-  }, surfaceSize: pageSurfaceSize);
+      await expectGoldenFile('provider_success', find.byWidget(widget));
+      verify(() => localDatabaseApi.loadKey(1)).called(1);
+    },
+    surfaceSize: pageSurfaceSize,
+  );
 }

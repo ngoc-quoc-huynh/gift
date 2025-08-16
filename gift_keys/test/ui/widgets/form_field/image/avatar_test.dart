@@ -24,32 +24,40 @@ void main() {
   tearDownAll(Injector.instance.reset);
 
   group('selected', () {
-    testGolden('renders correctly.', (tester) async {
-      final file = MemoryFileSystem().file('test.png')..createSync();
-      final widget = ImagePickerAvatar.selected(
-        file: file,
-        onImagePicked: () {
-          return;
-        },
-      );
-      await tester.pumpGoldenWidget(widget);
+    testGolden(
+      'renders correctly.',
+      (tester) async {
+        final file = MemoryFileSystem().file('test.png')..createSync();
+        final widget = ImagePickerAvatar.selected(
+          file: file,
+          onImagePicked: () {
+            return;
+          },
+        );
+        await tester.pumpGoldenWidget(widget);
 
-      await expectGoldenFile('avatar_selected', find.byWidget(widget));
-    }, surfaceSize: size);
+        await expectGoldenFile('avatar_selected', find.byWidget(widget));
+      },
+      surfaceSize: size,
+    );
 
     // TODO: Add tests for didUpdateWidget
   });
 
   group('empty', () {
-    testGolden('renders correctly.', (tester) async {
-      final widget = ImagePickerAvatar.empty(
-        onImagePicked: () {
-          return;
-        },
-      );
-      await tester.pumpGoldenWidget(widget);
+    testGolden(
+      'renders correctly.',
+      (tester) async {
+        final widget = ImagePickerAvatar.empty(
+          onImagePicked: () {
+            return;
+          },
+        );
+        await tester.pumpGoldenWidget(widget);
 
-      await expectGoldenFile('avatar_empty', find.byWidget(widget));
-    }, surfaceSize: size);
+        await expectGoldenFile('avatar_empty', find.byWidget(widget));
+      },
+      surfaceSize: size,
+    );
   });
 }

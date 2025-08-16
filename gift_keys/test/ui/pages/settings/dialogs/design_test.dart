@@ -20,22 +20,26 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden('renders correctly.', (tester) async {
-    final cubit = MockValueCubit<ThemeMode>();
-    whenListen(
-      cubit,
-      const Stream<ThemeMode>.empty(),
-      initialState: ThemeMode.light,
-    );
+  testGolden(
+    'renders correctly.',
+    (tester) async {
+      final cubit = MockValueCubit<ThemeMode>();
+      whenListen(
+        cubit,
+        const Stream<ThemeMode>.empty(),
+        initialState: ThemeMode.light,
+      );
 
-    final widget = BlocProvider<ThemeModeValueCubit>(
-      create: (_) => cubit,
-      child: const SettingsDesignDialog(),
-    );
-    await tester.pumpGoldenWidget(widget);
+      final widget = BlocProvider<ThemeModeValueCubit>(
+        create: (_) => cubit,
+        child: const SettingsDesignDialog(),
+      );
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('design', find.byWidget(widget));
-  }, surfaceSize: const Size(500, 400));
+      await expectGoldenFile('design', find.byWidget(widget));
+    },
+    surfaceSize: const Size(500, 400),
+  );
 
   testWidgets('show returns correctly.', (tester) async {
     final cubit = MockThemeModeHydratedValueCubit();

@@ -24,49 +24,61 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden('renders alert correctly.', (tester) async {
-    final widget = CustomDialog.alert(
-      title: 'Title',
-      content: const Text('Content'),
-      actions: [
-        const AlertDialogAction.cancel(),
-        AlertDialogAction.confirm(result: () => true),
-      ],
-    );
-    await tester.pumpGoldenWidget(widget);
-
-    await expectGoldenFile('dialog_alert', find.byWidget(widget));
-  }, surfaceSize: size);
-
-  testGolden('renders normal correctly.', (tester) async {
-    final widget = CustomDialog.normal(
-      title: 'Title',
-      content: const Text('Content'),
-      action: AlertDialogAction.confirm(result: () => true),
-    );
-    await tester.pumpGoldenWidget(widget);
-
-    await expectGoldenFile('dialog_normal', find.byWidget(widget));
-  }, surfaceSize: size);
-
-  group('radio', () {
-    testGolden('renders correctly.', (tester) async {
-      final cubit = MockValueCubit<int>();
-      whenListen(cubit, const Stream<int>.empty(), initialState: 1);
-      final widget = BlocProvider<ValueCubit<int>>(
-        create: (_) => cubit,
-        child: CustomDialog.radio(
-          title: 'Title',
-          options: const [
-            RadioDialogOption(title: 'Option 0', value: 0),
-            RadioDialogOption(title: 'Option 1', value: 1),
-          ],
-        ),
+  testGolden(
+    'renders alert correctly.',
+    (tester) async {
+      final widget = CustomDialog.alert(
+        title: 'Title',
+        content: const Text('Content'),
+        actions: [
+          const AlertDialogAction.cancel(),
+          AlertDialogAction.confirm(result: () => true),
+        ],
       );
       await tester.pumpGoldenWidget(widget);
 
-      await expectGoldenFile('dialog_radio', find.byWidget(widget));
-    }, surfaceSize: size);
+      await expectGoldenFile('dialog_alert', find.byWidget(widget));
+    },
+    surfaceSize: size,
+  );
+
+  testGolden(
+    'renders normal correctly.',
+    (tester) async {
+      final widget = CustomDialog.normal(
+        title: 'Title',
+        content: const Text('Content'),
+        action: AlertDialogAction.confirm(result: () => true),
+      );
+      await tester.pumpGoldenWidget(widget);
+
+      await expectGoldenFile('dialog_normal', find.byWidget(widget));
+    },
+    surfaceSize: size,
+  );
+
+  group('radio', () {
+    testGolden(
+      'renders correctly.',
+      (tester) async {
+        final cubit = MockValueCubit<int>();
+        whenListen(cubit, const Stream<int>.empty(), initialState: 1);
+        final widget = BlocProvider<ValueCubit<int>>(
+          create: (_) => cubit,
+          child: CustomDialog.radio(
+            title: 'Title',
+            options: const [
+              RadioDialogOption(title: 'Option 0', value: 0),
+              RadioDialogOption(title: 'Option 1', value: 1),
+            ],
+          ),
+        );
+        await tester.pumpGoldenWidget(widget);
+
+        await expectGoldenFile('dialog_radio', find.byWidget(widget));
+      },
+      surfaceSize: size,
+    );
 
     testWidgets('changes value correctly.', (tester) async {
       final cubit = MockValueCubit<int>();

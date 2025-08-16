@@ -37,12 +37,16 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden('renders correctly.', (tester) async {
-    const widget = AddKeyPage();
-    await tester.pumpGoldenWidget(widget);
+  testGolden(
+    'renders correctly.',
+    (tester) async {
+      const widget = AddKeyPage();
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('page', find.byWidget(widget));
-  }, surfaceSize: pageSurfaceSize);
+      await expectGoldenFile('page', find.byWidget(widget));
+    },
+    surfaceSize: pageSurfaceSize,
+  );
 
   group('Submit', () {
     const aid = 'F000000001';

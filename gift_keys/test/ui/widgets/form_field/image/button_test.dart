@@ -18,14 +18,18 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden('renders correctly.', (tester) async {
-    final widget = ImagePickerButton(
-      onImagePicked: () {
-        return;
-      },
-    );
-    await tester.pumpGoldenWidget(widget);
+  testGolden(
+    'renders correctly.',
+    (tester) async {
+      final widget = ImagePickerButton(
+        onImagePicked: () {
+          return;
+        },
+      );
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('button', find.byWidget(widget));
-  }, surfaceSize: const Size(170, 50));
+      await expectGoldenFile('button', find.byWidget(widget));
+    },
+    surfaceSize: const Size(170, 50),
+  );
 }

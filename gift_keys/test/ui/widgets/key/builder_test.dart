@@ -12,29 +12,33 @@ import '../../../mocks.dart';
 import '../../../utils.dart';
 
 void main() {
-  testGolden('renders correctly.', (tester) async {
-    final bloc = MockKeyBloc();
-    whenListen(
-      bloc,
-      const Stream<KeyState>.empty(),
-      initialState: KeyLoadOnSuccess(
-        GiftKey(
-          id: 1,
-          name: 'Name',
-          birthday: DateTime.utc(2025),
-          aid: 'F000000001',
-          password: '1234',
+  testGolden(
+    'renders correctly.',
+    (tester) async {
+      final bloc = MockKeyBloc();
+      whenListen(
+        bloc,
+        const Stream<KeyState>.empty(),
+        initialState: KeyLoadOnSuccess(
+          GiftKey(
+            id: 1,
+            name: 'Name',
+            birthday: DateTime.utc(2025),
+            aid: 'F000000001',
+            password: '1234',
+          ),
         ),
-      ),
-    );
-    final widget = BlocProvider<KeyBloc>(
-      create: (_) => bloc,
-      child: KeyPageBuilder(builder: (state) => Text(state.toString())),
-    );
-    await tester.pumpGoldenWidget(widget);
+      );
+      final widget = BlocProvider<KeyBloc>(
+        create: (_) => bloc,
+        child: KeyPageBuilder(builder: (state) => Text(state.toString())),
+      );
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('builder', find.byWidget(widget));
-  }, surfaceSize: pageSurfaceSize);
+      await expectGoldenFile('builder', find.byWidget(widget));
+    },
+    surfaceSize: pageSurfaceSize,
+  );
 
   testWidgets('throws assertion error when state is not success.', (
     tester,

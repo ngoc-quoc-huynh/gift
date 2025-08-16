@@ -21,22 +21,26 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden('renders correctly.', (tester) async {
-    final cubit = MockValueCubit<LanguageOption>();
-    whenListen(
-      cubit,
-      const Stream<LanguageOption>.empty(),
-      initialState: LanguageOption.english,
-    );
+  testGolden(
+    'renders correctly.',
+    (tester) async {
+      final cubit = MockValueCubit<LanguageOption>();
+      whenListen(
+        cubit,
+        const Stream<LanguageOption>.empty(),
+        initialState: LanguageOption.english,
+      );
 
-    final widget = BlocProvider<LanguageOptionValueCubit>(
-      create: (_) => cubit,
-      child: const SettingsLanguageDialog(),
-    );
-    await tester.pumpGoldenWidget(widget);
+      final widget = BlocProvider<LanguageOptionValueCubit>(
+        create: (_) => cubit,
+        child: const SettingsLanguageDialog(),
+      );
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('language', find.byWidget(widget));
-  }, surfaceSize: const Size(500, 400));
+      await expectGoldenFile('language', find.byWidget(widget));
+    },
+    surfaceSize: const Size(500, 400),
+  );
 
   testWidgets('show returns correctly.', (tester) async {
     final cubit = MockLanguageOptionHydratedValueCubit();

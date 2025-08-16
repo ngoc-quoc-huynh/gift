@@ -22,11 +22,15 @@ void testGolden(
   String description,
   WidgetTesterCallback callback, {
   Size surfaceSize = const Size(800, 600),
-}) => testWidgets(description, (tester) async {
-  await tester.binding.setSurfaceSize(surfaceSize);
-  addTearDown(() => tester.binding.setSurfaceSize(null));
-  return callback.call(tester);
-}, tags: ['golden']);
+}) => testWidgets(
+  description,
+  (tester) async {
+    await tester.binding.setSurfaceSize(surfaceSize);
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    return callback.call(tester);
+  },
+  tags: ['golden'],
+);
 
 const pageSurfaceSize = Size(360, 640);
 

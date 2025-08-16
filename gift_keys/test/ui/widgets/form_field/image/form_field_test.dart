@@ -30,37 +30,45 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden('renders correctly.', (tester) async {
-    final cubit = MockValueCubit<File?>();
-    whenListen(cubit, const Stream<File?>.empty());
+  testGolden(
+    'renders correctly.',
+    (tester) async {
+      final cubit = MockValueCubit<File?>();
+      whenListen(cubit, const Stream<File?>.empty());
 
-    final widget = BlocProvider<FileValueCubit>(
-      create: (_) => cubit,
-      child: const ImagePickerFormField(initialValue: null),
-    );
-    await tester.pumpGoldenWidget(widget);
-
-    await expectGoldenFile('form_field', find.byWidget(widget));
-  }, surfaceSize: const Size.square(180));
-
-  testGolden('renders validator correctly.', (tester) async {
-    final cubit = MockValueCubit<File?>();
-    whenListen(cubit, const Stream<File?>.empty());
-
-    final formKey = GlobalKey<FormState>();
-    final widget = Form(
-      key: formKey,
-      child: BlocProvider<FileValueCubit>(
+      final widget = BlocProvider<FileValueCubit>(
         create: (_) => cubit,
         child: const ImagePickerFormField(initialValue: null),
-      ),
-    );
-    await tester.pumpGoldenWidget(widget);
-    formKey.currentState!.validate();
-    await tester.pump();
+      );
+      await tester.pumpGoldenWidget(widget);
 
-    await expectGoldenFile('form_field_validator', find.byWidget(widget));
-  }, surfaceSize: const Size(350, 180));
+      await expectGoldenFile('form_field', find.byWidget(widget));
+    },
+    surfaceSize: const Size.square(180),
+  );
+
+  testGolden(
+    'renders validator correctly.',
+    (tester) async {
+      final cubit = MockValueCubit<File?>();
+      whenListen(cubit, const Stream<File?>.empty());
+
+      final formKey = GlobalKey<FormState>();
+      final widget = Form(
+        key: formKey,
+        child: BlocProvider<FileValueCubit>(
+          create: (_) => cubit,
+          child: const ImagePickerFormField(initialValue: null),
+        ),
+      );
+      await tester.pumpGoldenWidget(widget);
+      formKey.currentState!.validate();
+      await tester.pump();
+
+      await expectGoldenFile('form_field_validator', find.byWidget(widget));
+    },
+    surfaceSize: const Size(350, 180),
+  );
 
   testWidgets('taps returns correctly.', (tester) async {
     final cubit = MockValueCubit<File?>();
