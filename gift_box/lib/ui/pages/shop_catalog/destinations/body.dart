@@ -7,7 +7,7 @@ import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/static/resources/sizes.dart';
 import 'package:gift_box/ui/pages/shop_catalog/item.dart';
 
-abstract class ShopDestination<Bloc extends ShopItemMetasBloc>
+abstract class ShopDestination<T extends ShopItemMetasBloc>
     extends StatelessWidget {
   const ShopDestination({
     required this.detailRoute,
@@ -20,7 +20,7 @@ abstract class ShopDestination<Bloc extends ShopItemMetasBloc>
   Widget build(BuildContext context) {
     return BlocListener<ShopItemMetasResetBloc, ShopItemMetasResetState>(
       listener: _onShopItemMetasResetStateChanged,
-      child: BlocBuilder<Bloc, ShopItemMetasState>(
+      child: BlocBuilder<T, ShopItemMetasState>(
         builder: (context, state) => switch (state) {
           ShopItemMetasLoadInProgress() => const SizedBox.shrink(),
           ShopItemMetasLoadOnSuccess(:final metas) => ListView.builder(
@@ -52,5 +52,5 @@ abstract class ShopDestination<Bloc extends ShopItemMetasBloc>
   void _onShopItemMetasResetStateChanged(
     BuildContext context,
     ShopItemMetasResetState _,
-  ) => context.read<Bloc>().add(const ShopItemMetasResetEvent());
+  ) => context.read<T>().add(const ShopItemMetasResetEvent());
 }

@@ -6,20 +6,20 @@ part 'enum/cubit.dart';
 part 'enum/types.dart';
 part 'types.dart';
 
-base class HydratedValueCubit<State> extends HydratedCubit<State> {
+base class HydratedValueCubit<T> extends HydratedCubit<T> {
   HydratedValueCubit({
-    required State initialState,
+    required T initialState,
     required this.storageKey,
   }) : super(initialState);
 
   final String storageKey;
 
   @mustCallSuper
-  void update(State newState) => emit(newState);
+  void update(T newState) => emit(newState);
 
   @override
-  State fromJson(Map<String, dynamic> json) => json[storageKey] as State;
+  T fromJson(Map<String, dynamic> json) => json[storageKey] as T;
 
   @override
-  Map<String, dynamic>? toJson(State state) => {storageKey: state};
+  Map<String, dynamic>? toJson(T state) => {storageKey: state};
 }
