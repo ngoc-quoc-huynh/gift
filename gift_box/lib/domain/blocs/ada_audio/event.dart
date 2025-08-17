@@ -5,16 +5,18 @@ sealed class AdaAudioEvent {
   const AdaAudioEvent();
 }
 
-final class AdaAudioInitializeEvent extends AdaAudioEvent {
-  const AdaAudioInitializeEvent(this.id);
+final class AdaAudioPlayUnlockEvent extends AdaAudioEvent {
+  const AdaAudioPlayUnlockEvent(this.id);
 
   final String id;
 }
 
-final class AdaAudioPlayEvent extends AdaAudioEvent {
-  const AdaAudioPlayEvent();
+final class AdaAudioPlayMainEvent extends AdaAudioEvent {
+  const AdaAudioPlayMainEvent();
 }
 
-final class AdaAudioMonitorPlayerStateEvent extends AdaAudioEvent {
-  const AdaAudioMonitorPlayerStateEvent();
+final class AdaAudioUpdateTranscript extends AdaAudioEvent {
+  const AdaAudioUpdateTranscript(this.text);
+
+  final String text;
 }
