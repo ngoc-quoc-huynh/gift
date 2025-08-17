@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_box/domain/blocs/ada_audio/bloc.dart';
 import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/domain/blocs/shop_item_metas/bloc.dart';
 import 'package:gift_box/domain/blocs/shop_item_metas_reset/bloc.dart';
@@ -17,6 +18,7 @@ import 'package:gift_box/ui/pages/shop_catalog/page.dart';
 import 'package:gift_box/ui/pages/shop_detail/page.dart';
 import 'package:gift_box/ui/pages/sink/page.dart';
 import 'package:gift_box/ui/pages/timer/page.dart';
+import 'package:gift_box/ui/widgets/ada/overlay.dart';
 import 'package:go_router/go_router.dart';
 
 final class GoRouterConfig {
@@ -36,29 +38,37 @@ final class GoRouterConfig {
     },
     errorBuilder: (_, state) => ErrorPage(url: state.matchedLocation),
     routes: [
-      _timerRoute,
-      GoRoute(
-        name: AppRoute.sink(),
-        path: '/sink',
-        builder: (_, _) => const SinkPage(),
-      ),
-      _shopRoute,
-      GoRoute(
-        name: AppRoute.settings(),
-        path: '/settings',
-        builder: (_, _) => const SettingsPage(),
-      ),
-      GoRoute(
-        name: AppRoute.license(),
-        path: '/license',
-        builder: (_, _) => const CustomLicensePage(),
+      ShellRoute(
+        builder: (_, _, child) => BlocProvider<AdaAudioBloc>(
+          create: (_) => AdaAudioBloc(),
+          child: AdaOverlay(child: child),
+        ),
+        routes: [
+          _timerRoute,
+          GoRoute(
+            name: AppRoute.sink(),
+            path: '/sink',
+            builder: (_, _) => const SinkPage(),
+          ),
+          _shopRoute,
+          GoRoute(
+            name: AppRoute.settings(),
+            path: '/settings',
+            builder: (_, _) => const SettingsPage(),
+          ),
+          GoRoute(
+            name: AppRoute.license(),
+            path: '/license',
+            builder: (_, _) => const CustomLicensePage(),
+          ),
+        ],
       ),
     ],
   );
 
   static final _shopRoute = ShellRoute(
-    builder: (_, _, child) => BlocProvider<BoolCubit>(
-      create: (_) => BoolCubit(false),
+    builder: (_, _, child) => BlocProvider<WelcomeOverlayCubit>(
+      create: (_) => WelcomeOverlayCubit(false),
       child: child,
     ),
     routes: [

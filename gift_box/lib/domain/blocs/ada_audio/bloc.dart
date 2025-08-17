@@ -9,94 +9,116 @@ import 'package:gift_box/domain/models/ada_audio.dart';
 import 'package:gift_box/domain/models/shop_item_id.dart';
 import 'package:gift_box/injector.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:stream_transform/stream_transform.dart';
 
 part 'event.dart';
 part 'state.dart';
 
 final class AdaAudioBloc extends Bloc<AdaAudioEvent, AdaAudioState> {
-  AdaAudioBloc() : super(const AdaAudioLoadInProgress()) {
-    on<AdaAudioInitializeEvent>(
-      _onAdaAudioInitializeEvent,
-      transformer: droppable(),
+  AdaAudioBloc() : super(const AdaAudioIdle()) {
+    on<AdaAudioPlayUnlockEvent>(
+      _onAdaAudioPlayUnlockEvent,
+      transformer: restartable(),
     );
-    on<AdaAudioPlayEvent>(
-      _onAdaAudioPlayEvent,
-      transformer: droppable(),
+    on<AdaAudioPlayMainEvent>(
+      _onAdaAudioPlayMainEvent,
+      transformer: restartable(),
     );
-    on<AdaAudioMonitorPlayerStateEvent>(
-      _onAdaAudioMonitorPlayerState,
-      transformer: droppable(),
+    on<AdaAudioUpdateTranscript>(
+      _onAdaAudioUpdateTranscript,
+      transformer: restartable(),
     );
   }
 
   AudioPlayer? _audioPlayer;
+  AdaAudio? _audio;
+  StreamSubscription<Duration>? _positionSub;
   static final _shopApi = Injector.instance.shopApi;
 
-  Future<void> _onAdaAudioInitializeEvent(
-    AdaAudioInitializeEvent event,
+  Future<void> _onAdaAudioPlayUnlockEvent(
+    AdaAudioPlayUnlockEvent event,
     Emitter<AdaAudioState> emit,
   ) async {
-    final purchasedItems = await _shopApi.loadPurchasedItemIds();
-    final isAdaUnlocked = purchasedItems.contains(ShopItemId.ada);
-    if (!isAdaUnlocked) {
-      return emit(const AdaAudioLoadOnComplete());
+    emit(const AdaAudioIdle());
+    await _cleanUp();
+
+    if (!await _isUnlocked()) {
+      return emit(const AdaAudioIdle());
     }
 
     _audioPlayer = AudioPlayer();
-    final audio = await _shopApi.loadAdaAudio(event.id);
-    emit(
-      AdaAudioLoadOnSuccess(
-        text: audio.transcript.first.text,
-        audio: audio,
-      ),
-    );
-    await _audioPlayer?.setAsset('assets/audios/ada/unlock.mp3');
-    await _audioPlayer?.play();
+
+    final audio = _audio = await _shopApi.loadAdaAudio(event.id);
+    emit(AdaAudioPlaying(audio.transcript.first.text));
+
+    await _playUnlockAudio();
   }
 
-  Future<void> _onAdaAudioPlayEvent(
-    AdaAudioPlayEvent event,
+  Future<void> _onAdaAudioPlayMainEvent(
+    AdaAudioPlayMainEvent event,
     Emitter<AdaAudioState> emit,
   ) async {
-    if (state case final AdaAudioLoadOnSuccess state) {
-      final AdaAudio(:asset, :transcript) = state.audio;
-      await _audioPlayer?.setAsset(asset());
-      await _audioPlayer?.play();
-      add(const AdaAudioMonitorPlayerStateEvent());
+    if (state is! AdaAudioPlaying) {
+      return;
+    }
 
-      if (_audioPlayer case final audioPlayer?) {
-        await emit.forEach(
-          audioPlayer.positionStream,
-          onData: (position) {
-            final segment = transcript.lastWhereOrNull(
-              (transcript) => position >= transcript.offset,
-            );
+    final audioPlayer = _audioPlayer!;
+    await audioPlayer.setAsset(_audio!.asset());
+    _setTranscriptUpdates();
 
-            return state.copyWith(text: segment?.text);
-          },
+    await audioPlayer.play();
+    await audioPlayer.stop();
+
+    emit(const AdaAudioIdle());
+    await _cleanUp();
+  }
+
+  void _onAdaAudioUpdateTranscript(
+    AdaAudioUpdateTranscript event,
+    Emitter<AdaAudioState> emit,
+  ) {
+    if (state is AdaAudioPlaying) {
+      emit(AdaAudioPlaying(event.text));
+    }
+  }
+
+  Future<void> _playUnlockAudio() async {
+    final audioPlayer = _audioPlayer!;
+    await audioPlayer.setAsset('assets/audios/ada/unlock.mp3');
+    await audioPlayer.play();
+    await audioPlayer.stop();
+  }
+
+  Future<bool> _isUnlocked() async {
+    final purchasedItems = await _shopApi.loadPurchasedItemIds();
+    return purchasedItems.contains(ShopItemId.ada);
+  }
+
+  void _setTranscriptUpdates() => _positionSub = _audioPlayer!.positionStream
+      .throttle(const Duration(milliseconds: 500))
+      .listen((position) {
+        final segment = _audio!.transcript.lastWhereOrNull(
+          (transcript) => position >= transcript.offset,
         );
-      }
-    }
-  }
 
-  Future<void> _onAdaAudioMonitorPlayerState(
-    AdaAudioMonitorPlayerStateEvent event,
-    Emitter<AdaAudioState> emit,
-  ) async {
-    if (_audioPlayer case final audioPlayer?) {
-      await emit.forEach(
-        audioPlayer.playerStateStream,
-        onData: (playerState) => switch (playerState.processingState) {
-          ProcessingState.completed => const AdaAudioLoadOnComplete(),
-          _ => state,
-        },
-      );
-    }
+        if (segment?.text case final text?) {
+          add(AdaAudioUpdateTranscript(text));
+        }
+      });
+
+  Future<void> _cleanUp() async {
+    await Future.wait([
+      ?_audioPlayer?.dispose(),
+      ?_positionSub?.cancel(),
+    ]);
+    _audioPlayer = null;
+    _audio = null;
+    _positionSub = null;
   }
 
   @override
   Future<void> close() async {
-    await _audioPlayer?.dispose();
+    await _cleanUp();
     return super.close();
   }
 }
