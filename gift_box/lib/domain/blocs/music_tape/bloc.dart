@@ -74,7 +74,7 @@ final class MusicTapeBloc extends HydratedBloc<MusicTapeEvent, bool> {
     Emitter<bool> emit,
   ) {
     final volume = switch (event.isDucked) {
-      true => 0.3,
+      true => 0.5,
       false => 1.0,
     };
     unawaited(_audioPlayer?.setVolume(volume));
