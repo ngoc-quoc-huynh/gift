@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/gift_box/bloc.dart';
@@ -20,6 +22,7 @@ class GiftBox extends StatefulWidget {
 class _GiftBoxState extends State<GiftBox> {
   BooleanInput? _isCorrect;
   BooleanInput? _isWrong;
+  static final _nativeApi = Injector.instance.nativeApi;
 
   @override
   void dispose() {
@@ -53,12 +56,18 @@ class _GiftBoxState extends State<GiftBox> {
     stateMachine.addEventListener(_onRiveEvent);
   }
 
-  void _onGiftBoxStateChanged(BuildContext _, GiftBoxState state) =>
-      switch (state) {
-        GiftBoxIdle() => null,
-        GiftBoxOpenOnSuccess() => _isCorrect?.value = true,
-        GiftBoxOpenOnFailure() => _isWrong?.value = true,
-      };
+  void _onGiftBoxStateChanged(BuildContext _, GiftBoxState state) {
+    switch (state) {
+      case GiftBoxIdle():
+        break;
+      case GiftBoxOpenOnSuccess():
+        _isCorrect?.value = true;
+        unawaited(_nativeApi.vibrate());
+      case GiftBoxOpenOnFailure():
+        _isWrong?.value = true;
+        unawaited(_nativeApi.vibrate());
+    }
+  }
 
   void _onRiveEvent(Event event) => switch (event.name) {
     'Animation end event' =>
