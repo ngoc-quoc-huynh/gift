@@ -4,6 +4,7 @@ import 'package:gift_box/domain/interfaces/native.dart';
 import 'package:gift_box/domain/models/locale.dart';
 import 'package:gift_box/injector.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vibration/vibration.dart';
 
 final class NativeRepository implements NativeApi {
   const NativeRepository(this.widgetsBinding);
@@ -47,4 +48,7 @@ final class NativeRepository implements NativeApi {
         .where((asset) => asset.startsWith(prefix))
         .toList();
   }
+
+  @override
+  Future<void> vibrate() => Vibration.vibrate(duration: 50);
 }

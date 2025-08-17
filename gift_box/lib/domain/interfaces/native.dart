@@ -10,4 +10,6 @@ abstract interface class NativeApi {
   Future<List<String>> loadImagePaths();
 
   Future<List<String>> loadMusicTape();
+
+  Future<void> vibrate();
 }
