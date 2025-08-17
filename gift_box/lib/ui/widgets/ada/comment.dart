@@ -23,7 +23,7 @@ class AdaComment extends StatelessWidget {
         duration: Sizes.adaAnimationDuration,
         child: BlocBuilder<AdaAudioBloc, AdaAudioState>(
           builder: (context, state) => switch (state) {
-            AdaAudioLoadOnSuccess(:final text) => _Body(text),
+            AdaAudioPlaying(:final text) => _Body(text),
             _ => const SizedBox.shrink(),
           },
         ),

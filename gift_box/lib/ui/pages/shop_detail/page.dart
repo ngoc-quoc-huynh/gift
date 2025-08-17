@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gift_box/domain/blocs/ada_audio/bloc.dart';
 import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/domain/blocs/music_tape/bloc.dart';
 import 'package:gift_box/domain/blocs/shop_item/bloc.dart';
@@ -15,7 +16,6 @@ import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/sizes.dart';
 import 'package:gift_box/ui/pages/shop_detail/confirmation_dialog.dart';
-import 'package:gift_box/ui/widgets/ada/ada.dart';
 import 'package:gift_box/ui/widgets/asset_image.dart';
 import 'package:gift_box/ui/widgets/coupon_display.dart';
 import 'package:go_router/go_router.dart';
@@ -121,11 +121,11 @@ sealed class ShopDetailPage<T extends ShopItemMetasBloc>
     if (context.mounted && hasBought) {
       context
         ..read<T>().add(ShopItemMetasBuyEvent(id))
+        ..read<AdaAudioBloc>().add(AdaAudioPlayUnlockEvent(id))
         ..pop();
 
       final cubit = context.read<HydratedIntCubit>();
       cubit.update(cubit.state - price);
-      Ada.show(context, id);
 
       _applyShopItemEffect(context, id);
     }
