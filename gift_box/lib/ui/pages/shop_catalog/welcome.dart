@@ -22,7 +22,7 @@ class _WelcomeOverlayState extends State<WelcomeOverlay> {
   @override
   void initState() {
     super.initState();
-    if (!context.read<BoolCubit>().state) {
+    if (!context.read<WelcomeOverlayCubit>().state) {
       _controller.show();
     }
   }
@@ -40,7 +40,7 @@ class _WelcomeOverlayState extends State<WelcomeOverlay> {
 
   void _onWelcomeAnimationEnd() {
     _controller.hide();
-    context.read<BoolCubit>().update(true);
+    context.read<WelcomeOverlayCubit>().update(true);
   }
 }
 
