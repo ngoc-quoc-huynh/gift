@@ -1,4 +1,6 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
+import 'package:gift_box/domain/utils/extensions/build_context.dart';
 
 class SettingsItem extends StatelessWidget {
   const SettingsItem({
@@ -26,6 +28,7 @@ class SettingsItem extends StatelessWidget {
       false => (null, 0.3),
       true => (this.onPressed, 1.0),
     };
+    final iconColor = this.iconColor.harmonizeWith(context.colorScheme.primary);
 
     return ListTile(
       leading: SizedBox.square(
