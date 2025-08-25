@@ -17,15 +17,13 @@ final class LocalShopRepository implements ShopApi {
   final Box<bool> _box;
 
   @override
-  FutureOr<List<ShopItemMeta>> loadCustomizerMetas() =>
-      _loadMetas(_customizerKeys);
-
-  @override
-  FutureOr<List<ShopItemMeta>> loadEquipmentMetas() =>
-      _loadMetas(_equipmentKeys);
-
-  @override
-  FutureOr<List<ShopItemMeta>> loadSpecialMetas() => _loadMetas(_specialKey);
+  FutureOr<List<ShopItemMeta>> loadMetas() => ShopItemKey.values
+      .map(
+        (id) => _rawItems[id]!.toMeta(
+          isPurchased: _loadIsItemPurchased(id),
+        ),
+      )
+      .toList(growable: false);
 
   @override
   FutureOr<ShopItem> loadItem(String id) =>
@@ -176,28 +174,7 @@ final class LocalShopRepository implements ShopApi {
     ),
   };
 
-  static const _customizerKeys = [
-    ShopItemKey.darkMode,
-    ShopItemKey.germanDrive,
-  ];
-
-  static const _specialKey = [
-    ShopItemKey.ada,
-    ShopItemKey.reset,
-    ShopItemKey.musicTape,
-  ];
-
-  static const _equipmentKeys = [ShopItemKey.coffeeCup];
-
   bool _loadIsItemPurchased(ShopItemKey key) => _box.get(key.id) ?? false;
-
-  List<ShopItemMeta> _loadMetas(List<ShopItemKey> keys) => keys
-      .map(
-        (id) => _rawItems[id]!.toMeta(
-          isPurchased: _loadIsItemPurchased(id),
-        ),
-      )
-      .toList();
 
   static TranslationsPagesShopCatalogItemsEn get _translations =>
       Injector.instance.translations.pages.shopCatalog.items;
