@@ -11,10 +11,8 @@ import 'package:gift_box/injector.dart';
 part 'event.dart';
 part 'state.dart';
 
-sealed class ShopItemMetasBloc
-    extends Bloc<ShopItemMetasEvent, ShopItemMetasState> {
-  ShopItemMetasBloc(this._lodMetas)
-    : super(const ShopItemMetasLoadInProgress()) {
+class ShopItemMetasBloc extends Bloc<ShopItemMetasEvent, ShopItemMetasState> {
+  ShopItemMetasBloc() : super(const ShopItemMetasLoadInProgress()) {
     on<ShopItemMetasInitializeEvent>(
       _onShopItemMetasInitializeEvent,
       transformer: droppable(),
@@ -23,15 +21,7 @@ sealed class ShopItemMetasBloc
       _onShopItemMetasBuyEvent,
       transformer: droppable(),
     );
-    on<ShopItemMetasResetEvent>(
-      _onShopItemMetasResetEvent,
-      transformer: droppable(),
-    );
   }
-
-  static final _permanentIds = {ShopItemId.ada.id, ShopItemId.coffeeCup.id};
-
-  final FutureOr<List<ShopItemMeta>> Function() _lodMetas;
 
   @protected
   static final shopApi = Injector.instance.shopApi;
@@ -40,14 +30,14 @@ sealed class ShopItemMetasBloc
     ShopItemMetasInitializeEvent event,
     Emitter<ShopItemMetasState> emit,
   ) async {
-    final metas = await _lodMetas();
+    final metas = await shopApi.loadMetas();
     emit(ShopItemMetasLoadOnSuccess(metas));
   }
 
-  void _onShopItemMetasBuyEvent(
+  Future<void> _onShopItemMetasBuyEvent(
     ShopItemMetasBuyEvent event,
     Emitter<ShopItemMetasState> emit,
-  ) {
+  ) async {
     if (state case ShopItemMetasLoadOnSuccess(:final metas)) {
       unawaited(shopApi.buyItem(event.id));
       final newMetas = List.of(metas);
@@ -58,37 +48,12 @@ sealed class ShopItemMetasBloc
         emit(ShopItemMetasLoadOnSuccess(newMetas));
       }
     }
-  }
 
-  void _onShopItemMetasResetEvent(
-    ShopItemMetasResetEvent event,
-    Emitter<ShopItemMetasState> emit,
-  ) {
-    if (state case ShopItemMetasLoadOnSuccess(:final metas)) {
-      final newMetas = List.of(metas)
-          .map(
-            (meta) => switch (_permanentIds.contains(meta.id)) {
-              false => meta.copyWith(isPurchased: false),
-              true => meta,
-            },
-          )
-          .toList();
-      emit(ShopItemMetasLoadOnSuccess(newMetas));
+    if (ShopItemId.byId(event.id) == ShopItemId.reset) {
+      emit(const ShopItemMetasLoadInProgress());
+      await shopApi.resetPurchasedItems();
+      final metas = await shopApi.loadMetas();
+      emit(ShopItemMetasLoadOnSuccess(metas));
     }
   }
-}
-
-final class ShopItemMetasSpecialsBloc extends ShopItemMetasBloc {
-  ShopItemMetasSpecialsBloc()
-    : super(ShopItemMetasBloc.shopApi.loadSpecialMetas);
-}
-
-final class ShopItemMetasCustomizerBloc extends ShopItemMetasBloc {
-  ShopItemMetasCustomizerBloc()
-    : super(ShopItemMetasBloc.shopApi.loadCustomizerMetas);
-}
-
-final class ShopItemMetasEquipmentBloc extends ShopItemMetasBloc {
-  ShopItemMetasEquipmentBloc()
-    : super(ShopItemMetasBloc.shopApi.loadEquipmentMetas);
 }
