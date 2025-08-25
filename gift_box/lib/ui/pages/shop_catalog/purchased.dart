@@ -1,25 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
-import 'package:gift_box/static/resources/colors.dart';
 
 class ShopCatalogPurchased extends StatelessWidget {
   const ShopCatalogPurchased({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
+    final primaryColor = theme.colorScheme.primary;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       spacing: 5,
       children: [
-        const Icon(
+        Icon(
           Icons.check,
-          color: CustomColors.orange,
+          color: primaryColor,
         ),
         Text(
           Injector.instance.translations.pages.shopCatalog.purchased,
-          style: context.textTheme.bodyLarge?.copyWith(
-            color: CustomColors.orange,
+          style: theme.textTheme.bodyLarge?.copyWith(
+            color: primaryColor,
             fontWeight: FontWeight.w600,
           ),
         ),

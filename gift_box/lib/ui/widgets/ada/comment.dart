@@ -1,3 +1,4 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/ada_audio/bloc.dart';
@@ -60,17 +61,27 @@ class _BodyState extends State<_Body> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
+    final colorScheme = theme.colorScheme;
+
     return SizedBox(
       key: _key,
       width: context.screenSize.width * 0.9,
       child: Material(
         child: ColoredBox(
-          color: Colors.black.withValues(alpha: 0.8),
+          color: Colors.black
+              .harmonizeWith(colorScheme.primary)
+              .withValues(alpha: 0.8),
           child: Padding(
             padding: const EdgeInsets.all(20),
             child: Text(
               widget.text,
-              style: const TextStyle(color: Colors.white),
+              style: theme.textTheme.bodyMedium?.copyWith(
+                color: switch (theme.brightness) {
+                  Brightness.dark => colorScheme.inverseSurface,
+                  Brightness.light => colorScheme.surface,
+                }.harmonizeWith(colorScheme.primary),
+              ),
             ),
           ),
         ),
