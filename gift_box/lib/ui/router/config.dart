@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/ada_audio/bloc.dart';
 import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/domain/blocs/shop_item_metas/bloc.dart';
-import 'package:gift_box/domain/blocs/shop_item_metas_reset/bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
 import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/ui/pages/error/page.dart';
@@ -81,28 +80,15 @@ final class GoRouterConfig {
             navigatorKey: _shopKey,
             builder: (_, _, child) => MultiBlocProvider(
               providers: [
-                BlocProvider<ShopItemMetasResetBloc>(
-                  create: (_) => ShopItemMetasResetBloc(),
-                ),
                 BlocProvider<HydratedIntCubit>(
                   create: (_) => HydratedIntCubit(
                     initialState: 10,
                     storageKey: 'coupon_amount',
                   ),
                 ),
-                BlocProvider<ShopItemMetasCustomizerBloc>(
+                BlocProvider<ShopItemMetasBloc>(
                   create: (_) =>
-                      ShopItemMetasCustomizerBloc()
-                        ..add(const ShopItemMetasInitializeEvent()),
-                ),
-                BlocProvider<ShopItemMetasEquipmentBloc>(
-                  create: (_) =>
-                      ShopItemMetasEquipmentBloc()
-                        ..add(const ShopItemMetasInitializeEvent()),
-                ),
-                BlocProvider<ShopItemMetasSpecialsBloc>(
-                  create: (_) =>
-                      ShopItemMetasSpecialsBloc()
+                      ShopItemMetasBloc()
                         ..add(const ShopItemMetasInitializeEvent()),
                 ),
               ],
@@ -128,7 +114,7 @@ final class GoRouterConfig {
                             parentNavigatorKey: _shopKey,
                             name: AppRoute.shopSpecialsDetail(),
                             path: ':id',
-                            builder: (_, state) => ShopSpecialsDetailPage(
+                            builder: (_, state) => ShopDetailPage(
                               id: state.pathParameters['id']!,
                             ),
                           ),
@@ -147,7 +133,7 @@ final class GoRouterConfig {
                             parentNavigatorKey: _shopKey,
                             name: AppRoute.shopCustomizerDetail(),
                             path: ':id',
-                            builder: (_, state) => ShopCustomizerDetailPage(
+                            builder: (_, state) => ShopDetailPage(
                               id: state.pathParameters['id']!,
                             ),
                           ),
@@ -166,7 +152,7 @@ final class GoRouterConfig {
                             parentNavigatorKey: _shopKey,
                             name: AppRoute.shopEquipmentDetail(),
                             path: ':id',
-                            builder: (_, state) => ShopEquipmentsDetailPage(
+                            builder: (_, state) => ShopDetailPage(
                               id: state.pathParameters['id']!,
                             ),
                           ),

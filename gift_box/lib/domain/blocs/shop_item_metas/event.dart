@@ -14,7 +14,3 @@ final class ShopItemMetasBuyEvent extends ShopItemMetasEvent {
 
   final String id;
 }
-
-final class ShopItemMetasResetEvent extends ShopItemMetasEvent {
-  const ShopItemMetasResetEvent();
-}
