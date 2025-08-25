@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/image_carousel/cubit.dart';
@@ -84,18 +85,22 @@ class _Item extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.theme;
+
     return DecoratedBox(
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(path),
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
-            Colors.black.withValues(
-              alpha: switch (context.theme.brightness) {
-                Brightness.light => 0,
-                Brightness.dark => 0.2,
-              },
-            ),
+            Colors.black
+                .harmonizeWith(theme.colorScheme.primary)
+                .withValues(
+                  alpha: switch (theme.brightness) {
+                    Brightness.light => 0,
+                    Brightness.dark => 0.2,
+                  },
+                ),
             BlendMode.darken,
           ),
         ),

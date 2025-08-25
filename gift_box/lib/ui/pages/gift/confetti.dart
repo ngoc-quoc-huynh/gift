@@ -1,11 +1,13 @@
 import 'dart:math';
 
 import 'package:confetti/confetti.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 
 class GiftConfetti extends StatefulWidget {
   const GiftConfetti({required this.child, super.key});
+
   final Widget child;
 
   @override
@@ -34,6 +36,7 @@ class _GiftConfettiState extends State<GiftConfetti> {
       < 600 => (const Size(20, 10), const Size(30, 15)),
       _ => (const Size(60, 30), const Size(90, 45)),
     };
+    final primaryColor = context.colorScheme.primary;
 
     return ConfettiWidget(
       confettiController: _controller,
@@ -43,7 +46,9 @@ class _GiftConfettiState extends State<GiftConfetti> {
       minimumSize: minimumSize,
       maximumSize: maximumSize,
       shouldLoop: true,
-      colors: Colors.primaries,
+      colors: Colors.primaries
+          .map((color) => color.harmonizeWith(primaryColor))
+          .toList(growable: false),
       createParticlePath: _drawStar,
       child: widget.child,
     );

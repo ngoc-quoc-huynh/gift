@@ -4,6 +4,7 @@ import 'package:gift_box/domain/models/asset.dart';
 import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
+import 'package:gift_box/static/resources/colors.dart';
 import 'package:gift_box/static/resources/sizes.dart';
 import 'package:gift_box/ui/widgets/rive_player.dart';
 
@@ -14,7 +15,9 @@ class ShopPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textStyle = TextTheme.of(context).headlineLarge;
+    final textStyle = context.textTheme.headlineLarge?.copyWith(
+      color: CustomColors.darkGrey,
+    );
 
     return Scaffold(
       backgroundColor: Colors.white,
