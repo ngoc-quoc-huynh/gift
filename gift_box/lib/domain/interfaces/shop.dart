@@ -8,11 +8,7 @@ import 'package:gift_box/domain/models/shop_item_meta.dart';
 abstract interface class ShopApi {
   const ShopApi();
 
-  FutureOr<List<ShopItemMeta>> loadCustomizerMetas();
-
-  FutureOr<List<ShopItemMeta>> loadEquipmentMetas();
-
-  FutureOr<List<ShopItemMeta>> loadSpecialMetas();
+  FutureOr<List<ShopItemMeta>> loadMetas();
 
   FutureOr<ShopItem> loadItem(String id);
 

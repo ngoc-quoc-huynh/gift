@@ -8,7 +8,6 @@ import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/domain/blocs/music_tape/bloc.dart';
 import 'package:gift_box/domain/blocs/shop_item/bloc.dart';
 import 'package:gift_box/domain/blocs/shop_item_metas/bloc.dart';
-import 'package:gift_box/domain/blocs/shop_item_metas_reset/bloc.dart';
 import 'package:gift_box/domain/models/locale.dart';
 import 'package:gift_box/domain/models/shop_item.dart';
 import 'package:gift_box/domain/models/shop_item_id.dart';
@@ -22,8 +21,7 @@ import 'package:go_router/go_router.dart';
 
 // ignore_for_file: prefer-single-widget-per-file
 
-sealed class ShopDetailPage<T extends ShopItemMetasBloc>
-    extends StatelessWidget {
+class ShopDetailPage extends StatelessWidget {
   const ShopDetailPage({required this.id, super.key});
 
   final String id;
@@ -120,7 +118,7 @@ sealed class ShopDetailPage<T extends ShopItemMetasBloc>
 
     if (context.mounted && hasBought) {
       context
-        ..read<T>().add(ShopItemMetasBuyEvent(id))
+        ..read<ShopItemMetasBloc>().add(ShopItemMetasBuyEvent(id))
         ..read<AdaAudioBloc>().add(AdaAudioPlayUnlockEvent(id))
         ..pop();
 
@@ -148,17 +146,14 @@ sealed class ShopDetailPage<T extends ShopItemMetasBloc>
           ..read<HydratedTranslationLocalePreferenceCubit>().update(
             TranslationLocalePreference.english,
           )
-          ..read<ShopItemMetasResetBloc>().add(
-            const ShopItemMetasResetInitializeEvent(),
-          )
           ..read<MusicTapeBloc>().add(const MusicTapeStopEvent())
           ..read<HydratedIntCubit>().update(
             10 -
-                getPriceIfPurchased<ShopItemMetasSpecialsBloc>(
+                getPriceIfPurchased(
                   context,
                   ShopItemId.ada,
                 ) -
-                getPriceIfPurchased<ShopItemMetasEquipmentBloc>(
+                getPriceIfPurchased(
                   context,
                   ShopItemId.coffeeCup,
                 ),
@@ -168,10 +163,10 @@ sealed class ShopDetailPage<T extends ShopItemMetasBloc>
     }
   }
 
-  int getPriceIfPurchased<B extends ShopItemMetasBloc>(
+  int getPriceIfPurchased(
     BuildContext context,
     ShopItemId id,
-  ) => switch (context.read<B>().state) {
+  ) => switch (context.read<ShopItemMetasBloc>().state) {
     ShopItemMetasLoadOnSuccess(:final metas) =>
       metas
               .firstWhereOrNull(
@@ -184,19 +179,4 @@ sealed class ShopDetailPage<T extends ShopItemMetasBloc>
 
   static TranslationsPagesShopItemEn get _translations =>
       Injector.instance.translations.pages.shopItem;
-}
-
-final class ShopCustomizerDetailPage
-    extends ShopDetailPage<ShopItemMetasCustomizerBloc> {
-  const ShopCustomizerDetailPage({required super.id, super.key});
-}
-
-final class ShopEquipmentsDetailPage
-    extends ShopDetailPage<ShopItemMetasEquipmentBloc> {
-  const ShopEquipmentsDetailPage({required super.id, super.key});
-}
-
-final class ShopSpecialsDetailPage
-    extends ShopDetailPage<ShopItemMetasSpecialsBloc> {
-  const ShopSpecialsDetailPage({required super.id, super.key});
 }
