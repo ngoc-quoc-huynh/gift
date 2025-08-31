@@ -15,13 +15,13 @@ class RiveKey extends StatefulWidget {
 }
 
 class _RiveKeyState extends State<RiveKey> {
-  late StateMachineController _controller;
-  late SMIBool _isCorrect;
-  late SMIBool _isWrong;
+  BooleanInput? _isCorrect;
+  BooleanInput? _isWrong;
 
   @override
   void dispose() {
-    _controller.dispose();
+    _isCorrect?.dispose();
+    _isWrong?.dispose();
     super.dispose();
   }
 
@@ -29,35 +29,38 @@ class _RiveKeyState extends State<RiveKey> {
   Widget build(BuildContext context) {
     return BlocListener<NfcDiscoveryBloc, NfcDiscoveryState>(
       listener: _onNfcDiscoveryStateChanged,
-      child: RiveAnimation.asset(
-        Assets.key(),
-        fit: BoxFit.contain,
-        artboard: 'Key',
-        stateMachines: const ['State Machine'],
-        onInit: _onInit,
+      child: RiveWidgetBuilder(
+        fileLoader: FileLoader.fromAsset(
+          Assets.key(),
+          riveFactory: Factory.rive,
+        ),
+        onLoaded: _onLoaded,
+        builder: (context, state) => switch (state) {
+          RiveLoaded() => RiveWidget(
+            controller: state.controller,
+          ),
+          _ => const SizedBox.shrink(),
+        },
       ),
     );
   }
 
-  void _onInit(Artboard artboard) {
-    _controller = StateMachineController.fromArtboard(
-      artboard,
-      'State Machine',
-    )!..addEventListener(_onRiveEvent);
-    _isCorrect = _controller.getBoolInput('Is key correct')!;
-    _isWrong = _controller.getBoolInput('Is key wrong')!;
-    artboard.addController(_controller);
+  void _onLoaded(RiveLoaded state) {
+    final stateMachine = state.controller.stateMachine;
+    _isCorrect = stateMachine.boolean('Is key correct');
+    _isWrong = stateMachine.boolean('Is key wrong');
+    stateMachine.addEventListener(_onRiveEvent);
   }
 
-  void _onRiveEvent(RiveEvent event) => switch (event.name) {
+  void _onRiveEvent(Event event) => switch (event.name) {
     'Animation end event' => null,
     _ => null,
   };
 
   bool? _onNfcDiscoveryStateChanged(BuildContext _, NfcDiscoveryState state) =>
       switch (state) {
-        NfcDiscoveryConnectOnSuccess() => _isCorrect.change(true),
-        NfcDiscoveryConnectOnFailure() => _isWrong.change(true),
+        NfcDiscoveryConnectOnSuccess() => _isCorrect?.value = true,
+        NfcDiscoveryConnectOnFailure() => _isWrong?.value = true,
         NfcDiscoveryLoadInProgress() || NfcDiscoveryConnectInProgress() => null,
       };
 }

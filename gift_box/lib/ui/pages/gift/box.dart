@@ -8,7 +8,7 @@ import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/config.dart';
 import 'package:gift_box/ui/widgets/rive_player.dart';
-import 'package:rive_native/rive_native.dart';
+import 'package:rive/rive.dart';
 
 class GiftBox extends StatefulWidget {
   const GiftBox({super.key});
@@ -18,8 +18,15 @@ class GiftBox extends StatefulWidget {
 }
 
 class _GiftBoxState extends State<GiftBox> {
-  late BooleanInput _isCorrect;
-  late BooleanInput _isWrong;
+  BooleanInput? _isCorrect;
+  BooleanInput? _isWrong;
+
+  @override
+  void dispose() {
+    _isCorrect?.dispose();
+    _isWrong?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +40,15 @@ class _GiftBoxState extends State<GiftBox> {
         child: RivePlayer(
           asset: Asset.gift(),
           artboardName: 'Gift',
-          withStateMachine: _onInit,
+          onLoaded: _onInit,
         ),
       ),
     );
   }
 
   void _onInit(StateMachine stateMachine) {
-    _isCorrect = stateMachine.boolean('Is key correct')!;
-    _isWrong = stateMachine.boolean('Is key wrong')!;
+    _isCorrect = stateMachine.boolean('Is key correct');
+    _isWrong = stateMachine.boolean('Is key wrong');
     stateMachine.number('Skin number')!.value = Config.skin.index.toDouble();
     stateMachine.addEventListener(_onRiveEvent);
   }
@@ -49,8 +56,8 @@ class _GiftBoxState extends State<GiftBox> {
   void _onGiftBoxStateChanged(BuildContext _, GiftBoxState state) =>
       switch (state) {
         GiftBoxIdle() => null,
-        GiftBoxOpenOnSuccess() => _isCorrect.value = true,
-        GiftBoxOpenOnFailure() => _isWrong.value = true,
+        GiftBoxOpenOnSuccess() => _isCorrect?.value = true,
+        GiftBoxOpenOnFailure() => _isWrong?.value = true,
       };
 
   void _onRiveEvent(Event event) => switch (event.name) {

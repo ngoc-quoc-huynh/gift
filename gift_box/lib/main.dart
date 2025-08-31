@@ -5,11 +5,14 @@ import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/theme.dart';
 import 'package:gift_box/ui/router/config.dart';
-import 'package:rive_native/rive_native.dart';
+import 'package:rive/rive.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Future.wait([Injector.setupDependencies(), RiveNative.init()]);
+  await Future.wait([
+    Injector.setupDependencies(),
+    RiveNative.init(),
+  ]);
   runApp(const App());
 }
 

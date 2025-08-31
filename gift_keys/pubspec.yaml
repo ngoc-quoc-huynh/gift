@@ -30,7 +30,7 @@ dependencies:
 
   # UI
   dynamic_color: ^1.7.0
-  rive: ^0.13.20
+  rive: ^0.14.0-dev.6
 
   # Utils
   clock: ^1.1.2

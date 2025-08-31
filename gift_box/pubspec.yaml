@@ -24,7 +24,7 @@ dependencies:
 
   # UI
   confetti: ^0.8.0
-  rive_native: ^0.0.9
+  rive: ^0.14.0-dev.6
 
   # Utils
   clock: ^1.1.2

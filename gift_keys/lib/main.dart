@@ -10,10 +10,14 @@ import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/theme.dart';
 import 'package:gift_keys/ui/router/config.dart';
+import 'package:rive/rive.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Injector.setupDependencies();
+  await Future.wait([
+    Injector.setupDependencies(),
+    RiveNative.init(),
+  ]);
   runApp(const App());
 }
 
