@@ -5,6 +5,7 @@ import 'package:gift_box/domain/blocs/music_tape/bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
 import 'package:gift_box/ui/widgets/ada/comment.dart';
 import 'package:gift_box/ui/widgets/ada/rive.dart';
+import 'package:gift_box/ui/widgets/max_width_box.dart';
 
 class AdaOverlay extends StatefulWidget {
   const AdaOverlay({required this.child, super.key});
@@ -63,15 +64,17 @@ class _Overlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        BlocListener<BoolCubit, bool>(
-          listener: _onBoolCubitStateChanged,
-          child: const AdaComment(),
-        ),
-        const AdaRive(),
-      ],
+    return MaxWidthBox(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          BlocListener<BoolCubit, bool>(
+            listener: _onBoolCubitStateChanged,
+            child: const AdaComment(),
+          ),
+          const AdaRive(),
+        ],
+      ),
     );
   }
 

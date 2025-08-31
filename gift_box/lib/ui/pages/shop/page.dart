@@ -6,6 +6,7 @@ import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/colors.dart';
 import 'package:gift_box/static/resources/sizes.dart';
+import 'package:gift_box/ui/widgets/max_width_box.dart';
 import 'package:gift_box/ui/widgets/rive_player.dart';
 
 class ShopPage extends StatelessWidget {
@@ -35,24 +36,26 @@ class ShopPage extends StatelessWidget {
                   horizontal: Sizes.horizontalPadding,
                   vertical: Sizes.verticalPadding,
                 ),
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: AnimatedTextKit(
-                    repeatForever: true,
-                    pause: const Duration(seconds: 3),
-                    animatedTexts: [
-                      TyperAnimatedText(
-                        _translations.volumeUp,
-                        textStyle: textStyle,
-                        speed: _typerAnimationSpeed,
-                      ),
-                      TyperAnimatedText(
-                        _translations.tap,
-                        textAlign: TextAlign.center,
-                        textStyle: textStyle,
-                        speed: _typerAnimationSpeed,
-                      ),
-                    ],
+                child: MaxWidthBox(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: AnimatedTextKit(
+                      repeatForever: true,
+                      pause: const Duration(seconds: 3),
+                      animatedTexts: [
+                        TyperAnimatedText(
+                          _translations.volumeUp,
+                          textStyle: textStyle,
+                          speed: _typerAnimationSpeed,
+                        ),
+                        TyperAnimatedText(
+                          _translations.tap,
+                          textAlign: TextAlign.center,
+                          textStyle: textStyle,
+                          speed: _typerAnimationSpeed,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

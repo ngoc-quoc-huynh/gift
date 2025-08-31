@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/colors.dart';
+import 'package:gift_box/ui/widgets/max_width_box.dart';
 
 class WelcomeOverlay extends StatefulWidget {
   const WelcomeOverlay({
@@ -116,7 +117,7 @@ class _OverlayState extends State<_Overlay>
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Center(
+    return MaxWidthBox(
       child: SizeTransition(
         sizeFactor: _boxScaleAnimation,
         child: SizedBox(
