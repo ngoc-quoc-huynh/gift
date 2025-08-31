@@ -8,14 +8,16 @@ class CustomLicensePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LicensePage(
-      applicationName: Injector.instance.translations.appName,
+      applicationName: _translations.appName,
       applicationVersion: Injector.instance.packageInfo.version,
+      applicationLegalese: _translations.pages.settings.license.legalese,
       applicationIcon: Image.asset(
         Asset.launcherIcon(),
         width: 75,
         height: 75,
       ),
-      applicationLegalese: 'Stefan',
     );
   }
+
+  Translations get _translations => Injector.instance.translations;
 }
