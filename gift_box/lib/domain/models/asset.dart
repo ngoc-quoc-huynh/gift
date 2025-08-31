@@ -21,7 +21,10 @@ enum Asset {
   // Rive files
   gift('rive/gift.riv')
   ,
-  satisfactory('rive/satisfactory.riv');
+  satisfactory('rive/satisfactory.riv'),
+
+  // Others
+  launcherIcon('images/launcher_icon.webp');
 
   const Asset(this.path);
 
