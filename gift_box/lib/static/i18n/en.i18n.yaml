@@ -96,6 +96,7 @@ pages:
       feedback: 'Language has been updated successfully.'
     license:
       label: 'External Libraries and License'
+      legalese: '© 2025 Ngoc Quoc Huynh\n\nThis app includes software licensed under the BSD 3-Clause License. \nFor license terms and conditions, see gift_box.'
     music:
       label: 'Music'
       enabled: 'Enabled'
