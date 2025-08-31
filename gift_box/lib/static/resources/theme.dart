@@ -24,6 +24,7 @@ final class CustomTheme {
     required ColorScheme colorScheme,
     required TextTheme textTheme,
   }) => ThemeData(
+    appBarTheme: const AppBarTheme(centerTitle: true),
     colorScheme: colorScheme,
     textTheme: textTheme.apply(
       bodyColor: colorScheme.onSurface,
@@ -34,6 +35,10 @@ final class CustomTheme {
         left: Sizes.horizontalPadding,
         right: Sizes.horizontalPadding,
         bottom: Sizes.verticalPadding / 2,
+      ),
+      constraints: BoxConstraints(
+        minWidth: 280,
+        maxWidth: Sizes.maxWidgetWidthConstraint,
       ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(20)),

@@ -17,6 +17,7 @@ import 'package:gift_box/ui/pages/settings/dialogs/language.dart';
 import 'package:gift_box/ui/pages/settings/item.dart';
 import 'package:gift_box/ui/pages/settings/section.dart';
 import 'package:gift_box/ui/widgets/loading_indicator.dart';
+import 'package:gift_box/ui/widgets/max_width_box.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -29,14 +30,17 @@ class SettingsPage extends StatelessWidget {
           title: Text(_translations.appBar),
         ),
         bottomNavigationBar: const SettingsAppVersion(),
-        body: BlocProvider<PurchasedItemsBloc>(
-          create: (_) =>
-              PurchasedItemsBloc()..add(const PurchasedItemsInitializeEvent()),
-          child: BlocBuilder<PurchasedItemsBloc, PurchasedItemsState>(
-            builder: (context, state) => switch (state) {
-              PurchasedItemsLoadInProgress() => const LoadingIndicator(),
-              PurchasedItemsLoadOnSuccess(:final ids) => _Body(ids),
-            },
+        body: MaxWidthBox(
+          child: BlocProvider<PurchasedItemsBloc>(
+            create: (_) =>
+                PurchasedItemsBloc()
+                  ..add(const PurchasedItemsInitializeEvent()),
+            child: BlocBuilder<PurchasedItemsBloc, PurchasedItemsState>(
+              builder: (context, state) => switch (state) {
+                PurchasedItemsLoadInProgress() => const LoadingIndicator(),
+                PurchasedItemsLoadOnSuccess(:final ids) => _Body(ids),
+              },
+            ),
           ),
         ),
       ),
