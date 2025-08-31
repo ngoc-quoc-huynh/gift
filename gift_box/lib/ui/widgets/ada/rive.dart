@@ -4,7 +4,7 @@ import 'package:gift_box/domain/blocs/value/cubit.dart';
 import 'package:gift_box/domain/models/asset.dart';
 import 'package:gift_box/static/resources/sizes.dart';
 import 'package:gift_box/ui/widgets/rive_player.dart';
-import 'package:rive_native/rive_native.dart';
+import 'package:rive/rive.dart';
 
 class AdaRive extends StatelessWidget {
   const AdaRive({super.key});
