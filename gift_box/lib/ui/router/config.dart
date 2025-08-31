@@ -4,6 +4,7 @@ import 'package:gift_box/domain/blocs/ada_audio/bloc.dart';
 import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/domain/blocs/shop_item_metas/bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
+import 'package:gift_box/domain/models/locale.dart';
 import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/ui/pages/error/page.dart';
 import 'package:gift_box/ui/pages/gift/page.dart';
@@ -92,7 +93,12 @@ final class GoRouterConfig {
                         ..add(const ShopItemMetasInitializeEvent()),
                 ),
               ],
-              child: child,
+              child: BlocListener<TranslationLocaleCubit, TranslationLocale>(
+                listener: (context, _) =>
+                    context.read<ShopItemMetasBloc>()
+                      ..add(const ShopItemMetasInitializeEvent()),
+                child: child,
+              ),
             ),
             routes: [
               StatefulShellRoute(
