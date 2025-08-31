@@ -17,6 +17,7 @@ import 'package:gift_box/static/resources/sizes.dart';
 import 'package:gift_box/ui/pages/shop_detail/confirmation_dialog.dart';
 import 'package:gift_box/ui/widgets/asset_image.dart';
 import 'package:gift_box/ui/widgets/coupon_display.dart';
+import 'package:gift_box/ui/widgets/max_width_box.dart';
 import 'package:go_router/go_router.dart';
 
 // ignore_for_file: prefer-single-widget-per-file
@@ -57,44 +58,46 @@ class ShopDetailPage extends StatelessWidget {
                     horizontal: Sizes.horizontalPadding,
                     vertical: Sizes.verticalPadding,
                   ),
-                  child: Column(
-                    spacing: 20,
-                    children: [
-                      ConstrainedBox(
-                        constraints: BoxConstraints(maxHeight: height),
-                        child: CustomAssetImage(
-                          asset: asset,
-                          height: height,
-                        ),
-                      ),
-                      Text(
-                        description,
-                        style: textTheme.bodyLarge,
-                      ),
-                      const Spacer(),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            _translations.price,
-                            style: textTheme.headlineMedium,
+                  child: MaxWidthBox(
+                    child: Column(
+                      spacing: 20,
+                      children: [
+                        ConstrainedBox(
+                          constraints: BoxConstraints(maxHeight: height),
+                          child: CustomAssetImage(
+                            asset: asset,
+                            height: height,
                           ),
-                          CouponDisplay.large(amount: price),
-                        ],
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: FilledButton(
-                          onPressed: () => _onPressed(
-                            context: context,
-                            id: id,
-                            name: name,
-                            price: price,
-                          ),
-                          child: Text(_translations.checkOut),
                         ),
-                      ),
-                    ],
+                        Text(
+                          description,
+                          style: textTheme.bodyLarge,
+                        ),
+                        const Spacer(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              _translations.price,
+                              style: textTheme.headlineMedium,
+                            ),
+                            CouponDisplay.large(amount: price),
+                          ],
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: FilledButton(
+                            onPressed: () => _onPressed(
+                              context: context,
+                              id: id,
+                              name: name,
+                              price: price,
+                            ),
+                            child: Text(_translations.checkOut),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

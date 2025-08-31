@@ -66,7 +66,6 @@ class _BodyState extends State<_Body> {
 
     return SizedBox(
       key: _key,
-      width: context.screenSize.width * 0.9,
       child: Material(
         child: ColoredBox(
           color: Colors.black
