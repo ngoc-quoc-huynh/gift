@@ -7,6 +7,7 @@ class SettingsAppVersion extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      minimum: const EdgeInsets.only(bottom: 20),
       child: SizedBox(
         height: kBottomNavigationBarHeight,
         child: Align(

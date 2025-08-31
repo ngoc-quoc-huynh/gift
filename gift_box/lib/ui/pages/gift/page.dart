@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
 import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
+import 'package:gift_box/static/resources/sizes.dart';
 import 'package:gift_box/ui/pages/gift/box.dart';
 import 'package:gift_box/ui/pages/gift/confetti.dart';
 import 'package:gift_box/ui/pages/gift/nfc_status.dart';
@@ -19,7 +20,10 @@ class GiftPage extends StatelessWidget {
             child: Align(
               alignment: Alignment.topRight,
               child: Padding(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.symmetric(
+                  horizontal: Sizes.horizontalPadding,
+                  vertical: Sizes.verticalPadding,
+                ),
                 child: GiftNfcStatus(),
               ),
             ),
