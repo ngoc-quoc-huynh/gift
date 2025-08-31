@@ -14,7 +14,9 @@ final class NativeRepository implements NativeApi {
   static final _loggerApi = Injector.instance.loggerApi;
 
   static const _imagePath = 'assets/images/carousel';
+  static const _imageType = '.webp';
   static const _musicTapePath = 'assets/audios/music_tape';
+  static const _musicType = '.m4a';
 
   @override
   TranslationLocale get locale {
@@ -35,17 +37,26 @@ final class NativeRepository implements NativeApi {
   }
 
   @override
-  Future<List<String>> loadImagePaths() => _loadAssetPaths(_imagePath);
+  Future<List<String>> loadImagePaths() => _loadAssetPaths(
+    prefix: _imagePath,
+    suffix: _imageType,
+  );
 
   @override
-  Future<List<String>> loadMusicTape() => _loadAssetPaths(_musicTapePath);
+  Future<List<String>> loadMusicTape() => _loadAssetPaths(
+    prefix: _musicTapePath,
+    suffix: _musicType,
+  );
 
-  Future<List<String>> _loadAssetPaths(String prefix) async {
+  Future<List<String>> _loadAssetPaths({
+    required String prefix,
+    required String suffix,
+  }) async {
     final assetManifest = await AssetManifest.loadFromAssetBundle(rootBundle);
 
     return assetManifest
         .listAssets()
-        .where((asset) => asset.startsWith(prefix))
+        .where((asset) => asset.startsWith(prefix) && asset.endsWith(suffix))
         .toList();
   }
 
