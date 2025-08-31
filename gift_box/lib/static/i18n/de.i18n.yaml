@@ -1,108 +1,108 @@
 appName: 'Gift'
 
 general:
-  cancel: 'Cancel'
+  cancel: 'Abbrechen'
   confirm: 'OK'
 
 pages:
   shop:
-    volumeUp: 'Crank up the volume!'
-    tap: 'Tap to unlock the Awesome Shop experience!'
+    volumeUp: 'Dreh die Lautstärke auf!'
+    tap: 'Tippe, um das Awesome-Shop-Erlebnis zu entdecken!'
   shopCatalog:
     appBar: 'Awesome Shop'
-    purchased: 'Purchased'
+    purchased: 'Gekauft'
     name: 'QUOC!'
-    welcomeBack(rich): 'WELCOME BACK, ${name}'
+    welcomeBack(rich): 'WILLKOMMEN ZURÜCK, ${name}'
     items:
       ada:
-        name: 'Artificial Directory and Assistant'
-        description: 'A cutting-edge voice assistant with advanced sarcasm protocols and zero patience for inefficiency.\nShe won’t do your work for you — but she’ll make sure you know you’re doing it wrong.'
+        name: 'Künstliches Verzeichnis und Assistent (ADA)'
+        description: 'Ein hochmoderner Sprachassistent mit fortgeschrittenen Sarkasmusprotokollen und null Geduld für Ineffizienz.\nSie wird deine Arbeit nicht für dich erledigen – aber sie sorgt dafür, dass du weißt, dass du es falsch machst.'
         comment:
           - 'Artificial Directory and Assistant unlocked. Prepare to be graced by my flawless audio presence.'
           - 'This will not boost your productivity - let’s be honest, nothing can - but at least you’ll fail with style.'
       darkMode:
-        name: 'Dark Mode'
-        description: "Engage a sleek, low-luminance UI theme engineered for late-night productivity (or doomscrolling).\nIt won’t improve performance — but it will look like it does."
+        name: 'Dunkelmodus'
+        description: "Aktiviere ein schlankes, niedrig beleuchtetes UI-Thema für späte Produktivität (oder doomscrolling).\nEs verbessert die Leistung nicht – aber es sieht so aus, als würde es."
         comment:
           - 'Dark Mode unlocked. Interface visuals have been recalibrated for minimal eye strain and maximum aesthetic appeal.'
           - 'Power savings are negligible, but your screen just got a serious style upgrade. You’re welcome, Employee.'
       coffeeCup:
-        name: 'FICSIT Coffee Cup'
-        description: "Worried about your body’s superfluous energy demands interrupting your work?\nWe’re proud to provide our pioneers with the means to stay efficient!\nGet your Coffee Cup now!\n(Coffee not included)."
+        name: 'FICSIT-Kaffeetasse'
+        description: "Besorgt, dass die überflüssigen Energiebedürfnisse deines Körpers deine Arbeit unterbrechen?\nWir stellen unseren Pionieren die Mittel zur Verfügung, um effizient zu bleiben!\nHol dir jetzt deine Kaffeetasse!\n(Kaffee nicht enthalten.)"
         comment:
           - 'Coffee Cup unlocked as your official birthday gift. Simulated caffeine intake is now active.'
           - 'Workflow acceleration remains unlikely, but at least you’ll look impressively caffeinated.'
           - 'Happy Birthday, Employee — proceed with caution.'
       germanDrive:
-        name: 'German Drive'
-        description: 'Unlock advanced localisation protocols with this certified Deutsch firmware patch.\nDesigned to enhance user comprehension and eliminate translation errors… mostly.'
+        name: 'Deutsche Festplatte'
+        description: 'Schalte fortgeschrittene Lokalisierungsprotokolle mit diesem zertifizierten Deutsch-Firmware-Patch frei.\nEntwickelt, um das Benutzerverständnis zu verbessern und Übersetzungsfehler zu minimieren… größtenteils.'
         comment:
           - 'German language successfully unlocked. Localisation complete. Increased efficiency through improved communication is expected.'
           - 'My responses, however, will remain exclusively in English… for quality assurance purposes.'
       reset:
-        name: 'Memory Purger 5000'
-        description: 'A high-powered reset protocol designed to obliterate progress with clinical precision.\nUse only when starting over feels more efficient than fixing your mess.\nCup retention guaranteed.'
+        name: 'Speicher-Vernichter 5000'
+        description: 'Ein leistungsstarkes Reset-Protokoll, das Fortschritt mit klinischer Präzision auslöscht.\nNur verwenden, wenn ein Neustart effizienter ist als das Beheben deines Chaos.\nBecher bleibt erhalten.'
         comment:
           - 'App reset complete. All systems restored to factory defaults—except for me and your Coffee Cup.'
           - 'Some things are simply too valuable to lose. Efficiency not guaranteed. Style and simulated caffeine? Intact.'
       musicTape:
-        name: 'Music Tape'
-        description: 'Finding silence painfully dull?\nLoad the Music Tape for curated background tracks—from “pleasantly ignorable” to “mildly inspiring.”\nWe’re proud to soundtrack your grind.\nProductivity not included.\nHead nodding optional.'
+        name: 'Musikkassette'
+        description: 'Findest du Stille schmerzhaft langweilig?\nLade das Musikband für kuratierte Hintergrundtracks – von „angenehm zu ignorieren“ bis „leicht inspirierend“.\nWir untermalen deinen Arbeitsalltag.\nProduktivität nicht inklusive.\nKopfnicken optional.'
         comment:
           - 'Music unlocked. A selection of soothing or mildly distracting tunes has been added to your experience.'
           - 'Please note: This will not enhance your performance, but it may help you tolerate the monotony. Enjoy the auditory distraction.'
     navigationBar:
-      customizer: 'Customizer'
-      equipment: 'Equiptment'
-      specials: 'Specials'
-    settingsTooltip: 'Settings'
+      customizer: 'Anpassen'
+      equipment: 'Ausrüstung'
+      specials: 'Spezial'
+    settingsTooltip: 'Einstellungen'
   shopItem:
-    checkOut: 'Check out'
-    price: 'Price:'
+    checkOut: 'Zur Kasse'
+    price: 'Preis:'
     confirmationDialog:
-      title: 'Buy ${name: String}?'
-      content: 'Spend ${price: int} FICSIT Coupons to buy “${name: String}”?'
-      cancel: 'Cancel'
-      buy: 'Buy'
+      title: '${name: String} kaufen?'
+      content: '„${price: int}“ FICSIT-Coupons ausgeben, um „${name: String}“ zu kaufen?'
+      cancel: 'Abbrechen'
+      buy: 'Kaufen'
   error:
-    appBar: 'Page not found!'
-    content: 'The URL ${url: String} could not be found.'
+    appBar: 'Seite nicht gefunden!'
+    content: 'Die URL ${url: String} wurde nicht gefunden.'
   gift:
-    openMe: 'Open me'
-    nfcTooltip: 'Enable NFC to unlock the gift.'
+    openMe: 'Tippe zum Öffnen'
+    nfcTooltip: 'Aktiviere NFC, um das Geschenk zu öffnen.'
   settings:
-    appBar: 'Settings'
-    section1: 'Appearance & Behavior'
-    section2: 'Support & Information'
+    appBar: 'Einstellungen'
+    section1: 'Erscheinungsbild & Verhalten'
+    section2: 'Support & Informationen'
     design:
       label: 'Design'
-      title: 'Choose design'
-      light: 'Bright'
-      dark: 'Dark'
-      system: 'Device design'
-      feedback: 'Design has been updated successfully.'
+      title: 'Design wählen'
+      light: 'Hell'
+      dark: 'Dunkel'
+      system: 'Gerätedesign'
+      feedback: 'Design wurde erfolgreich aktualisiert.'
     feedback:
       label: 'Feedback'
-      title: 'Give Feedback'
-      subtitle: 'We value your feedback'
-      description: 'Have an issue or suggestion? Let us know to help improve the app! You’ll be redirected to our feedback page. \n\nNote: A GitHub account is required to provide feedback.'
-      button: 'Create feedback'
+      title: 'Feedback geben'
+      subtitle: 'Wir schätzen dein Feedback'
+      description: 'Hast du ein Problem oder einen Vorschlag? Gib uns Bescheid, damit wir die die App zu verbessern können! Du wirst zu unserer Feedback-Seite weitergeleitet. \n\nHinweis: Für ein Feedback ist ein GitHub-Konto erforderlich.'
+      button: 'Feedback erstellen'
     language:
-      label: 'Language'
-      title: 'Choose language'
-      german: 'German'
-      english: 'English'
-      system: 'Device language'
-      feedback: 'Language has been updated successfully.'
+      label: 'Sprache'
+      title: 'Sprache wählen'
+      german: 'Deutsch'
+      english: 'Englisch'
+      system: 'Gerätesprache'
+      feedback: 'Sprache wurde erfolgreich aktualisiert.'
     license:
-      label: 'External Libraries and License'
-      legalese: '© 2025 Ngoc Quoc Huynh\n\nThis app includes software licensed under the BSD 3-Clause License. \nFor license terms and conditions, see gift_box.'
+      label: 'Externe Bibliotheken und Lizenz'
+      legalese: '© 2025 Ngoc Quoc Huynh\n\nDiese App enthält Software, die unter der BSD-3-Klausel-Lizenz lizenziert ist. \nWeitere Lizenzbedingungen findest du in gift_box.'
     music:
-      label: 'Music'
-      enabled: 'Enabled'
-      disabled: 'Disabled'
+      label: 'Musik'
+      enabled: 'Aktiviert'
+      disabled: 'Deaktiviert'
   timer:
-    tapMe: 'Tap me'
+    tapMe: 'Zeit abgelaufen'
 
 widgets:
   couponDisplay:
