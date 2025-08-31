@@ -4,7 +4,7 @@ import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/static/resources/colors.dart';
 import 'package:gift_box/ui/widgets/rive_player.dart';
-import 'package:rive_native/rive_native.dart';
+import 'package:rive/rive.dart';
 
 class SinkPage extends StatefulWidget {
   const SinkPage({super.key});
