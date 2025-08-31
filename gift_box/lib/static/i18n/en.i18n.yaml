@@ -68,7 +68,7 @@ pages:
     appBar: 'Page not found!'
     content: 'The URL ${url: String} could not be found.'
   gift:
-    openMe: 'Open me'
+    openMe: 'Tap to open'
     nfcTooltip: 'Enable NFC to unlock the gift.'
   settings:
     appBar: 'Settings'
@@ -102,7 +102,7 @@ pages:
       enabled: 'Enabled'
       disabled: 'Disabled'
   timer:
-    tapMe: 'Tap me'
+    tapMe: 'Time’s up'
 
 widgets:
   couponDisplay:

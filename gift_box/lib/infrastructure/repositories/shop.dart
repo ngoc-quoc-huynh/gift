@@ -52,127 +52,131 @@ final class LocalShopRepository implements ShopApi {
     ],
   );
 
-  static final _rawItems = {
-    ShopItemKey.ada: RawShopItem(
-      id: ShopItemKey.ada.id,
-      name: _translations.ada.name,
-      description: _translations.ada.description,
-      price: 2,
-      asset: Asset.ada,
-      metaHeight: 50,
-      height: 100,
-      audio: AdaAudio(
-        Asset.adaAudio,
-        [
-          TranscriptSegment(_translations.ada.comment.first),
-          TranscriptSegment(
-            _translations.ada.comment[1],
-            const Duration(milliseconds: 6000),
-          ),
-        ],
-      ),
-    ),
-    ShopItemKey.coffeeCup: RawShopItem(
-      id: ShopItemKey.coffeeCup.id,
-      name: _translations.coffeeCup.name,
-      description: _translations.coffeeCup.description,
-      price: 1,
-      asset: Asset.coffeeCup,
-      metaHeight: 100,
-      height: 175,
-      audio: AdaAudio(
-        Asset.coffeeCupAudio,
-        [
-          TranscriptSegment(_translations.coffeeCup.comment.first),
-          TranscriptSegment(
-            _translations.coffeeCup.comment[1],
-            const Duration(milliseconds: 5500),
-          ),
-          TranscriptSegment(
-            _translations.coffeeCup.comment[2],
-            const Duration(milliseconds: 11000),
-          ),
-        ],
-      ),
-    ),
-    ShopItemKey.darkMode: RawShopItem(
-      id: ShopItemKey.darkMode.id,
-      name: _translations.darkMode.name,
-      description: _translations.darkMode.description,
-      price: 1,
-      asset: Asset.darkMode,
-      metaHeight: 100,
-      height: 150,
-      audio: AdaAudio(
-        Asset.darkModeAudio,
-        [
-          TranscriptSegment(_translations.darkMode.comment.first),
-          TranscriptSegment(
-            _translations.darkMode.comment[1],
-            const Duration(milliseconds: 7000),
-          ),
-        ],
-      ),
-    ),
-    ShopItemKey.germanDrive: RawShopItem(
-      id: ShopItemKey.germanDrive.id,
-      name: _translations.germanDrive.name,
-      description: _translations.germanDrive.description,
-      price: 1,
-      asset: Asset.germanDrive,
-      metaHeight: 100,
-      height: 175,
-      audio: AdaAudio(
-        Asset.germanDriveAudio,
-        [
-          TranscriptSegment(_translations.germanDrive.comment.first),
-          TranscriptSegment(
-            _translations.germanDrive.comment[1],
-            const Duration(milliseconds: 7600),
-          ),
-        ],
-      ),
-    ),
+  static Map<ShopItemKey, RawShopItem> get _rawItems {
+    final coffeCupTranslations = _translations.coffeeCup;
 
-    ShopItemKey.reset: RawShopItem(
-      id: ShopItemKey.reset.id,
-      name: _translations.reset.name,
-      description: _translations.reset.description,
-      price: 3,
-      asset: Asset.reset,
-      metaHeight: 100,
-      height: 150,
-      audio: AdaAudio(
-        Asset.resetAudio,
-        [
-          TranscriptSegment(_translations.reset.comment.first),
-          TranscriptSegment(
-            _translations.reset.comment[1],
-            const Duration(milliseconds: 6500),
-          ),
-        ],
+    return {
+      ShopItemKey.ada: RawShopItem(
+        id: ShopItemKey.ada.id,
+        name: _translations.ada.name,
+        description: _translations.ada.description,
+        price: 2,
+        asset: Asset.ada,
+        metaHeight: 50,
+        height: 100,
+        audio: AdaAudio(
+          Asset.adaAudio,
+          [
+            TranscriptSegment(_translations.ada.comment.first),
+            TranscriptSegment(
+              _translations.ada.comment[1],
+              const Duration(milliseconds: 6000),
+            ),
+          ],
+        ),
       ),
-    ),
-    ShopItemKey.musicTape: RawShopItem(
-      id: ShopItemKey.musicTape.id,
-      name: _translations.musicTape.name,
-      description: _translations.musicTape.description,
-      price: 2,
-      asset: Asset.musicTape,
-      metaHeight: 85,
-      height: 150,
-      audio: AdaAudio(
-        Asset.musicTapeAudio,
-        [
-          TranscriptSegment(_translations.musicTape.comment.first),
-          TranscriptSegment(
-            _translations.musicTape.comment[1],
-            const Duration(milliseconds: 6500),
-          ),
-        ],
+      ShopItemKey.coffeeCup: RawShopItem(
+        id: ShopItemKey.coffeeCup.id,
+        name: coffeCupTranslations.name,
+        description: coffeCupTranslations.description,
+        price: 1,
+        asset: Asset.coffeeCup,
+        metaHeight: 100,
+        height: 175,
+        audio: AdaAudio(
+          Asset.coffeeCupAudio,
+          [
+            TranscriptSegment(coffeCupTranslations.comment.first),
+            TranscriptSegment(
+              coffeCupTranslations.comment[1],
+              const Duration(milliseconds: 5500),
+            ),
+            TranscriptSegment(
+              coffeCupTranslations.comment[2],
+              const Duration(milliseconds: 11000),
+            ),
+          ],
+        ),
       ),
-    ),
-  };
+      ShopItemKey.darkMode: RawShopItem(
+        id: ShopItemKey.darkMode.id,
+        name: _translations.darkMode.name,
+        description: _translations.darkMode.description,
+        price: 1,
+        asset: Asset.darkMode,
+        metaHeight: 100,
+        height: 150,
+        audio: AdaAudio(
+          Asset.darkModeAudio,
+          [
+            TranscriptSegment(_translations.darkMode.comment.first),
+            TranscriptSegment(
+              _translations.darkMode.comment[1],
+              const Duration(milliseconds: 7000),
+            ),
+          ],
+        ),
+      ),
+      ShopItemKey.germanDrive: RawShopItem(
+        id: ShopItemKey.germanDrive.id,
+        name: _translations.germanDrive.name,
+        description: _translations.germanDrive.description,
+        price: 1,
+        asset: Asset.germanDrive,
+        metaHeight: 100,
+        height: 175,
+        audio: AdaAudio(
+          Asset.germanDriveAudio,
+          [
+            TranscriptSegment(_translations.germanDrive.comment.first),
+            TranscriptSegment(
+              _translations.germanDrive.comment[1],
+              const Duration(milliseconds: 7600),
+            ),
+          ],
+        ),
+      ),
+
+      ShopItemKey.reset: RawShopItem(
+        id: ShopItemKey.reset.id,
+        name: _translations.reset.name,
+        description: _translations.reset.description,
+        price: 3,
+        asset: Asset.reset,
+        metaHeight: 100,
+        height: 150,
+        audio: AdaAudio(
+          Asset.resetAudio,
+          [
+            TranscriptSegment(_translations.reset.comment.first),
+            TranscriptSegment(
+              _translations.reset.comment[1],
+              const Duration(milliseconds: 6500),
+            ),
+          ],
+        ),
+      ),
+      ShopItemKey.musicTape: RawShopItem(
+        id: ShopItemKey.musicTape.id,
+        name: _translations.musicTape.name,
+        description: _translations.musicTape.description,
+        price: 2,
+        asset: Asset.musicTape,
+        metaHeight: 85,
+        height: 150,
+        audio: AdaAudio(
+          Asset.musicTapeAudio,
+          [
+            TranscriptSegment(_translations.musicTape.comment.first),
+            TranscriptSegment(
+              _translations.musicTape.comment[1],
+              const Duration(milliseconds: 6500),
+            ),
+          ],
+        ),
+      ),
+    };
+  }
 
   bool _loadIsItemPurchased(ShopItemKey key) => _box.get(key.id) ?? false;
 

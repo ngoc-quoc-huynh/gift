@@ -138,9 +138,11 @@ class ShopDetailPage extends StatelessWidget {
       case ShopItemId.darkMode:
         context.read<HydratedThemeModeCubit>().update(ThemeMode.dark);
       case ShopItemId.germanDrive:
-        context.read<HydratedTranslationLocalePreferenceCubit>().update(
-          TranslationLocalePreference.german,
-        );
+        context
+          ..read<HydratedTranslationLocalePreferenceCubit>().update(
+            TranslationLocalePreference.german,
+          )
+          ..read<ShopItemMetasBloc>().add(const ShopItemMetasInitializeEvent());
       case ShopItemId.musicTape:
         context.read<MusicTapeBloc>().add(const MusicTapePlayEvent());
       case ShopItemId.reset:
