@@ -67,7 +67,7 @@ final class AdaAudioBloc extends Bloc<AdaAudioEvent, AdaAudioState> {
     _setTranscriptUpdates();
 
     await audioPlayer.play();
-    await audioPlayer.stop();
+    await audioPlayer.waitUntilComplete();
 
     emit(const AdaAudioIdle());
     await _cleanUp();
@@ -86,7 +86,7 @@ final class AdaAudioBloc extends Bloc<AdaAudioEvent, AdaAudioState> {
     final audioPlayer = _audioPlayer!;
     await audioPlayer.setAsset('assets/audios/ada/unlock.mp3');
     await audioPlayer.play();
-    await audioPlayer.stop();
+    await audioPlayer.waitUntilComplete();
   }
 
   Future<bool> _isUnlocked() async {
@@ -121,4 +121,10 @@ final class AdaAudioBloc extends Bloc<AdaAudioEvent, AdaAudioState> {
     await _cleanUp();
     return super.close();
   }
+}
+
+extension on AudioPlayer {
+  Future<void> waitUntilComplete() => processingStateStream.firstWhere(
+    (state) => state == ProcessingState.completed,
+  );
 }
