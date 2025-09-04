@@ -5,6 +5,7 @@ import 'package:gift_box/domain/blocs/nfc_status/bloc.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/ui/widgets/app_lifecycle_observer.dart';
+import 'package:gift_box/ui/widgets/snack_bar.dart';
 
 class GiftNfcStatus extends StatelessWidget {
   const GiftNfcStatus({super.key});
@@ -23,9 +24,9 @@ class GiftNfcStatus extends StatelessWidget {
           child: BlocBuilder<NfcStatusBloc, NfcStatusState>(
             builder: (context, state) => switch (state) {
               NfcStatusLoadInProgress() => const SizedBox.shrink(),
-              NfcStatusLoadOnSuccess(:final isEnabled) => Tooltip(
-                message: Injector.instance.translations.pages.gift.nfcTooltip,
-                child: Icon(
+              NfcStatusLoadOnSuccess(:final isEnabled) => IconButton(
+                onPressed: () => _onPressed(context, isEnabled: isEnabled),
+                icon: Icon(
                   Icons.nfc,
                   color: switch (isEnabled) {
                     false => Colors.red,
@@ -39,4 +40,17 @@ class GiftNfcStatus extends StatelessWidget {
       ),
     );
   }
+
+  void _onPressed(BuildContext context, {required bool isEnabled}) {
+    print("TAP");
+    final message = switch (isEnabled) {
+      false => _translations.nfcHintDisabled,
+      true => _translations.nfcHintEnabled,
+    };
+
+    CustomSnackBar.showInfo(context, message);
+  }
+
+  TranslationsPagesGiftEn get _translations =>
+      Injector.instance.translations.pages.gift;
 }
