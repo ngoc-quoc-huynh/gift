@@ -69,7 +69,8 @@ pages:
     content: 'Die URL ${url: String} wurde nicht gefunden.'
   gift:
     openMe: 'Tippe zum Öffnen'
-    nfcTooltip: 'Aktiviere NFC, um das Geschenk zu öffnen.'
+    nfcHintEnabled: 'Suche einen Schlüssel, um das Geschenk zu öffnen.'
+    nfcHintDisabled: 'Aktiviere NFC, um das Geschenk zu öffnen.'
   settings:
     appBar: 'Einstellungen'
     section1: 'Erscheinungsbild & Verhalten'
