@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/ada_audio/bloc.dart';
 import 'package:gift_box/domain/blocs/music_tape/bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
+import 'package:gift_box/static/resources/sizes.dart';
 import 'package:gift_box/ui/widgets/ada/comment.dart';
 import 'package:gift_box/ui/widgets/ada/rive.dart';
 import 'package:gift_box/ui/widgets/max_width_box.dart';
@@ -65,15 +66,20 @@ class _Overlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaxWidthBox(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          BlocListener<BoolCubit, bool>(
-            listener: _onBoolCubitStateChanged,
-            child: const AdaComment(),
-          ),
-          const AdaRive(),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: Sizes.horizontalPadding,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            BlocListener<BoolCubit, bool>(
+              listener: _onBoolCubitStateChanged,
+              child: const AdaComment(),
+            ),
+            const AdaRive(),
+          ],
+        ),
       ),
     );
   }
