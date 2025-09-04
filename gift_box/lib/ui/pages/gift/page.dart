@@ -14,35 +14,38 @@ class GiftPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          const SafeArea(
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Sizes.horizontalPadding,
-                  vertical: Sizes.verticalPadding,
-                ),
-                child: GiftNfcStatus(),
-              ),
-            ),
-          ),
-          GiftConfetti(
-            child: BlocProvider<BoolCubit>(
-              create: (_) => BoolCubit(false),
-              child: BlocBuilder<BoolCubit, bool>(
-                builder: (context, isOpen) => GestureDetector(
-                  onTap: switch (isOpen) {
-                    false => null,
-                    true => () => context.goRoute(AppRoute.sink),
-                  },
-                  child: const GiftBox(),
+      body: GiftConfetti(
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              const Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Sizes.horizontalPadding,
+                    vertical: Sizes.verticalPadding,
+                  ),
+                  child: GiftNfcStatus(),
                 ),
               ),
-            ),
+              Expanded(
+                child: BlocProvider<BoolCubit>(
+                  create: (_) => BoolCubit(false),
+                  child: BlocBuilder<BoolCubit, bool>(
+                    builder: (context, isOpen) => GestureDetector(
+                      onTap: switch (isOpen) {
+                        false => null,
+                        true => () => context.goRoute(AppRoute.sink),
+                      },
+                      child: const GiftBox(),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

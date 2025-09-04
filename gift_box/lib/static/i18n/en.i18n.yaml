@@ -69,7 +69,8 @@ pages:
     content: 'The URL ${url: String} could not be found.'
   gift:
     openMe: 'Tap to open'
-    nfcTooltip: 'Enable NFC to unlock the gift.'
+    nfcHintEnabled: 'Look out for a key to open the gift.'
+    nfcHintDisabled: 'Activate NFC to open the gift.'
   settings:
     appBar: 'Settings'
     section1: 'Appearance & Behavior'
