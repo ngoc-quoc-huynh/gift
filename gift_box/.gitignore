@@ -50,9 +50,6 @@ lib/**/*.g.dart
 test/**/*.g.dart
 lib/**/*.i18n.dart
 
-# Fastlane secrets
-.signing/
-
 # Coverage
 /coverage/
 
