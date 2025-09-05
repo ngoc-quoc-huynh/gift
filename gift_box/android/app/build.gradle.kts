@@ -8,10 +8,10 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-val releaseKeystoreProperties = Properties()
-val releaseKeystorePropertiesFile = rootProject.file(".signing/keystore.properties")
-if (releaseKeystorePropertiesFile.exists()) {
-    releaseKeystoreProperties.load(FileInputStream(releaseKeystorePropertiesFile))
+val keyProperties = Properties()
+val keyPropertiesFile = rootProject.file(".signing/key.properties")
+if (keyPropertiesFile.exists()) {
+    keyProperties.load(FileInputStream(keyPropertiesFile))
 }
 
 android {
@@ -38,10 +38,10 @@ android {
 
     signingConfigs {
         create("release") {
-            keyAlias = releaseKeystoreProperties["keyAlias"] as String?
-            keyPassword = releaseKeystoreProperties["keyPassword"] as String?
+            keyAlias = keyProperties["keyAlias"] as String?
+            keyPassword = keyProperties["keyPassword"] as String?
             storeFile = rootProject.file(".signing/keystore.jks")
-            storePassword = releaseKeystoreProperties["keyPassword"] as String?
+            storePassword = keyProperties["keyPassword"] as String?
         }
     }
 
