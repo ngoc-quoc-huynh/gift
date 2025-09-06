@@ -42,7 +42,6 @@ class GiftNfcStatus extends StatelessWidget {
   }
 
   void _onPressed(BuildContext context, {required bool isEnabled}) {
-    print("TAP");
     final message = switch (isEnabled) {
       false => _translations.nfcHintDisabled,
       true => _translations.nfcHintEnabled,
