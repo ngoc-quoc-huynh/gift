@@ -24,7 +24,7 @@ class TimerCountdown extends StatelessWidget {
           CountdownLoadInProgress() => const SizedBox.shrink(),
           CountdownRunning(:final remainingTime) => FrostedBackground(
             child: Text(
-              remainingTime.toHHMMSS(),
+              remainingTime.toDDHHMMSS(),
               style: textStyle?.copyWith(letterSpacing: 1.5),
             ),
           ),
