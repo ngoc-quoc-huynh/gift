@@ -39,11 +39,19 @@ final class AdaAudioBloc extends Bloc<AdaAudioEvent, AdaAudioState> {
     AdaAudioPlayUnlockEvent event,
     Emitter<AdaAudioState> emit,
   ) async {
+    final state = this.state;
     emit(const AdaAudioIdle());
+
+    // We need to wait a tiny moment for the Overlay widget destroy, otherwise
+    // the Rive animation will freeze.
+    if (state is AdaAudioPlaying) {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    }
+
     await _cleanUp();
 
     if (!await _isUnlocked()) {
-      return emit(const AdaAudioIdle());
+      return;
     }
 
     _audioPlayer = AudioPlayer();
@@ -124,7 +132,7 @@ final class AdaAudioBloc extends Bloc<AdaAudioEvent, AdaAudioState> {
 }
 
 extension on AudioPlayer {
-  Future<void> waitUntilComplete() => processingStateStream.firstWhere(
+  Future<void> waitUntilComplete() => processingStateStream.any(
     (state) => state == ProcessingState.completed,
   );
 }
