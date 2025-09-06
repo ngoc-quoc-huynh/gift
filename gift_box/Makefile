@@ -67,7 +67,8 @@ apk:
 	flutter build apk \
 		--release \
 		--obfuscate \
-		--split-debug-info=./build/app/outputs/symbols
+		--split-debug-info=./build/app/outputs/symbols \
+		--target-platform android-arm64
 
 jks:
 	keytool -genkey -v -keystore android/app/gift_box.jks -keyalg RSA -keysize 2048 -validity 10000 -alias gift_box
