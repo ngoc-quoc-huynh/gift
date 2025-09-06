@@ -55,7 +55,7 @@ final class Injector {
         Timer.periodic,
       )
       ..registerLazySingleton<DateTime>(
-        () => DateTime(2025),
+        () => Config.birthday,
         instanceName: 'birthday',
       )
       ..registerLazySingleton<Uint8List>(
