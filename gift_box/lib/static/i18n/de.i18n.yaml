@@ -11,8 +11,7 @@ pages:
   shopCatalog:
     appBar: 'Awesome Shop'
     purchased: 'Gekauft'
-    name: 'QUOC!'
-    welcomeBack(rich): 'WILLKOMMEN ZURÜCK, ${name}'
+    welcomeBack(rich): 'WILLKOMMEN ZURÜCK, ${name}!'
     items:
       ada:
         name: 'Künstliches Verzeichnis und Assistent (ADA)'

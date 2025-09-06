@@ -11,8 +11,7 @@ pages:
   shopCatalog:
     appBar: 'Awesome Shop'
     purchased: 'Purchased'
-    name: 'QUOC!'
-    welcomeBack(rich): 'WELCOME BACK, ${name}'
+    welcomeBack(rich): 'WELCOME BACK, ${name}!'
     items:
       ada:
         name: 'Artificial Directory and Assistant'

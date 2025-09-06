@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/value/cubit.dart';
 import 'package:gift_box/injector.dart';
+import 'package:gift_box/static/config.dart';
 import 'package:gift_box/static/resources/colors.dart';
 import 'package:gift_box/ui/widgets/max_width_box.dart';
 
@@ -130,7 +131,7 @@ class _OverlayState extends State<_Overlay>
                 child: Text.rich(
                   _translations.welcomeBack(
                     name: TextSpan(
-                      text: _translations.name,
+                      text: Config.name,
                       style: theme.textTheme.headlineSmall?.copyWith(
                         color: CustomColors.orange,
                         letterSpacing: 1.2,
