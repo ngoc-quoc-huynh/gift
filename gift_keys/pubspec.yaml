@@ -46,7 +46,7 @@ dependencies:
       url: https://github.com/ngoc-quoc-huynh/nfc_manager.git
       path: nfc_manager
       ref: v1.1.0
-  package_info_plus: ^8.3.0
+  package_info_plus: ^9.0.0
   path: ^1.9.1
   path_provider: ^2.1.5
   url_launcher: ^6.3.1
