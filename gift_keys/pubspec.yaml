@@ -30,12 +30,12 @@ dependencies:
 
   # UI
   dynamic_color: ^1.8.1
-  rive: ^0.14.0-dev.6
+  rive: ^0.14.0-dev.12
 
   # Utils
   clock: ^1.1.2
   collection: ^1.19.1
-  equatable: ^2.0.5
+  equatable: ^2.0.7
   file: ^7.0.1
   flutter_image_compress: ^2.4.0
   image_picker: ^1.2.0
@@ -49,22 +49,22 @@ dependencies:
   package_info_plus: ^9.0.0
   path: ^1.9.1
   path_provider: ^2.1.5
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   # Linter
   cosee_lints: ^0.11.0
-  dart_code_linter: ^3.0.0
+  dart_code_linter: ^3.1.1
 
   # Localization
   slang_flutter: ^4.9.0
   slang_build_runner: ^4.9.0
 
   # Launcher icon
-  flutter_launcher_icons: ^0.14.3
+  flutter_launcher_icons: ^0.14.4
 
   # Splash Screen
-  flutter_native_splash: ^2.4.1
+  flutter_native_splash: ^2.4.7
 
   # Test
   flutter_test:
