@@ -31,7 +31,7 @@ dependencies:
   # UI
   dynamic_color: ^2.1.0
   material_ui: ^1.11.1
-  rive: ^0.14.0-dev.6
+  rive: ^0.14.0-dev.12
 
   # Utils
   clock: ^1.1.2
@@ -50,7 +50,7 @@ dependencies:
   package_info_plus: ^10.0.0
   path: ^1.9.1
   path_provider: ^2.1.5
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
 
 dev_dependencies:
   # Linter
@@ -62,10 +62,10 @@ dev_dependencies:
   slang_build_runner: ^4.9.0
 
   # Launcher icon
-  flutter_launcher_icons: ^0.14.3
+  flutter_launcher_icons: ^0.14.4
 
   # Splash Screen
-  flutter_native_splash: ^2.4.1
+  flutter_native_splash: ^2.4.7
 
   # Test
   flutter_test:
