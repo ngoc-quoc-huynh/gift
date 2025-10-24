@@ -18,18 +18,18 @@ dependencies:
 
   # Local storage
   sqlite_async: ^0.13.0
-  sqlite3_flutter_libs: ^0.5.31
+  sqlite3_flutter_libs: ^0.5.40
 
   # Navigator
-  go_router: ^16.0.0
+  go_router: ^16.3.0
 
   # State Management
   bloc_concurrency: ^0.3.0
-  flutter_bloc: ^9.0.0
-  hydrated_bloc: ^10.0.0
+  flutter_bloc: ^9.1.1
+  hydrated_bloc: ^10.1.1
 
   # UI
-  dynamic_color: ^1.7.0
+  dynamic_color: ^1.8.1
   rive: ^0.14.0-dev.6
 
   # Utils
@@ -38,9 +38,9 @@ dependencies:
   equatable: ^2.0.5
   file: ^7.0.1
   flutter_image_compress: ^2.4.0
-  image_picker: ^1.1.2
+  image_picker: ^1.2.0
   get_it: 9.0.5
-  logger: ^2.4.0
+  logger: ^2.6.2
   nfc_manager:
     git:
       url: https://github.com/ngoc-quoc-huynh/nfc_manager.git
@@ -57,8 +57,8 @@ dev_dependencies:
   dart_code_linter: ^3.0.0
 
   # Localization
-  slang_flutter: ^4.0.0
-  slang_build_runner: ^4.0.0
+  slang_flutter: ^4.9.0
+  slang_build_runner: ^4.9.0
 
   # Launcher icon
   flutter_launcher_icons: ^0.14.3
