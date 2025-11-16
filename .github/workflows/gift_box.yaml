@@ -78,7 +78,7 @@ jobs:
           dart run test_cov_console --exclude=static,domain/interfaces,injector.dart
       - name: Upload golden test failures
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: golden-test-failures
           path: gift_box/test/ui/**/failures
@@ -102,7 +102,7 @@ jobs:
             --obfuscate \
             --split-debug-info=./build/app/outputs/symbols
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: github.event_name == 'workflow_dispatch'
         with:
           name: Gift Keys APK
