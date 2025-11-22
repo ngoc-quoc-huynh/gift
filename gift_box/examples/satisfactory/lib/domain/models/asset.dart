@@ -19,12 +19,12 @@ enum Asset {
   reset('images/shop/reset.webp'),
 
   // Rive files
-  gift('rive/gift.riv')
-  ,
+  gift('rive/gift.riv'),
   satisfactory('rive/satisfactory.riv'),
 
   // Others
-  launcherIcon('images/launcher_icon.webp');
+  launcherIcon('images/launcher_icon.webp')
+  ;
 
   const Asset(this.path);
 
