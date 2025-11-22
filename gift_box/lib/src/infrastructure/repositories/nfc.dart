@@ -1,9 +1,9 @@
-import 'dart:typed_data';
-
-import 'package:gift_box_satisfactory/domain/interfaces/nfc.dart';
-import 'package:gift_box_satisfactory/domain/models/nfc_status.dart';
+import 'package:flutter/foundation.dart';
+import 'package:gift_box/src/domain/interfaces/nfc.dart';
+import 'package:gift_box/src/domain/models/nfc_status.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 
+@immutable
 final class NfcRepository implements NfcApi {
   const NfcRepository();
 

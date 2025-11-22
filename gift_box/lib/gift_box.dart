@@ -1,2 +1,2 @@
-export 'src/domain/interfaces/logger.dart';
-export 'src/infrastructure/repositories/logger.dart';
+export 'src/domain/domain.dart';
+export 'src/infrastructure/infrastructure.dart';

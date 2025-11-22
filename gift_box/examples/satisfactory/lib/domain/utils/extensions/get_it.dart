@@ -5,7 +5,6 @@ import 'dart:typed_data';
 import 'package:get_it/get_it.dart';
 import 'package:gift_box/gift_box.dart';
 import 'package:gift_box_satisfactory/domain/interfaces/native.dart';
-import 'package:gift_box_satisfactory/domain/interfaces/nfc.dart';
 import 'package:gift_box_satisfactory/domain/interfaces/shop.dart';
 import 'package:gift_box_satisfactory/static/i18n/translations.g.dart';
 import 'package:just_audio/just_audio.dart';

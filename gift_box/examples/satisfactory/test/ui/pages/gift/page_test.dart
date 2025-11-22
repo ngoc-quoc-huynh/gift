@@ -1,8 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box_satisfactory/domain/interfaces/nfc.dart';
-import 'package:gift_box_satisfactory/domain/models/nfc_status.dart';
+import 'package:gift_box/gift_box.dart';
 import 'package:gift_box_satisfactory/injector.dart';
 import 'package:mocktail/mocktail.dart';
 
