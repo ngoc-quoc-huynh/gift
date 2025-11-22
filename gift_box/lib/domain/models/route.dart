@@ -1,7 +1,8 @@
 enum AppRoute {
   home,
   gift,
-  timer;
+  timer
+  ;
 
   String call() => name;
 }
