@@ -34,6 +34,8 @@ dependencies:
   collection: ^1.19.1
   equatable: ^2.0.7
   get_it: ^9.0.5
+  gift_box:
+    path: ../../
   hive_ce: ^2.15.1
   just_audio: ^0.10.5
   logger: ^2.6.2

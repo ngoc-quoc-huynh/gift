@@ -3,11 +3,10 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box_satisfactory/domain/interfaces/logger.dart';
+import 'package:gift_box/gift_box.dart';
 import 'package:gift_box_satisfactory/domain/interfaces/native.dart';
 import 'package:gift_box_satisfactory/injector.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../mocks.dart';
@@ -36,14 +35,6 @@ void main() {
     addTearDown(Injector.instance.unregisterBirthday);
 
     expect(Injector.instance.birthday, birthday);
-  });
-
-  test('returns Logger.', () {
-    final logger = MockLogger();
-    Injector.instance.registerSingleton<Logger>(logger);
-    addTearDown(Injector.instance.unregister<Logger>);
-
-    expect(Injector.instance.logger, logger);
   });
 
   test('returns LoggerApi.', () {

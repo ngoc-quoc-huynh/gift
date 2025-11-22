@@ -4,11 +4,10 @@ import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gift_box_satisfactory/domain/interfaces/logger.dart';
+import 'package:gift_box/gift_box.dart';
 import 'package:gift_box_satisfactory/domain/interfaces/native.dart';
 import 'package:gift_box_satisfactory/domain/interfaces/nfc.dart';
 import 'package:gift_box_satisfactory/domain/interfaces/shop.dart';
-import 'package:gift_box_satisfactory/infrastructure/repositories/logger.dart';
 import 'package:gift_box_satisfactory/infrastructure/repositories/native.dart';
 import 'package:gift_box_satisfactory/infrastructure/repositories/nfc.dart';
 import 'package:gift_box_satisfactory/infrastructure/repositories/shop.dart';

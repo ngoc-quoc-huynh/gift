@@ -381,6 +381,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.1.0"
+  gift_box:
+    dependency: "direct main"
+    description:
+      path: "../.."
+      relative: true
+    source: path
+    version: "0.0.1"
   glob:
     dependency: transitive
     description:
