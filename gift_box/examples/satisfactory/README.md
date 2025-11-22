@@ -8,7 +8,7 @@
 
 Gift Box App is a Flutter application designed for birthday celebrants to receive and open their
 digital gifts. Integrated with NFC Host Card Emulation (HCE), the app acts as a secure gift
-receiver, waiting to be unlocked by a [Gift Key](../gift_keys).
+receiver, waiting to be unlocked by a [Gift Key](../../../gift_keys).
 When someone scans their phone using the Gift Keys App, the Gift Box App authenticates the incoming
 **AID (Application Identifier)** and **password (PIN)**, unlocking the gift.
 
@@ -26,7 +26,7 @@ asdf install
 If you don't have asdf installed or prefer not to use it, you can
 install [Flutter](https://docs.flutter.dev/) directly by following the
 official[Flutter installation guide](https://docs.flutter.dev/get-started/install). Make sure to use
-the version specified in the [.tool-versions ](../.tool-versions) file to avoid compatibility
+the version specified in the [.tool-versions ](../../../.tool-versions) file to avoid compatibility
 issues.
 
 ### Local development
@@ -41,8 +41,8 @@ issues.
    make skin color=red
    ```
 2. Use own images in assets
-   - If needed replace the images in [assets](assets/images) with your own images and update the
-     corresponding paths in the [Assets](lib/static/resources/assets.dart) class.
+    - If needed replace the images in [assets](assets/images) with your own images and update the
+      corresponding paths in the [Assets](lib/static/resources/assets.dart) class.
 2. Configure the AID
     - Update the AID in [apduservice.xml](android/app/src/main/res/xml/apduservice.xml) to a custom
       one if needed
@@ -103,26 +103,26 @@ To generate a release APK for your application, follow the steps below:
    cp android/key.example.properties android/key.properties
    ```
 2. Create a `keystore` file:
-   - **Option 1**: Using Android Studio
+    - **Option 1**: Using Android Studio
 
-     You can generate a keystore directly from Android Studio by following
-     the [official guide](https://developer.android.com/studio/publish/app-signing#generate-key).
-   - **Option 2**: Using the Command Line
+      You can generate a keystore directly from Android Studio by following
+      the [official guide](https://developer.android.com/studio/publish/app-signing#generate-key).
+    - **Option 2**: Using the Command Line
 
-     Alternatively, use the `keytool` command to generate a keystore:
-      ```sh
-     make jks
-      ```
+      Alternatively, use the `keytool` command to generate a keystore:
+       ```sh
+      make jks
+       ```
 3. Create an environment on  [GitHub](https://github.com) with `gift_box` as name (optional, for
    GitHub Actions):
 4. Set up secrets in GitHub (optional, for GitHub Actions):
 
    Next, you need to set up the following secrets in your GitHub repository:
 
-   - **KEY_PASSWORD**: The password for the key.
-   - **STORE_PASSWORD**: The password for the keystore.
-   - **KEY_ALIAS**: The alias of the key, by default it is `gift_box`.
-   - **KEYSTORE**: The base64-encoded version of your keystore file.
+    - **KEY_PASSWORD**: The password for the key.
+    - **STORE_PASSWORD**: The password for the keystore.
+    - **KEY_ALIAS**: The alias of the key, by default it is `gift_box`.
+    - **KEYSTORE**: The base64-encoded version of your keystore file.
 
 ### Encoding the keystore file
 

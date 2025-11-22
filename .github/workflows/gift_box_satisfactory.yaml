@@ -1,10 +1,10 @@
-name: gift_box
+name: gift_box_satisfactory
 
 on:
   push:
     paths:
-      - 'gift_box/**'
-      - '.github/workflows/gift_box.yaml'
+      - 'gift_box/examples/satisfactory/**'
+      - '.github/workflows/gift_box_satisfactory.yaml'
   workflow_dispatch:
 
 concurrency:
@@ -19,7 +19,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./gift_box
+        working-directory: ./gift_box/examples/satisfactory
 
     steps:
       - uses: actions/checkout@v5
@@ -32,8 +32,8 @@ jobs:
           java-version: 21
           cache: gradle
           cache-dependency-path: |
-            gift_box/android/*.gradle*
-            gift_box/android/**/gradle-wrapper.properties
+            gift_box/examples/satisfactory/android/*.gradle*
+            gift_box/examples/satisfactory/android/**/gradle-wrapper.properties
 
       - name: Setup asdf
         uses: asdf-vm/actions/setup@v4
@@ -44,7 +44,7 @@ jobs:
             ~/.asdf/installs
             ~/.asdf/plugins
             ~/.asdf/shims
-          key: ${{ runner.os }}-asdf-${{ hashFiles('.tool-versions') }}
+          key: ${{ runner.os }}-asdf-${{ hashFiles('.tool-versions')}}
           restore-keys: ${{ runner.os }}-asdf-
       - name: Install asdf
         uses: asdf-vm/actions/install@v4
@@ -58,9 +58,9 @@ jobs:
         with:
           path: |
             ~/.pub-cache
-            ./gift_box/.dart_tool
-          key: ${{ runner.os }}-flutter-gift-box-${{ hashFiles('./gift_box/pubspec.lock') }}
-          restore-keys: ${{ runner.os }}-flutter-gift-box-
+            ./gift_box/examples/satisfactory/.dart_tool
+          key: ${{ runner.os }}-flutter-gift-box-satisfactory-${{ hashFiles('./gift_box/examples/satisfactory/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-flutter-gift-box-satisfactory-
       - name: Install dependencies
         run: flutter pub get
 
@@ -81,7 +81,7 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: golden-test-failures
-          path: gift_box/test/ui/**/failures
+          path: gift_box/examples/satisfactory/test/ui/**/failures
 
       - name: Generate key.properties file
         if: github.event_name == 'workflow_dispatch'
@@ -105,7 +105,7 @@ jobs:
         uses: actions/upload-artifact@v5
         if: github.event_name == 'workflow_dispatch'
         with:
-          name: Gift Keys APK
+          name: Gift Box Satisfactory APK
           path: |
-            gift_box/build/app/outputs/apk/release/gift_box_release_v*.apk
-            gift_box/build/app/outputs/symbols
+            gift_box/examples/satisfactory/build/app/outputs/apk/release/gift_box_release_v*.apk
+            gift_box/examples/satisfactory/build/app/outputs/symbols
