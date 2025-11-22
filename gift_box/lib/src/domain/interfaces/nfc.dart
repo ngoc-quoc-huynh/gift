@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:gift_box_satisfactory/domain/models/nfc_status.dart';
+import 'package:gift_box/src/domain/models/nfc_status.dart';
 
 abstract interface class NfcApi {
   const NfcApi();
