@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/blocs/countdown/cubit.dart';
-import 'package:gift_box/domain/models/route.dart';
-import 'package:gift_box/domain/utils/extensions/build_context.dart';
-import 'package:gift_box/domain/utils/extensions/duration.dart';
-import 'package:gift_box/injector.dart';
-import 'package:gift_box/ui/pages/timer/frosted_background.dart';
+import 'package:gift_box_satisfactory/domain/blocs/countdown/cubit.dart';
+import 'package:gift_box_satisfactory/domain/models/route.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/duration.dart';
+import 'package:gift_box_satisfactory/injector.dart';
+import 'package:gift_box_satisfactory/ui/pages/timer/frosted_background.dart';
 
 class TimerCountdown extends StatelessWidget {
   const TimerCountdown({super.key});

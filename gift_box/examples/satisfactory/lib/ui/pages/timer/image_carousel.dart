@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/blocs/image_carousel/cubit.dart';
-import 'package:gift_box/domain/blocs/images/bloc.dart';
-import 'package:gift_box/domain/utils/extensions/build_context.dart';
-import 'package:gift_box/domain/utils/extensions/list.dart';
-import 'package:gift_box/static/config.dart';
+import 'package:gift_box_satisfactory/domain/blocs/image_carousel/cubit.dart';
+import 'package:gift_box_satisfactory/domain/blocs/images/bloc.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/list.dart';
+import 'package:gift_box_satisfactory/static/config.dart';
 
 class TimerImageCarousel extends StatefulWidget {
   const TimerImageCarousel({super.key});

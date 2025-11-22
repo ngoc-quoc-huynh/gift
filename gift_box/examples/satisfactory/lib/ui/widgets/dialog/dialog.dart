@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gift_box/static/resources/sizes.dart';
-import 'package:gift_box/ui/widgets/dialog/action.dart';
+import 'package:gift_box_satisfactory/static/resources/sizes.dart';
+import 'package:gift_box_satisfactory/ui/widgets/dialog/action.dart';
 
 sealed class CustomDialog extends StatelessWidget {
   const CustomDialog({super.key});

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:gift_box/domain/models/asset.dart';
+import 'package:gift_box_satisfactory/domain/models/asset.dart';
 
 final class AdaAudio extends Equatable {
   const AdaAudio(this.asset, this.transcript);

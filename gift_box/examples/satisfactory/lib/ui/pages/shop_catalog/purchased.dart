@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gift_box/domain/utils/extensions/build_context.dart';
-import 'package:gift_box/injector.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/injector.dart';
 
 class ShopCatalogPurchased extends StatelessWidget {
   const ShopCatalogPurchased({super.key});

@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/domain/blocs/value/cubit.dart';
+import 'package:gift_box_satisfactory/domain/blocs/value/cubit.dart';
 
 void main() {
   group('BoolCubit', () {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/blocs/value/cubit.dart';
-import 'package:gift_box/injector.dart';
-import 'package:gift_box/static/config.dart';
-import 'package:gift_box/static/resources/colors.dart';
-import 'package:gift_box/ui/widgets/max_width_box.dart';
+import 'package:gift_box_satisfactory/domain/blocs/value/cubit.dart';
+import 'package:gift_box_satisfactory/injector.dart';
+import 'package:gift_box_satisfactory/static/config.dart';
+import 'package:gift_box_satisfactory/static/resources/colors.dart';
+import 'package:gift_box_satisfactory/ui/widgets/max_width_box.dart';
 
 class WelcomeOverlay extends StatefulWidget {
   const WelcomeOverlay({

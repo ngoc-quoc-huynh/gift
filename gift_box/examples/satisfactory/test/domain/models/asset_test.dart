@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/domain/models/asset.dart';
+import 'package:gift_box_satisfactory/domain/models/asset.dart';
 
 void main() {
   test(

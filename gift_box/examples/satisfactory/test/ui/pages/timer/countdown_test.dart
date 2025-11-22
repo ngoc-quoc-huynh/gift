@@ -1,8 +1,8 @@
 import 'package:alchemist/alchemist.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/injector.dart';
-import 'package:gift_box/ui/pages/timer/countdown.dart';
+import 'package:gift_box_satisfactory/injector.dart';
+import 'package:gift_box_satisfactory/ui/pages/timer/countdown.dart';
 
 import '../../../utils.dart';
 

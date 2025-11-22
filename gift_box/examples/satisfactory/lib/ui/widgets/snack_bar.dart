@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gift_box/domain/utils/extensions/build_context.dart';
-import 'package:gift_box/static/resources/sizes.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/static/resources/sizes.dart';
 
 final class CustomSnackBar extends SnackBar {
   const CustomSnackBar({

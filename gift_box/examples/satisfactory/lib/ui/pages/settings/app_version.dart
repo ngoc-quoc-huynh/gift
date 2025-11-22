@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gift_box/injector.dart';
+import 'package:gift_box_satisfactory/injector.dart';
 
 class SettingsAppVersion extends StatelessWidget {
   const SettingsAppVersion({super.key});

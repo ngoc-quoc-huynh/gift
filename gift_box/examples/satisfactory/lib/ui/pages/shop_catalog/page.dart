@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
-import 'package:gift_box/domain/models/route.dart';
-import 'package:gift_box/domain/utils/extensions/build_context.dart';
-import 'package:gift_box/injector.dart';
-import 'package:gift_box/static/resources/sizes.dart';
-import 'package:gift_box/ui/pages/shop_catalog/welcome.dart';
-import 'package:gift_box/ui/widgets/coupon_display.dart';
+import 'package:gift_box_satisfactory/domain/blocs/hydrated_value/cubit.dart';
+import 'package:gift_box_satisfactory/domain/models/route.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/injector.dart';
+import 'package:gift_box_satisfactory/static/resources/sizes.dart';
+import 'package:gift_box_satisfactory/ui/pages/shop_catalog/welcome.dart';
+import 'package:gift_box_satisfactory/ui/widgets/coupon_display.dart';
 import 'package:go_router/go_router.dart';
 
 class ShopCatalogPage extends StatelessWidget {

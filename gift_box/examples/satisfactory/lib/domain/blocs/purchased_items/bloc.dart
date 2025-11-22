@@ -2,8 +2,8 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/models/shop_item_id.dart';
-import 'package:gift_box/injector.dart';
+import 'package:gift_box_satisfactory/domain/models/shop_item_id.dart';
+import 'package:gift_box_satisfactory/injector.dart';
 
 part 'event.dart';
 part 'state.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/domain/models/route.dart';
+import 'package:gift_box_satisfactory/domain/models/route.dart';
 
 void main() {
   test(

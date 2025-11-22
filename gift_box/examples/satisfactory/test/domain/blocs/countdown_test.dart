@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/domain/blocs/countdown/cubit.dart';
-import 'package:gift_box/injector.dart';
+import 'package:gift_box_satisfactory/domain/blocs/countdown/cubit.dart';
+import 'package:gift_box_satisfactory/injector.dart';
 
 import '../../utils.dart';
 

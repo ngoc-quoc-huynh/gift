@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gift_box/injector.dart';
-import 'package:gift_box/ui/widgets/dialog/dialog.dart';
+import 'package:gift_box_satisfactory/injector.dart';
+import 'package:gift_box_satisfactory/ui/widgets/dialog/dialog.dart';
 
 class SettingsFeedbackDialog extends StatelessWidget {
   const SettingsFeedbackDialog._();

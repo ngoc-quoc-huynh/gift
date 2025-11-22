@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
-import 'package:gift_box/domain/blocs/value/cubit.dart';
-import 'package:gift_box/injector.dart';
-import 'package:gift_box/ui/widgets/dialog/radio/dialog.dart';
-import 'package:gift_box/ui/widgets/dialog/radio/option.dart';
+import 'package:gift_box_satisfactory/domain/blocs/hydrated_value/cubit.dart';
+import 'package:gift_box_satisfactory/domain/blocs/value/cubit.dart';
+import 'package:gift_box_satisfactory/injector.dart';
+import 'package:gift_box_satisfactory/ui/widgets/dialog/radio/dialog.dart';
+import 'package:gift_box_satisfactory/ui/widgets/dialog/radio/option.dart';
 
 class SettingsDesignDialog extends StatelessWidget {
   const SettingsDesignDialog._(this._themeMode);

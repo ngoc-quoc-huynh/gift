@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/ui/widgets/app_lifecycle_observer.dart';
+import 'package:gift_box_satisfactory/ui/widgets/app_lifecycle_observer.dart';
 
 void main() {
   testWidgets('calls onResume when app resumes.', (tester) async {
