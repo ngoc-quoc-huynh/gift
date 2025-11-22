@@ -3,13 +3,12 @@ import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:get_it/get_it.dart';
-import 'package:gift_box_satisfactory/domain/interfaces/logger.dart';
+import 'package:gift_box/gift_box.dart';
 import 'package:gift_box_satisfactory/domain/interfaces/native.dart';
 import 'package:gift_box_satisfactory/domain/interfaces/nfc.dart';
 import 'package:gift_box_satisfactory/domain/interfaces/shop.dart';
 import 'package:gift_box_satisfactory/static/i18n/translations.g.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 extension GetItExtension on GetIt {
@@ -20,8 +19,6 @@ extension GetItExtension on GetIt {
   ShopApi get shopApi => get<ShopApi>();
 
   DateTime get birthday => get<DateTime>(instanceName: 'birthday');
-
-  Logger get logger => get<Logger>();
 
   LoggerApi get loggerApi => get<LoggerApi>();
 
