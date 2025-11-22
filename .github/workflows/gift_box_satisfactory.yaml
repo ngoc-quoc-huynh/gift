@@ -1,10 +1,10 @@
-name: gift_box
+name: gift_box_satisfactory
 
 on:
   push:
     paths:
-      - 'gift_box/**'
-      - '.github/workflows/gift_box.yaml'
+      - 'gift_box/examples/satisfactory/**'
+      - '.github/workflows/gift_box_satisfactory.yaml'
       - 'mise.toml'
       - 'mise.lock'
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./gift_box
+        working-directory: ./gift_box/examples/satisfactory
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -43,16 +43,16 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ runner.arch }}-gift_box-${{ hashFiles('mise.lock', 'gift_box/android/**/*.gradle*', 'gift_box/android/**/gradle-wrapper.properties') }}
+          key: gradle-${{ runner.os }}-${{ runner.arch }}-gift_box-${{ hashFiles('mise.lock', 'gift_box/examples/satisfactory/android/**/*.gradle*', 'gift_box/examples/satisfactory/android/**/gradle-wrapper.properties') }}
 
       - name: Cache flutter dependencies
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: |
             ~/.pub-cache
-            ./gift_box/.dart_tool
-          key: ${{ runner.os }}-flutter-gift-box-${{ hashFiles('./gift_box/pubspec.lock') }}
-          restore-keys: ${{ runner.os }}-flutter-gift-box-
+            ./gift_box/examples/satisfactory/.dart_tool
+          key: ${{ runner.os }}-flutter-gift-box-satisfactory-${{ hashFiles('./gift_box/examples/satisfactory/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-flutter-gift-box-satisfactory-
       - name: Install dependencies
         run: flutter pub get --enforce-lockfile
 
@@ -92,7 +92,7 @@ jobs:
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         if: github.event_name == 'workflow_dispatch'
         with:
-          name: Gift Keys APK
+          name: Gift Box Satisfactory APK
           path: |
-            gift_box/build/app/outputs/apk/release/gift_box_release_v*.apk
-            gift_box/build/app/outputs/symbols
+            gift_box/examples/satisfactory/build/app/outputs/apk/release/gift_box_release_v*.apk
+            gift_box/examples/satisfactory/build/app/outputs/symbols

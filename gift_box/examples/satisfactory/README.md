@@ -8,7 +8,7 @@
 
 Gift Box App is a Flutter application designed for birthday celebrants to receive and open their
 digital gifts. Integrated with NFC Host Card Emulation (HCE), the app acts as a secure gift
-receiver, waiting to be unlocked by a [Gift Key](../gift_keys).
+receiver, waiting to be unlocked by a [Gift Key](../../../gift_keys).
 When someone scans their phone using the Gift Keys App, the Gift Box App authenticates the incoming
 **AID (Application Identifier)** and **password (PIN)**, unlocking the gift.
 
@@ -26,7 +26,7 @@ mise install
 
 If you prefer a manual setup, install [Flutter](https://docs.flutter.dev/install/archive)
 and [Eclipse Temurin](https://github.com/adoptium/temurin21-binaries/releases) at the versions
-specified in [mise.lock](../mise.lock). Add both SDKs to your `PATH` and set `JAVA_HOME`
+specified in [mise.lock](../../../mise.lock). Add both SDKs to your `PATH` and set `JAVA_HOME`
 to the JDK home.
 
 ### Local development
