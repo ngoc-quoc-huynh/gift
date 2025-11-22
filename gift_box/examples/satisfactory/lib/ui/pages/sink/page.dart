@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gift_box/domain/models/asset.dart';
-import 'package:gift_box/domain/models/route.dart';
-import 'package:gift_box/domain/utils/extensions/build_context.dart';
-import 'package:gift_box/static/resources/colors.dart';
-import 'package:gift_box/ui/widgets/rive_player.dart';
+import 'package:gift_box_satisfactory/domain/models/asset.dart';
+import 'package:gift_box_satisfactory/domain/models/route.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/static/resources/colors.dart';
+import 'package:gift_box_satisfactory/ui/widgets/rive_player.dart';
 import 'package:rive/rive.dart';
 
 class SinkPage extends StatefulWidget {

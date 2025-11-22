@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:alchemist/alchemist.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/static/resources/theme.dart';
+import 'package:gift_box_satisfactory/static/resources/theme.dart';
 
 Future<void> testExecutable(
   FutureOr<void> Function() testMain,

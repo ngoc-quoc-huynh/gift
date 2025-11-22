@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
+import 'package:gift_box_satisfactory/domain/blocs/hydrated_value/cubit.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:mocktail/mocktail.dart';
 

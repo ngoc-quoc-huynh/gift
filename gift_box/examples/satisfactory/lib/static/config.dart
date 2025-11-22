@@ -1,4 +1,4 @@
-import 'package:gift_box/domain/models/skin.dart';
+import 'package:gift_box_satisfactory/domain/models/skin.dart';
 
 final class Config {
   const Config._();

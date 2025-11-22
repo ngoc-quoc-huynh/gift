@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/blocs/shop_item_metas/bloc.dart';
-import 'package:gift_box/domain/models/route.dart';
-import 'package:gift_box/domain/models/shop_item_id.dart';
-import 'package:gift_box/static/resources/sizes.dart';
-import 'package:gift_box/ui/pages/shop_catalog/item.dart';
+import 'package:gift_box_satisfactory/domain/blocs/shop_item_metas/bloc.dart';
+import 'package:gift_box_satisfactory/domain/models/route.dart';
+import 'package:gift_box_satisfactory/domain/models/shop_item_id.dart';
+import 'package:gift_box_satisfactory/static/resources/sizes.dart';
+import 'package:gift_box_satisfactory/ui/pages/shop_catalog/item.dart';
 
 abstract class ShopDestination extends StatelessWidget {
   const ShopDestination({

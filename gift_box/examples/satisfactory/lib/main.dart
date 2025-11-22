@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
-import 'package:gift_box/domain/blocs/music_tape/bloc.dart';
-import 'package:gift_box/domain/models/locale.dart';
-import 'package:gift_box/injector.dart';
-import 'package:gift_box/static/resources/theme.dart';
-import 'package:gift_box/ui/router/config.dart';
-import 'package:gift_box/ui/widgets/translations_provider.dart';
+import 'package:gift_box_satisfactory/domain/blocs/hydrated_value/cubit.dart';
+import 'package:gift_box_satisfactory/domain/blocs/music_tape/bloc.dart';
+import 'package:gift_box_satisfactory/domain/models/locale.dart';
+import 'package:gift_box_satisfactory/injector.dart';
+import 'package:gift_box_satisfactory/static/resources/theme.dart';
+import 'package:gift_box_satisfactory/ui/router/config.dart';
+import 'package:gift_box_satisfactory/ui/widgets/translations_provider.dart';
 import 'package:rive/rive.dart';
 
 Future<void> main() async {

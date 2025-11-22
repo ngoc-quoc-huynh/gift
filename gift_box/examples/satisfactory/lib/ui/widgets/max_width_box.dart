@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gift_box/static/resources/sizes.dart';
+import 'package:gift_box_satisfactory/static/resources/sizes.dart';
 
 class MaxWidthBox extends StatelessWidget {
   const MaxWidthBox({

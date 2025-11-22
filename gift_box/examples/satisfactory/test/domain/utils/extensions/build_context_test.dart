@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide Route;
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/domain/models/route.dart';
-import 'package:gift_box/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/domain/models/route.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
 import 'package:go_router/go_router.dart';
 
 void main() {

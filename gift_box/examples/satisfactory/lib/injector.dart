@@ -4,15 +4,15 @@ import 'dart:typed_data';
 
 import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
-import 'package:gift_box/domain/interfaces/logger.dart';
-import 'package:gift_box/domain/interfaces/native.dart';
-import 'package:gift_box/domain/interfaces/nfc.dart';
-import 'package:gift_box/domain/interfaces/shop.dart';
-import 'package:gift_box/infrastructure/repositories/logger.dart';
-import 'package:gift_box/infrastructure/repositories/native.dart';
-import 'package:gift_box/infrastructure/repositories/nfc.dart';
-import 'package:gift_box/infrastructure/repositories/shop.dart';
-import 'package:gift_box/static/config.dart';
+import 'package:gift_box_satisfactory/domain/interfaces/logger.dart';
+import 'package:gift_box_satisfactory/domain/interfaces/native.dart';
+import 'package:gift_box_satisfactory/domain/interfaces/nfc.dart';
+import 'package:gift_box_satisfactory/domain/interfaces/shop.dart';
+import 'package:gift_box_satisfactory/infrastructure/repositories/logger.dart';
+import 'package:gift_box_satisfactory/infrastructure/repositories/native.dart';
+import 'package:gift_box_satisfactory/infrastructure/repositories/nfc.dart';
+import 'package:gift_box_satisfactory/infrastructure/repositories/shop.dart';
+import 'package:gift_box_satisfactory/static/config.dart';
 import 'package:hive_ce/hive.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:just_audio/just_audio.dart';
@@ -21,8 +21,8 @@ import 'package:nfc_manager/nfc_manager.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 
-export 'package:gift_box/domain/utils/extensions/get_it.dart';
-export 'package:gift_box/static/i18n/translations.g.dart';
+export 'package:gift_box_satisfactory/domain/utils/extensions/get_it.dart';
+export 'package:gift_box_satisfactory/static/i18n/translations.g.dart';
 
 final class Injector {
   const Injector._();

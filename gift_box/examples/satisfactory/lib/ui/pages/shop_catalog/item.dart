@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart' hide Route;
-import 'package:gift_box/domain/models/route.dart';
-import 'package:gift_box/domain/models/shop_item_meta.dart';
-import 'package:gift_box/domain/utils/extensions/build_context.dart';
-import 'package:gift_box/ui/pages/shop_catalog/purchased.dart';
-import 'package:gift_box/ui/widgets/asset_image.dart';
-import 'package:gift_box/ui/widgets/coupon_display.dart';
+import 'package:gift_box_satisfactory/domain/models/route.dart';
+import 'package:gift_box_satisfactory/domain/models/shop_item_meta.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/ui/pages/shop_catalog/purchased.dart';
+import 'package:gift_box_satisfactory/ui/widgets/asset_image.dart';
+import 'package:gift_box_satisfactory/ui/widgets/coupon_display.dart';
 
 class ShopCatalogItem extends StatelessWidget {
   const ShopCatalogItem({

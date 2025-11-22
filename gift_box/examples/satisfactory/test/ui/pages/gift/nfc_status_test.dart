@@ -1,8 +1,8 @@
 import 'package:alchemist/alchemist.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/domain/interfaces/nfc.dart';
-import 'package:gift_box/injector.dart';
-import 'package:gift_box/ui/pages/gift/nfc_status.dart';
+import 'package:gift_box_satisfactory/domain/interfaces/nfc.dart';
+import 'package:gift_box_satisfactory/injector.dart';
+import 'package:gift_box_satisfactory/ui/pages/gift/nfc_status.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../mocks.dart';

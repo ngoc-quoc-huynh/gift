@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gift_box/ui/pages/timer/countdown.dart';
-import 'package:gift_box/ui/pages/timer/image_carousel.dart';
+import 'package:gift_box_satisfactory/ui/pages/timer/countdown.dart';
+import 'package:gift_box_satisfactory/ui/pages/timer/image_carousel.dart';
 
 class TimerPage extends StatelessWidget {
   const TimerPage({super.key});

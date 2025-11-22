@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/blocs/value/cubit.dart';
-import 'package:gift_box/domain/models/asset.dart';
-import 'package:gift_box/static/resources/sizes.dart';
-import 'package:gift_box/ui/widgets/rive_player.dart';
+import 'package:gift_box_satisfactory/domain/blocs/value/cubit.dart';
+import 'package:gift_box_satisfactory/domain/models/asset.dart';
+import 'package:gift_box_satisfactory/static/resources/sizes.dart';
+import 'package:gift_box_satisfactory/ui/widgets/rive_player.dart';
 import 'package:rive/rive.dart';
 
 class AdaRive extends StatelessWidget {

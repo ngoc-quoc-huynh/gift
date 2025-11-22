@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
-import 'package:gift_box/domain/blocs/value/cubit.dart';
-import 'package:gift_box/domain/models/locale.dart';
-import 'package:gift_box/injector.dart';
+import 'package:gift_box_satisfactory/domain/blocs/hydrated_value/cubit.dart';
+import 'package:gift_box_satisfactory/domain/blocs/value/cubit.dart';
+import 'package:gift_box_satisfactory/domain/models/locale.dart';
+import 'package:gift_box_satisfactory/injector.dart';
 
 typedef TranslationLocaleBuilder =
     Widget Function(BuildContext, TranslationLocale);

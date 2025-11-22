@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:gift_box/static/resources/colors.dart';
-import 'package:gift_box/static/resources/sizes.dart';
+import 'package:gift_box_satisfactory/static/resources/colors.dart';
+import 'package:gift_box_satisfactory/static/resources/sizes.dart';
 
 final class CustomTheme {
   const CustomTheme._();

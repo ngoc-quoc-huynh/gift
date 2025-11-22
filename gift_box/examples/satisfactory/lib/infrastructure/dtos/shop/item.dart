@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
-import 'package:gift_box/domain/models/ada_audio.dart';
-import 'package:gift_box/domain/models/asset.dart';
-import 'package:gift_box/domain/models/shop_item.dart';
-import 'package:gift_box/domain/models/shop_item_meta.dart';
+import 'package:gift_box_satisfactory/domain/models/ada_audio.dart';
+import 'package:gift_box_satisfactory/domain/models/asset.dart';
+import 'package:gift_box_satisfactory/domain/models/shop_item.dart';
+import 'package:gift_box_satisfactory/domain/models/shop_item_meta.dart';
 
 final class RawShopItem extends Equatable {
   const RawShopItem({

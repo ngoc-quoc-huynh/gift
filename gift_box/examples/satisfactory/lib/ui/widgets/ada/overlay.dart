@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/blocs/ada_audio/bloc.dart';
-import 'package:gift_box/domain/blocs/music_tape/bloc.dart';
-import 'package:gift_box/domain/blocs/value/cubit.dart';
-import 'package:gift_box/static/resources/sizes.dart';
-import 'package:gift_box/ui/widgets/ada/comment.dart';
-import 'package:gift_box/ui/widgets/ada/rive.dart';
-import 'package:gift_box/ui/widgets/max_width_box.dart';
+import 'package:gift_box_satisfactory/domain/blocs/ada_audio/bloc.dart';
+import 'package:gift_box_satisfactory/domain/blocs/music_tape/bloc.dart';
+import 'package:gift_box_satisfactory/domain/blocs/value/cubit.dart';
+import 'package:gift_box_satisfactory/static/resources/sizes.dart';
+import 'package:gift_box_satisfactory/ui/widgets/ada/comment.dart';
+import 'package:gift_box_satisfactory/ui/widgets/ada/rive.dart';
+import 'package:gift_box_satisfactory/ui/widgets/max_width_box.dart';
 
 class AdaOverlay extends StatefulWidget {
   const AdaOverlay({required this.child, super.key});

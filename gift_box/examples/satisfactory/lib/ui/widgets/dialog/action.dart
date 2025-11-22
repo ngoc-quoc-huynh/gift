@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gift_box/injector.dart';
+import 'package:gift_box_satisfactory/injector.dart';
 import 'package:go_router/go_router.dart';
 
 sealed class AlertDialogAction extends StatelessWidget {

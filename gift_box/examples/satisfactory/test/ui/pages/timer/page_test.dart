@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:alchemist/alchemist.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/domain/interfaces/native.dart';
-import 'package:gift_box/injector.dart';
-import 'package:gift_box/ui/pages/timer/page.dart';
+import 'package:gift_box_satisfactory/domain/interfaces/native.dart';
+import 'package:gift_box_satisfactory/injector.dart';
+import 'package:gift_box_satisfactory/ui/pages/timer/page.dart';
 
 import '../../../mocks.dart';
 import '../../../utils.dart';

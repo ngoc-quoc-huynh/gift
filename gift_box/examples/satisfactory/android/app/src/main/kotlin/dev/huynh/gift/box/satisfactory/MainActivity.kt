@@ -1,4 +1,4 @@
-package dev.huynh.gift.box
+package dev.huynh.gift.box.satisfactory
 
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration

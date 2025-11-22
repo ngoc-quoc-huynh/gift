@@ -2,14 +2,14 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/blocs/gift_box/bloc.dart';
-import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
-import 'package:gift_box/domain/models/asset.dart';
-import 'package:gift_box/domain/models/route.dart';
-import 'package:gift_box/domain/utils/extensions/build_context.dart';
-import 'package:gift_box/injector.dart';
-import 'package:gift_box/static/config.dart';
-import 'package:gift_box/ui/widgets/rive_player.dart';
+import 'package:gift_box_satisfactory/domain/blocs/gift_box/bloc.dart';
+import 'package:gift_box_satisfactory/domain/blocs/hydrated_value/cubit.dart';
+import 'package:gift_box_satisfactory/domain/models/asset.dart';
+import 'package:gift_box_satisfactory/domain/models/route.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/injector.dart';
+import 'package:gift_box_satisfactory/static/config.dart';
+import 'package:gift_box_satisfactory/ui/widgets/rive_player.dart';
 import 'package:rive/rive.dart';
 
 class GiftBox extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:gift_box/domain/interfaces/logger.dart';
+import 'package:gift_box_satisfactory/domain/interfaces/logger.dart';
 import 'package:logger/logger.dart';
 
 @immutable
