@@ -1,7 +1,8 @@
 enum TranslationLocalePreference {
   german('de'),
   english('en'),
-  system(null);
+  system(null)
+  ;
 
   const TranslationLocalePreference(this.code);
 

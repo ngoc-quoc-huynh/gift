@@ -23,7 +23,8 @@ enum Asset {
   satisfactory('rive/satisfactory.riv'),
 
   // Others
-  launcherIcon('images/launcher_icon.webp');
+  launcherIcon('images/launcher_icon.webp')
+  ;
 
   const Asset(this.path);
 

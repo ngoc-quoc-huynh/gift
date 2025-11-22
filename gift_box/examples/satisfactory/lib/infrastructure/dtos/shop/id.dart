@@ -6,7 +6,8 @@ enum ShopItemKey {
   germanDrive('german-drive'),
   coffeeCup('coffee-cup'),
   reset('reset'),
-  musicTape('music-tape');
+  musicTape('music-tape')
+  ;
 
   const ShopItemKey(this.id);
 
