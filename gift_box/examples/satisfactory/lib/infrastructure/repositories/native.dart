@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:gift_box/domain/interfaces/native.dart';
-import 'package:gift_box/domain/models/locale.dart';
-import 'package:gift_box/injector.dart';
+import 'package:gift_box_satisfactory/domain/interfaces/native.dart';
+import 'package:gift_box_satisfactory/domain/models/locale.dart';
+import 'package:gift_box_satisfactory/injector.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vibration/vibration.dart';
 

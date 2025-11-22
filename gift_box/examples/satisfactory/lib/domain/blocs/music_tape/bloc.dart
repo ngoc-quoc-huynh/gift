@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/foundation.dart';
-import 'package:gift_box/domain/utils/extensions/list.dart';
-import 'package:gift_box/injector.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/list.dart';
+import 'package:gift_box_satisfactory/injector.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 

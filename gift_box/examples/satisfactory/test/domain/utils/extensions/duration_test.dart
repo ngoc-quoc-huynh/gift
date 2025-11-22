@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/domain/utils/extensions/duration.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/duration.dart';
 
 void main() {
   group('toDDHHMMSS', () {

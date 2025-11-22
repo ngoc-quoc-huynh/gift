@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:gift_box/domain/interfaces/shop.dart';
-import 'package:gift_box/domain/models/ada_audio.dart';
-import 'package:gift_box/domain/models/asset.dart';
-import 'package:gift_box/domain/models/shop_item.dart';
-import 'package:gift_box/domain/models/shop_item_id.dart';
-import 'package:gift_box/domain/models/shop_item_meta.dart';
-import 'package:gift_box/infrastructure/dtos/shop/id.dart';
-import 'package:gift_box/infrastructure/dtos/shop/item.dart';
-import 'package:gift_box/injector.dart';
+import 'package:gift_box_satisfactory/domain/interfaces/shop.dart';
+import 'package:gift_box_satisfactory/domain/models/ada_audio.dart';
+import 'package:gift_box_satisfactory/domain/models/asset.dart';
+import 'package:gift_box_satisfactory/domain/models/shop_item.dart';
+import 'package:gift_box_satisfactory/domain/models/shop_item_id.dart';
+import 'package:gift_box_satisfactory/domain/models/shop_item_meta.dart';
+import 'package:gift_box_satisfactory/infrastructure/dtos/shop/id.dart';
+import 'package:gift_box_satisfactory/infrastructure/dtos/shop/item.dart';
+import 'package:gift_box_satisfactory/injector.dart';
 import 'package:hive_ce/hive.dart';
 
 final class LocalShopRepository implements ShopApi {

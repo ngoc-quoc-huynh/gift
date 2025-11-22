@@ -1,4 +1,4 @@
-import 'package:gift_box/domain/models/shop_item_id.dart';
+import 'package:gift_box_satisfactory/domain/models/shop_item_id.dart';
 
 enum ShopItemKey {
   ada('ada'),

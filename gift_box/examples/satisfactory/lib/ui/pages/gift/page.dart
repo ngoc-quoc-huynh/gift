@@ -6,6 +6,13 @@ import 'package:gift_box/static/resources/sizes.dart';
 import 'package:gift_box/ui/pages/gift/box.dart';
 import 'package:gift_box/ui/pages/gift/confetti.dart';
 import 'package:gift_box/ui/pages/gift/nfc_status.dart';
+import 'package:gift_box_satisfactory/domain/blocs/value/cubit.dart';
+import 'package:gift_box_satisfactory/domain/models/route.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/static/resources/sizes.dart';
+import 'package:gift_box_satisfactory/ui/pages/gift/box.dart';
+import 'package:gift_box_satisfactory/ui/pages/gift/confetti.dart';
+import 'package:gift_box_satisfactory/ui/pages/gift/nfc_status.dart';
 import 'package:material_ui/material_ui.dart';
 
 class GiftPage extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:gift_box/domain/interfaces/logger.dart';
-import 'package:gift_box/domain/interfaces/native.dart';
-import 'package:gift_box/domain/interfaces/nfc.dart';
+import 'package:gift_box_satisfactory/domain/interfaces/logger.dart';
+import 'package:gift_box_satisfactory/domain/interfaces/native.dart';
+import 'package:gift_box_satisfactory/domain/interfaces/nfc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:logger/logger.dart';

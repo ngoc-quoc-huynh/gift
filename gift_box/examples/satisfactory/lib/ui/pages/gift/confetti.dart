@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
 import 'package:material_ui/material_ui.dart';
 
 class GiftConfetti extends StatefulWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/blocs/value/cubit.dart';
-import 'package:gift_box/ui/widgets/dialog/action.dart';
-import 'package:gift_box/ui/widgets/dialog/dialog.dart';
-import 'package:gift_box/ui/widgets/dialog/radio/option.dart';
+import 'package:gift_box_satisfactory/domain/blocs/value/cubit.dart';
+import 'package:gift_box_satisfactory/ui/widgets/dialog/action.dart';
+import 'package:gift_box_satisfactory/ui/widgets/dialog/dialog.dart';
+import 'package:gift_box_satisfactory/ui/widgets/dialog/radio/option.dart';
 
 class RadioDialog<T extends Object> extends StatelessWidget {
   const RadioDialog({

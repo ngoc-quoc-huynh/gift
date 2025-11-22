@@ -1,4 +1,4 @@
-import 'package:gift_box/domain/models/locale.dart';
+import 'package:gift_box_satisfactory/domain/models/locale.dart';
 
 abstract interface class NativeApi {
   const NativeApi();

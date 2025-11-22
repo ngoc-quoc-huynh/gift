@@ -7,6 +7,11 @@ import 'package:gift_box/domain/blocs/images/bloc.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/domain/utils/extensions/list.dart';
 import 'package:gift_box/static/config.dart';
+import 'package:gift_box_satisfactory/domain/blocs/image_carousel/cubit.dart';
+import 'package:gift_box_satisfactory/domain/blocs/images/bloc.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/list.dart';
+import 'package:gift_box_satisfactory/static/config.dart';
 import 'package:material_ui/material_ui.dart';
 
 class TimerImageCarousel extends StatefulWidget {

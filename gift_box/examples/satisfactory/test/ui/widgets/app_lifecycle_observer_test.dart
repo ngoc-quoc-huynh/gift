@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_box/ui/widgets/app_lifecycle_observer.dart';
+import 'package:gift_box_satisfactory/ui/widgets/app_lifecycle_observer.dart';
 import 'package:material_ui/material_ui.dart';
 
 void main() {

@@ -5,6 +5,11 @@ import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/ui/widgets/app_lifecycle_observer.dart';
 import 'package:gift_box/ui/widgets/snack_bar.dart';
+import 'package:gift_box_satisfactory/domain/blocs/nfc_status/bloc.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/injector.dart';
+import 'package:gift_box_satisfactory/ui/widgets/app_lifecycle_observer.dart';
+import 'package:gift_box_satisfactory/ui/widgets/snack_bar.dart';
 import 'package:material_ui/material_ui.dart';
 
 class GiftNfcStatus extends StatelessWidget {

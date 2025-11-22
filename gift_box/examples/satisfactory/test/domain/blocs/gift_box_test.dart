@@ -2,10 +2,10 @@ import 'dart:typed_data';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/domain/blocs/gift_box/bloc.dart';
-import 'package:gift_box/domain/interfaces/nfc.dart';
-import 'package:gift_box/domain/models/nfc_status.dart';
-import 'package:gift_box/injector.dart';
+import 'package:gift_box_satisfactory/domain/blocs/gift_box/bloc.dart';
+import 'package:gift_box_satisfactory/domain/interfaces/nfc.dart';
+import 'package:gift_box_satisfactory/domain/models/nfc_status.dart';
+import 'package:gift_box_satisfactory/injector.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../mocks.dart';

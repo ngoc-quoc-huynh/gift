@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:gift_box/domain/utils/extensions/build_context.dart';
+import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
 
 class FrostedBackground extends StatelessWidget {
   const FrostedBackground({

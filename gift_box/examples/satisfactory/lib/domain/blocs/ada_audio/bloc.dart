@@ -5,9 +5,9 @@ import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/models/ada_audio.dart';
-import 'package:gift_box/domain/models/shop_item_id.dart';
-import 'package:gift_box/injector.dart';
+import 'package:gift_box_satisfactory/domain/models/ada_audio.dart';
+import 'package:gift_box_satisfactory/domain/models/shop_item_id.dart';
+import 'package:gift_box_satisfactory/injector.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:stream_transform/stream_transform.dart';
 

@@ -1,5 +1,7 @@
 import 'package:gift_box/static/resources/colors.dart';
 import 'package:gift_box/static/resources/sizes.dart';
+import 'package:gift_box_satisfactory/static/resources/colors.dart';
+import 'package:gift_box_satisfactory/static/resources/sizes.dart';
 import 'package:material_ui/material_ui.dart';
 
 final class CustomTheme {

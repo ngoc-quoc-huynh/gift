@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/domain/exceptions/base.dart';
-import 'package:gift_box/infrastructure/repositories/logger.dart';
+import 'package:gift_box_satisfactory/domain/exceptions/base.dart';
+import 'package:gift_box_satisfactory/infrastructure/repositories/logger.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../mocks.dart';
