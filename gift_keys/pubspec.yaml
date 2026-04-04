@@ -21,7 +21,7 @@ dependencies:
   sqlite3_flutter_libs: 0.6.0+eol
 
   # Navigator
-  go_router: ^16.0.0
+  go_router: ^17.0.0
 
   # State Management
   bloc_concurrency: ^0.3.0
