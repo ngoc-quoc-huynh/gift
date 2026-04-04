@@ -20,7 +20,7 @@ dependencies:
   # State Management
   bloc_concurrency: ^0.3.0
   flutter_bloc: ^9.0.0
-  hydrated_bloc: ^10.0.0
+  hydrated_bloc: ^11.0.0
 
   # UI
   confetti: ^0.8.0
