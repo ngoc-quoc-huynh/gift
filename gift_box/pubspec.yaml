@@ -1,5 +1,5 @@
 name: gift_box
-description: A new Flutter project.
+description: Shared Flutter package for gift box domain logic and infrastructure.
 publish_to: none
 version: 0.0.1
 
