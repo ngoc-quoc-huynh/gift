@@ -15,3 +15,22 @@ You can explore the project through the following directories:
 - [Assets](assets):  Contains backup files for Rive animations used for editing and working within the Rive editor.
 - [Gift Box](gift_box): Application designed for birthday celebrants to receive and open their digital gifts.
 - [Gift Keys](gift_keys): Application allows users to manage digital keys to unlock the Gift Boxes.
+
+## Demo
+
+<table align="center">
+  <tr>
+    <td align="center" width="50%">
+      <b>Gift Box</b><br>
+      <a href="https://youtu.be/LhaqX6WVN0U">
+        <img src="https://img.youtube.com/vi/LhaqX6WVN0U/hqdefault.jpg" width="260" alt="Gift Box demo">
+      </a>
+    </td>
+    <td align="center" width="50%">
+      <b>Gift Keys</b><br>
+      <a href="https://youtube.com/shorts/lho4d_7TsnY">
+        <img src="https://img.youtube.com/vi/lho4d_7TsnY/hqdefault.jpg" width="260" alt="Gift Keys demo">
+      </a>
+    </td>
+  </tr>
+</table>
