@@ -10,6 +10,9 @@ Gift Box acts as a secure digital receiver, awaiting the correct authentication 
 digital keys used to unlock the gifts via NFC Host Card Emulation (HCE).
 Currently, the applications are only supported on **Android**.
 
+For a concrete example, check out the
+[satisfactory](https://github.com/ngoc-quoc-huynh/gift/tree/feat/satisfactory) branch.
+
 You can explore the project through the following directories:
 
 - [Assets](assets):  Contains backup files for Rive animations used for editing and working within the Rive editor.
