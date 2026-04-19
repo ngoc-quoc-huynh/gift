@@ -16,7 +16,7 @@ final class NativeRepository implements NativeApi {
   static const _imagePath = 'assets/images/carousel';
   static const _imageType = '.webp';
   static const _musicTapePath = 'assets/audios/music_tape';
-  static const _musicType = '.m4a';
+  static const _musicType = '.mp3';
 
   @override
   TranslationLocale get locale {
