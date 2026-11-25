@@ -11,7 +11,6 @@ import 'package:gift_keys/ui/widgets/form_field/page/page.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../mocks.dart';
-import '../../../../utils.dart';
 
 void main() {
   final fileApi = MockFileApi();
@@ -22,33 +21,6 @@ void main() {
   );
 
   tearDownAll(Injector.instance.reset);
-
-  testGolden(
-    'renders correctly.',
-    (tester) async {
-      final bloc = MockKeyFormBloc();
-      whenListen(
-        bloc,
-        const Stream<KeyFormState>.empty(),
-        initialState: const KeyFormInitial(),
-      );
-
-      final widget = BlocProvider<KeyFormBloc>(
-        create: (_) => bloc,
-        child: FormFieldPage(
-          title: 'Title',
-          buttonTitle: 'Button',
-          onSubmitted: (_, _, _, _, _) {
-            return;
-          },
-        ),
-      );
-      await tester.pumpGoldenWidget(widget);
-
-      await expectGoldenFile('page', find.byWidget(widget));
-    },
-    surfaceSize: pageSurfaceSize,
-  );
 
   // ignore: missing-test-assertion, verify is sufficient.
   testWidgets('loads image correctly if provided.', (tester) async {

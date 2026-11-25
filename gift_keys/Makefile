@@ -1,4 +1,4 @@
-.PHONY: i18n check-i18n check-code check-files style test test-unit test-ui update-goldens launcher-icon splash-screen apk jks encode-jks
+.PHONY: i18n check-i18n check-code check-files style test test-unit test-ui launcher-icon splash-screen apk jks encode-jks
 
 i18n:
 	dart run slang
@@ -29,9 +29,6 @@ test-ui:
 	flutter test test/ui --coverage --test-randomize-ordering-seed=$(or $(seed),random)
 	dart run test_cov_console --exclude=static,domain,infrastructure,injector.dart
 
-
-update-goldens:
-	flutter test --update-goldens --tags=golden
 
 
 launcher-icon:

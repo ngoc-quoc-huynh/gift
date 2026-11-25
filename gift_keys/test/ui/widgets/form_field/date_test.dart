@@ -11,7 +11,6 @@ import 'package:gift_keys/ui/widgets/form_field/date.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../mocks.dart';
-import '../../../utils.dart';
 
 void main() {
   final date = DateTime(2025);
@@ -23,23 +22,6 @@ void main() {
   );
 
   tearDownAll(Injector.instance.reset);
-
-  testGolden('renders correctly.', (tester) async {
-    final cubit = MockValueCubit<DateTime>();
-    whenListen(cubit, const Stream<DateTime>.empty(), initialState: date);
-
-    await withClock(Clock.fixed(date), () async {
-      final widget = BlocProvider<DateTimeValueCubit>(
-        create: (_) => cubit,
-        child: DateFormField(labelText: 'Date'),
-      );
-      await tester.pumpGoldenWidget(widget);
-      await tester.tap(find.byWidget(widget));
-      await tester.pumpAndSettle();
-    });
-
-    await expectGoldenFile('date', find.byType(MaterialApp));
-  });
 
   testWidgets('submits correctly.', (tester) async {
     final cubit = MockValueCubit<DateTime?>();

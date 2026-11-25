@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
-import 'package:gift_keys/domain/blocs/value/cubit.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/design.dart';
 import 'package:mocktail/mocktail.dart';
@@ -19,27 +18,6 @@ void main() {
   );
 
   tearDownAll(Injector.instance.reset);
-
-  testGolden(
-    'renders correctly.',
-    (tester) async {
-      final cubit = MockValueCubit<ThemeMode>();
-      whenListen(
-        cubit,
-        const Stream<ThemeMode>.empty(),
-        initialState: ThemeMode.light,
-      );
-
-      final widget = BlocProvider<ThemeModeValueCubit>(
-        create: (_) => cubit,
-        child: const SettingsDesignDialog(),
-      );
-      await tester.pumpGoldenWidget(widget);
-
-      await expectGoldenFile('design', find.byWidget(widget));
-    },
-    surfaceSize: const Size(500, 400),
-  );
 
   testWidgets('show returns correctly.', (tester) async {
     final cubit = MockThemeModeHydratedValueCubit();

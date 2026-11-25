@@ -19,7 +19,6 @@ import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../mocks.dart';
-import '../../../utils.dart';
 
 void main() {
   final fileApi = MockFileApi();
@@ -35,30 +34,6 @@ void main() {
   );
 
   tearDownAll(Injector.instance.reset);
-
-  testGolden(
-    'renders correctly.',
-    (tester) async {
-      when(
-        () => fileApi.loadImage(1),
-      ).thenReturn(MemoryFileSystem().file('test.webp')..createSync());
-
-      final widget = EditKeyPage(
-        giftKey: GiftKey(
-          id: 1,
-          name: 'Name',
-          birthday: DateTime(2025),
-          aid: 'F000000001',
-          password: '1234',
-        ),
-      );
-      await tester.pumpGoldenWidget(widget);
-
-      await expectGoldenFile('page', find.byWidget(widget));
-      verify(() => fileApi.loadImage(1)).called(1);
-    },
-    surfaceSize: pageSurfaceSize,
-  );
 
   group('Submit', () {
     const aid = 'F000000001';

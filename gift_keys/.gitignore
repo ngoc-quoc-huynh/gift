@@ -56,9 +56,6 @@ lib/**/*.i18n.dart
 # Coverage
 /coverage/
 
-# Don't check in golden failure output
-test/**/failures/
-
 # i18n analyses
 **/i18n/_missing_translations.yaml
 **/i18n/_unused_translations.yaml

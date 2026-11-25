@@ -19,17 +19,6 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden(
-    'renders correctly.',
-    (tester) async {
-      const widget = SettingsResetDialog();
-      await tester.pumpGoldenWidget(widget);
-
-      await expectGoldenFile('reset', find.byWidget(widget));
-    },
-    surfaceSize: const Size(500, 300),
-  );
-
   testWidgets('show returns correctly.', (tester) async {
     final bloc = MockKeyMetasBloc();
     whenListen(

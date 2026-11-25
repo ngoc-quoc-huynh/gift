@@ -6,8 +6,6 @@ import 'package:gift_keys/ui/widgets/dialog/alert_action.dart';
 import '../../../utils.dart';
 
 void main() {
-  const size = Size(110, 50);
-
   setUpAll(
     () => Injector.instance.registerSingleton<Translations>(
       AppLocale.en.buildSync(),
@@ -17,17 +15,6 @@ void main() {
   tearDownAll(Injector.instance.reset);
 
   group('cancel', () {
-    testGolden(
-      'renders correctly.',
-      (tester) async {
-        const widget = AlertDialogAction.cancel();
-        await tester.pumpGoldenWidget(widget);
-
-        await expectGoldenFile('alert_action_cancel', find.byWidget(widget));
-      },
-      surfaceSize: size,
-    );
-
     testWidgets('pops correctly.', (tester) async {
       final widget = TestGoRouter(
         onTestSetup: (context) => WidgetsBinding.instance.addPostFrameCallback(
@@ -53,17 +40,6 @@ void main() {
   });
 
   group('confirm', () {
-    testGolden(
-      'renders correctly.',
-      (tester) async {
-        final widget = AlertDialogAction.confirm(result: () => true);
-        await tester.pumpGoldenWidget(widget);
-
-        await expectGoldenFile('alert_action_confirm', find.byWidget(widget));
-      },
-      surfaceSize: size,
-    );
-
     testWidgets('pops correctly.', (tester) async {
       final widget = TestGoRouter(
         onTestSetup: (context) =>

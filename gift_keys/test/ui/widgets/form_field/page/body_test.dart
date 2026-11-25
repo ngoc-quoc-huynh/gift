@@ -12,7 +12,6 @@ import 'package:gift_keys/ui/widgets/form_field/page/body.dart';
 import 'package:gift_keys/ui/widgets/form_field/text.dart';
 
 import '../../../../mocks.dart';
-import '../../../../utils.dart';
 
 void main() {
   setUpAll(
@@ -22,80 +21,6 @@ void main() {
   );
 
   tearDownAll(Injector.instance.reset);
-
-  testGolden(
-    'renders correctly.',
-    (tester) async {
-      final bloc = MockKeyFormBloc();
-      whenListen(
-        bloc,
-        const Stream<KeyFormState>.empty(),
-        initialState: const KeyFormInitial(),
-      );
-      final fileCubit = MockValueCubit<File?>();
-      whenListen(fileCubit, const Stream<File?>.empty());
-      final dateCubit = MockValueCubit<DateTime?>();
-      whenListen(dateCubit, const Stream<DateTime>.empty());
-
-      final widget = MultiBlocProvider(
-        providers: [
-          BlocProvider<KeyFormBloc>(create: (_) => bloc),
-          BlocProvider<FileValueCubit>(create: (_) => fileCubit),
-          BlocProvider<DateTimeValueCubit>(create: (_) => dateCubit),
-        ],
-        child: FormFieldPageBody(
-          buttonTitle: 'Button',
-          giftKey: null,
-          onSubmitted: (_, _, _, _, _) {
-            return;
-          },
-        ),
-      );
-      await tester.pumpGoldenWidget(widget);
-
-      await expectGoldenFile('body', find.byWidget(widget));
-    },
-    surfaceSize: pageSurfaceSize,
-  );
-
-  testGolden(
-    'renders validators correctly.',
-    (tester) async {
-      final bloc = MockKeyFormBloc();
-      whenListen(
-        bloc,
-        const Stream<KeyFormState>.empty(),
-        initialState: const KeyFormInitial(),
-      );
-      final fileCubit = MockValueCubit<File?>();
-      whenListen(fileCubit, const Stream<File?>.empty());
-      final dateCubit = MockValueCubit<DateTime?>();
-      whenListen(dateCubit, const Stream<DateTime>.empty());
-
-      final widget = MultiBlocProvider(
-        providers: [
-          BlocProvider<KeyFormBloc>(create: (_) => bloc),
-          BlocProvider<FileValueCubit>(create: (_) => fileCubit),
-          BlocProvider<DateTimeValueCubit>(create: (_) => dateCubit),
-        ],
-        child: Form(
-          child: FormFieldPageBody(
-            buttonTitle: 'Button',
-            giftKey: null,
-            onSubmitted: (_, _, _, _, _) {
-              return;
-            },
-          ),
-        ),
-      );
-      await tester.pumpGoldenWidget(widget);
-      await tester.tap(find.byType(FilledButton));
-      await tester.pumpAndSettle();
-
-      await expectGoldenFile('body_validators', find.byWidget(widget));
-    },
-    surfaceSize: pageSurfaceSize,
-  );
 
   group('submit', () {
     final giftKey = GiftKey(

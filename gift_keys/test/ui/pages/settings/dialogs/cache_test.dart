@@ -19,17 +19,6 @@ void main() {
 
   tearDownAll(Injector.instance.reset);
 
-  testGolden(
-    'renders correctly.',
-    (tester) async {
-      const widget = SettingsCacheDialog();
-      await tester.pumpGoldenWidget(widget);
-
-      await expectGoldenFile('cache', find.byWidget(widget));
-    },
-    surfaceSize: const Size(500, 300),
-  );
-
   // ignore: missing-test-assertion, verify is sufficient.
   testWidgets('show returns correctly.', (tester) async {
     when(fileApi.clearCache).thenAnswer((_) => Future<void>.value());

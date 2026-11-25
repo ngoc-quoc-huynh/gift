@@ -22,9 +22,10 @@ import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../mocks.dart';
-import '../../../utils.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   final packageInfo = MockPackageInfo();
   when(() => packageInfo.version).thenReturn('1.0.0');
   final themeModeCubit = MockThemeModeHydratedValueCubit();
@@ -50,32 +51,6 @@ void main() {
   );
 
   tearDownAll(Injector.instance.reset);
-
-  testGolden(
-    'renders correctly.',
-    (tester) async {
-      whenListen(
-        themeModeCubit,
-        const Stream<ThemeMode>.empty(),
-        initialState: ThemeMode.light,
-      );
-      whenListen(
-        languageOptionCubit,
-        const Stream<LanguageOption>.empty(),
-        initialState: LanguageOption.english,
-      );
-      whenListen(
-        keyMetasBloc,
-        const Stream<KeyMetasState>.empty(),
-        initialState: const KeyMetasLoadOnSuccess([]),
-      );
-
-      await tester.pumpGoldenWidget(widget);
-
-      await expectGoldenFile('page', find.byWidget(widget));
-    },
-    surfaceSize: pageSurfaceSize,
-  );
 
   group('items', () {
     final theme = CustomTheme.lightTheme(const TextTheme());

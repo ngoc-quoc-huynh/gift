@@ -130,20 +130,3 @@ If you want to specify a seed for randomizing the test order, you can use the fo
 ```sh
 make test seed=1
 ```
-
-### Golden tests
-
-We utilize Golden Tests for our UI testing process. These tests are specifically designed to verify
-the visual output of our application and guarantee consistent appearance across UI components, thus
-mitigating any potential UI regression issues.
-
-The golden files for our UI tests are located in the `test/ui/**/goldens` directory.
-
-To update these golden files, simply execute the following command:
-
-```sh
-make update-goldens
-```
-
-This will update all golden files, so be careful when running this command to ensure that all
-changes to the UI are intentional.
