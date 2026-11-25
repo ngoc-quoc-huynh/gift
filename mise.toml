@@ -1,0 +1,11 @@
+min_version = "2026.11.1"
+
+[settings]
+lockfile_platforms = ["macos-arm64", "linux-x64"]
+
+[tool_config]
+locked = true
+
+[tools]
+flutter = "3.38.4"
+java = "temurin-21"

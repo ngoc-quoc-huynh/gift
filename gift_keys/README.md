@@ -14,20 +14,20 @@ transmits the stored AID and PIN for verification, enabling secure access to the
 
 ## Getting Started
 
-### asdf
+### mise
 
-We are using [asdf](https://asdf-vm.com/) to manage the dependencies. Make sure you have it
-installed and then run the following command to install the required versions:
+We recommend [mise](https://mise.jdx.dev/installing-mise.html) to manage Flutter and Java.
+Install mise, [activate it in your shell](https://mise.jdx.dev/shell-setup.html), and run
+the following command from the repository root to install the required versions.
 
 ```bash
-asdf install
+mise install
 ```
 
-If you don't have asdf installed or prefer not to use it, you can
-install [Flutter](https://docs.flutter.dev/) directly by following the
-official[Flutter installation guide](https://docs.flutter.dev/get-started/install). Make sure to use
-the version specified in the [.tool-versions ](../.tool-versions) file to avoid compatibility
-issues.
+If you prefer a manual setup, install [Flutter](https://docs.flutter.dev/install/archive)
+and [Eclipse Temurin](https://github.com/adoptium/temurin21-binaries/releases) at the versions
+specified in [mise.lock](../mise.lock). Add both SDKs to your `PATH` and set `JAVA_HOME`
+to the JDK home.
 
 ### Code generation for translations
 

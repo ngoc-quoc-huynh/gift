@@ -5,7 +5,12 @@ on:
     paths:
       - 'gift_keys/**'
       - '.github/workflows/gift_keys.yaml'
+      - 'mise.toml'
+      - 'mise.lock'
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
@@ -22,35 +27,23 @@ jobs:
 
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v5
+      - name: Setup mise
+        uses: jdx/mise-action@90f833d396d0cc3674b631d2d225e306476c303a # v5.2.10
+        with:
+          version: '2026.11.11'
+          install_args: 'flutter java'
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v5
         if: github.event_name == 'workflow_dispatch'
         with:
-          distribution: adopt
-          java-version: 21
-          cache: gradle
-          cache-dependency-path: |
-            gift_keys/android/*.gradle*
-            gift_keys/android/**/gradle-wrapper.properties
-
-      - name: Setup asdf
-        uses: asdf-vm/actions/setup@v4
-      - name: Cache asdf
-        uses: actions/cache@v5
-        with:
           path: |
-            ~/.asdf/installs
-            ~/.asdf/plugins
-            ~/.asdf/shims
-          key: ${{ runner.os }}-asdf-${{ hashFiles('.tool-versions') }}
-          restore-keys: ${{ runner.os }}-asdf-
-      - name: Install asdf
-        uses: asdf-vm/actions/install@v4
-        # See https://github.com/asdf-vm/actions/issues/445
-        if: steps.cache-asdf.outputs.cache-hit != 'true'
-      - name: Reshim asdf
-        run: asdf reshim
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ runner.arch }}-gift_keys-${{ hashFiles('mise.lock', 'gift_keys/android/**/*.gradle*', 'gift_keys/android/**/gradle-wrapper.properties') }}
 
       - name: Cache flutter dependencies
         uses: actions/cache@v5
@@ -96,6 +89,7 @@ jobs:
       - name: Build APK
         if: github.event_name == 'workflow_dispatch'
         run: |
+          flutter config --jdk-dir="$JAVA_HOME"
           flutter build apk \
             --release \
             --obfuscate \
