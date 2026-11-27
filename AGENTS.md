@@ -14,7 +14,7 @@
 - Prefer simple, readable solutions and small, focused changes.
 - Use modern, established practices compatible with the project's
   supported SDKs and platforms.
-- Follow existing conventions.
+- Follow existing conventions unless `docs/architecture.md` defines the target.
 - Reuse existing code and tools when appropriate. Avoid speculative
   features, unrelated refactoring, and premature optimization.
 - Validate untrusted input, including NFC tag data and APDUs.
@@ -22,12 +22,13 @@
 
 ## Architecture
 
+- Before you create or move Dart code, read `docs/architecture.md`.
 - Keep responsibilities clear, public APIs small, and implementation
   details private.
 - Separate platform-specific integration from shared logic through
   clear interfaces.
-- Introduce layers or abstractions only when a concrete requirement
-  justifies them.
+- Beyond the layers and building blocks in `docs/architecture.md`, introduce
+  abstractions only when a concrete requirement justifies them.
 
 ## Workflow
 
