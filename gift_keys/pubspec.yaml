@@ -18,7 +18,7 @@ dependencies:
 
   # Local storage
   sqlite_async: ^0.14.0
-  sqlite3_flutter_libs: 0.6.0+eol
+  sqlite3: ^3.9.2
 
   # Navigator
   go_router: ^18.1.4

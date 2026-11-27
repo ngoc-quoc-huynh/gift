@@ -8,7 +8,7 @@ import 'package:gift_keys/infrastructure/dtos/sqlite_async/key.dart';
 import 'package:gift_keys/infrastructure/dtos/sqlite_async/key_meta.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:path/path.dart';
-import 'package:sqlite_async/sqlite3.dart';
+import 'package:sqlite3/sqlite3.dart';
 import 'package:sqlite_async/sqlite_async.dart';
 
 final class SqliteAsyncRepository implements LocalDatabaseApi {
