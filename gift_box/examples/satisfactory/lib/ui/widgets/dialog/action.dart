@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:gift_box_satisfactory/injector.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 sealed class AlertDialogAction extends StatelessWidget {
   const AlertDialogAction({
@@ -17,7 +17,7 @@ sealed class AlertDialogAction extends StatelessWidget {
   }) = _Confirm;
 
   @protected
-  TranslationsGeneralEn get translations =>
+  Translations$general$en get translations =>
       Injector.instance.translations.general;
 }
 

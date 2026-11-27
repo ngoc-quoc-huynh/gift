@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:gift_box_satisfactory/domain/models/locale.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'enum/cubit.dart';
 part 'enum/types.dart';

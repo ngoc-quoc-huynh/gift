@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart' hide Route;
-import 'package:gift_box/domain/models/route.dart';
 import 'package:gift_box_satisfactory/domain/models/route.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart' hide Route;

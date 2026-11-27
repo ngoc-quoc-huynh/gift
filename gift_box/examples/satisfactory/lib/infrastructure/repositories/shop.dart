@@ -180,6 +180,6 @@ final class LocalShopRepository implements ShopApi {
 
   bool _loadIsItemPurchased(ShopItemKey key) => _box.get(key.id) ?? false;
 
-  static TranslationsPagesShopCatalogItemsEn get _translations =>
+  static Translations$pages$shopCatalog$items$en get _translations =>
       Injector.instance.translations.pages.shopCatalog.items;
 }

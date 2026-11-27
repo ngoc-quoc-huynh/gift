@@ -1,10 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gift_box/domain/blocs/nfc_status/bloc.dart';
-import 'package:gift_box/domain/utils/extensions/build_context.dart';
-import 'package:gift_box/injector.dart';
-import 'package:gift_box/ui/widgets/app_lifecycle_observer.dart';
-import 'package:gift_box/ui/widgets/snack_bar.dart';
 import 'package:gift_box_satisfactory/domain/blocs/nfc_status/bloc.dart';
 import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
 import 'package:gift_box_satisfactory/injector.dart';
@@ -55,6 +50,6 @@ class GiftNfcStatus extends StatelessWidget {
     CustomSnackBar.showInfo(context, message);
   }
 
-  TranslationsPagesGiftEn get _translations =>
+  Translations$pages$gift$en get _translations =>
       Injector.instance.translations.pages.gift;
 }

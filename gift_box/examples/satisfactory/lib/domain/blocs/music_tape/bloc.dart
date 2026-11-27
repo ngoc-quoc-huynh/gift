@@ -96,6 +96,6 @@ final class MusicTapeBloc extends HydratedBloc<MusicTapeEvent, bool> {
   @override
   Future<void> close() async {
     await _disposeAudioPlayer();
-    return super.close();
+    await super.close();
   }
 }

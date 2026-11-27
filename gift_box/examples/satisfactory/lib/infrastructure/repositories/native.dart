@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:gift_box_satisfactory/domain/interfaces/native.dart';
 import 'package:gift_box_satisfactory/domain/models/locale.dart';
 import 'package:gift_box_satisfactory/injector.dart';

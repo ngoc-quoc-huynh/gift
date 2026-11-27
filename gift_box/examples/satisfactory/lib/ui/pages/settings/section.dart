@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsSection extends StatelessWidget {
   const SettingsSection({

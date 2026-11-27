@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:gift_box/static/i18n/translations.g.dart';
 import 'package:gift_box_satisfactory/static/i18n/translations.g.dart';
 import 'package:material_ui/material_ui.dart';
 

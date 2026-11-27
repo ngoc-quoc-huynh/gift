@@ -1,5 +1,4 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter/material.dart';
 import 'package:gift_box_satisfactory/domain/models/asset.dart';
 import 'package:gift_box_satisfactory/domain/models/route.dart';
 import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
@@ -8,6 +7,7 @@ import 'package:gift_box_satisfactory/static/resources/colors.dart';
 import 'package:gift_box_satisfactory/static/resources/sizes.dart';
 import 'package:gift_box_satisfactory/ui/widgets/max_width_box.dart';
 import 'package:gift_box_satisfactory/ui/widgets/rive_player.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ShopPage extends StatelessWidget {
   const ShopPage({super.key});
@@ -66,6 +66,6 @@ class ShopPage extends StatelessWidget {
     );
   }
 
-  static TranslationsPagesShopEn get _translations =>
+  static Translations$pages$shop$en get _translations =>
       Injector.instance.translations.pages.shop;
 }

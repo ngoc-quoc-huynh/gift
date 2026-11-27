@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box_satisfactory/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box_satisfactory/domain/blocs/music_tape/bloc.dart';
@@ -18,6 +17,7 @@ import 'package:gift_box_satisfactory/ui/pages/settings/item.dart';
 import 'package:gift_box_satisfactory/ui/pages/settings/section.dart';
 import 'package:gift_box_satisfactory/ui/widgets/loading_indicator.dart';
 import 'package:gift_box_satisfactory/ui/widgets/max_width_box.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -47,7 +47,7 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
-  TranslationsPagesSettingsEn get _translations =>
+  Translations$pages$settings$en get _translations =>
       Injector.instance.translations.pages.settings;
 }
 
@@ -163,6 +163,6 @@ class _Body extends StatelessWidget {
         },
       );
 
-  TranslationsPagesSettingsEn get _translations =>
+  Translations$pages$settings$en get _translations =>
       Injector.instance.translations.pages.settings;
 }

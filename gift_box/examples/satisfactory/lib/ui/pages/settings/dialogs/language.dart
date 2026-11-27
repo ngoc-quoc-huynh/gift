@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box_satisfactory/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box_satisfactory/domain/blocs/value/cubit.dart';
@@ -6,6 +5,7 @@ import 'package:gift_box_satisfactory/domain/models/locale.dart';
 import 'package:gift_box_satisfactory/injector.dart';
 import 'package:gift_box_satisfactory/ui/widgets/dialog/radio/dialog.dart';
 import 'package:gift_box_satisfactory/ui/widgets/dialog/radio/option.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsLanguageDialog extends StatelessWidget {
   const SettingsLanguageDialog._(this._locale);
@@ -49,6 +49,6 @@ class SettingsLanguageDialog extends StatelessWidget {
     );
   }
 
-  static TranslationsPagesSettingsLanguageEn get _translations =>
+  static Translations$pages$settings$language$en get _translations =>
       Injector.instance.translations.pages.settings.language;
 }

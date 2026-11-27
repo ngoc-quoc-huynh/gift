@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box_satisfactory/domain/blocs/ada_audio/bloc.dart';
 import 'package:gift_box_satisfactory/domain/blocs/hydrated_value/cubit.dart';
@@ -19,6 +18,7 @@ import 'package:gift_box_satisfactory/ui/widgets/asset_image.dart';
 import 'package:gift_box_satisfactory/ui/widgets/coupon_display.dart';
 import 'package:gift_box_satisfactory/ui/widgets/max_width_box.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 // ignore_for_file: prefer-single-widget-per-file
 
@@ -182,6 +182,6 @@ class ShopDetailPage extends StatelessWidget {
     ShopItemMetasLoadInProgress() => 0,
   };
 
-  static TranslationsPagesShopItemEn get _translations =>
+  static Translations$pages$shopItem$en get _translations =>
       Injector.instance.translations.pages.shopItem;
 }

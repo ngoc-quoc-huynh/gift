@@ -127,7 +127,7 @@ final class AdaAudioBloc extends Bloc<AdaAudioEvent, AdaAudioState> {
   @override
   Future<void> close() async {
     await _cleanUp();
-    return super.close();
+    await super.close();
   }
 }
 

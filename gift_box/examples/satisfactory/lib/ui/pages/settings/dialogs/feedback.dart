@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:gift_box_satisfactory/injector.dart';
 import 'package:gift_box_satisfactory/ui/widgets/dialog/dialog.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsFeedbackDialog extends StatelessWidget {
   const SettingsFeedbackDialog._();
@@ -28,6 +28,6 @@ class SettingsFeedbackDialog extends StatelessWidget {
     );
   }
 
-  static TranslationsPagesSettingsFeedbackEn get _translations =>
+  static Translations$pages$settings$feedback$en get _translations =>
       Injector.instance.translations.pages.settings.feedback;
 }

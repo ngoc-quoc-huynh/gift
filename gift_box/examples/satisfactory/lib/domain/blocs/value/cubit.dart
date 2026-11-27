@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box_satisfactory/domain/models/locale.dart';
 import 'package:gift_box_satisfactory/injector.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'bool/welcome_overlay.dart';
 part 'locale/cubit.dart';

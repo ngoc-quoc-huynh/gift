@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box_satisfactory/domain/blocs/value/cubit.dart';
 import 'package:gift_box_satisfactory/static/resources/sizes.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RadioDialogOption<T> extends StatelessWidget {
   const RadioDialogOption({

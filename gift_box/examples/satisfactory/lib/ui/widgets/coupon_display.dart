@@ -1,9 +1,9 @@
 import 'package:animated_flip_counter/animated_flip_counter.dart';
-import 'package:flutter/material.dart';
 import 'package:gift_box_satisfactory/domain/models/asset.dart';
 import 'package:gift_box_satisfactory/domain/utils/extensions/build_context.dart';
 import 'package:gift_box_satisfactory/injector.dart';
 import 'package:gift_box_satisfactory/ui/widgets/asset_image.dart';
+import 'package:material_ui/material_ui.dart';
 
 sealed class CouponDisplay extends StatelessWidget {
   const CouponDisplay({required this.amount, super.key});
@@ -26,7 +26,7 @@ sealed class CouponDisplay extends StatelessWidget {
   final int amount;
 
   @protected
-  static TranslationsWidgetsCouponDisplayEn get translations =>
+  static Translations$widgets$couponDisplay$en get translations =>
       Injector.instance.translations.widgets.couponDisplay;
 }
 

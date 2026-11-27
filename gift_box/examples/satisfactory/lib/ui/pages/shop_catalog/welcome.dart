@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box_satisfactory/domain/blocs/value/cubit.dart';
 import 'package:gift_box_satisfactory/injector.dart';
 import 'package:gift_box_satisfactory/static/config.dart';
 import 'package:gift_box_satisfactory/static/resources/colors.dart';
 import 'package:gift_box_satisfactory/ui/widgets/max_width_box.dart';
+import 'package:material_ui/material_ui.dart';
 
 class WelcomeOverlay extends StatefulWidget {
   const WelcomeOverlay({
@@ -103,7 +103,6 @@ class _OverlayState extends State<_Overlay>
           ),
         );
     _controller
-      // ignore: discarded_futures, we don't need to await the animation.
       ..forward()
       ..addStatusListener(_onStatusChanged);
   }
@@ -157,6 +156,6 @@ class _OverlayState extends State<_Overlay>
     }
   }
 
-  static TranslationsPagesShopCatalogEn get _translations =>
+  static Translations$pages$shopCatalog$en get _translations =>
       Injector.instance.translations.pages.shopCatalog;
 }
