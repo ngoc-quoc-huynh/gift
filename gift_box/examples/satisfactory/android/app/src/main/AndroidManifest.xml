@@ -36,7 +36,7 @@
                 android:value="2"/>
         <!-- Host Card Emulation Configuration -->
         <service
-                android:name="dev.huynh.nfc_manager_android.host_card_emulation.HostCardEmulation"
+                android:name="dev.huynh.nfc_manager_android.hce.HostCardEmulationService"
                 android:exported="true"
                 android:permission="android.permission.BIND_NFC_SERVICE">
             <intent-filter>
