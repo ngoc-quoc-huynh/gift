@@ -29,13 +29,10 @@ final class NfcRepository implements NfcApi {
   Future<bool> sendCommand(domain.NfcCommand nfcCommand) async {
     try {
       final response = await _nfcManager.sendCommand(
-        CommandExtension.fromDomain(nfcCommand),
+        ApduCommandExtension.fromDomain(nfcCommand),
       );
 
-      final result = switch (response) {
-        ApduResponse.ok => true,
-        _ => false,
-      };
+      final result = response.isSuccess;
       _loggerApi.logInfo('Sent NFC command with response: $result');
 
       return result;
