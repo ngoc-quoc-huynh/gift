@@ -41,7 +41,7 @@ android {
             keyAlias = keyProperties["keyAlias"] as String?
             keyPassword = keyProperties["keyPassword"] as String?
             storeFile = rootProject.file(".signing/keystore.jks")
-            storePassword = keyProperties["keyPassword"] as String?
+            storePassword = keyProperties["storePassword"] as String?
         }
     }
 
