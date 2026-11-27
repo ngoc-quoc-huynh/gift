@@ -19,8 +19,7 @@ void main() {
       instanceName: 'appDir',
     );
     addTearDown(
-      () async =>
-          Injector.instance.unregister<Directory>(instanceName: 'appDir'),
+      () => Injector.instance.unregister<Directory>(instanceName: 'appDir'),
     );
 
     expect(Injector.instance.appDir, appDir);
@@ -33,8 +32,7 @@ void main() {
       instanceName: 'tmpDir',
     );
     addTearDown(
-      () async =>
-          Injector.instance.unregister<Directory>(instanceName: 'tmpDir'),
+      () => Injector.instance.unregister<Directory>(instanceName: 'tmpDir'),
     );
 
     expect(Injector.instance.tmpDir, tmpDir);

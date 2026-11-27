@@ -8,7 +8,6 @@ import 'package:gift_box/injector.dart';
 
 import '../../utils.dart';
 
-// ignore_for_file: discarded_futures, testBloc do not need to be awaited here.
 // ignore_for_file: missing-test-assertion, withClock is used alongside
 // blocTest, ensuring proper assertions.
 

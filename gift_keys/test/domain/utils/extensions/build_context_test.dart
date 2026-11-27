@@ -8,7 +8,7 @@ void main() {
   group('colorScheme', () {
     testWidgets(
       'returns correctly.',
-      (tester) async => tester.pumpWidget(
+      (tester) => tester.pumpWidget(
         MaterialApp(
           builder: (context, child) {
             expect(context.colorScheme, ColorScheme.of(context));
@@ -22,7 +22,7 @@ void main() {
   group('dialogTheme', () {
     testWidgets(
       'returns correctly.',
-      (tester) async => tester.pumpWidget(
+      (tester) => tester.pumpWidget(
         MaterialApp(
           builder: (context, _) {
             expect(context.dialogTheme, DialogTheme.of(context));
@@ -36,7 +36,7 @@ void main() {
   group('theme', () {
     testWidgets(
       'returns correctly.',
-      (tester) async => tester.pumpWidget(
+      (tester) => tester.pumpWidget(
         MaterialApp(
           builder: (context, _) {
             expect(context.theme, Theme.of(context));
@@ -50,7 +50,7 @@ void main() {
   group('textTheme', () {
     testWidgets(
       'returns correctly.',
-      (tester) async => tester.pumpWidget(
+      (tester) => tester.pumpWidget(
         MaterialApp(
           builder: (context, _) {
             expect(context.textTheme, TextTheme.of(context));
