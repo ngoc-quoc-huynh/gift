@@ -593,29 +593,29 @@ packages:
     dependency: "direct main"
     description:
       path: nfc_manager
-      ref: "v1.2.0"
-      resolved-ref: "162fdfa4bcdcdd45abe6b7fffbdf31d9bde4b4cf"
+      ref: "v2.0.0"
+      resolved-ref: c6fb0d8f6130ae5938f7ad0e6974519297aa0479
       url: "https://github.com/ngoc-quoc-huynh/nfc_manager.git"
     source: git
-    version: "1.2.0"
+    version: "2.0.0"
   nfc_manager_android:
     dependency: transitive
     description:
       path: nfc_manager_android
-      ref: "162fdfa4bcdcdd45abe6b7fffbdf31d9bde4b4cf"
-      resolved-ref: "162fdfa4bcdcdd45abe6b7fffbdf31d9bde4b4cf"
+      ref: c6fb0d8f6130ae5938f7ad0e6974519297aa0479
+      resolved-ref: c6fb0d8f6130ae5938f7ad0e6974519297aa0479
       url: "https://github.com/ngoc-quoc-huynh/nfc_manager.git"
     source: git
-    version: "1.2.0"
+    version: "2.0.0"
   nfc_manager_platform_interface:
     dependency: transitive
     description:
       path: nfc_manager_platform_interface
-      ref: "162fdfa4bcdcdd45abe6b7fffbdf31d9bde4b4cf"
-      resolved-ref: "162fdfa4bcdcdd45abe6b7fffbdf31d9bde4b4cf"
+      ref: c6fb0d8f6130ae5938f7ad0e6974519297aa0479
+      resolved-ref: c6fb0d8f6130ae5938f7ad0e6974519297aa0479
       url: "https://github.com/ngoc-quoc-huynh/nfc_manager.git"
     source: git
-    version: "1.2.0"
+    version: "2.0.0"
   node_preamble:
     dependency: transitive
     description:
