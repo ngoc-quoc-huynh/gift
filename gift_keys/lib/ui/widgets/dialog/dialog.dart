@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/value/cubit.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
@@ -6,6 +5,7 @@ import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/widgets/dialog/alert_action.dart';
 import 'package:gift_keys/ui/widgets/dialog/radio_option.dart';
 import 'package:gift_keys/ui/widgets/responsive_box.dart';
+import 'package:material_ui/material_ui.dart';
 
 sealed class CustomDialog extends StatelessWidget {
   const CustomDialog({super.key});

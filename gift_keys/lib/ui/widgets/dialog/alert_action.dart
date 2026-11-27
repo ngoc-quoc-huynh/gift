@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 sealed class AlertDialogAction extends StatelessWidget {
   const AlertDialogAction({super.key});

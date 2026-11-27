@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:gift_keys/static/resources/theme.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 class TestGoRouter extends StatelessWidget {
   const TestGoRouter({required this.onTestSetup, super.key});

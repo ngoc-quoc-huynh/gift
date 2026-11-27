@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/key_metas/bloc.dart';
 import 'package:gift_keys/ui/pages/add_key/page.dart';
@@ -12,6 +11,7 @@ import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/key/builder.dart';
 import 'package:gift_keys/ui/widgets/key/provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 final class GoRouterConfig {
   const GoRouterConfig._();

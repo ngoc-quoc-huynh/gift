@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/widgets/dialog/alert_action.dart';
 import 'package:gift_keys/ui/widgets/dialog/dialog.dart';
 import 'package:gift_keys/ui/widgets/snack_bar.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsCacheDialog extends StatelessWidget {
   const SettingsCacheDialog({super.key});

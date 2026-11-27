@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FadeBox extends StatelessWidget {
   const FadeBox({required this.child, super.key});

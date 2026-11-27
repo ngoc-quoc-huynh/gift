@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/exceptions/local_database.dart';
 import 'package:gift_keys/domain/models/key_meta.dart';
 import 'package:gift_keys/injector.dart';
+import 'package:material_ui/material_ui.dart';
 
 part 'event.dart';
 part 'state.dart';

@@ -1,5 +1,4 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
@@ -18,6 +17,7 @@ import 'package:gift_keys/ui/pages/settings/dialogs/reset.dart';
 import 'package:gift_keys/ui/pages/settings/page.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 

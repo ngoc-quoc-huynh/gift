@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/key_metas/bloc.dart';
 import 'package:gift_keys/domain/models/key_meta.dart';
@@ -12,6 +11,7 @@ import 'package:gift_keys/ui/pages/key_metas/item/item.dart';
 import 'package:gift_keys/ui/pages/key_metas/settings_button.dart';
 import 'package:gift_keys/ui/widgets/loading_indicator.dart';
 import 'package:gift_keys/ui/widgets/snack_bar.dart';
+import 'package:material_ui/material_ui.dart';
 
 class KeyMetasPage extends StatelessWidget {
   const KeyMetasPage({super.key});
@@ -100,20 +100,16 @@ class _BodyState extends State<_Body> {
           switch (state) {
             case KeyMetasAddOnSuccess(:final index, :final metas):
               unawaited(_precacheImage(context, metas[index].id));
-              unawaited(
-                _controller.animateToItem(
-                  index + 1,
-                  duration: Duration(milliseconds: 500 * (index + 1)),
-                  curve: Curves.easeInOut,
-                ),
+              _controller.animateToItem(
+                index + 1,
+                duration: Duration(milliseconds: 500 * (index + 1)),
+                curve: Curves.easeInOut,
               );
             case KeyMetasUpdateOnSuccess(:final index):
-              unawaited(
-                _controller.animateToItem(
-                  index + 1,
-                  duration: Duration(milliseconds: 500 * (index + 1)),
-                  curve: Curves.easeInOut,
-                ),
+              _controller.animateToItem(
+                index + 1,
+                duration: Duration(milliseconds: 500 * (index + 1)),
+                curve: Curves.easeInOut,
               );
             case KeyMetasDeleteOnSuccess():
               // Prevent delay of showing SnackBar after popping page.

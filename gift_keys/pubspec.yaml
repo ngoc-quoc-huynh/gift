@@ -21,7 +21,7 @@ dependencies:
   sqlite3_flutter_libs: 0.6.0+eol
 
   # Navigator
-  go_router: ^17.0.0
+  go_router: ^18.1.4
 
   # State Management
   bloc_concurrency: ^0.3.0
@@ -29,8 +29,8 @@ dependencies:
   hydrated_bloc: ^11.0.0
 
   # UI
-  # 1.9.0 requires built-in Kotlin.
-  dynamic_color: '>=1.8.1 <1.9.0'
+  dynamic_color: ^2.1.0
+  material_ui: ^1.11.1
   rive: ^0.14.0-dev.6
 
   # Utils

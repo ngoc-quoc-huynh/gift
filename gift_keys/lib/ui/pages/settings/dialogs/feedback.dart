@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/config.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
 import 'package:gift_keys/ui/widgets/dialog/dialog.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsFeedbackDialog extends StatelessWidget {
   const SettingsFeedbackDialog({super.key});

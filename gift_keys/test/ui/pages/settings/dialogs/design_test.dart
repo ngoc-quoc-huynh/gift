@@ -1,10 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/pages/settings/dialogs/design.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../../../mocks.dart';
