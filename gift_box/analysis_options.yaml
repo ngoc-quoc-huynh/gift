@@ -10,3 +10,8 @@ dart_code_linter:
           - expectList
         include-methods:
           - testBloc
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
