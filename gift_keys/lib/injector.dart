@@ -59,7 +59,7 @@ final class Injector {
         ),
       )
       ..registerLazySingleton<NativeApi>(NativeRepository.new)
-      ..registerLazySingleton<NfcApi>(() => NfcRepository(NfcManager()))
+      ..registerLazySingleton<NfcApi>(() => NfcRepository(const NfcManager()))
       ..registerSingletonAsync<PackageInfo>(PackageInfo.fromPlatform)
       ..registerLazySingleton<Translations>(_createTranslations);
     await instance.allReady();

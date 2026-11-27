@@ -7,7 +7,7 @@ import 'package:nfc_manager/nfc_manager.dart';
 final class NfcRepository implements NfcApi {
   const NfcRepository();
 
-  static final _instance = NfcManager();
+  static const _instance = NfcManager();
 
   @override
   Future<bool> isEnabled() => _instance.isNfcEnabled();

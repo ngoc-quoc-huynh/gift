@@ -20,47 +20,24 @@ void main() {
     0x34,
   ]);
 
-  group('CommandExtension', () {
+  group('ApduCommandExtension', () {
     group('fromDomain', () {
       test(
-        'return correctly for SelectAidCommandExtension.',
+        'returns correctly for SelectAidCommand.',
         () => expect(
-          CommandExtension.fromDomain(const domain.SelectAidCommand(aid)),
-          SelectAidCommand(aidBytes),
+          ApduCommandExtension.fromDomain(const domain.SelectAidCommand(aid)),
+          ApduCommand.selectAid(aidBytes),
         ),
       );
 
       test(
-        'return correctly for VerifyPinCommandExtension.',
+        'returns correctly for VerifyPinCommand.',
         () => expect(
-          CommandExtension.fromDomain(const domain.VerifyPinCommand(password)),
-          VerifyPinCommand(passwordBytes),
-        ),
-      );
-    });
-  });
-
-  group('SelectAidCommandExtension', () {
-    group('fromDomain', () {
-      test(
-        'returns correctly.',
-        () => expect(
-          SelectAidCommandExtension.fromDomain(
-            const domain.SelectAidCommand(aid),
+          ApduCommandExtension.fromDomain(
+            const domain.VerifyPinCommand(password),
           ),
-          SelectAidCommand(aidBytes),
+          ApduCommand.verifyPin(passwordBytes),
         ),
-      );
-    });
-  });
-
-  group('VerifyPinCommandExtension', () {
-    test('returns correctly', () {
-      expect(
-        VerifyPinCommandExtension.fromDomain(
-          const domain.VerifyPinCommand(password),
-        ),
-        VerifyPinCommand(passwordBytes),
       );
     });
   });

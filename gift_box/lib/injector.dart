@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:math';
 import 'dart:typed_data';
 
@@ -46,11 +47,11 @@ final class Injector {
         instanceName: 'birthday',
       )
       ..registerLazySingleton<Uint8List>(
-        () => Config.aid.toUint8List(isHex: true),
+        () => Config.aid.hexToBytes(),
         instanceName: 'aid',
       )
       ..registerLazySingleton<Uint8List>(
-        () => Config.pin.toHexString().toUint8List(),
+        () => utf8.encode(utf8.encode(Config.pin).toHex()),
         instanceName: 'pin',
       );
 

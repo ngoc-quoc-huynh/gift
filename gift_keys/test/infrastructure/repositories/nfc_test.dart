@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_keys/domain/interfaces/logger.dart';
 import 'package:gift_keys/domain/interfaces/nfc.dart';
@@ -70,9 +72,12 @@ void main() {
     test('returns true if response is ok.', () async {
       when(
         () => nfcManager.sendCommand(
-          SelectAidCommand(aid.toUint8List(isHex: true)),
+          ApduCommand.selectAid(aid.hexToBytes()),
         ),
-      ).thenAnswer((_) async => ApduResponse.ok);
+      ).thenAnswer(
+        (_) async =>
+            ApduResponse.fromUint8List(Uint8List.fromList([0x90, 0x00])),
+      );
 
       final result = await repository.sendCommand(
         const domain.SelectAidCommand(aid),
@@ -81,7 +86,7 @@ void main() {
       expect(result, isTrue);
       verify(
         () => nfcManager.sendCommand(
-          SelectAidCommand(aid.toUint8List(isHex: true)),
+          ApduCommand.selectAid(aid.hexToBytes()),
         ),
       ).called(1);
       verify(() => loggerApi.logInfo(any())).called(1);
@@ -90,9 +95,12 @@ void main() {
     test('returns false if response is not ok.', () async {
       when(
         () => nfcManager.sendCommand(
-          SelectAidCommand(aid.toUint8List(isHex: true)),
+          ApduCommand.selectAid(aid.hexToBytes()),
         ),
-      ).thenAnswer((_) async => ApduResponse.invalidAid);
+      ).thenAnswer(
+        (_) async =>
+            ApduResponse.fromUint8List(Uint8List.fromList([0x6A, 0x82])),
+      );
 
       final result = await repository.sendCommand(
         const domain.SelectAidCommand(aid),
@@ -101,7 +109,7 @@ void main() {
       expect(result, isFalse);
       verify(
         () => nfcManager.sendCommand(
-          SelectAidCommand(aid.toUint8List(isHex: true)),
+          ApduCommand.selectAid(aid.hexToBytes()),
         ),
       ).called(1);
       verify(() => loggerApi.logInfo(any())).called(1);
@@ -110,7 +118,7 @@ void main() {
     test('returns false if NfcException is thrown.', () async {
       when(
         () => nfcManager.sendCommand(
-          SelectAidCommand(aid.toUint8List(isHex: true)),
+          ApduCommand.selectAid(aid.hexToBytes()),
         ),
       ).thenThrow(const TagConnectionException());
 
@@ -121,7 +129,7 @@ void main() {
       expect(result, isFalse);
       verify(
         () => nfcManager.sendCommand(
-          SelectAidCommand(aid.toUint8List(isHex: true)),
+          ApduCommand.selectAid(aid.hexToBytes()),
         ),
       ).called(1);
       verify(
