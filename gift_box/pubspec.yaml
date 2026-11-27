@@ -6,6 +6,10 @@ version: 0.0.1
 environment:
   sdk: ^3.10.0
 
+workspace:
+  - examples/basic
+  - examples/satisfactory
+
 dependencies:
   flutter:
     sdk: flutter

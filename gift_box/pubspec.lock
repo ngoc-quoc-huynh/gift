@@ -34,7 +34,7 @@ packages:
     source: hosted
     version: "0.14.20"
   animated_flip_counter:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: animated_flip_counter
       sha256: "73f852d84c461c3e4c1ddf320bee334dde8dba89441922ab11a8013be0b2fad1"
@@ -42,7 +42,7 @@ packages:
     source: hosted
     version: "0.3.4"
   animated_text_kit:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: animated_text_kit
       sha256: "1d41486860885321972dd332179357a535d50d4780fc2ba5e1805bde085c81f2"
@@ -98,7 +98,7 @@ packages:
     source: hosted
     version: "9.2.2"
   bloc_concurrency:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: bloc_concurrency
       sha256: "31bec79fb7fb1231dd78bb2aa7b482a7567968c1d10015d7b11537c4e63160f2"
@@ -106,7 +106,7 @@ packages:
     source: hosted
     version: "0.3.1"
   bloc_test:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: bloc_test
       sha256: cacfed95aff230d32d98e71bda4f1258c325d613c13ef9f34b6531948c73da54
@@ -162,7 +162,7 @@ packages:
     source: hosted
     version: "0.4.2"
   clock:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: clock
       sha256: e51d50bca3217c9a9fa2b41a30e4a38971133f5f9ec7a3d57bae095007f1d28e
@@ -178,7 +178,7 @@ packages:
     source: hosted
     version: "2.2.0"
   collection:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: collection
       sha256: "2f5709ae4d3d59dd8f7cd309b4e023046b57d8a6c82130785d2b0e5868084e76"
@@ -186,7 +186,7 @@ packages:
     source: hosted
     version: "1.19.1"
   confetti:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: confetti
       sha256: "79376a99648efbc3f23582f5784ced0fe239922bd1a0fb41f582051eba750751"
@@ -282,7 +282,7 @@ packages:
     source: hosted
     version: "0.4.1"
   dynamic_color:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: dynamic_color
       sha256: "869b3bce0100eb519768ecd71c0111f0b5ea679f5f62e1f59c49d80067e730c5"
@@ -290,7 +290,7 @@ packages:
     source: hosted
     version: "2.1.0"
   equatable:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: equatable
       sha256: ea36e500cbf0ec18361deabca755434f73e42fe53c5130021c7e2d6b5ebe1702
@@ -343,7 +343,7 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_bloc:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: flutter_bloc
       sha256: "340acf8bb63ac20b452b7f90c228d6136d112d1d0ede934055d24b90fc2a8511"
@@ -351,7 +351,7 @@ packages:
     source: hosted
     version: "9.1.2"
   flutter_launcher_icons:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: flutter_launcher_icons
       sha256: "10f13781741a2e3972126fae08393d3c4e01fa4cd7473326b94b72cf594195e7"
@@ -359,12 +359,12 @@ packages:
     source: hosted
     version: "0.14.4"
   flutter_localizations:
-    dependency: "direct main"
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
   flutter_native_splash:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: flutter_native_splash
       sha256: "9db4b80b044e9af17cc4b1272137fc7ace0054d879ef8210a76adc34aaf4cdff"
@@ -372,7 +372,7 @@ packages:
     source: hosted
     version: "2.4.8"
   flutter_test:
-    dependency: "direct dev"
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -397,13 +397,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "9.3.0"
-  gift_box:
-    dependency: "direct main"
-    description:
-      path: "../.."
-      relative: true
-    source: path
-    version: "0.0.1"
   glob:
     dependency: transitive
     description:
@@ -413,7 +406,7 @@ packages:
     source: hosted
     version: "2.2.0"
   go_router:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: go_router
       sha256: d4105f50c438c37d0d1372b1fbf1617fe9be398b559fa29d2067756ebbd42b69
@@ -429,7 +422,7 @@ packages:
     source: hosted
     version: "2.3.2"
   hive_ce:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: hive_ce
       sha256: "03ac73b673f98f48d7a3c364bb0b646a88f931240453e0f389ffcc0e18c5379f"
@@ -477,7 +470,7 @@ packages:
     source: hosted
     version: "4.1.2"
   hydrated_bloc:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: hydrated_bloc
       sha256: "1444375ee775d25e1c2ad175f8fe3b2041b3d5db63b27ca939a927020c90a208"
@@ -549,7 +542,7 @@ packages:
     source: hosted
     version: "4.12.0"
   just_audio:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: just_audio
       sha256: e60aa97b233ddea025e13dfac59195207f528fa5e9e4a4a49a8c0766701e5fe6
@@ -637,7 +630,7 @@ packages:
     source: hosted
     version: "0.13.0"
   material_ui:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: material_ui
       sha256: a6b19012df437a356cbc01f8ea22a105e07194c47c9a6009da0032a0ce35c4ab
@@ -661,7 +654,7 @@ packages:
     source: hosted
     version: "2.1.0"
   mocktail:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: mocktail
       sha256: "5e1bf53cc7baa8062a33b84424deb61513858ea05c601b8509e683815b5914aa"
@@ -728,7 +721,7 @@ packages:
     source: hosted
     version: "3.0.0"
   package_info_plus:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: package_info_plus
       sha256: "73ef2cd5c11a7548f9b7f6fc2a4f6113de2e64aa2a70de63feede95548822908"
@@ -744,7 +737,7 @@ packages:
     source: hosted
     version: "4.1.0"
   path:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: path
       sha256: "75cca69d1490965be98c73ceaea117e8a04dd21217b37b292c9ddbec0d955bc5"
@@ -752,7 +745,7 @@ packages:
     source: hosted
     version: "1.9.1"
   path_provider:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: path_provider
       sha256: a7f4874f987173da295a61c181b8ee71dab59b332a486b391babf26a1b884825
@@ -880,7 +873,7 @@ packages:
     source: hosted
     version: "1.1.1"
   rive:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: rive
       sha256: "0319f216b753f5d8f3f624413cd5b5a18f6ed8f0a677f80d97b53ecd3d2080c3"
@@ -957,7 +950,7 @@ packages:
     source: hosted
     version: "4.19.2"
   slang_build_runner:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: slang_build_runner
       sha256: f2b6c5fc1f5bc41de80b05e95e7d5d03b5c3041082877ce931fc7ba61cd08afe
@@ -965,7 +958,7 @@ packages:
     source: hosted
     version: "4.19.0"
   slang_flutter:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: slang_flutter
       sha256: "2348a39432c48d7c890a2a1e3409b9faae3e49f117fe56d390d4236de8d064f4"
@@ -1013,7 +1006,7 @@ packages:
     source: hosted
     version: "2.1.4"
   stream_transform:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: stream_transform
       sha256: a00e5f18bffc764f923e7dec1038527f7fe7a1791361a7117f0358193f13d53a
@@ -1069,7 +1062,7 @@ packages:
     source: hosted
     version: "0.6.20"
   test_cov_console:
-    dependency: "direct dev"
+    dependency: transitive
     description:
       name: test_cov_console
       sha256: "73519e8be3689d73f5cffb652c12c310acacf48379396d834da937094836e65e"
@@ -1093,7 +1086,7 @@ packages:
     source: hosted
     version: "2.3.1"
   url_launcher:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: url_launcher
       sha256: e8cc955c97e06df9879140a1fe301f3d493f01b7c62dec7f46834be31d7e9fda
@@ -1173,7 +1166,7 @@ packages:
     source: hosted
     version: "2.4.4"
   vibration:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: vibration
       sha256: "3424f7856b971a2ce94d22be3a3abfb5b9b5984562fdedd621f4e67574be7254"

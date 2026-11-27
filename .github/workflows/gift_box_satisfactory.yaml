@@ -4,6 +4,9 @@ on:
   push:
     paths:
       - 'gift_box/examples/satisfactory/**'
+      - 'gift_box/lib/**'
+      - 'gift_box/pubspec.yaml'
+      - 'gift_box/pubspec.lock'
       - '.github/workflows/gift_box_satisfactory.yaml'
       - 'mise.toml'
       - 'mise.lock'
@@ -50,10 +53,11 @@ jobs:
         with:
           path: |
             ~/.pub-cache
-            ./gift_box/examples/satisfactory/.dart_tool
-          key: ${{ runner.os }}-flutter-gift-box-satisfactory-${{ hashFiles('./gift_box/examples/satisfactory/pubspec.lock') }}
+            ./gift_box/.dart_tool
+          key: ${{ runner.os }}-flutter-gift-box-satisfactory-${{ hashFiles('./gift_box/pubspec.lock') }}
           restore-keys: ${{ runner.os }}-flutter-gift-box-satisfactory-
       - name: Install dependencies
+        working-directory: ./gift_box
         run: flutter pub get --enforce-lockfile
 
       - name: Generate i18n

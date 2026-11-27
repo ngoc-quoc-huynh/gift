@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'gift_box/examples/basic/**'
+      - 'gift_box/pubspec.yaml'
+      - 'gift_box/pubspec.lock'
       - '.github/workflows/gift_box_basic.yaml'
       - 'mise.toml'
       - 'mise.lock'
@@ -40,10 +42,11 @@ jobs:
         with:
           path: |
             ~/.pub-cache
-            ./gift_box/examples/basic/.dart_tool
-          key: ${{ runner.os }}-flutter-gift-box-basic-${{ hashFiles('./gift_box/examples/basic/pubspec.lock') }}
+            ./gift_box/.dart_tool
+          key: ${{ runner.os }}-flutter-gift-box-basic-${{ hashFiles('./gift_box/pubspec.lock') }}
           restore-keys: ${{ runner.os }}-flutter-gift-box-basic-
       - name: Install dependencies
+        working-directory: ./gift_box
         run: flutter pub get --enforce-lockfile
 
       - name: Format code
