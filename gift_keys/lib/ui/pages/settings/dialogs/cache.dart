@@ -45,6 +45,6 @@ class SettingsCacheDialog extends StatelessWidget {
 
   static Translations get _translations => Injector.instance.translations;
 
-  static TranslationsPagesSettingsDialogsCacheEn get _dialogTranslations =>
+  static Translations$pages$settings$dialogs$cache$en get _dialogTranslations =>
       _translations.pages.settings.dialogs.cache;
 }

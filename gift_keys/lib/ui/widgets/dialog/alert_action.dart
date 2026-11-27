@@ -13,7 +13,7 @@ sealed class AlertDialogAction extends StatelessWidget {
   }) = _Confirm;
 
   @protected
-  TranslationsGeneralEn get translations =>
+  Translations$general$en get translations =>
       Injector.instance.translations.general;
 }
 

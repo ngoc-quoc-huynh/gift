@@ -46,9 +46,13 @@ class _GiftBoxState extends State<GiftBox> {
     );
   }
 
+  // TODO: Migrate to Rive Data Binding once gift.riv defines a view model.
   void _onInit(StateMachine stateMachine) {
+    // ignore: deprecated_member_use, until gift.riv supports Data Binding.
     _isCorrect = stateMachine.boolean('Is key correct');
+    // ignore: deprecated_member_use, until gift.riv supports Data Binding.
     _isWrong = stateMachine.boolean('Is key wrong');
+    // ignore: deprecated_member_use, until gift.riv supports Data Binding.
     stateMachine.number('Skin number')!.value = Config.skin.index.toDouble();
     stateMachine.addEventListener(_onRiveEvent);
   }

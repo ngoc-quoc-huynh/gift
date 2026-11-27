@@ -47,6 +47,6 @@ class KeyNfcStatus extends StatelessWidget {
     CustomSnackBar.showInfo(context, message);
   }
 
-  TranslationsPagesKeyEn get _translations =>
+  Translations$pages$key$en get _translations =>
       Injector.instance.translations.pages.key;
 }

@@ -38,6 +38,6 @@ final class FormValidators {
     String() => null,
   };
 
-  static TranslationsWidgetsFormEn get _translations =>
+  static Translations$widgets$form$en get _translations =>
       Injector.instance.translations.widgets.form;
 }

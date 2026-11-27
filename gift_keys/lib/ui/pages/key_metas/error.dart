@@ -31,6 +31,6 @@ class KeyMetasErrorView extends StatelessWidget {
     );
   }
 
-  static TranslationsPagesKeysErrorEn get _translations =>
+  static Translations$pages$keys$error$en get _translations =>
       Injector.instance.translations.pages.keys.error;
 }

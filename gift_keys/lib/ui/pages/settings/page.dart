@@ -138,6 +138,6 @@ class SettingsPage extends StatelessWidget {
 
   static Translations get _translations => Injector.instance.translations;
 
-  static TranslationsPagesSettingsEn get _settingsTranslations =>
+  static Translations$pages$settings$en get _settingsTranslations =>
       _translations.pages.settings;
 }

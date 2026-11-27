@@ -44,6 +44,6 @@ class KeyMenuAnchor extends StatelessWidget {
     );
   }
 
-  static TranslationsPagesKeyEn get _translations =>
+  static Translations$pages$key$en get _translations =>
       Injector.instance.translations.pages.key;
 }

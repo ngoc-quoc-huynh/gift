@@ -26,6 +26,6 @@ class ErrorPage extends StatelessWidget {
     );
   }
 
-  static TranslationsPagesErrorEn get _translations =>
+  static Translations$pages$error$en get _translations =>
       Injector.instance.translations.pages.error;
 }

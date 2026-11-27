@@ -68,6 +68,6 @@ class EditKeyPage extends StatelessWidget {
 
   static Translations get _translations => Injector.instance.translations;
 
-  static TranslationsPagesEditKeyEn get _editKeyTranslations =>
+  static Translations$pages$editKey$en get _editKeyTranslations =>
       _translations.pages.editKey;
 }

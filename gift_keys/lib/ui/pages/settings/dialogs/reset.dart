@@ -38,6 +38,6 @@ class SettingsResetDialog extends StatelessWidget {
     );
   }
 
-  static TranslationsPagesSettingsDialogsResetEn get _translations =>
+  static Translations$pages$settings$dialogs$reset$en get _translations =>
       Injector.instance.translations.pages.settings.dialogs.reset;
 }
