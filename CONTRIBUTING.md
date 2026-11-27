@@ -30,6 +30,14 @@ Before creating a pull request, please follow these steps:
 8. **Create the pull request**: Submit your PR and include a detailed description of the changes made.
 9. **Verify status checks**: Ensure all status checks are passing before finalizing your PR.
 
+## Commit messages
+
+Follow [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for pull request titles:
+`type: summary` or `type(scope): summary`.
+
+Use short imperative summaries, scope by app (`gift_box`, `gift_keys`) or concern when useful, and use `chore(deps)`
+for routine dependency upgrades. Mark breaking changes with `!` or a `BREAKING CHANGE:` footer.
+
 ## Report a bug
 
 When reporting a bug, please use the provided [template](.github/DISCUSSION_TEMPLATE/report-a-bug.yml) to ensure that
