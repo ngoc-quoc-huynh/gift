@@ -133,6 +133,6 @@ class _BodyState extends State<_Body> {
     return Injector.instance.nativeApi.precacheImage(context, file);
   }
 
-  static TranslationsPagesKeysEn get _translations =>
+  static Translations$pages$keys$en get _translations =>
       Injector.instance.translations.pages.keys;
 }

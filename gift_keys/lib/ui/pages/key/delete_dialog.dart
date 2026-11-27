@@ -38,6 +38,6 @@ class KeyDeleteDialog extends StatelessWidget {
     );
   }
 
-  static TranslationsPagesKeyDeleteDialogEn get _translations =>
+  static Translations$pages$key$deleteDialog$en get _translations =>
       Injector.instance.translations.pages.key.deleteDialog;
 }

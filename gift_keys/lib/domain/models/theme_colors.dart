@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:material_ui/material_ui.dart';
 
 class CustomThemeColors extends ThemeExtension<CustomThemeColors>
-    with EquatableMixin {
+    with Equatable {
   const CustomThemeColors({this.success = Colors.green});
 
   final Color success;

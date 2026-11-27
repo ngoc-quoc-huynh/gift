@@ -37,6 +37,6 @@ class SettingsFeedbackDialog extends StatelessWidget {
     );
   }
 
-  static TranslationsPagesSettingsDialogsFeedbackEn get _translations =>
+  static Translations$pages$settings$dialogs$feedback$en get _translations =>
       Injector.instance.translations.pages.settings.dialogs.feedback;
 }

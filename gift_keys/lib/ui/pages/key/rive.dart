@@ -45,9 +45,12 @@ class _RiveKeyState extends State<RiveKey> {
     );
   }
 
+  // TODO: Migrate to Rive Data Binding once key.riv defines a view model.
   void _onLoaded(RiveLoaded state) {
     final stateMachine = state.controller.stateMachine;
+    // ignore: deprecated_member_use, until key.riv supports Data Binding.
     _isCorrect = stateMachine.boolean('Is key correct');
+    // ignore: deprecated_member_use, until key.riv supports Data Binding.
     _isWrong = stateMachine.boolean('Is key wrong');
     stateMachine.addEventListener(_onRiveEvent);
   }

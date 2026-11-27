@@ -133,6 +133,6 @@ class _FormFieldPageBodyState extends State<FormFieldPageBody> {
 
   GiftKey? get _giftKey => widget.giftKey;
 
-  static TranslationsWidgetsFormEn get _translations =>
+  static Translations$widgets$form$en get _translations =>
       Injector.instance.translations.widgets.form;
 }
