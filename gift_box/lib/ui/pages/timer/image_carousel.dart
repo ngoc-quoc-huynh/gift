@@ -1,12 +1,10 @@
-import 'dart:async';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/image_carousel/cubit.dart';
 import 'package:gift_box/domain/blocs/images/bloc.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/domain/utils/extensions/list.dart';
 import 'package:gift_box/static/config.dart';
+import 'package:material_ui/material_ui.dart';
 
 class TimerImageCarousel extends StatefulWidget {
   const TimerImageCarousel({super.key});
@@ -68,12 +66,10 @@ class _TimerImageCarouselState extends State<TimerImageCarousel> {
   void _onImageCarouselStateChange(
     BuildContext _,
     ImageCarouselState state,
-  ) => unawaited(
-    _controller.animateToItem(
-      state.index,
-      duration: Config.carouselAnimationDuration,
-      curve: Curves.easeInOut,
-    ),
+  ) => _controller.animateToItem(
+    state.index,
+    duration: Config.carouselAnimationDuration,
+    curve: Curves.easeInOut,
   );
 }
 

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:gift_box/domain/utils/extensions/build_context.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ErrorText extends StatelessWidget {
   const ErrorText({required this.text, super.key});

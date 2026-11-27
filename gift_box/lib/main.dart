@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/theme.dart';
 import 'package:gift_box/ui/router/config.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:rive/rive.dart';
 
 Future<void> main() async {

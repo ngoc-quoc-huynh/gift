@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/nfc_status/bloc.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/ui/widgets/app_lifecycle_observer.dart';
+import 'package:material_ui/material_ui.dart';
 
 class GiftNfcStatus extends StatelessWidget {
   const GiftNfcStatus({super.key});

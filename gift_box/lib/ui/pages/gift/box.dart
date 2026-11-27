@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_box/domain/blocs/gift_box/bloc.dart';
 import 'package:gift_box/domain/blocs/hydrated_value/cubit.dart';
@@ -8,6 +7,7 @@ import 'package:gift_box/domain/utils/extensions/build_context.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/config.dart';
 import 'package:gift_box/ui/widgets/rive_player.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:rive/rive.dart';
 
 class GiftBox extends StatefulWidget {
