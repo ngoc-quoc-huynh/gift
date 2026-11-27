@@ -37,7 +37,7 @@ jobs:
           install_args: 'flutter java'
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         if: github.event_name == 'workflow_dispatch'
         with:
           path: |
@@ -46,7 +46,7 @@ jobs:
           key: gradle-${{ runner.os }}-${{ runner.arch }}-gift_keys-${{ hashFiles('mise.lock', 'gift_keys/android/**/*.gradle*', 'gift_keys/android/**/gradle-wrapper.properties') }}
 
       - name: Cache flutter dependencies
-        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         with:
           path: |
             ~/.pub-cache
