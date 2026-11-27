@@ -30,7 +30,7 @@ dependencies:
 
   # UI
   # 1.9.0 requires built-in Kotlin.
-  dynamic_color: '>=1.8.1 <1.9.0'
+  dynamic_color: '<1.10.0'
   rive: ^0.14.0-dev.6
 
   # Utils
