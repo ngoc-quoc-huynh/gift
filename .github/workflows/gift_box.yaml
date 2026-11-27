@@ -1,0 +1,189 @@
+name: gift_box
+
+on:
+  push:
+    branches: [main]
+    paths: &ci_paths
+      - 'gift_box/**'
+      - '.github/workflows/gift_box.yaml'
+      - 'mise.toml'
+      - 'mise.lock'
+  pull_request:
+    paths: *ci_paths
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  package:
+    name: Package checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    defaults:
+      run:
+        working-directory: ./gift_box
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Setup mise
+        uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78
+        with:
+          version: '2026.11.14'
+          install_args: 'flutter'
+
+      - name: Cache flutter dependencies
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-flutter-gift-box-${{ hashFiles('gift_box/**/pubspec.yaml', 'gift_box/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-flutter-gift-box-
+
+      - name: Install dependencies
+        run: flutter pub get --enforce-lockfile
+
+      # The examples have their own job; check only the package here.
+      - name: Check formatting
+        run: dart format --output=none --set-exit-if-changed lib
+      - name: Analyze code
+        run: flutter analyze --no-pub lib
+      - name: Check metrics
+        run: dart run dart_code_linter:metrics analyze lib --set-exit-on-violation-level=warning
+
+  examples:
+    name: Example checks (${{ matrix.app }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - app: basic
+            i18n: false
+            coverage: false
+          - app: satisfactory
+            i18n: true
+            coverage: true
+
+    defaults:
+      run:
+        working-directory: ./gift_box/examples/${{ matrix.app }}
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Setup mise
+        uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78
+        with:
+          version: '2026.11.14'
+          install_args: 'flutter'
+
+      - name: Cache flutter dependencies
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-flutter-gift-box-${{ hashFiles('gift_box/**/pubspec.yaml', 'gift_box/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-flutter-gift-box-
+
+      - name: Install dependencies
+        working-directory: ./gift_box
+        run: flutter pub get --enforce-lockfile
+      - name: Generate i18n
+        if: matrix.i18n
+        run: dart run slang generate
+
+      - name: Check formatting
+        run: dart format --output=none --set-exit-if-changed .
+      - name: Analyze code
+        run: flutter analyze --no-pub
+      - name: Check metrics
+        run: dart run dart_code_linter:metrics analyze . --set-exit-on-violation-level=warning
+
+      - name: Run tests
+        if: ${{ !matrix.coverage }}
+        run: flutter test --no-pub --test-randomize-ordering-seed=random
+      - name: Run tests with coverage
+        if: matrix.coverage
+        run: |
+          flutter test --no-pub --coverage --test-randomize-ordering-seed=random
+          dart run test_cov_console --exclude=static,domain/interfaces,injector.dart
+
+  release:
+    name: Release APK (satisfactory)
+    if: github.event_name == 'workflow_dispatch'
+    needs: [package, examples]
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: gift_box
+
+    defaults:
+      run:
+        working-directory: ./gift_box/examples/satisfactory
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Setup mise
+        uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78
+        with:
+          version: '2026.11.14'
+          install_args: 'flutter java'
+
+      - name: Cache flutter dependencies
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-flutter-gift-box-${{ hashFiles('gift_box/**/pubspec.yaml', 'gift_box/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-flutter-gift-box-
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6
+
+      - name: Install dependencies
+        working-directory: ./gift_box
+        run: flutter pub get --enforce-lockfile
+      - name: Generate i18n
+        run: dart run slang generate
+
+      - name: Write signing config
+        env:
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEYSTORE: ${{ secrets.KEYSTORE }}
+        # Paths match the signing config in android/app/build.gradle.kts.
+        run: |
+          mkdir -p android/.signing
+          printf 'keyPassword=%s\nstorePassword=%s\nkeyAlias=%s\n' \
+            "$KEY_PASSWORD" "$KEYSTORE_PASSWORD" "$KEY_ALIAS" > android/.signing/key.properties
+          printf '%s' "$KEYSTORE" | base64 --decode > android/.signing/keystore.jks
+
+      - name: Build APK
+        run: |
+          flutter config --jdk-dir="$JAVA_HOME"
+          flutter build apk \
+            --no-pub \
+            --release \
+            --obfuscate \
+            --split-debug-info=./build/app/outputs/symbols
+      - name: Upload APK
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: Gift Box Satisfactory APK
+          if-no-files-found: error
+          path: |
+            gift_box/examples/satisfactory/build/app/outputs/apk/release/gift_box_v*-release.apk
+            gift_box/examples/satisfactory/build/app/outputs/symbols

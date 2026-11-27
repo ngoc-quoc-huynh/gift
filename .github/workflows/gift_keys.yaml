@@ -2,23 +2,74 @@ name: gift_keys
 
 on:
   push:
-    paths:
+    branches: [main]
+    paths: &ci_paths
       - 'gift_keys/**'
       - '.github/workflows/gift_keys.yaml'
       - 'mise.toml'
       - 'mise.lock'
+  pull_request:
+    paths: *ci_paths
   workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref || github.run_id }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  build:
+  checks:
+    name: Checks
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    defaults:
+      run:
+        working-directory: ./gift_keys
+
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - name: Setup mise
+        uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78
+        with:
+          version: '2026.11.14'
+          install_args: 'flutter'
+
+      - name: Cache flutter dependencies
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-flutter-gift-keys-${{ hashFiles('gift_keys/pubspec.yaml', 'gift_keys/pubspec.lock') }}
+          restore-keys: ${{ runner.os }}-flutter-gift-keys-
+
+      - name: Install dependencies
+        run: flutter pub get --enforce-lockfile
+      - name: Generate i18n
+        run: dart run slang generate
+
+      - name: Check formatting
+        run: dart format --output=none --set-exit-if-changed .
+      - name: Analyze code
+        run: flutter analyze --no-pub
+      - name: Check metrics
+        run: dart run dart_code_linter:metrics analyze . --set-exit-on-violation-level=warning
+
+      - name: Run tests
+        run: |
+          flutter test --no-pub --coverage --test-randomize-ordering-seed=random
+          dart run test_cov_console --exclude=static,domain/interfaces,injector.dart
+
+  release:
+    name: Release APK
+    if: github.event_name == 'workflow_dispatch'
+    needs: checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
     environment: gift_keys
 
     defaults:
@@ -26,73 +77,57 @@ jobs:
         working-directory: ./gift_keys
 
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
 
       - name: Setup mise
-        uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78 # v5.3.0
+        uses: jdx/mise-action@924e7c586e33d7d4bae9c14e26c5d22e2beb6e78
         with:
           version: '2026.11.14'
           install_args: 'flutter java'
 
-      - name: Cache Gradle dependencies
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
-        if: github.event_name == 'workflow_dispatch'
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: gradle-${{ runner.os }}-${{ runner.arch }}-gift_keys-${{ hashFiles('mise.lock', 'gift_keys/android/**/*.gradle*', 'gift_keys/android/**/gradle-wrapper.properties') }}
-
       - name: Cache flutter dependencies
-        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         with:
-          path: |
-            ~/.pub-cache
-            ./gift_keys/.dart_tool
-          key: ${{ runner.os }}-flutter-gift-keys-${{ hashFiles('./gift_keys/pubspec.lock') }}
+          path: ~/.pub-cache
+          key: ${{ runner.os }}-flutter-gift-keys-${{ hashFiles('gift_keys/pubspec.yaml', 'gift_keys/pubspec.lock') }}
           restore-keys: ${{ runner.os }}-flutter-gift-keys-
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6
+
       - name: Install dependencies
         run: flutter pub get --enforce-lockfile
-
       - name: Generate i18n
         run: dart run slang generate
-      - name: Format code
-        run: dart format --set-exit-if-changed .
-      - name: Analyze code
-        run: flutter analyze
-      - name: Run code metrics
-        run: dart run dart_code_linter:metrics analyze . --set-exit-on-violation-level=warning
-      - name: Run tests
-        run: |
-          flutter test --coverage --test-randomize-ordering-seed=random
-          dart run test_cov_console --exclude=static,domain/interfaces,injector.dart
 
-      - name: Generate key.properties file
-        if: github.event_name == 'workflow_dispatch'
+      - name: Write signing config
         env:
-          KEY_PROPERTIES_FILE: ./android/key.properties
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEYSTORE: ${{ secrets.KEYSTORE }}
+        # Paths match the signing config in android/app/build.gradle.kts.
         run: |
-          echo "keyPassword=${{ secrets.KEY_PASSWORD }}" > ${{ env.KEY_PROPERTIES_FILE }}
-          echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> ${{ env.KEY_PROPERTIES_FILE }}
-          echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> ${{ env.KEY_PROPERTIES_FILE }}
-      - name: Generate keystore file
-        if: github.event_name == 'workflow_dispatch'
-        run: echo "${{ secrets.KEYSTORE }}" | base64 --decode > android/app/gift_keys.jks
+          mkdir -p android/.signing
+          printf 'keyPassword=%s\nstorePassword=%s\nkeyAlias=%s\n' \
+            "$KEY_PASSWORD" "$KEYSTORE_PASSWORD" "$KEY_ALIAS" > android/.signing/key.properties
+          printf '%s' "$KEYSTORE" | base64 --decode > android/.signing/keystore.jks
+
       - name: Build APK
-        if: github.event_name == 'workflow_dispatch'
         run: |
           flutter config --jdk-dir="$JAVA_HOME"
           flutter build apk \
+            --no-pub \
             --release \
             --obfuscate \
             --split-debug-info=./build/app/outputs/symbols
       - name: Upload APK
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
-        if: github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: Gift Keys APK
+          if-no-files-found: error
           path: |
-            gift_keys/build/app/outputs/apk/release/gift_keys_release_v*.apk
+            gift_keys/build/app/outputs/apk/release/gift_keys_v*-release.apk
             gift_keys/build/app/outputs/symbols
