@@ -32,7 +32,6 @@ test-ui:
 launcher-icon:
 	@$(MAKE) check-color
 	cp assets/skins/launcher_icon/android/$(color).png assets/launcher_icon/android.png
-	cp assets/skins/launcher_icon/ios/$(color).png assets/launcher_icon/ios.png
 	cp assets/skins/launcher_icon/app/$(color).webp assets/images/launcher_icon.webp
 	dart run flutter_launcher_icons --file launcher_icon.yaml
 
