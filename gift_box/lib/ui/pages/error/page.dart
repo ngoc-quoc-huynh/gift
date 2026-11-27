@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:gift_box/injector.dart';
 import 'package:gift_box/static/resources/sizes.dart';
 import 'package:gift_box/ui/widgets/error_text.dart';
 import 'package:gift_box/ui/widgets/responsive_box.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ErrorPage extends StatelessWidget {
   const ErrorPage({required this.url, super.key});

@@ -1,14 +1,14 @@
-import 'package:flutter/material.dart' hide Route;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_keys/domain/models/route.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart' hide Route;
 
 void main() {
   group('colorScheme', () {
     testWidgets(
       'returns correctly.',
-      (tester) async => tester.pumpWidget(
+      (tester) => tester.pumpWidget(
         MaterialApp(
           builder: (context, child) {
             expect(context.colorScheme, ColorScheme.of(context));
@@ -22,7 +22,7 @@ void main() {
   group('dialogTheme', () {
     testWidgets(
       'returns correctly.',
-      (tester) async => tester.pumpWidget(
+      (tester) => tester.pumpWidget(
         MaterialApp(
           builder: (context, _) {
             expect(context.dialogTheme, DialogTheme.of(context));
@@ -36,7 +36,7 @@ void main() {
   group('theme', () {
     testWidgets(
       'returns correctly.',
-      (tester) async => tester.pumpWidget(
+      (tester) => tester.pumpWidget(
         MaterialApp(
           builder: (context, _) {
             expect(context.theme, Theme.of(context));
@@ -50,7 +50,7 @@ void main() {
   group('textTheme', () {
     testWidgets(
       'returns correctly.',
-      (tester) async => tester.pumpWidget(
+      (tester) => tester.pumpWidget(
         MaterialApp(
           builder: (context, _) {
             expect(context.textTheme, TextTheme.of(context));

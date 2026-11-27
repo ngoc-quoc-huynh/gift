@@ -1,10 +1,10 @@
 import 'package:file/file.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart' as widget;
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:gift_keys/domain/interfaces/native.dart';
 import 'package:gift_keys/injector.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:path/path.dart';
 import 'package:url_launcher/url_launcher.dart';
 

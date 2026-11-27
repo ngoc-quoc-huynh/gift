@@ -76,6 +76,6 @@ final class GiftBoxBloc extends Bloc<GiftBoxEvent, GiftBoxState> {
   @override
   Future<void> close() async {
     await _stopEmulation();
-    return super.close();
+    await super.close();
   }
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/key/bloc.dart';
 import 'package:gift_keys/domain/blocs/key_form/bloc.dart';
@@ -16,6 +15,7 @@ import 'package:gift_keys/ui/pages/key/rive.dart';
 import 'package:gift_keys/ui/widgets/responsive_box.dart';
 import 'package:gift_keys/ui/widgets/snack_bar.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 
 class KeyPage extends StatelessWidget {
   const KeyPage({required this.giftKey, super.key});

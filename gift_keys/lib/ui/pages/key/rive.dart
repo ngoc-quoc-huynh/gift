@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/nfc_discovery/bloc.dart';
 import 'package:gift_keys/static/resources/assets.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:rive/rive.dart';
 
 class RiveKey extends StatefulWidget {

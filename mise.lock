@@ -3,17 +3,17 @@
 lockfile_version = 4
 
 [[tools.flutter]]
-version = "3.41.4"
+version = "3.50.1"
 backend = "http:flutter"
-specifiers = ["3.41.4"]
+specifiers = ["3.50.1"]
 
 [tools.flutter."platforms.linux-x64"]
-checksum = "sha256:c9c4e741ebcf83ee88303404176f7e22c3b6abfc8e9d60781098b6d4104327a9"
-url = "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.41.4-stable.tar.xz"
+checksum = "sha256:4ad17fc8462fbcef2ba19ff4a78c0a16b7147fde1add8578e267ea62cdb92678"
+url = "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.50.1-stable.tar.xz"
 
 [tools.flutter."platforms.macos-arm64"]
-checksum = "sha256:16984a0dae1f13c7b3e05b973913a939144b7e9e3aa6439fa3382599a6326f8c"
-url = "https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_3.41.4-stable.zip"
+checksum = "sha256:872883d49965e0cc1d8e477d2d87f2f45930d13f94b34889e53783586f04c715"
+url = "https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_3.50.1-stable.zip"
 
 [[tools.java]]
 version = "temurin-21.0.13.1+2.0.LTS"

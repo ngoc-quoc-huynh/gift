@@ -1,6 +1,6 @@
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_keys/static/i18n/translations.g.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   test('All locales should be supported by Flutter.', () {

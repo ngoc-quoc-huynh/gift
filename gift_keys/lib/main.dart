@@ -1,15 +1,14 @@
 import 'dart:io';
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_keys/domain/models/language.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/theme.dart';
 import 'package:gift_keys/ui/router/config.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:rive/rive.dart';
 
 Future<void> main() async {

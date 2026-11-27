@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/nfc_status/bloc.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/widgets/app_lifecycle_observer.dart';
 import 'package:gift_keys/ui/widgets/snack_bar.dart';
+import 'package:material_ui/material_ui.dart';
 
 class KeyNfcStatus extends StatelessWidget {
   const KeyNfcStatus({super.key});

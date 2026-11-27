@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_keys/domain/blocs/key_metas/bloc.dart';
@@ -19,6 +18,7 @@ import 'package:gift_keys/ui/pages/settings/item.dart';
 import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/responsive_box.dart';
 import 'package:gift_keys/ui/widgets/snack_bar.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

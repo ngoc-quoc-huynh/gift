@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RadioDialogOption<T> extends StatelessWidget {
   const RadioDialogOption({

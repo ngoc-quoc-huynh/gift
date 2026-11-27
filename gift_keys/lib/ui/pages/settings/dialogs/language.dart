@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gift_keys/domain/blocs/hydrated_value/cubit.dart';
 import 'package:gift_keys/domain/blocs/value/cubit.dart';
@@ -6,6 +5,7 @@ import 'package:gift_keys/domain/models/language.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/widgets/dialog/dialog.dart';
 import 'package:gift_keys/ui/widgets/dialog/radio_option.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsLanguageDialog extends StatelessWidget {
   const SettingsLanguageDialog({super.key});

@@ -1,7 +1,7 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
+import 'package:material_ui/material_ui.dart';
 
 class FrostedCard extends StatelessWidget {
   const FrostedCard({required this.child, super.key});

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SettingsAppVersion extends StatelessWidget {
   const SettingsAppVersion({super.key});

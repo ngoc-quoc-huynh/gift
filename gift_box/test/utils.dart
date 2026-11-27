@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:typed_data';
 
 import 'package:collection/collection.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:get_it/get_it.dart';
 
@@ -22,14 +22,12 @@ extension GetItTestExtension on GetIt {
   void registerPin(Uint8List pin) =>
       registerLazySingleton<Uint8List>(() => pin, instanceName: 'pin');
 
-  FutureOr<void> unregisterAid() async =>
-      unregister<Uint8List>(instanceName: 'aid');
+  FutureOr<void> unregisterAid() => unregister<Uint8List>(instanceName: 'aid');
 
-  FutureOr<void> unregisterBirthday() async =>
+  FutureOr<void> unregisterBirthday() =>
       unregister<DateTime>(instanceName: 'birthday');
 
-  FutureOr<void> unregisterPin() async =>
-      unregister<Uint8List>(instanceName: 'pin');
+  FutureOr<void> unregisterPin() => unregister<Uint8List>(instanceName: 'pin');
 
   void registerPeriodicTimer() =>
       registerFactoryParam<Timer, Duration, void Function(Timer timer)>(

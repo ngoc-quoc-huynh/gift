@@ -1,7 +1,7 @@
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:flutter/material.dart';
 import 'package:gift_keys/domain/models/theme_colors.dart';
 import 'package:gift_keys/static/resources/sizes.dart';
+import 'package:material_ui/material_ui.dart';
 
 final class CustomTheme {
   const CustomTheme._();

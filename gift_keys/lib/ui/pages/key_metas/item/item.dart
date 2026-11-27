@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:gift_keys/domain/models/date_time_format.dart';
 import 'package:gift_keys/domain/models/key_meta.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
@@ -8,6 +7,7 @@ import 'package:gift_keys/ui/router/routes.dart';
 import 'package:gift_keys/ui/widgets/fade_out.dart';
 import 'package:gift_keys/ui/widgets/frosted_card.dart';
 import 'package:gift_keys/ui/widgets/responsive_box.dart';
+import 'package:material_ui/material_ui.dart';
 
 class KeyMetaItem extends StatelessWidget {
   const KeyMetaItem({required this.meta, super.key});

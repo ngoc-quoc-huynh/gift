@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gift_keys/domain/blocs/value/cubit.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/ui/widgets/dialog/dialog.dart';
 import 'package:gift_keys/ui/widgets/dialog/radio_option.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../../../mocks.dart';
 import '../../../utils.dart';

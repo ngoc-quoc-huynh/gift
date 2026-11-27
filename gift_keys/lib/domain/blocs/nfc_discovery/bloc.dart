@@ -106,6 +106,6 @@ final class NfcDiscoveryBloc
   @override
   Future<void> close() async {
     await _cancelSub();
-    return super.close();
+    await super.close();
   }
 }

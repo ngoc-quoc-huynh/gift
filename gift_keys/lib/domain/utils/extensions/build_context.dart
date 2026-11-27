@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart' hide Route;
 import 'package:gift_keys/domain/models/route.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart' hide Route;
 
 extension BuildContextExtension on BuildContext {
   ColorScheme get colorScheme => ColorScheme.of(this);

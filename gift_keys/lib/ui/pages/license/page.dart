@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:gift_keys/injector.dart';
 import 'package:gift_keys/static/resources/assets.dart';
+import 'package:material_ui/material_ui.dart';
 
 class CustomLicensePage extends StatelessWidget {
   const CustomLicensePage({super.key});

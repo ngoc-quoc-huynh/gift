@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:gift_keys/domain/utils/extensions/build_context.dart';
 import 'package:gift_keys/domain/utils/extensions/theme_data.dart';
+import 'package:material_ui/material_ui.dart';
 
 final class CustomSnackBar extends SnackBar {
   const CustomSnackBar({
