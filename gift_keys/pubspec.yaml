@@ -36,7 +36,7 @@ dependencies:
   # Utils
   clock: ^1.1.2
   collection: ^1.19.1
-  equatable: ^2.0.5
+  equatable: ^3.0.0
   file: ^7.0.1
   flutter_image_compress: ^2.4.0
   image_picker: ^1.1.2
