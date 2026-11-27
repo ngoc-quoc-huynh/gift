@@ -40,7 +40,7 @@ dependencies:
   file: ^7.0.1
   flutter_image_compress: ^2.4.0
   image_picker: ^1.1.2
-  get_it: 9.2.1
+  get_it: 9.3.0
   logger: ^2.4.0
   nfc_manager:
     git:
