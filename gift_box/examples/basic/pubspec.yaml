@@ -1,0 +1,26 @@
+name: gift_box_basic
+description: Minimal example app for the gift_box package.
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.10.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI
+  material_ui: ^1.11.1
+
+dev_dependencies:
+  # Linter
+  cosee_lints: 0.16.0
+  dart_code_linter: ^4.0.0
+
+  # Test
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
